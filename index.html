@@ -195,6 +195,23 @@
             margin: 1.2rem 0 0.8rem 0;
             font-size: 1.1rem;
         }
+        /* 博主信息样式 */
+        .author-info {
+            background: #e8f4fd;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 2rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .author-info h3 {
+            color: #2c6fb8;
+            margin-bottom: 0.8rem;
+        }
+        .author-info p {
+            margin: 0.3rem 0;
+            font-size: 0.95rem;
+        }
         footer {
             background: #1b2b3a;
             color: white;
@@ -264,7 +281,7 @@
                         <strong>校正方法：</strong>
                         <a href="https://en.wikipedia.org/wiki/Bonferroni_correction" target="_blank">Bonferroni</a>、
                         <a href="https://en.wikipedia.org/wiki/False_discovery_rate" target="_blank">FDR</a>、
-                        <a href="https://www.jstor.org/stable/3592417" target="_blank">Benjamini-Hochberg</a>
+                        <a href="https://en.wikipedia.org/wiki/Benjamini%E2%80%93Hochberg_procedure" target="_blank">Benjamini-Hochberg</a>
                     </p>
                 </div>
                 <div class="card">
@@ -388,7 +405,7 @@
                         <div class="tool-item"><a href="https://www.stat.ubc.ca/~rollin/stats/ssize/" target="_blank">UBC SampleSize</a></div>
                         <div class="tool-item"><a href="https://ncss-wsp.com/" target="_blank">PASS</a></div>
                         <div class="tool-item"><a href="https://www.sample-size.net/" target="_blank">SampleSize.Net</a></div>
-                        <div class="tool-item"><a href="https://www.sealedenvelope.com/power/" target="_blank">Sealed Envelope</a></div>
+                        <div class="tool-item"><a href="https://sealedenvelope.com/power/" target="_blank">Sealed Envelope</a></div>
                     </div>
                 </div>
             </div>
@@ -411,7 +428,7 @@
                 </p>
             </div>
 
-            <!-- 真实世界研究（独立模块+补全链接） -->
+            <!-- 真实世界研究 -->
             <div class="card" id="rws">
                 <h3>🏥 真实世界研究 (RWS)</h3>
                 <p class="desc-text">
@@ -423,7 +440,7 @@
                     <a href="https://en.wikipedia.org/wiki/Difference_in_differences" target="_blank">DID</a>、
                     <a href="https://en.wikipedia.org/wiki/Instrumental_variable" target="_blank">工具变量</a>、高维倾向得分<br>
                     <strong>报告规范：</strong>
-                    <a href="https://www.record-statement.org/" target="_blank">RECORD</a><br>
+                    <a href="https://record-statement.org/" target="_blank">RECORD</a><br>
                     <strong>优势：</strong>外推性强、样本量大、覆盖广泛人群
                 </p>
             </div>
@@ -490,7 +507,7 @@
         </div>
     </div>
 
-    <!-- 公共数据库（全面扩充） -->
+    <!-- 公共数据库 -->
     <div class="module-header" onclick="toggleModule(this)" id="databases">
         <div class="module-title">
             <span class="module-icon">💾</span>
@@ -508,10 +525,8 @@
             <div class="tool-item"><a href="https://seer.cancer.gov/" target="_blank">SEER</a></div>
             <div class="tool-item"><a href="https://www.ecdc.europa.eu/en" target="_blank">ECDC</a></div>
             <div class="tool-item"><a href="https://www.who.int/data" target="_blank">WHO Data</a></div>
-            <div class="tool-item"><a href="https://www.nationwidechildrens.org/research/institute-for-pediatric-public-health/peddr" target="_blank">PEDRR</a></div>
-            <div class="tool-item"><a href="https://www.cdc.gov/databases/" target="_blank">CDC 数据库</a></div>
-            <div class="tool-item"><a href="https://www.eurostat.europa.eu/" target="_blank">Eurostat</a></div>
-            <div class="tool-item"><a href="https://www.clinical-data-archive.com/" target="_blank">CDA 临床数据</a></div>
+            <div class="tool-item"><a href="https://www.cdc.gov/databases.html" target="_blank">CDC Databases</a></div>
+            <div class="tool-item"><a href="https://ec.europa.eu/eurostat/" target="_blank">Eurostat</a></div>
         </div>
 
         <div class="sub-title">肿瘤与基因组</div>
@@ -525,7 +540,7 @@
             <div class="tool-item"><a href="https://www.proteinatlas.org/" target="_blank">HPA 蛋白图谱</a></div>
             <div class="tool-item"><a href="https://www.disgenet.org/" target="_blank">DisGeNET</a></div>
             <div class="tool-item"><a href="https://www.oncomine.org/" target="_blank">Oncomine</a></div>
-            <div class="tool-item"><a href="https://www.intogen.org/" target="_blank">IntOGen 驱动基因</a></div>
+            <div class="tool-item"><a href="https://www.intogen.org/" target="_blank">IntOGen</a></div>
         </div>
 
         <div class="sub-title">测序与序列</div>
@@ -533,7 +548,7 @@
             <div class="tool-item"><a href="https://www.ncbi.nlm.nih.gov/sra" target="_blank">SRA</a></div>
             <div class="tool-item"><a href="https://ngdc.cncb.ac.cn/gsa/" target="_blank">GSA</a></div>
             <div class="tool-item"><a href="https://www.ncbi.nlm.nih.gov/genbank/" target="_blank">GenBank</a></div>
-            <div class="tool-item"><a href="http://www.internationalgenome.org/" target="_blank">1000 Genomes</a></div>
+            <div class="tool-item"><a href="https://www.internationalgenome.org/" target="_blank">1000 Genomes</a></div>
             <div class="tool-item"><a href="https://www.ebi.ac.uk/ena/" target="_blank">ENA</a></div>
             <div class="tool-item"><a href="https://www.ncbi.nlm.nih.gov/refseq/" target="_blank">RefSeq</a></div>
             <div class="tool-item"><a href="https://www.ensembl.org/" target="_blank">Ensembl</a></div>
@@ -554,9 +569,9 @@
         <div class="tool-grid">
             <div class="tool-item"><a href="https://www.drugbank.com/" target="_blank">DrugBank</a></div>
             <div class="tool-item"><a href="https://clinicaltrials.gov/" target="_blank">ClinicalTrials</a></div>
-            <div class="tool-item"><a href="https://www.chictr.org.cn/" target="_blank">中国临床试验注册中心</a></div>
+            <div class="tool-item"><a href="http://www.chictr.org.cn/" target="_blank">中国临床试验注册中心</a></div>
             <div class="tool-item"><a href="https://www.fda.gov/" target="_blank">FDA</a></div>
-            <div class="tool-item"><a href="https://www.nmpa.gov.cn/" target="_blank">NMPA 国家药监局</a></div>
+            <div class="tool-item"><a href="https://www.nmpa.gov.cn/" target="_blank">NMPA</a></div>
             <div class="tool-item"><a href="https://pubchem.ncbi.nlm.nih.gov/" target="_blank">PubChem</a></div>
             <div class="tool-item"><a href="https://www.ebi.ac.uk/chembl/" target="_blank">ChEMBL</a></div>
             <div class="tool-item"><a href="https://www.pharmgkb.org/" target="_blank">PharmGKB</a></div>
@@ -588,11 +603,11 @@
             <div class="tool-item"><a href="https://www.python.org/" target="_blank">Python</a></div>
             <div class="tool-item"><a href="https://www.sas.com/" target="_blank">SAS</a></div>
             <div class="tool-item"><a href="https://www.jmp.com/" target="_blank">JMP</a></div>
-            <div class="tool-item"><a href="https://www.epiinfo.com/" target="_blank">EpiInfo</a></div>
+            <div class="tool-item"><a href="https://www.cdc.gov/epiinfo/index.html" target="_blank">EpiInfo</a></div>
             <div class="tool-item"><a href="https://www.medcalc.org/" target="_blank">MedCalc</a></div>
         </div>
 
-        <!-- 量表工具（大幅扩充） -->
+        <!-- 量表工具 -->
         <div class="sub-title">量表与评估工具</div>
         <div class="tool-grid">
             <div class="tool-item"><a href="https://www.phqscreeners.com/" target="_blank">PHQ-9 抑郁</a></div>
@@ -603,13 +618,8 @@
             <div class="tool-item"><a href="https://www.cdc.gov/arthritis/data_statistics/health-assessment/paq.htm" target="_blank">PAQ 活动量表</a></div>
             <div class="tool-item"><a href="https://www.ids-qids.org/" target="_blank">IDS-QIDS 抑郁</a></div>
             <div class="tool-item"><a href="https://www.eortc.org/" target="_blank">EORTC 肿瘤</a></div>
-            <div class="tool-item"><a href="https://www.hesi.com/" target="_blank">HESI 健康量表</a></div>
-            <div class="tool-item"><a href="https://www.npionline.com/" target="_blank">NPI 神经精神</a></div>
             <div class="tool-item"><a href="https://www.barthelindex.com/" target="_blank">Barthel 指数</a></div>
             <div class="tool-item"><a href="https://www.fimscore.org/" target="_blank">FIM 功能评分</a></div>
-            <div class="tool-item"><a href="https://www.asi-q.com/" target="_blank">ASI 成瘾严重</a></div>
-            <div class="tool-item"><a href="https://www.childbehaviorchecklist.org/" target="_blank">CBCL 儿童行为</a></div>
-            <div class="tool-item"><a href="https://www.gad7.net/" target="_blank">GAD-7 完整版</a></div>
             <div class="tool-item"><a href="https://www.promis.nih.gov/" target="_blank">PROMIS 健康量表</a></div>
         </div>
 
@@ -625,7 +635,7 @@
             <div class="tool-item"><a href="https://www.canva.com/" target="_blank">Canva</a></div>
         </div>
 
-        <!-- 文献资源（超全面） -->
+        <!-- 文献资源 -->
         <div class="sub-title">文献平台</div>
         <div class="tool-grid">
             <div class="tool-item"><a href="https://pubmed.ncbi.nlm.nih.gov/" target="_blank">PubMed</a></div>
@@ -635,15 +645,15 @@
             <div class="tool-item"><a href="https://www.wanfangdata.com.cn/" target="_blank">万方</a></div>
             <div class="tool-item"><a href="https://www.cqvip.com/" target="_blank">维普</a></div>
             <div class="tool-item"><a href="https://www.sciencedirect.com/" target="_blank">ScienceDirect</a></div>
-            <div class="tool-item"><a href="https://www.springer.com/" target="_blank">SpringerLink</a></div>
+            <div class="tool-item"><a href="https://link.springer.com/" target="_blank">SpringerLink</a></div>
             <div class="tool-item"><a href="https://www.sci-hub.se/" target="_blank">Sci-Hub</a></div>
             <div class="tool-item"><a href="https://www.semanticscholar.org/" target="_blank">Semantic Scholar</a></div>
             <div class="tool-item"><a href="https://www.nature.com/" target="_blank">Nature</a></div>
             <div class="tool-item"><a href="https://www.science.org/" target="_blank">Science</a></div>
             <div class="tool-item"><a href="https://www.thelancet.com/" target="_blank">Lancet</a></div>
             <div class="tool-item"><a href="https://www.nejm.org/" target="_blank">NEJM</a></div>
-            <div class="tool-item"><a href="https://pubmed.ncbi.nlm.nih.gov/central/" target="_blank">PMC 全文</a></div>
-            <div class="tool-item"><a href="https://www.jamanetwork.com/" target="_blank">JAMA</a></div>
+            <div class="tool-item"><a href="https://www.ncbi.nlm.nih.gov/pmc/" target="_blank">PMC 全文</a></div>
+            <div class="tool-item"><a href="https://jamanetwork.com/" target="_blank">JAMA</a></div>
         </div>
         
         <div class="sub-title">科研写作与规范</div>
@@ -678,9 +688,9 @@
             <div class="tool-item"><a href="https://www.tiangong.cn/" target="_blank">天工AI</a></div>
             <div class="tool-item"><a href="https://www.coze.com/" target="_blank">Coze 扣子</a></div>
             <div class="tool-item"><a href="https://chat.mistral.ai/" target="_blank">Mistral</a></div>
-            <div class="tool-item"><a href="https://www.llama2.ai/" target="_blank">Llama 3</a></div>
-            <div class="tool-item"><a href="https://ai.baidu.com/" target="_blank">百度千帆</a></div>
-            <div class="tool-item"><a href="https://ai.tencent.com/" target="_blank">腾讯混元</a></div>
+            <div class="tool-item"><a href="https://www.llama.com/" target="_blank">Llama 3</a></div>
+            <div class="tool-item"><a href="https://cloud.baidu.com/" target="_blank">百度千帆</a></div>
+            <div class="tool-item"><a href="https://cloud.tencent.com/" target="_blank">腾讯混元</a></div>
             <div class="tool-item"><a href="https://ai.360.cn/" target="_blank">360 智脑</a></div>
         </div>
 
@@ -689,11 +699,11 @@
             <div class="tool-item"><a href="https://elicit.org/" target="_blank">Elicit 文献AI</a></div>
             <div class="tool-item"><a href="https://www.deepl.com/translator" target="_blank">DeepL 翻译</a></div>
             <div class="tool-item"><a href="https://quillbot.com/" target="_blank">QuillBot</a></div>
-            <div class="tool-item"><a href="https://www.consensus.app/" target="_blank">Consensus 论文AI</a></div>
+            <div class="tool-item"><a href="https://consensus.app/" target="_blank">Consensus 论文AI</a></div>
             <div class="tool-item"><a href="https://www.scite.ai/" target="_blank">Scite 引文分析</a></div>
             <div class="tool-item"><a href="https://www.jasondavies.com/wordcloud/" target="_blank">WordCloud 词云</a></div>
-            <div class="tool-item"><a href="https://www.connectedpapers.com/" target="_blank">Connected Papers</a></div>
-            <div class="tool-item"><a href="https://www.paperpal.com/" target="_blank">PaperPal 论文润色</a></div>
+            <div class="tool-item"><a href="https://connectedpapers.com/" target="_blank">Connected Papers</a></div>
+            <div class="tool-item"><a href="https://paperpal.com/" target="_blank">PaperPal 论文润色</a></div>
         </div>
         
         <div class="sub-title">医学专用AI</div>
@@ -701,14 +711,24 @@
             <div class="tool-item"><a href="https://chat.medlive.cn/" target="_blank">梅斯医学AI</a></div>
             <div class="tool-item"><a href="https://www.amia.org/" target="_blank">AMIA 医学信息学AI</a></div>
             <div class="tool-item"><a href="https://www.deepmedicine.com/" target="_blank">深度医疗AI</a></div>
-            <div class="tool-item"><a href="https://www.cradlegenomics.com/" target="_blank">Cradle Genomics</a></div>
+            <div class="tool-item"><a href="https://cradlegenomics.com/" target="_blank">Cradle Genomics</a></div>
             <div class="tool-item"><a href="https://www.benchling.com/" target="_blank">Benchling 生信AI</a></div>
         </div>
     </div>
+
+    <!-- 博主信息模块 -->
+    <div class="author-info">
+        <h3>👨‍⚕️ 博主信息</h3>
+        <p><strong>研究方向：</strong>医学统计学、临床流行病学、生物信息学、真实世界研究、临床预测模型、传染病数学建模</p>
+        <p><strong>微信公众号：</strong>Abel统计</p>
+        <p><strong>交流邮箱：</strong>medical_stat@163.com</p>
+        <p><strong>宗旨：</strong>让医学科研更简单，让统计方法更易懂</p>
+    </div>
+
 </div>
 
 <footer>
-    <p>© 2025 医学科研一站式学习平台 | 学术资源整理</p>
+    <p>© 2026 Abel统计 | 医学科研一站式学习平台</p>
 </footer>
 
 <script>
