@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abel 统计 | 医学统计与生物信息学习平台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        body {
+            background-color: #f7f9fc;
+            color: #2c3e50;
+            line-height: 1.8;
+        }
+        a {
+            text-decoration: none;
+            color: #3498db;
+        }
+        /* 导航 */
+        header {
+            background: #1b2b3a;
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+        }
+        .nav-links a {
+            color: white;
+            margin-left: 1.5rem;
+            font-size: 1rem;
+        }
+        .nav-links a:hover {
+            color: #5dade2;
+        }
+        /* Banner */
+        .banner {
+            background: linear-gradient(135deg, #2c6fb8, #3498db);
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+        .banner h1 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+        .banner p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 0.6rem auto;
+        }
+        /* 区块 */
+        .section {
+            padding: 3.5rem 0;
+        }
+        .section-title {
+            font-size: 1.6rem;
+            margin-bottom: 2rem;
+            color: #2c3e50;
+            border-left: 5px solid #3498db;
+            padding-left: 12px;
+            font-weight: bold;
+        }
+        /* 分类卡片 */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1.2rem;
+        }
+        .category {
+            background: white;
+            padding: 1.4rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.04);
+            font-weight: 500;
+            font-size: 1rem;
+            transition: 0.2s;
+        }
+        .category:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.07);
+        }
+        /* 文章卡片 */
+        .card-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.8rem;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+            transition: 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+        }
+        .card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.6rem;
+            color: #2c3e50;
+        }
+        .card p {
+            color: #555;
+            margin-bottom: 1rem;
+        }
+        .card a {
+            font-weight: 500;
+        }
+        /* 底部 */
+        footer {
+            background: #1b2b3a;
+            color: white;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            margin-top: 3rem;
+        }
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- 导航 -->
+<header>
+    <div class="container nav">
+        <div class="logo">Abel 统计</div>
+        <div class="nav-links">
+            <a href="#home">首页</a>
+            <a href="#categories">学习分类</a>
+            <a href="#articles">最新文章</a>
+            <a href="#about">关于我</a>
+        </div>
+    </div>
+</header>
+
+<!-- Banner -->
+<section class="banner" id="home">
+    <div class="container">
+        <h1>Abel 统计 | 医学统计与生物信息学习平台</h1>
+        <p>专注分享：医学统计学方法 | 样本量计算 | 生物信息学 | 公共数据库挖掘</p>
+        <p>机器学习 | 传染病数学建模 | 研究设计 | 真实世界研究</p>
+        <p style="margin-top:1.2rem; font-weight:bold;">📱 公众号：Abel统计（同步更新全部干货）</p>
+    </div>
+</section>
+
+<!-- 学习分类（完全匹配你的公众号） -->
+<div class="container section" id="categories">
+    <h2 class="section-title">📚 学习分类（持续更新）</h2>
+    <div class="category-grid">
+        <div class="category">📊 医学统计学方法</div>
+        <div class="category">🧮 样本量计算</div>
+        <div class="category">🧬 生物信息学（转录组 / 单细胞 / 空间转录 / 蛋白组 / 代谢组 / 肠道菌群）</div>
+        <div class="category">💾 公共数据库挖掘（UKB / NHANES / CHARLS / GBD）</div>
+        <div class="category">📈 传染病数学建模</div>
+        <div class="category">🤖 机器学习在医学中的应用</div>
+        <div class="category">📝 临床研究设计</div>
+        <div class="category">🏥 真实世界研究（RWS）</div>
+    </div>
+</div>
+
+<!-- 最新文章（可直接放公众号链接） -->
+<div class="container section" id="articles">
+    <h2 class="section-title">📝 最新文章（同步公众号）</h2>
+    <div class="card-box">
+        <div class="card">
+            <h3>样本量计算最全方法总结</h3>
+            <p>均值、率、生存分析、诊断试验、等效性研究…一次性讲透！</p>
+            <a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=Mzk0NDcyMzk1Mw==&action=getalbum&album_id=3709856140965101571" target="_blank">阅读全文 →</a>
+        </div>
+        <div class="card">
+            <h3>NHANES 数据库挖掘实战教程</h3>
+            <p>数据下载、清洗、统计分析、图表绘制全套流程</p>
+            <a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=Mzk0NDcyMzk1Mw==&action=getalbum&album_id=3709856140965101571" target="_blank">阅读全文 →</a>
+        </div>
+        <div class="card">
+            <h3>单细胞测序分析入门到精通</h3>
+            <p>质控、降维、聚类、差异基因、细胞注释…一步一步教学</p>
+            <a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=Mzk0NDcyMzk1Mw==&action=getalbum&album_id=3709856140965101571" target="_blank">阅读全文 →</a>
+        </div>
+    </div>
+</div>
+
+<!-- 关于我（贴合你公众号） -->
+<div class="container section" id="about">
+    <h2 class="section-title">👨‍💻 关于博主</h2>
+    <div class="card">
+        <p>大家好，我是 Abel，《Abel统计》公众号主理人。</p>
+        <p>专注医学统计学、生物信息学、公共数据库挖掘、机器学习、真实世界研究、传染病数学建模、临床研究设计等领域的干货分享。</p>
+        <p>本网站为公众号同步平台，所有内容持续更新，欢迎收藏转发！</p>
+        <p style="margin-top:1rem; font-weight:bold;">关注公众号：Abel统计，获取第一手学习资料</p>
+    </div>
+</div>
+
+<!-- 底部 -->
+<footer>
+    <p>© 2025 Abel 统计 | 医学统计与生物信息学习平台</p>
+    <p>📱 公众号：Abel统计</p>
+    <p>所有文章同步更新：Abel统计公众号</p>
+</footer>
+
+</body>
+</html>
