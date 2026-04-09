@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abel 统计 | 医学统计与生物信息学习平台</title>
+    <title>医学统计与生物信息学习平台 | 学术资源</title>
     <style>
         * {
             margin: 0;
@@ -190,28 +189,6 @@
             font-size: 0.95rem;
             line-height: 1.7;
         }
-        .qrcode-group {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 1rem;
-        }
-        .qrcode-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-        .qrcode {
-            width: 160px;
-            height: 160px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-        .qrcode-text {
-            margin-top: 0.5rem;
-            font-weight: bold;
-        }
         .sub-title {
             font-weight: bold;
             color: #2c3e50;
@@ -242,115 +219,135 @@
 
 <header>
     <div class="container nav">
-        <div class="logo">Abel 统计</div>
+        <div class="logo">医学统计学习平台</div>
         <div class="nav-links">
             <a href="#home">首页</a>
             <a href="#stats">统计方法</a>
             <a href="#databases">数据库</a>
             <a href="#tools">科研工具</a>
             <a href="#ai">AI工具</a>
-            <a href="#about">关于我</a>
         </div>
     </div>
 </header>
 
 <section class="banner" id="home">
     <div class="container">
-        <h1>Abel 统计 | 医学科研一站式学习平台</h1>
-        <p>专注分享：医学统计学方法 | 样本量计算 | 生物信息学 | 公共数据库挖掘</p>
-        <p>机器学习 | 传染病数学建模 | 研究设计 | 真实世界研究</p>
-        <p style="margin-top:1rem; font-weight:bold;">📱 公众号：Abel统计</p>
+        <h1>医学科研一站式学习平台</h1>
+        <p>专注分享：医学统计学 | 样本量计算 | 生物信息学 | 公共数据库挖掘</p>
+        <p>机器学习 | 传染病数学建模 | 临床研究设计 | 真实世界研究</p>
+        <p>因果推断 | 诊断试验 | 量表信效度 | 科研作图 | 论文写作</p>
     </div>
 </section>
 
 <div class="container">
-    <!-- 核心研究方法模块 - 全部展开，两列布局，无需折叠 -->
     <div class="section" id="core-methods">
         <h2 class="section-title">📚 核心研究方法</h2>
         
         <!-- 医学统计学方法 -->
         <div id="stats" class="card" style="margin-bottom:1.5rem;">
             <div class="top-link">
-                <a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=Mzk0NDcyMzk1Mw==&action=getalbum&album_id=3881297220724850690&scene=126&sessionid=1775759402451#wechat_redirect" target="_blank">
-                    📚 查看公众号完整统计方法合集（含视频教程）
-                </a>
-            </div>
-            <div class="top-link" style="margin-top:0.5rem;">
-                <a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=Mzk0NDcyMzk1Mw==&action=getalbum&album_id=3881297220724850690&scene=126&sessionid=1775759402451#wechat_redirect" target="_blank">
-                    🏫 公众号专属数据科学实战教程
-                </a>
+                <a href="https://www.amstat.org/" target="_blank">📚 美国统计学会(ASA) 统计指南</a>
             </div>
             <h3 style="margin-bottom:1rem; color:#2c3e50;">📊 医学统计学方法</h3>
             <div class="card-box">
                 <div class="card">
-                    <h3>P 值深度解读</h3>
+                    <h3>P 值解读</h3>
                     <p class="desc-text">
                         <strong>定义：</strong><a href="https://www.amstat.org/asa/files/pdfs/P-ValueStatement.pdf" target="_blank">P值</a>：原假设H₀为真时，观察到当前或更极端结果的概率<br>
-                        <strong>ASA官方声明：</strong>2016年ASA明确反对"P<0.05"作为唯一判断标准，<a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=Mzk0NDcyMzk1Mw==&action=getalbum&album_id=3881297220724850690&scene=126&sessionid=1775759402451#wechat_redirect" target="_blank">查看公众号解读</a><br>
+                        <strong>ASA声明：</strong><a href="https://www.tandfonline.com/doi/full/10.1080/00031305.2015.1080428" target="_blank">2016年P值使用规范</a><br>
                         <strong>常见误区：</strong>
                         <ul style="padding-left:1.2rem; margin-top:0.5rem; font-size:0.9rem;">
-                            <li>P<0.05 ≠ 结果一定有意义，需结合效应量</li>
-                            <li>P>0.05 ≠ 没有差异，可能是样本量不足</li>
-                            <li>P值不是原假设为真的概率，是条件概率</li>
-                            <li>统计显著 ≠ 临床显著，如降压2mmHg统计显著但无临床意义</li>
+                            <li>P&lt;0.05 ≠ 临床意义显著</li>
+                            <li>P&gt;0.05 ≠ 无差异，可能样本量不足</li>
+                            <li>多次检验会导致假阳性升高</li>
                         </ul>
+                        <strong>校正方法：</strong>
+                        <a href="https://en.wikipedia.org/wiki/Bonferroni_correction" target="_blank">Bonferroni</a>、
+                        <a href="https://en.wikipedia.org/wiki/False_discovery_rate" target="_blank">FDR</a>、
+                        <a href="https://www.jstor.org/stable/3592417" target="_blank">Benjamini-Hochberg</a>
                     </p>
                 </div>
                 <div class="card">
                     <h3>置信区间 (CI)</h3>
                     <p class="desc-text">
-                        <strong>定义：</strong>重复抽样100次时，95次的区间会包含真实总体参数<br>
-                        <strong>核心优势：</strong>比P值提供更多信息，同时展示效应大小和精度<br>
-                        <strong>临床解读：</strong>
+                        <strong>定义：</strong><a href="https://www.ncbi.nlm.nih.gov/books/NBK56437/" target="_blank">置信区间</a>：参数估计的区间范围<br>
+                        <strong>优势：</strong>同时展示效应大小与精度<br>
+                        <strong>解读：</strong>
                         <ul style="padding-left:1.2rem; margin-top:0.5rem; font-size:0.9rem;">
-                            <li>95%CI不包含无效值=统计显著</li>
-                            <li>区间宽度直接反映估计精度</li>
-                            <li>可直接判断临床意义：如OR=1.2(0.9-1.5)，即使显著也效应很小</li>
-                            <li>支持等效性/非劣效性检验</li>
+                            <li>95%CI不含无效值=统计显著</li>
+                            <li>区间越窄，估计精度越高</li>
                         </ul>
+                        <strong>常用：</strong>率差、率比、均数差、风险比
                     </p>
                 </div>
                 <div class="card">
                     <h3>数据前提检验</h3>
                     <p class="desc-text">
-                        <strong>正态性检验：</strong>Shapiro-Wilk(小样本)、KS检验(大样本)、QQ图<br>
-                        <strong>方差齐性检验：</strong>Levene检验(对异常值稳健)、Bartlett检验(正态假设)<br>
-                        <strong>数据类型判断：</strong>
+                        <strong>正态性：</strong>
+                        <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/" target="_blank">Shapiro-Wilk</a>、
+                        <a href="https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test" target="_blank">KS检验</a><br>
+                        <strong>方差齐性：</strong>
+                        <a href="https://en.wikipedia.org/wiki/Levene%27s_test" target="_blank">Levene</a>、
+                        <a href="https://en.wikipedia.org/wiki/Bartlett%27s_test" target="_blank">Bartlett</a><br>
+                        <strong>数据类型：</strong>
                         <ul style="padding-left:1.2rem; margin-top:0.5rem; font-size:0.9rem;">
-                            <li>定量：连续(血压)、离散(住院天数)</li>
-                            <li>定性：二分类(是否患病)、多分类(血型)、有序(疾病分期)</li>
-                            <li>生存：带时间和截尾(随访中未发生终点)</li>
+                            <li>定量：连续、离散</li>
+                            <li>定性：二分类、多分类、有序</li>
+                            <li>生存数据：含时间与截尾</li>
+                            <li>重复测量：多时间点观测</li>
                         </ul>
-                    </p>
-                </div>
-                <div class="card">
-                    <h3>统计方法选择流程</h3>
-                    <p class="desc-text">
-                        <strong>Step1：</strong>判断数据类型：定量/定性/生存？<br>
-                        <strong>Step2：</strong>判断正态性：正态→参数检验，非正态→非参数<br>
-                        <strong>Step3：</strong>判断组数：2组→t检验/Mann-Whitney，多组→ANOVA/Kruskal-Wallis<br>
-                        <strong>Step4：</strong>判断配对：配对→配对检验，独立→独立样本检验<br>
-                        <strong>Step5：</strong>影响因素分析→回归模型：线性/Logistic/Cox
-                    </p>
-                </div>
-                <div class="card">
-                    <h3>基础假设检验</h3>
-                    <p class="desc-text">
-                        <strong>参数检验：</strong><br>
-                        单样本t检验、独立样本t检验、配对t检验<br>
-                        单因素ANOVA、重复测量ANOVA<br>
-                        <strong>非参数检验：</strong><br>
-                        Wilcoxon符号秩、Mann-Whitney U、Kruskal-Wallis<br>
-                        <strong>卡方类：</strong>Pearson卡方、Fisher精确、McNemar、卡方拟合优度
                     </p>
                 </div>
                 <div class="card">
                     <h3>高级统计方法</h3>
                     <p class="desc-text">
-                        <strong>回归模型：</strong>线性、Logistic、Cox、有序Logistic、多分类Logistic<br>
-                        <strong>纵向数据：</strong>广义估计方程(GEE)、线性混合效应模型(LMM)<br>
-                        <strong>因果推断：</strong><a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=Mzk0NDcyMzk1Mw==&action=getalbum&album_id=3881297220724850690&scene=126&sessionid=1775759402451#wechat_redirect" target="_blank">PSM(倾向得分匹配)</a>、<a href="https://www.stata.com/manuals14/teteffectsipw.pdf" target="_blank">IPTW(逆概率加权)</a>、工具变量(IV)、断点回归(RDD)、<a href="https://www.chinaooc.com.cn/course/66bd3362711dc30c342efeb5" target="_blank">DID(双重差分)</a><br>
-                        <strong>其他：</strong><a href="https://www.stata.com/manuals/causalmediateintro.pdf" target="_blank">中介分析(中介效应)</a>、<a href="https://wap.sciencenet.cn/blog-3444471-1523896.html" target="_blank">调节分析(交互效应)</a>、多重插补、竞争风险模型
+                        <strong>回归模型：</strong>
+                        <a href="https://en.wikipedia.org/wiki/Linear_regression" target="_blank">线性</a>、
+                        <a href="https://en.wikipedia.org/wiki/Logistic_regression" target="_blank">Logistic</a>、
+                        <a href="https://en.wikipedia.org/wiki/Cox_proportional_hazards_model" target="_blank">Cox</a><br>
+                        <strong>纵向数据：</strong>
+                        <a href="https://en.wikipedia.org/wiki/Generalized_estimating_equation" target="_blank">GEE</a>、
+                        <a href="https://en.wikipedia.org/wiki/Mixed_model" target="_blank">线性混合模型</a><br>
+                        <strong>因果推断：</strong>
+                        <a href="https://en.wikipedia.org/wiki/Propensity_score_matching" target="_blank">PSM</a>、
+                        <a href="https://en.wikipedia.org/wiki/Inverse_probability_weighting" target="_blank">IPTW</a>、
+                        工具变量、断点回归、双重差分<br>
+                        <strong>其他：</strong>
+                        <a href="https://en.wikipedia.org/wiki/Mediation_(statistics)" target="_blank">中介分析</a>、
+                        <a href="https://en.wikipedia.org/wiki/Multiple_imputation" target="_blank">多重插补</a>、
+                        竞争风险模型、结构方程模型
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>基础统计检验</h3>
+                    <p class="desc-text">
+                        <strong>定量数据：</strong>
+                        <a href="https://en.wikipedia.org/wiki/Student%27s_t-test" target="_blank">t检验</a>、
+                        <a href="https://en.wikipedia.org/wiki/Analysis_of_variance" target="_blank">ANOVA</a>、
+                        非参数检验<br>
+                        <strong>定性数据：</strong>
+                        <a href="https://en.wikipedia.org/wiki/Chi-squared_test" target="_blank">卡方检验</a>、
+                        <a href="https://en.wikipedia.org/wiki/Fisher%27s_exact_test" target="_blank">Fisher确切概率</a>、
+                        McNemar检验<br>
+                        <strong>相关分析：</strong>
+                        <a href="https://en.wikipedia.org/wiki/Pearson_correlation_coefficient" target="_blank">Pearson</a>、
+                        <a href="https://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient" target="_blank">Spearman</a>、
+                        Kendall相关<br>
+                        <strong>一致性：</strong>
+                        <a href="https://en.wikipedia.org/wiki/Intraclass_correlation_coefficient" target="_blank">ICC</a>、
+                        <a href="https://en.wikipedia.org/wiki/Cohen%27s_kappa" target="_blank">Kappa</a>
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>诊断试验评价</h3>
+                    <p class="desc-text">
+                        <strong>核心指标：</strong>
+                        <a href="https://en.wikipedia.org/wiki/Sensitivity_and_specificity" target="_blank">灵敏度、特异度</a>、约登指数<br>
+                        <strong>预测值：</strong>PPV、NPV、似然比<br>
+                        <strong>综合评价：</strong>
+                        <a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic" target="_blank">ROC曲线、AUC</a>、校准曲线<br>
+                        <strong>报告规范：</strong>
+                        <a href="https://www.stard-statement.org/" target="_blank">STARD</a>
                     </p>
                 </div>
             </div>
@@ -359,392 +356,375 @@
         <!-- 样本量计算 -->
         <div id="sample-size" class="card" style="margin-bottom:1.5rem;">
             <div class="top-link">
-                <a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=Mzk0NDcyMzk1Mw==&action=getalbum&album_id=3709856140965101571&scene=126&sessionid=1775759402451#wechat_redirect" target="_blank">
-                    📚 查看公众号完整样本量计算合集（含公式与案例）
-                </a>
-            </div>
-            <div class="top-link" style="margin-top:0.5rem;">
-                <a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=Mzk0NDcyMzk1Mw==&action=getalbum&album_id=3709856140965101571&scene=126&sessionid=1775759402451#wechat_redirect" target="_blank">
-                    📖 公众号专属样本量计算实战教程
-                </a>
+                <a href="https://www.openepi.com/" target="_blank">📊 OpenEpi 样本量计算工具</a>
             </div>
             <h3 style="margin-bottom:1rem; color:#2c3e50;">🧮 样本量计算</h3>
             <div class="card-box">
                 <div class="card">
                     <h3>核心参数</h3>
                     <p class="desc-text">
-                        <strong>α值：</strong>一类错误，通常取0.05，对应95%置信度<br>
-                        <strong>β值：</strong>二类错误，通常取0.2，对应80%检验效能<br>
-                        <strong>效应量：</strong>预期的组间差异，是样本量计算的核心<br>
-                        <strong>脱落率：</strong>通常预留10-20%的脱落，最终样本量需放大<br>
-                        <small style="color:#666;">点击查看<a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=Mzk0NDcyMzk1Mw==&action=getalbum&album_id=3709856140965101571&scene=126&sessionid=1775759402451#wechat_redirect" target="_blank">样本量计算实战教程</a>，涵盖所有检验类型的估算方法</small>
+                        <strong>α值：</strong><a href="https://en.wikipedia.org/wiki/Type_I_and_type_II_errors" target="_blank">一类错误</a>，通常0.05<br>
+                        <strong>β值：</strong><a href="https://en.wikipedia.org/wiki/Power_(statistics)" target="_blank">二类错误</a>，通常0.2，效能80%<br>
+                        <strong>效应量：</strong>组间预期差异<br>
+                        <strong>脱落率：</strong>10–20%<br>
+                        <strong>单侧/双侧：</strong>临床研究优先双侧
                     </p>
                 </div>
                 <div class="card">
-                    <h3>均值比较</h3>
+                    <h3>计算场景</h3>
                     <p class="desc-text">
-                        独立样本t检验：基于两组均值差和标准差<br>
-                        配对t检验：基于差值的标准差，效率更高<br>
-                        单组均值：与已知总体均值比较的样本量
+                        均值比较：t检验、ANOVA<br>
+                        率的比较：卡方、病例对照、队列<br>
+                        生存分析：Log-rank、Cox回归<br>
+                        诊断试验：灵敏度、特异度、ROC<br>
+                        等效性/非劣效性试验专用计算
                     </p>
                 </div>
                 <div class="card">
-                    <h3>率的比较</h3>
-                    <p class="desc-text">
-                        二分类结局：两组率的比较，如干预组有效率60% vs 对照组40%<br>
-                        队列研究：暴露组与非暴露组的发病风险比较<br>
-                        病例对照研究：病例组与对照组的暴露率比较
-                    </p>
-                </div>
-                <div class="card">
-                    <h3>生存分析</h3>
-                    <p class="desc-text">
-                        Log-rank检验：需要的事件数，而非总样本量<br>
-                        Cox回归：事件数通常需要变量数的10倍以上<br>
-                        随访时间：需考虑入组时间和随访时间的设计
-                    </p>
-                </div>
-                <div class="card">
-                    <h3>诊断试验</h3>
-                    <p class="desc-text">
-                        灵敏度：检测阳性的样本量估算<br>
-                        特异度：检测阴性的样本量估算<br>
-                        ROC曲线：AUC的样本量估算
-                    </p>
-                </div>
-                <div class="card">
-                    <h3>在线计算工具</h3>
+                    <h3>计算工具</h3>
                     <div class="tool-grid" style="margin:0; padding:0;">
                         <div class="tool-item"><a href="https://www.openepi.com/" target="_blank">OpenEpi</a></div>
-                        <div class="tool-item"><a href="https://www.stat.ubc.ca/~rollin/stats/ssize/" target="_blank">UBC Sample Size</a></div>
-                        <div class="tool-item"><a href="https://www.powerandsamplesize.com/" target="_blank">Power & Sample Size</a></div>
-                        <div class="tool-item"><a href="https://www.sealedenvelope.com/" target="_blank">Sealed Envelope</a></div>
                         <div class="tool-item"><a href="https://www.gpower.hhu.de/" target="_blank">G*Power</a></div>
-                        <div class="tool-item"><a href="https://www.ncss.com/software/pass/" target="_blank">PASS Software</a></div>
+                        <div class="tool-item"><a href="https://www.stat.ubc.ca/~rollin/stats/ssize/" target="_blank">UBC SampleSize</a></div>
+                        <div class="tool-item"><a href="https://ncss-wsp.com/" target="_blank">PASS</a></div>
+                        <div class="tool-item"><a href="https://www.sample-size.net/" target="_blank">SampleSize.Net</a></div>
+                        <div class="tool-item"><a href="https://www.sealedenvelope.com/power/" target="_blank">Sealed Envelope</a></div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 两列布局的研究设计模块 -->
         <div class="card-box">
             <!-- 临床研究设计 -->
             <div class="card" id="study-design">
-                <h3 style="color:#2c3e50;">📝 临床研究设计</h3>
+                <h3>📝 临床研究设计</h3>
                 <p class="desc-text">
                     <strong>证据等级：</strong>RCT > 队列 > 病例对照 > 横断面<br><br>
                     <strong>观察性研究：</strong><br>
-                    • 横断面：患病率调查，某一时间点的现状<br>
-                    • 病例对照：回顾性，从果到因，适合罕见病，计算<a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=Mzk0NDcyMzk1Mw==&action=getalbum&album_id=3881297220724850690&scene=126&sessionid=1775759402451#wechat_redirect" target="_blank">OR(比值比)</a>，用于估计暴露与疾病的关联强度<br>
-                    • 队列：前瞻性，从因到果，计算<a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=Mzk0NDcyMzk1Mw==&action=getalbum&album_id=3881297220724850690&scene=126&sessionid=1775759402451#wechat_redirect" target="_blank">RR(相对风险)</a>、AR(归因风险)，验证因果，遵循<a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=Mzk0NDcyMzk1Mw==&action=getalbum&album_id=3881297220724850690&scene=126&sessionid=1775759402451#wechat_redirect" target="_blank">STROBE报告规范解读</a><br><br>
+                    • 横断面：患病率调查<br>
+                    • 病例对照：回顾性，计算<a href="https://www.ncbi.nlm.nih.gov/books/NBK55312/" target="_blank">OR</a><br>
+                    • 队列：前瞻性，计算<a href="https://www.ncbi.nlm.nih.gov/books/NBK54433/" target="_blank">RR</a>，遵循<a href="https://www.strobe-statement.org/" target="_blank">STROBE</a><br><br>
                     <strong>实验性研究：</strong><br>
-                    • RCT：金标准，随机、盲法、对照，<a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=Mzk0NDcyMzk1Mw==&action=getalbum&album_id=3881297220724850690&scene=126&sessionid=1775759402451#wechat_redirect" target="_blank">CONSORT报告规范解读</a><br>
-                    • 非随机对照：证据等级低于RCT<br>
-                    • 诊断试验：<a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=Mzk0NDcyMzk1Mw==&action=getalbum&album_id=3881297220724850690&scene=126&sessionid=1775759402451#wechat_redirect" target="_blank">STARD报告规范解读</a>，评价诊断准确性
+                    • RCT：遵循<a href="https://www.consort-statement.org/" target="_blank">CONSORT</a><br>
+                    • 诊断试验：遵循<a href="https://www.stard-statement.org/" target="_blank">STARD</a><br>
+                    <strong>量表研究：</strong>遵循<a href="https://www.cosmin.nl/" target="_blank">COSMIN</a>
                 </p>
             </div>
 
-            <!-- 真实世界研究 -->
+            <!-- 真实世界研究（独立模块+补全链接） -->
             <div class="card" id="rws">
-                <h3 style="color:#2c3e50;">🏥 真实世界研究 (RWS)</h3>
+                <h3>🏥 真实世界研究 (RWS)</h3>
                 <p class="desc-text">
-                    <strong>定义：</strong>真实临床实践中，常规诊疗数据的研究，外部有效性高<br>
-                    <strong>数据来源：</strong>EHR、医保、登记库、可穿戴设备<br><br>
-                    <strong>混杂控制方法：</strong><br>
-                    • PSM：匹配混杂因素，模拟随机<br>
-                    • IPTW：逆概率加权，保留更多样本<br>
-                    • IV：解决未观测混杂，类似自然实验<br>
-                    • DID：双重差分，评估政策干预效果<br>
-                    <strong>报告规范：</strong><a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=Mzk0NDcyMzk1Mw==&action=getalbum&album_id=3881297220724850690&scene=126&sessionid=1775759402451#wechat_redirect" target="_blank">RECORD-PE规范解读</a>，规范RWS的报告
+                    <strong>定义：</strong><a href="https://en.wikipedia.org/wiki/Real_world_evidence" target="_blank">真实世界研究</a>：基于常规诊疗数据的临床研究<br>
+                    <strong>数据来源：</strong>EHR、医保、登记库、区域健康数据<br><br>
+                    <strong>混杂控制：</strong>
+                    <a href="https://en.wikipedia.org/wiki/Propensity_score_matching" target="_blank">PSM</a>、
+                    <a href="https://en.wikipedia.org/wiki/Inverse_probability_weighting" target="_blank">IPTW</a>、
+                    <a href="https://en.wikipedia.org/wiki/Difference_in_differences" target="_blank">DID</a>、
+                    <a href="https://en.wikipedia.org/wiki/Instrumental_variable" target="_blank">工具变量</a>、高维倾向得分<br>
+                    <strong>报告规范：</strong>
+                    <a href="https://www.record-statement.org/" target="_blank">RECORD</a><br>
+                    <strong>优势：</strong>外推性强、样本量大、覆盖广泛人群
                 </p>
             </div>
 
             <!-- 医学机器学习 -->
             <div class="card" id="ml">
-                <h3 style="color:#2c3e50;">🤖 医学机器学习</h3>
+                <h3>🤖 医学机器学习</h3>
                 <p class="desc-text">
                     <strong>常用算法：</strong><br>
-                    • 传统：<a href="https://scikit-learn.org.cn/view/411.html" target="_blank">LASSO正则回归</a>、随机森林、XGBoost、SVM<br>
-                    • 深度学习：CNN(影像)、LSTM(时序)、Transformer<br><br>
-                    <strong>医学特有要求：</strong><br>
-                    • 可解释性：<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11513550/pdf/CTS-17-e70056.pdf" target="_blank">SHAP可解释性</a>/LIME，解决黑箱问题<br>
-                    • 校准：校准曲线，保证预测概率准确<br>
-                    • 外部验证：必须独立队列验证，避免过拟合<br>
-                    • 临床评价：DCA决策曲线，评价净获益
+                    <a href="https://en.wikipedia.org/wiki/Lasso_(statistics)" target="_blank">LASSO</a>、
+                    <a href="https://en.wikipedia.org/wiki/Random_forest" target="_blank">随机森林</a>、
+                    <a href="https://en.wikipedia.org/wiki/XGBoost" target="_blank">XGBoost</a>、
+                    <a href="https://en.wikipedia.org/wiki/Support_vector_machine" target="_blank">SVM</a><br>
+                    CNN、LSTM、Transformer、TabNet<br><br>
+                    <strong>医学要求：</strong><br>
+                    <a href="https://en.wikipedia.org/wiki/SHAP_(software)" target="_blank">SHAP</a>可解释性、校准曲线、外部验证、DCA决策曲线<br>
+                    <strong>报告规范：</strong>
+                    <a href="https://www.equator-network.org/library/transparent-reporting-of-a-multivariable-prediction-model-for-individual-prognosis-or-diagnosis-tripod/" target="_blank">TRIPOD</a>
                 </p>
             </div>
 
             <!-- 传染病数学建模 -->
             <div class="card" id="modeling">
-                <h3 style="color:#2c3e50;">📈 传染病数学建模</h3>
+                <h3>📈 传染病数学建模</h3>
                 <p class="desc-text">
-                    <strong>经典仓室模型：</strong><br>
-                    • SIR：易感-感染-恢复，适用于永久免疫的传染病<br>
-                    • SEIR：加入潜伏期，适用于新冠、流感等<br>
-                    • SEIRS：加入免疫丧失，适用于流感等反复流行的疾病<br><br>
+                    <strong>经典模型：</strong>
+                    <a href="https://en.wikipedia.org/wiki/Compartmental_models_in_epidemiology#The_SIR_model" target="_blank">SIR</a>、
+                    <a href="https://en.wikipedia.org/wiki/Compartmental_models_in_epidemiology#The_SEIR_model" target="_blank">SEIR</a>、SEIRS、MSEIR<br><br>
                     <strong>关键参数：</strong><br>
-                    • R₀：基本再生数，无干预时的传播能力<br>
-                    • Rₜ：有效再生数，当前的传播能力，<1说明疫情得到控制<br>
-                    <strong>应用：</strong>疫情预测、防控效果评估、疫苗策略优化
+                    <a href="https://en.wikipedia.org/wiki/Basic_reproduction_number" target="_blank">R₀(基本再生数)</a>、Rₜ(有效再生数)<br>
+                    潜伏期、传染期、防控效果评估<br>
+                    <strong>工具：</strong>Python、R、MATLAB、AnyLogic
+                </p>
+            </div>
+                        
+            <!-- 量表与信效度 -->
+            <div class="card" id="scale">
+                <h3>📋 量表信效度分析</h3>
+                <p class="desc-text">
+                    <strong>信度：</strong>
+                    <a href="https://en.wikipedia.org/wiki/Cronbach%27s_alpha" target="_blank">Cronbach's α</a>、重测信度、分半信度<br>
+                    <strong>效度：</strong>内容效度、结构效度、效标效度<br>
+                    <strong>结构分析：</strong>
+                    <a href="https://en.wikipedia.org/wiki/Exploratory_factor_analysis" target="_blank">EFA</a>、
+                    <a href="https://en.wikipedia.org/wiki/Confirmatory_factor_analysis" target="_blank">CFA</a><br>
+                    <strong>规范：</strong>
+                    <a href="https://www.cosmin.nl/" target="_blank">COSMIN</a>
+                </p>
+            </div>
+            
+            <!-- 生存分析 -->
+            <div class="card" id="survival">
+                <h3>⏳ 生存分析方法</h3>
+                <p class="desc-text">
+                    <strong>基础方法：</strong>
+                    <a href="https://en.wikipedia.org/wiki/Kaplan%E2%80%93Meier_estimator" target="_blank">Kaplan-Meier曲线</a>、
+                    <a href="https://en.wikipedia.org/wiki/Log-rank_test" target="_blank">Log-rank检验</a><br>
+                    <strong>多因素：</strong>
+                    <a href="https://en.wikipedia.org/wiki/Cox_proportional_hazards_model" target="_blank">Cox比例风险回归</a><br>
+                    <strong>前提检验：</strong>比例风险假设PH检验<br>
+                    <strong>拓展：</strong>竞争风险模型、时变协变量模型
                 </p>
             </div>
         </div>
     </div>
 
-        <!-- 公共数据库大全 -->
-        <div class="module-header" onclick="toggleModule(this)" id="databases">
-            <div class="module-title">
-                <span class="module-icon">💾</span>
-                公共数据库大全
-            </div>
-            <span class="toggle-icon">▼</span>
+    <!-- 公共数据库（全面扩充） -->
+    <div class="module-header" onclick="toggleModule(this)" id="databases">
+        <div class="module-title">
+            <span class="module-icon">💾</span>
+            公共数据库
         </div>
-        <div class="module-content">
-            <div class="sub-title">人群健康数据库</div>
-            <div class="tool-grid">
-                <div class="tool-item"><a href="https://www.ukbiobank.ac.uk/" UKB 英国生物银行</a></div>
-                <div class="tool-item"><a href="https://wwwn.cdc.gov/nchs/nhanes/" target="_blank">NHANES 美国健康营养</a></div>
-                <div class="tool-item"><a href="https://charls.pku.edu.cn/" target="_blank">CHARLS 中国健康养老</a></div>
-                <div class="tool-item"><a href="https://vizhub.healthdata.org/gbd-results/" target="_blank">GBD 全球疾病负担</a></div>
-                <div class="tool-item"><a href="https://seer.cancer.gov/" target="_blank">SEER 美国肿瘤登记</a></div>
-                <div class="tool-item"><a href="https://www.ncbi.nlm.nih.gov/gap" target="_blank">dbGaP 基因型表型</a></div>
-            </div>
-
-            <div class="sub-title">肿瘤与基因组数据库</div>
-            <div class="tool-grid">
-                <div class="tool-item"><a href="https://portal.gdc.cancer.gov/" target="_blank">TCGA 肿瘤基因组</a></div>
-                <div class="tool-item"><a href="https://www.ncbi.nlm.nih.gov/geo/" target="_blank">GEO 基因表达</a></div>
-                <div class="tool-item"><a href="https://gtexportal.org/home/" target="_blank">GTEx 组织表达</a></div>
-                <div class="tool-item"><a href="https://www.ebi.ac.uk/arrayexpress/" target="_blank">ArrayExpress</a></div>
-                <div class="tool-item"><a href="https://pdc.cancer.gov/pdc/" target="_blank">PDC 蛋白组数据</a></div>
-                <div class="tool-item"><a href="https://portal.imaging.datacommons.cancer.gov/" target="_blank">IDC 影像数据</a></div>
-            </div>
-
-            <div class="sub-title">测序与序列数据库</div>
-            <div class="tool-grid">
-                <div class="tool-item"><a href="https://www.ncbi.nlm.nih.gov/sra" target="_blank">SRA 测序数据</a></div>
-                <div class="tool-item"><a href="https://www.ebi.ac.uk/ena/" target="_blank">ENA 欧洲核酸库</a></div>
-                <div class="tool-item"><a href="https://ngdc.cncb.ac.cn/gsa/" target="_blank">GSA 中国组学归档</a></div>
-                <div class="tool-item"><a href="https://www.ncbi.nlm.nih.gov/genbank/" target="_blank">GenBank</a></div>
-                <div class="tool-item"><a href="https://www.ddbj.nig.ac.jp/" target="_blank">DDBJ 日本核酸库</a></div>
-                <div class="tool-item"><a href="http://www.internationalgenome.org/" target="_blank">1000 Genomes</a></div>
-            </div>
-
-            <div class="sub-title">遗传与变异数据库</div>
-            <div class="tool-grid">
-                <div class="tool-item"><a href="https://www.ncbi.nlm.nih.gov/snp/" target="_blank">dbSNP 单核苷酸多态</a></div>
-                <div class="tool-item"><a href="https://www.ncbi.nlm.nih.gov/clinvar/" target="_blank">ClinVar 临床变异</a></div>
-                <div class="tool-item"><a href="https://omim.org/" target="_blank">OMIM 孟德尔遗传</a></div>
-                <div class="tool-item"><a href="https://string-db.org/" target="_blank">STRING 蛋白互作</a></div>
-                <div class="tool-item"><a href="https://www.genome.jp/kegg/" target="_blank">KEGG 通路数据库</a></div>
-                <div class="tool-item"><a href="https://pubchem.ncbi.nlm.nih.gov/" target="_blank">PubChem 化合物库</a></div>
-            </div>
-
-            <div class="sub-title">国家基因组科学数据中心</div>
-            <div class="tool-grid">
-                <div class="tool-item"><a href="https://ngdc.cncb.ac.cn/gwh/" target="_blank">GWH 基因组序列</a></div>
-                <div class="tool-item"><a href="https://ngdc.cncb.ac.cn/omix/" target="_blank">OMIX 多元归档</a></div>
-                <div class="tool-item"><a href="https://ngdc.cncb.ac.cn/gen/" target="_blank">GEN 基因表达</a></div>
-                <div class="tool-item"><a href="https://ngdc.cncb.ac.cn/biosample/" target="_blank">BioSample 生物样本</a></div>
-                <div class="tool-item"><a href="https://ngdc.cncb.ac.cn/bioproject/" target="_blank">BioProject 生物项目</a></div>
-                <div class="tool-item"><a href="https://ngdc.cncb.ac.cn/methbank/" target="_blank">MethBank 甲基化</a></div>
-            </div>
-        </div>
-
-        <!-- 科研工具大全 -->
-        <div class="module-header" onclick="toggleModule(this)" id="tools">
-            <div class="module-title">
-                <span class="module-icon">🔬</span>
-                科研工具大全
-            </div>
-            <span class="toggle-icon">▼</span>
-        </div>
-        <div class="module-content">
-            <div class="sub-title">统计分析软件</div>
-            <div class="tool-grid">
-                <div class="tool-item"><a href="https://www.ibm.com/products/spss-statistics" target="_blank">SPSS</a></div>
-                <div class="tool-item"><a href="https://www.sas.com/" target="_blank">SAS</a></div>
-                <div class="tool-item"><a href="https://www.stata.com/" target="_blank">Stata</a></div>
-                <div class="tool-item"><a href="https://www.r-project.org/" target="_blank">R 语言</a></div>
-                <div class="tool-item"><a href="https://posit.co/" target="_blank">RStudio</a></div>
-                <div class="tool-item"><a href="https://www.python.org/" target="_blank">Python</a></div>
-                <div class="tool-item"><a href="https://www.mstata.com/" target="_blank">MSTATA AI统计</a></div>
-                <div class="tool-item"><a href="https://www.tableau.com/" target="_blank">Tableau</a></div>
-            </div>
-
-            <div class="sub-title">量表查询工具</div>
-            <div class="tool-grid">
-                <div class="tool-item"><a href="https://www.chinecoa.com/" target="_blank">华量网(中国COA平台)</a></div>
-                <div class="tool-item"><a href="https://www.usecoa.com/" target="_blank">USECOA临床量表库</a></div>
-                <div class="tool-item"><a href="https://clinicaltoolslibrary.com/" target="_blank">临床工具库</a></div>
-                <div class="tool-item"><a href="https://www.cxmed.cn/ms.html" target="_blank">创序医变量表库</a></div>
-                <div class="tool-item"><a href="https://www.healthmeasures.net/" target="_blank">HealthMeasures健康库</a></div>
-                <div class="tool-item"><a href="https://www.xinlixue.cn/wb/" target="_blank">心理学量表库</a></div>
-            </div>
-
-            <div class="sub-title">常用量表直达</div>
-            <div class="tool-grid">
-                <div class="tool-item"><a href="https://www.phqscreeners.com/" target="_blank">PHQ-9 抑郁量表</a></div>
-                <div class="tool-item"><a href="https://www.phqscreeners.com/" target="_blank">GAD-7 焦虑量表</a></div>
-                <div class="tool-item"><a href="https://www.sf-36.org/" target="_blank">SF-36 生活质量量表</a></div>
-                <div class="tool-item"><a href="https://psychiatry.uchicago.edu/psqi" target="_blank">PSQI 睡眠质量量表</a></div>
-                <div class="tool-item"><a href="https://www.mocatest.org/" target="_blank">MoCA 认知评估量表</a></div>
-                <div class="tool-item"><a href="https://www.epworthsleepscale.com/" target="_blank">ESS 嗜睡量表</a></div>
-            </div>
-
-            <div class="sub-title">科研作图软件</div>
-            <div class="tool-grid">
-                <div class="tool-item"><a href="https://www.graphpad.com/" target="_blank">GraphPad Prism</a></div>
-                <div class="tool-item"><a href="https://www.originlab.com/" target="_blank">Origin</a></div>
-                <div class="tool-item"><a href="https://biorender.com/" target="_blank">BioRender</a></div>
-                <div class="tool-item"><a href="https://imagej.nih.gov/ij/" target="_blank">ImageJ</a></div>
-                <div class="tool-item"><a href="https://hiplot.com.cn/" target="_blank">Hiplot</a></div>
-                <div class="tool-item"><a href="https://www.lucidchart.com/" target="_blank">Lucidchart</a></div>
-                <div class="tool-item"><a href="https://www.adobe.com/cn/products/illustrator.html" target="_blank">Adobe Illustrator</a></div>
-                <div class="tool-item"><a href="https://www.snapgene.com/" target="_blank">SnapGene</a></div>
-            </div>
-
-            <div class="sub-title">文献管理工具</div>
-            <div class="tool-grid">
-                <div class="tool-item"><a href="https://www.endnote.com/" target="_blank">EndNote</a></div>
-                <div class="tool-item"><a href="https://www.zotero.org/" target="_blank">Zotero</a></div>
-                <div class="tool-item"><a href="https://www.mendeley.com/" target="_blank">Mendeley</a></div>
-                <div class="tool-item"><a href="https://www.noteexpress.com/" target="_blank">NoteExpress</a></div>
-                <div class="tool-item"><a href="https://readpaper.com/" target="_blank">ReadPaper</a></div>
-                <div class="tool-item"><a href="https://www.papersapp.com/" target="_blank">Papers</a></div>
-            </div>
-
-            <div class="sub-title">文献查阅平台</div>
-            <div class="tool-grid">
-                <div class="tool-item"><a href="https://pubmed.ncbi.nlm.nih.gov/" target="_blank">PubMed</a></div>
-                <div class="tool-item"><a href="https://scholar.google.com/" target="_blank">Google Scholar</a></div>
-                <div class="tool-item"><a href="https://www.webofscience.com/" target="_blank">Web of Science</a></div>
-                <div class="tool-item"><a href="https://www.sciencedirect.com/" target="_blank">ScienceDirect</a></div>
-                <div class="tool-item"><a href="https://www.cnki.net/" target="_blank">中国知网 CNKI</a></div>
-                <div class="tool-item"><a href="https://www.wanfangdata.com.cn/" target="_blank">万方数据</a></div>
-                <div class="tool-item"><a href="https://www.cqvip.com/" target="_blank">维普资讯</a></div>
-                <div class="tool-item"><a href="https://www.researchgate.net/" target="_blank">ResearchGate</a></div>
-            </div>
-
-            <div class="sub-title">科研笔记工具</div>
-            <div class="tool-grid">
-                <div class="tool-item"><a href="https://www.notion.so/" target="_blank">Notion</a></div>
-                <div class="tool-item"><a href="https://obsidian.md/" target="_blank">Obsidian</a></div>
-                <div class="tool-item"><a href="https://www.yuque.com/" target="_blank">语雀</a></div>
-                <div class="tool-item"><a href="https://www.marginnote.com/" target="_blank">MarginNote</a></div>
-                <div class="tool-item"><a href="https://logseq.com/" target="_blank">Logseq</a></div>
-                <div class="tool-item"><a href="https://www.feishu.cn/" target="_blank">飞书文档</a></div>
-                <div class="tool-item"><a href="https://www.overleaf.com/" target="_blank">Overleaf LaTeX</a></div>
-                <div class="tool-item"><a href="https://www.evernote.com/" target="_blank">印象笔记</a></div>
-            </div>
-        </div>
-
-        <!-- AI科研工具 -->
-        <div class="module-header" onclick="toggleModule(this)" id="ai">
-            <div class="module-title">
-                <span class="module-icon">🤖</span>
-                AI 科研工具 & 大模型
-            </div>
-            <span class="toggle-icon">▼</span>
-        </div>
-        <div class="module-content">
-            <div class="sub-title">主流通用大模型</div>
-            <div class="tool-grid">
-                <div class="tool-item"><a href="https://chat.openai.com/" target="_blank">ChatGPT</a></div>
-                <div class="tool-item"><a href="https://www.anthropic.com/claude" target="_blank">Claude</a></div>
-                <div class="tool-item"><a href="https://kimi.moonshot.cn/" target="_blank">Kimi 月之暗面</a></div>
-                <div class="tool-item"><a href="https://yiyan.baidu.com/" target="_blank">文心一言</a></div>
-                <div class="tool-item"><a href="https://tongyi.aliyun.com/qianwen/" target="_blank">通义千问</a></div>
-                <div class="tool-item"><a href="https://xinghuo.xfyun.cn/" target="_blank">讯飞星火</a></div>
-                <div class="tool-item"><a href="https://www.deepseek.com/" target="_blank">DeepSeek</a></div>
-                <div class="tool-item"><a href="https://chatglm.cn/" target="_blank">智谱清言</a></div>
-            </div>
-
-            <div class="sub-title">医学专用AI工具</div>
-            <div class="tool-grid">
-                <div class="tool-item"><a href="https://gongke.net/tools/newidea-ai" target="_blank">NewIdea 医学AI</a></div>
-                <div class="tool-item"><a href="https://ai.google/discover/med-palm/" target="_blank">Med-PaLM 2</a></div>
-                <div class="tool-item"><a href="https://www.yiducloud.com/product/ai-medical.html" target="_blank">医渡大模型</a></div>
-                <div class="tool-item"><a href="https://www.dxy.cn/ai" target="_blank">丁香园AI</a></div>
-                <div class="tool-item"><a href="https://www.medpeer.cn/" target="_blank">MedPeer</a></div>
-                <div class="tool-item"><a href="https://www.paperred.com/" target="_blank">PaperRed</a></div>
-            </div>
-
-            <div class="sub-title">文献阅读AI工具</div>
-            <div class="tool-grid">
-                <div class="tool-item"><a href="https://elicit.org/" target="_blank">Elicit</a></div>
-                <div class="tool-item"><a href="https://researchrabbitapp.com/" target="_blank">ResearchRabbit</a></div>
-                <div class="tool-item"><a href="https://www.qinkuge.com/" target="_blank">沁言学术</a></div>
-                <div class="tool-item"><a href="https://www.paperpal.com/" target="_blank">Paperpal</a></div>
-                <div class="tool-item"><a href="https://arxiv.53yu.com/" target="_blank">ChatPaper</a></div>
-                <div class="tool-item"><a href="https://www.connectedpapers.com/" target="_blank">Connected Papers</a></div>
-                <div class="tool-item"><a href="https://www.semanticscholar.org/" target="_blank">Semantic Scholar</a></div>
-                <div class="tool-item"><a href="https://huggingface.co/papers2agent" target="_blank">Paper2Agent</a></div>
-            </div>
-
-            <div class="sub-title">学术写作 & 翻译AI</div>
-            <div class="tool-grid">
-                <div class="tool-item"><a href="https://www.grammarly.com/" target="_blank">Grammarly</a></div>
-                <div class="tool-item"><a href="https://quillbot.com/" target="_blank">QuillBot</a></div>
-                <div class="tool-item"><a href="https://www.deepl.com/translator" target="_blank">DeepL 翻译</a></div>
-                <div class="tool-item"><a href="https://www.sciencedirect.com/sciencedoc" target="_blank">ScienceDoc</a></div>
-                <div class="tool-item"><a href="https://www.rocwrite.com/" target="_blank">鲲鹏智写</a></div>
-                <div class="tool-item"><a href="https://www.writefull.com/" target="_blank">Writefull</a></div>
-            </div>
-        </div>
-
-
+        <span class="toggle-icon">▼</span>
     </div>
-</div>
+    <div class="module-content">
+        <div class="sub-title">人群健康与流行病学</div>
+        <div class="tool-grid">
+            <div class="tool-item"><a href="https://www.ukbiobank.ac.uk/" target="_blank">UK Biobank</a></div>
+            <div class="tool-item"><a href="https://wwwn.cdc.gov/nchs/nhanes/" target="_blank">NHANES</a></div>
+            <div class="tool-item"><a href="https://charls.pku.edu.cn/" target="_blank">CHARLS</a></div>
+            <div class="tool-item"><a href="https://vizhub.healthdata.org/gbd-results/" target="_blank">GBD</a></div>
+            <div class="tool-item"><a href="https://seer.cancer.gov/" target="_blank">SEER</a></div>
+            <div class="tool-item"><a href="https://www.ecdc.europa.eu/en" target="_blank">ECDC</a></div>
+            <div class="tool-item"><a href="https://www.who.int/data" target="_blank">WHO Data</a></div>
+            <div class="tool-item"><a href="https://www.nationwidechildrens.org/research/institute-for-pediatric-public-health/peddr" target="_blank">PEDRR</a></div>
+            <div class="tool-item"><a href="https://www.cdc.gov/databases/" target="_blank">CDC 数据库</a></div>
+            <div class="tool-item"><a href="https://www.eurostat.europa.eu/" target="_blank">Eurostat</a></div>
+            <div class="tool-item"><a href="https://www.clinical-data-archive.com/" target="_blank">CDA 临床数据</a></div>
+        </div>
 
-<!-- 关于博主 - 放在最外层，不折叠 -->
-<div class="container section" id="about">
-    <h2 class="section-title">👨‍💻 关于博主</h2>
-    <div class="card" style="text-align:center; border:none; background:white;">
-        <p style="font-size:1.1rem;">大家好，我是 Abel，《Abel统计》公众号主理人。</p>
-        <p style="font-size:1.1rem;">专注医学统计、生物信息学、数据库挖掘、机器学习、科研设计分享。</p>
-        <p style="font-size:1.1rem;">希望能帮你解决科研中的各种难题，让科研更简单！</p>
+        <div class="sub-title">肿瘤与基因组</div>
+        <div class="tool-grid">
+            <div class="tool-item"><a href="https://portal.gdc.cancer.gov/" target="_blank">TCGA</a></div>
+            <div class="tool-item"><a href="https://www.ncbi.nlm.nih.gov/geo/" target="_blank">GEO</a></div>
+            <div class="tool-item"><a href="https://gtexportal.org/home/" target="_blank">GTEx</a></div>
+            <div class="tool-item"><a href="https://www.ebi.ac.uk/arrayexpress/" target="_blank">ArrayExpress</a></div>
+            <div class="tool-item"><a href="https://www.cbioportal.org/" target="_blank">cBioPortal</a></div>
+            <div class="tool-item"><a href="https://string-db.org/" target="_blank">STRING</a></div>
+            <div class="tool-item"><a href="https://www.proteinatlas.org/" target="_blank">HPA 蛋白图谱</a></div>
+            <div class="tool-item"><a href="https://www.disgenet.org/" target="_blank">DisGeNET</a></div>
+            <div class="tool-item"><a href="https://www.oncomine.org/" target="_blank">Oncomine</a></div>
+            <div class="tool-item"><a href="https://www.intogen.org/" target="_blank">IntOGen 驱动基因</a></div>
+        </div>
 
-        <p style="margin-top:1.5rem; font-weight:bold; font-size:1.2rem;">👇 关注我，获取更多科研干货</p>
+        <div class="sub-title">测序与序列</div>
+        <div class="tool-grid">
+            <div class="tool-item"><a href="https://www.ncbi.nlm.nih.gov/sra" target="_blank">SRA</a></div>
+            <div class="tool-item"><a href="https://ngdc.cncb.ac.cn/gsa/" target="_blank">GSA</a></div>
+            <div class="tool-item"><a href="https://www.ncbi.nlm.nih.gov/genbank/" target="_blank">GenBank</a></div>
+            <div class="tool-item"><a href="http://www.internationalgenome.org/" target="_blank">1000 Genomes</a></div>
+            <div class="tool-item"><a href="https://www.ebi.ac.uk/ena/" target="_blank">ENA</a></div>
+            <div class="tool-item"><a href="https://www.ncbi.nlm.nih.gov/refseq/" target="_blank">RefSeq</a></div>
+            <div class="tool-item"><a href="https://www.ensembl.org/" target="_blank">Ensembl</a></div>
+            <div class="tool-item"><a href="https://genome.ucsc.edu/" target="_blank">UCSC Genome</a></div>
+            <div class="tool-item"><a href="https://ngdc.cncb.ac.cn/bioproject/" target="_blank">BioProject</a></div>
+            <div class="tool-item"><a href="https://www.ncbi.nlm.nih.gov/snp/" target="_blank">dbSNP</a></div>
+        </div>
+
+        <div class="sub-title">国家基因组科学数据中心</div>
+        <div class="tool-grid">
+            <div class="tool-item"><a href="https://ngdc.cncb.ac.cn/gwh/" target="_blank">GWH</a></div>
+            <div class="tool-item"><a href="https://ngdc.cncb.ac.cn/omix/" target="_blank">OMIX</a></div>
+            <div class="tool-item"><a href="https://ngdc.cncb.ac.cn/gen/" target="_blank">GEN</a></div>
+            <div class="tool-item"><a href="https://ngdc.cncb.ac.cn/databasecommons/" target="_blank">Database Commons</a></div>
+        </div>
         
-        <div class="qrcode-group">
-            <div class="qrcode-item">
-                <img src="https://s41.ax1x.com/2026/04/10/ped0jns.jpg" class="qrcode" alt="Abel统计公众号二维码">
-                <div class="qrcode-text">公众号：Abel统计</div>
-            </div>
+        <div class="sub-title">临床与药物</div>
+        <div class="tool-grid">
+            <div class="tool-item"><a href="https://www.drugbank.com/" target="_blank">DrugBank</a></div>
+            <div class="tool-item"><a href="https://clinicaltrials.gov/" target="_blank">ClinicalTrials</a></div>
+            <div class="tool-item"><a href="https://www.chictr.org.cn/" target="_blank">中国临床试验注册中心</a></div>
+            <div class="tool-item"><a href="https://www.fda.gov/" target="_blank">FDA</a></div>
+            <div class="tool-item"><a href="https://www.nmpa.gov.cn/" target="_blank">NMPA 国家药监局</a></div>
+            <div class="tool-item"><a href="https://pubchem.ncbi.nlm.nih.gov/" target="_blank">PubChem</a></div>
+            <div class="tool-item"><a href="https://www.ebi.ac.uk/chembl/" target="_blank">ChEMBL</a></div>
+            <div class="tool-item"><a href="https://www.pharmgkb.org/" target="_blank">PharmGKB</a></div>
+            <div class="tool-item"><a href="https://www.drugs.com/" target="_blank">Drugs.com</a></div>
+        </div>
+
+        <div class="sub-title">微生物与感染</div>
+        <div class="tool-grid">
+            <div class="tool-item"><a href="https://www.ncbi.nlm.nih.gov/genome/" target="_blank">NCBI 微生物</a></div>
+            <div class="tool-item"><a href="https://gtdb.ecogenomic.org/" target="_blank">GTDB</a></div>
+            <div class="tool-item"><a href="https://www.ebi.ac.uk/ena/browser/" target="_blank">ENA 病毒</a></div>
+        </div>
+    </div>
+
+    <!-- 科研工具 -->
+    <div class="module-header" onclick="toggleModule(this)" id="tools">
+        <div class="module-title">
+            <span class="module-icon">🔬</span>
+            科研工具
+        </div>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="module-content">
+        <div class="sub-title">统计分析软件</div>
+        <div class="tool-grid">
+            <div class="tool-item"><a href="https://www.ibm.com/products/spss-statistics" target="_blank">SPSS</a></div>
+            <div class="tool-item"><a href="https://www.stata.com/" target="_blank">Stata</a></div>
+            <div class="tool-item"><a href="https://www.r-project.org/" target="_blank">R 语言</a></div>
+            <div class="tool-item"><a href="https://www.python.org/" target="_blank">Python</a></div>
+            <div class="tool-item"><a href="https://www.sas.com/" target="_blank">SAS</a></div>
+            <div class="tool-item"><a href="https://www.jmp.com/" target="_blank">JMP</a></div>
+            <div class="tool-item"><a href="https://www.epiinfo.com/" target="_blank">EpiInfo</a></div>
+            <div class="tool-item"><a href="https://www.medcalc.org/" target="_blank">MedCalc</a></div>
+        </div>
+
+        <!-- 量表工具（大幅扩充） -->
+        <div class="sub-title">量表与评估工具</div>
+        <div class="tool-grid">
+            <div class="tool-item"><a href="https://www.phqscreeners.com/" target="_blank">PHQ-9 抑郁</a></div>
+            <div class="tool-item"><a href="https://www.phqscreeners.com/" target="_blank">GAD-7 焦虑</a></div>
+            <div class="tool-item"><a href="https://www.sf-36.org/" target="_blank">SF-36 生活质量</a></div>
+            <div class="tool-item"><a href="https://www.mocatest.org/" target="_blank">MoCA 认知</a></div>
+            <div class="tool-item"><a href="https://www.who.int/news-room/fact-sheets/detail/mental-health" target="_blank">WHO 心理量表</a></div>
+            <div class="tool-item"><a href="https://www.cdc.gov/arthritis/data_statistics/health-assessment/paq.htm" target="_blank">PAQ 活动量表</a></div>
+            <div class="tool-item"><a href="https://www.ids-qids.org/" target="_blank">IDS-QIDS 抑郁</a></div>
+            <div class="tool-item"><a href="https://www.eortc.org/" target="_blank">EORTC 肿瘤</a></div>
+            <div class="tool-item"><a href="https://www.hesi.com/" target="_blank">HESI 健康量表</a></div>
+            <div class="tool-item"><a href="https://www.npionline.com/" target="_blank">NPI 神经精神</a></div>
+            <div class="tool-item"><a href="https://www.barthelindex.com/" target="_blank">Barthel 指数</a></div>
+            <div class="tool-item"><a href="https://www.fimscore.org/" target="_blank">FIM 功能评分</a></div>
+            <div class="tool-item"><a href="https://www.asi-q.com/" target="_blank">ASI 成瘾严重</a></div>
+            <div class="tool-item"><a href="https://www.childbehaviorchecklist.org/" target="_blank">CBCL 儿童行为</a></div>
+            <div class="tool-item"><a href="https://www.gad7.net/" target="_blank">GAD-7 完整版</a></div>
+            <div class="tool-item"><a href="https://www.promis.nih.gov/" target="_blank">PROMIS 健康量表</a></div>
+        </div>
+
+        <div class="sub-title">科研作图</div>
+        <div class="tool-grid">
+            <div class="tool-item"><a href="https://www.graphpad.com/" target="_blank">GraphPad Prism</a></div>
+            <div class="tool-item"><a href="https://biorender.com/" target="_blank">BioRender</a></div>
+            <div class="tool-item"><a href="https://imagej.nih.gov/ij/" target="_blank">ImageJ</a></div>
+            <div class="tool-item"><a href="https://hiplot.com.cn/" target="_blank">Hiplot</a></div>
+            <div class="tool-item"><a href="https://www.originlab.com/" target="_blank">Origin</a></div>
+            <div class="tool-item"><a href="https://www.adobe.com/cn/products/illustrator.html" target="_blank">AI 矢量图</a></div>
+            <div class="tool-item"><a href="https://www.figma.com/" target="_blank">Figma</a></div>
+            <div class="tool-item"><a href="https://www.canva.com/" target="_blank">Canva</a></div>
+        </div>
+
+        <!-- 文献资源（超全面） -->
+        <div class="sub-title">文献平台</div>
+        <div class="tool-grid">
+            <div class="tool-item"><a href="https://pubmed.ncbi.nlm.nih.gov/" target="_blank">PubMed</a></div>
+            <div class="tool-item"><a href="https://scholar.google.com/" target="_blank">Google Scholar</a></div>
+            <div class="tool-item"><a href="https://www.webofscience.com/" target="_blank">Web of Science</a></div>
+            <div class="tool-item"><a href="https://www.cnki.net/" target="_blank">CNKI 知网</a></div>
+            <div class="tool-item"><a href="https://www.wanfangdata.com.cn/" target="_blank">万方</a></div>
+            <div class="tool-item"><a href="https://www.cqvip.com/" target="_blank">维普</a></div>
+            <div class="tool-item"><a href="https://www.sciencedirect.com/" target="_blank">ScienceDirect</a></div>
+            <div class="tool-item"><a href="https://www.springer.com/" target="_blank">SpringerLink</a></div>
+            <div class="tool-item"><a href="https://www.sci-hub.se/" target="_blank">Sci-Hub</a></div>
+            <div class="tool-item"><a href="https://www.semanticscholar.org/" target="_blank">Semantic Scholar</a></div>
+            <div class="tool-item"><a href="https://www.nature.com/" target="_blank">Nature</a></div>
+            <div class="tool-item"><a href="https://www.science.org/" target="_blank">Science</a></div>
+            <div class="tool-item"><a href="https://www.thelancet.com/" target="_blank">Lancet</a></div>
+            <div class="tool-item"><a href="https://www.nejm.org/" target="_blank">NEJM</a></div>
+            <div class="tool-item"><a href="https://pubmed.ncbi.nlm.nih.gov/central/" target="_blank">PMC 全文</a></div>
+            <div class="tool-item"><a href="https://www.jamanetwork.com/" target="_blank">JAMA</a></div>
+        </div>
+        
+        <div class="sub-title">科研写作与规范</div>
+        <div class="tool-grid">
+            <div class="tool-item"><a href="https://www.equator-network.org/" target="_blank">EQUATOR 报告规范</a></div>
+            <div class="tool-item"><a href="https://www.endnote.com/" target="_blank">EndNote</a></div>
+            <div class="tool-item"><a href="https://www.mendeley.com/" target="_blank">Mendeley</a></div>
+            <div class="tool-item"><a href="https://www.zotero.org/" target="_blank">Zotero</a></div>
+            <div class="tool-item"><a href="https://www.turnitin.com/" target="_blank">Turnitin 查重</a></div>
+            <div class="tool-item"><a href="https://www.grammarly.com/" target="_blank">Grammarly</a></div>
+        </div>
+    </div>
+
+    <!-- AI科研工具 -->
+    <div class="module-header" onclick="toggleModule(this)" id="ai">
+        <div class="module-title">
+            <span class="module-icon">🤖</span>
+            AI 科研工具 & 大模型
+        </div>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="module-content">
+        <div class="sub-title">主流通用大模型</div>
+        <div class="tool-grid">
+            <div class="tool-item"><a href="https://chat.openai.com/" target="_blank">ChatGPT</a></div>
+            <div class="tool-item"><a href="https://www.anthropic.com/claude" target="_blank">Claude</a></div>
+            <div class="tool-item"><a href="https://kimi.moonshot.cn/" target="_blank">Kimi</a></div>
+            <div class="tool-item"><a href="https://yiyan.baidu.com/" target="_blank">文心一言</a></div>
+            <div class="tool-item"><a href="https://tongyi.aliyun.com/" target="_blank">通义千问</a></div>
+            <div class="tool-item"><a href="https://lingyiwanwu.com/" target="_blank">零一万物</a></div>
+            <div class="tool-item"><a href="https://deepseek.com/" target="_blank">DeepSeek</a></div>
+            <div class="tool-item"><a href="https://www.tiangong.cn/" target="_blank">天工AI</a></div>
+            <div class="tool-item"><a href="https://www.coze.com/" target="_blank">Coze 扣子</a></div>
+            <div class="tool-item"><a href="https://chat.mistral.ai/" target="_blank">Mistral</a></div>
+            <div class="tool-item"><a href="https://www.llama2.ai/" target="_blank">Llama 3</a></div>
+            <div class="tool-item"><a href="https://ai.baidu.com/" target="_blank">百度千帆</a></div>
+            <div class="tool-item"><a href="https://ai.tencent.com/" target="_blank">腾讯混元</a></div>
+            <div class="tool-item"><a href="https://ai.360.cn/" target="_blank">360 智脑</a></div>
+        </div>
+
+        <div class="sub-title">学术AI工具</div>
+        <div class="tool-grid">
+            <div class="tool-item"><a href="https://elicit.org/" target="_blank">Elicit 文献AI</a></div>
+            <div class="tool-item"><a href="https://www.deepl.com/translator" target="_blank">DeepL 翻译</a></div>
+            <div class="tool-item"><a href="https://quillbot.com/" target="_blank">QuillBot</a></div>
+            <div class="tool-item"><a href="https://www.consensus.app/" target="_blank">Consensus 论文AI</a></div>
+            <div class="tool-item"><a href="https://www.scite.ai/" target="_blank">Scite 引文分析</a></div>
+            <div class="tool-item"><a href="https://www.jasondavies.com/wordcloud/" target="_blank">WordCloud 词云</a></div>
+            <div class="tool-item"><a href="https://www.connectedpapers.com/" target="_blank">Connected Papers</a></div>
+            <div class="tool-item"><a href="https://www.paperpal.com/" target="_blank">PaperPal 论文润色</a></div>
+        </div>
+        
+        <div class="sub-title">医学专用AI</div>
+        <div class="tool-grid">
+            <div class="tool-item"><a href="https://chat.medlive.cn/" target="_blank">梅斯医学AI</a></div>
+            <div class="tool-item"><a href="https://www.amia.org/" target="_blank">AMIA 医学信息学AI</a></div>
+            <div class="tool-item"><a href="https://www.deepmedicine.com/" target="_blank">深度医疗AI</a></div>
+            <div class="tool-item"><a href="https://www.cradlegenomics.com/" target="_blank">Cradle Genomics</a></div>
+            <div class="tool-item"><a href="https://www.benchling.com/" target="_blank">Benchling 生信AI</a></div>
         </div>
     </div>
 </div>
 
 <footer>
-    <p>© 2025 Abel 统计 | 医学科研一站式学习平台</p>
-    <p>公众号：Abel统计</p>
+    <p>© 2025 医学科研一站式学习平台 | 学术资源整理</p>
 </footer>
 
 <script>
     function toggleModule(header) {
         const content = header.nextElementSibling;
         const icon = header.querySelector('.toggle-icon');
-        
         content.classList.toggle('active');
         icon.classList.toggle('active');
     }
 
-    // 折叠模块默认不展开，仅保留工具类的折叠，减少不必要的交互
-    window.onload = function() {
-        // 工具类模块默认折叠，用户按需展开
-    }
-
-    // 平滑滚动
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth'
-                });
-                // 如果目标模块是折叠的，自动展开
+                target.scrollIntoView({behavior: 'smooth'});
                 const moduleHeader = target.closest('.module-header');
                 if (moduleHeader) {
                     const content = moduleHeader.nextElementSibling;
@@ -756,6 +736,5 @@
         });
     });
 </script>
-
 </body>
 </html>
