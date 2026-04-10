@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -23,66 +22,6 @@
         }
         a:hover {
             color: #2c6fb8;
-        }
-        /* 侧边导航栏 */
-        .sidebar {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 240px;
-            height: 100vh;
-            background: #1b2b3a;
-            color: white;
-            padding: 1.5rem 1rem;
-            overflow-y: auto;
-            z-index: 200;
-            transition: transform 0.3s;
-        }
-        .sidebar-logo {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #34495e;
-            text-align: center;
-        }
-        .sidebar-nav {
-            display: flex;
-            flex-direction: column;
-            gap: 0.3rem;
-        }
-        .sidebar-nav a {
-            color: #bdc3c7;
-            padding: 0.6rem 0.8rem;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            transition: all 0.2s;
-        }
-        .sidebar-nav a:hover {
-            background: #3498db;
-            color: white;
-        }
-        .sidebar-nav a.active {
-            background: #3498db;
-            color: white;
-        }
-        .sidebar-toggle {
-            display: none;
-            position: fixed;
-            left: 10px;
-            top: 10px;
-            z-index: 250;
-            background: #3498db;
-            color: white;
-            border: none;
-            padding: 0.5rem 0.8rem;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-        /* 主内容区 */
-        .main-content {
-            margin-left: 240px;
-            transition: margin-left 0.3s;
         }
         /* 顶部公众号模块 */
         .official-account {
@@ -427,18 +366,6 @@
             margin-top: 3rem;
         }
         @media (max-width: 768px) {
-            .sidebar {
-                transform: translateX(-100%);
-            }
-            .sidebar.open {
-                transform: translateX(0);
-            }
-            .main-content {
-                margin-left: 0;
-            }
-            .sidebar-toggle {
-                display: block;
-            }
             .banner h1 {
                 font-size: 1.6rem;
             }
@@ -452,136 +379,114 @@
     </style>
 </head>
 <body>
-    <!-- 侧边导航切换按钮 -->
-    <button class="sidebar-toggle" onclick="toggleSidebar()">☰ 菜单</button>
-
-    <!-- 侧边导航栏 -->
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-logo">医学统计学习平台</div>
-        <div class="sidebar-nav">
-            <a href="#home" class="nav-link">首页</a>
-            <a href="#stats" class="nav-link">统计方法</a>
-            <a href="#bioinfo" class="nav-link">生物信息学</a>
-            <a href="#sample-size" class="nav-link">样本量计算</a>
-            <a href="#modeling" class="nav-link">传染病建模</a>
-            <a href="#study-design" class="nav-link">研究设计</a>
-            <a href="#scales" class="nav-link">医学量表</a>
-            <a href="#databases" class="nav-link">医学数据库</a>
-            <a href="#tools" class="nav-link">科研工具</a>
-            <a href="#ai" class="nav-link">AI科研工具</a>
-            <a href="#author" class="nav-link">关于博主</a>
-        </div>
+    <!-- 顶部公众号模块 -->
+    <div class="official-account">
+        <a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=Mzk0NDcyMzk1Mw==&action=getalbum&album_id=3709856140965101571&scene=126&sessionid=1775834953391#wechat_redirect" target="_blank">📢 Abel统计公众号推文 | 点击直达最新科研教程</a>
     </div>
 
-    <!-- 主内容区 -->
-    <div class="main-content">
-        <!-- 顶部公众号模块 -->
-        <div class="official-account">
-            <a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=Mzk0NDcyMzk1Mw==&action=getalbum&album_id=3709856140965101571&scene=126&sessionid=1775834953391#wechat_redirect" target="_blank">📢 Abel统计公众号推文 | 点击直达最新科研教程</a>
+    <header>
+        <div class="container nav">
+            <div class="logo">医学统计学习平台</div>
+            <div class="nav-links">
+                <a href="#home">首页</a>
+                <a href="#stats">统计方法</a>
+                <a href="#bioinfo">生物信息学</a>
+                <a href="#databases">医学数据库</a>
+                <a href="#tools">科研工具</a>
+                <a href="#ai">AI工具</a>
+                <a href="#modeling">传染病建模</a>
+            </div>
         </div>
+    </header>
 
-        <header>
-            <div class="container nav">
-                <div class="logo">医学统计学习平台</div>
-                <div class="nav-links">
-                    <a href="#home">首页</a>
-                    <a href="#stats">统计方法</a>
-                    <a href="#databases">医学数据库</a>
-                    <a href="#tools">科研工具</a>
-                    <a href="#ai">AI工具</a>
-                    <a href="#modeling">传染病建模</a>
-                </div>
-            </div>
-        </header>
-
-        <section class="banner" id="home">
-            <div class="container">
-                <h1>医学科研一站式学习平台</h1>
-                <p>专注分享：医学统计学 | 样本量计算 | 生物信息学 | 公共数据库挖掘</p>
-                <p>机器学习 | 传染病数学建模 | 临床研究设计 | 真实世界研究</p>
-                <p>因果推断 | 诊断试验 | 量表信效度 | 科研作图 | 论文写作</p>
-            </div>
-        </section>
-
+    <section class="banner" id="home">
         <div class="container">
-            <div class="section" id="core-methods">
-                <h2 class="section-title">📚 核心研究方法</h2>
-                
-                <!-- 医学统计学方法 -->
-                <div id="stats" class="card" style="margin-bottom:1.5rem;">
-                    <div class="top-link">
-                        <a href="https://www.amstat.org/" target="_blank">📚 美国统计学会(ASA) 统计指南</a>
+            <h1>医学科研一站式学习平台</h1>
+            <p>专注分享：医学统计学 | 样本量计算 | 生物信息学 | 公共数据库挖掘</p>
+            <p>机器学习 | 传染病数学建模 | 临床研究设计 | 真实世界研究</p>
+            <p>因果推断 | 诊断试验 | 量表信效度 | 科研作图 | 论文写作</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="section" id="core-methods">
+            <h2 class="section-title">📚 核心研究方法</h2>
+            
+            <!-- 医学统计学方法 -->
+            <div id="stats" class="card" style="margin-bottom:1.5rem;">
+                <div class="top-link">
+                    <a href="https://www.amstat.org/" target="_blank">📚 美国统计学会(ASA) 统计指南</a>
+                </div>
+                <h3 style="margin-bottom:1rem; color:#2c3e50;">📊 医学统计学方法</h3>
+                <div class="card-box">
+                    <div class="card">
+                        <h3>P 值解读</h3>
+                        <p class="desc-text">
+                            <strong>定义：</strong><a href="https://www.amstat.org/asa/files/pdfs/P-ValueStatement.pdf" target="_blank">P值</a>：原假设H₀为真时，观察到当前或更极端结果的概率<br>
+                            <strong>ASA声明：</strong><a href="https://www.tandfonline.com/doi/full/10.1080/00031305.2015.1080428" target="_blank">2016年P值使用规范</a><br>
+                            <strong>常见误区：</strong>
+                            <ul style="padding-left:1.2rem; margin-top:0.5rem; font-size:0.9rem;">
+                                <li>P&lt;0.05 ≠ 临床意义显著</li>
+                                <li>P&gt;0.05 ≠ 无差异，可能样本量不足</li>
+                                <li>多次检验会导致假阳性升高</li>
+                            </ul>
+                            <strong>校正方法：</strong>
+                            <a href="https://cosx.org/2012/08/multiple-testing/" target="_blank">Bonferroni</a>、
+                            <a href="https://cosx.org/2013/01/fdr/" target="_blank">FDR</a>、
+                            <a href="https://cosx.org/2013/01/fdr/" target="_blank">Benjamini-Hochberg</a>
+                        </p>
                     </div>
-                    <h3 style="margin-bottom:1rem; color:#2c3e50;">📊 医学统计学方法</h3>
-                    <div class="card-box">
-                        <div class="card">
-                            <h3>P 值解读</h3>
-                            <p class="desc-text">
-                                <strong>定义：</strong><a href="https://www.amstat.org/asa/files/pdfs/P-ValueStatement.pdf" target="_blank">P值</a>：原假设H₀为真时，观察到当前或更极端结果的概率<br>
-                                <strong>ASA声明：</strong><a href="https://www.tandfonline.com/doi/full/10.1080/00031305.2015.1080428" target="_blank">2016年P值使用规范</a><br>
-                                <strong>常见误区：</strong>
-                                <ul style="padding-left:1.2rem; margin-top:0.5rem; font-size:0.9rem;">
-                                    <li>P&lt;0.05 ≠ 临床意义显著</li>
-                                    <li>P&gt;0.05 ≠ 无差异，可能样本量不足</li>
-                                    <li>多次检验会导致假阳性升高</li>
-                                </ul>
-                                <strong>校正方法：</strong>
-                                <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/" target="_blank">Bonferroni</a>、
-                                <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/" target="_blank">FDR</a>、
-                                <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/" target="_blank">Benjamini-Hochberg</a>
-                            </p>
-                        </div>
-                        <div class="card">
-                            <h3>置信区间 (CI)</h3>
-                            <p class="desc-text">
-                                <strong>定义：</strong><a href="https://www.ncbi.nlm.nih.gov/books/NBK56437/" target="_blank">置信区间</a>：参数估计的区间范围<br>
-                                <strong>优势：</strong>同时展示效应大小与精度<br>
-                                <strong>解读：</strong>
-                                <ul style="padding-left:1.2rem; margin-top:0.5rem; font-size:0.9rem;">
-                                    <li>95%CI不含无效值=统计显著</li>
-                                    <li>区间越窄，估计精度越高</li>
-                                </ul>
-                                <strong>常用：</strong>率差、率比、均数差、风险比
-                            </p>
-                        </div>
-                        <div class="card">
-                            <h3>数据前提检验</h3>
-                            <p class="desc-text">
-                                <strong>正态性：</strong>
-                                <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/" target="_blank">Shapiro-Wilk</a>、
-                                <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Kolmogorov%E2%80%93Smirnov_test" target="_blank">KS检验</a>
-                                <button class="method-btn" onclick="toggleMethod(this)">查看详细操作</button>
-                                <div class="method-content">
-                                    <div class="tab-nav">
-                                        <button class="tab-btn active" onclick="switchTab(this, 'intro')">方法介绍</button>
-                                        <button class="tab-btn" onclick="switchTab(this, 'spss')">SPSS操作</button>
-                                        <button class="tab-btn" onclick="switchTab(this, 'r')">R代码</button>
-                                        <button class="tab-btn" onclick="switchTab(this, 'python')">Python代码</button>
-                                    </div>
-                                    <div class="tab-content active" id="intro">
-                                        <p>正态性检验用于判断数据是否服从正态分布，是参数检验的前提条件。Shapiro-Wilk检验适用于小样本（n<50），KS检验适用于大样本。</p>
-                                    </div>
-                                    <div class="tab-content" id="spss">
-                                        <ol>
-                                            <li>菜单：分析 → 描述统计 → 探索</li>
-                                            <li>将检验变量选入"因变量列表"</li>
-                                            <li>点击"绘制"，勾选"带检验的正态图"</li>
-                                            <li>点击确定，查看Shapiro-Wilk检验结果</li>
-                                            <li>p>0.05说明数据服从正态分布</li>
-                                        </ol>
-                                    </div>
-                                    <div class="tab-content" id="r">
-                                        <pre>
+                    <div class="card">
+                        <h3>置信区间 (CI)</h3>
+                        <p class="desc-text">
+                            <strong>定义：</strong><a href="https://www.ncbi.nlm.nih.gov/books/NBK56437/" target="_blank">置信区间</a>：参数估计的区间范围<br>
+                            <strong>优势：</strong>同时展示效应大小与精度<br>
+                            <strong>解读：</strong>
+                            <ul style="padding-left:1.2rem; margin-top:0.5rem; font-size:0.9rem;">
+                                <li>95%CI不含无效值=统计显著</li>
+                                <li>区间越窄，估计精度越高</li>
+                            </ul>
+                            <strong>常用：</strong>率差、率比、均数差、风险比
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3>数据前提检验</h3>
+                        <p class="desc-text">
+                            <strong>正态性：</strong>
+                            <a href="https://cosx.org/2011/02/normality-test/" target="_blank">Shapiro-Wilk</a>、
+                            <a href="https://cosx.org/2011/02/normality-test/" target="_blank">KS检验</a>
+                            <button class="method-btn" onclick="toggleMethod(this, 'norm')">查看详细操作</button>
+                            <div class="method-content">
+                                <div class="tab-nav">
+                                    <button class="tab-btn active" onclick="switchTab(this, 'norm_intro')">方法介绍</button>
+                                    <button class="tab-btn" onclick="switchTab(this, 'norm_spss')">SPSS操作</button>
+                                    <button class="tab-btn" onclick="switchTab(this, 'norm_r')">R代码</button>
+                                    <button class="tab-btn" onclick="switchTab(this, 'norm_python')">Python代码</button>
+                                </div>
+                                <div class="tab-content active" id="norm_intro">
+                                    <p>正态性检验用于判断数据是否服从正态分布，是参数检验的前提条件。Shapiro-Wilk检验适用于小样本（n<50），KS检验适用于大样本。</p>
+                                </div>
+                                <div class="tab-content" id="norm_spss">
+                                    <ol>
+                                        <li>菜单：分析 → 描述统计 → 探索</li>
+                                        <li>将检验变量选入"因变量列表"</li>
+                                        <li>点击"绘制"，勾选"带检验的正态图"</li>
+                                        <li>点击确定，查看Shapiro-Wilk检验结果</li>
+                                        <li>p>0.05说明数据服从正态分布</li>
+                                    </ol>
+                                </div>
+                                <div class="tab-content" id="norm_r">
+                                    <pre>
 <button class="copy-btn" onclick="copyCode(this)">复制</button>
 # Shapiro-Wilk正态性检验
 shapiro.test(data$variable)
 
 # KS检验
 ks.test(data$variable, "pnorm", mean=mean(data$variable), sd=sd(data$variable))
-                                        </pre>
-                                    </div>
-                                    <div class="tab-content" id="python">
-                                        <pre>
+                                    </pre>
+                                </div>
+                                <div class="tab-content" id="norm_python">
+                                    <pre>
 <button class="copy-btn" onclick="copyCode(this)">复制</button>
 from scipy import stats
 import pandas as pd
@@ -593,13 +498,13 @@ print(f'Shapiro-Wilk: 统计量={stat:.3f}, p值={p:.4f}')
 # KS检验
 stat, p = stats.kstest(data['variable'], 'norm', args=(data['variable'].mean(), data['variable'].std()))
 print(f'KS检验: 统计量={stat:.3f}, p值={p:.4f}')
-                                        </pre>
-                                    </div>
+                                    </pre>
                                 </div>
-                            </p>
+                            </div>
+                            <br>
                             <strong>方差齐性：</strong>
-                            <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Levene%27s_test" target="_blank">Levene</a>、
-                            <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Bartlett%27s_test" target="_blank">Bartlett</a><br>
+                            <a href="https://cosx.org/2011/02/levene-test/" target="_blank">Levene</a>、
+                            <a href="https://cosx.org/2011/02/levene-test/" target="_blank">Bartlett</a><br>
                             <strong>数据类型：</strong>
                             <ul style="padding-left:1.2rem; margin-top:0.5rem; font-size:0.9rem;">
                                 <li>定量：连续、离散</li>
@@ -610,24 +515,24 @@ print(f'KS检验: 统计量={stat:.3f}, p值={p:.4f}')
                         </p>
                     </div>
                     <div class="card">
-                        <h3>高级统计方法</h3>
+                        <h3>回归模型</h3>
                         <p class="desc-text">
                             <strong>回归模型：</strong>
-                            <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Linear_regression" target="_blank">线性</a>、
-                            <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Logistic_regression" target="_blank">Logistic</a>、
-                            <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Cox_proportional_hazards_model" target="_blank">Cox</a>
-                            <button class="method-btn" onclick="toggleMethod(this)">查看详细操作</button>
+                            <a href="https://cosx.org/2011/03/linear-regression/" target="_blank">线性</a>、
+                            <a href="https://cosx.org/2011/03/logistic-regression/" target="_blank">Logistic</a>、
+                            <a href="https://cosx.org/2012/05/cox-regression/" target="_blank">Cox</a>
+                            <button class="method-btn" onclick="toggleMethod(this, 'reg')">查看详细操作</button>
                             <div class="method-content">
                                 <div class="tab-nav">
-                                    <button class="tab-btn active" onclick="switchTab(this, 'intro')">方法介绍</button>
-                                    <button class="tab-btn" onclick="switchTab(this, 'spss')">SPSS操作</button>
-                                    <button class="tab-btn" onclick="switchTab(this, 'r')">R代码</button>
-                                    <button class="tab-btn" onclick="switchTab(this, 'python')">Python代码</button>
+                                    <button class="tab-btn active" onclick="switchTab(this, 'reg_intro')">方法介绍</button>
+                                    <button class="tab-btn" onclick="switchTab(this, 'reg_spss')">SPSS操作</button>
+                                    <button class="tab-btn" onclick="switchTab(this, 'reg_r')">R代码</button>
+                                    <button class="tab-btn" onclick="switchTab(this, 'reg_python')">Python代码</button>
                                 </div>
-                                <div class="tab-content active" id="intro">
+                                <div class="tab-content active" id="reg_intro">
                                     <p>回归模型用于探索变量之间的关系，线性回归用于连续因变量，Logistic用于二分类因变量，Cox用于生存数据的风险因素分析。</p>
                                 </div>
-                                <div class="tab-content" id="spss">
+                                <div class="tab-content" id="reg_spss">
                                     <h4>线性回归</h4>
                                     <ol>
                                         <li>菜单：分析 → 回归 → 线性</li>
@@ -649,7 +554,7 @@ print(f'KS检验: 统计量={stat:.3f}, p值={p:.4f}')
                                         <li>点击确定</li>
                                     </ol>
                                 </div>
-                                <div class="tab-content" id="r">
+                                <div class="tab-content" id="reg_r">
                                     <pre>
 <button class="copy-btn" onclick="copyCode(this)">复制</button>
 # 线性回归
@@ -667,7 +572,7 @@ cox_model <- coxph(Surv(time, status) ~ x1 + x2, data = data)
 summary(cox_model)
                                     </pre>
                                 </div>
-                                <div class="tab-content" id="python">
+                                <div class="tab-content" id="reg_python">
                                     <pre>
 <button class="copy-btn" onclick="copyCode(this)">复制</button>
 import pandas as pd
@@ -694,15 +599,15 @@ cph.print_summary()
                             </div>
                             <br>
                             <strong>纵向数据：</strong>
-                            <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Generalized_estimating_equation" target="_blank">GEE</a>、
-                            <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Mixed_model" target="_blank">线性混合模型</a><br>
+                            <a href="https://cosx.org/2013/02/gee/" target="_blank">GEE</a>、
+                            <a href="https://cosx.org/2013/02/mixed-model/" target="_blank">线性混合模型</a><br>
                             <strong>因果推断：</strong>
-                            <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Propensity_score_matching" target="_blank">PSM</a>、
-                            <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Inverse_probability_weighting" target="_blank">IPTW</a>、
+                            <a href="https://cosx.org/2014/03/psm/" target="_blank">PSM</a>、
+                            <a href="https://cosx.org/2014/03/iptw/" target="_blank">IPTW</a>、
                             工具变量、断点回归、双重差分<br>
                             <strong>其他：</strong>
-                            <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Mediation_(statistics)" target="_blank">中介分析</a>、
-                            <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Multiple_imputation" target="_blank">多重插补</a>、
+                            <a href="https://cosx.org/2014/04/mediation/" target="_blank">中介分析</a>、
+                            <a href="https://cosx.org/2014/04/multiple-imputation/" target="_blank">多重插补</a>、
                             竞争风险模型、结构方程模型
                         </p>
                     </div>
@@ -710,21 +615,21 @@ cph.print_summary()
                         <h3>基础统计检验</h3>
                         <p class="desc-text">
                             <strong>定量数据：</strong>
-                            <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Student%27s_t-test" target="_blank">t检验</a>、
-                            <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Analysis_of_variance" target="_blank">ANOVA</a>、
+                            <a href="https://cosx.org/2011/02/t-test/" target="_blank">t检验</a>、
+                            <a href="https://cosx.org/2011/02/anova/" target="_blank">ANOVA</a>、
                             非参数检验
-                            <button class="method-btn" onclick="toggleMethod(this)">查看详细操作</button>
+                            <button class="method-btn" onclick="toggleMethod(this, 'ttest')">查看详细操作</button>
                             <div class="method-content">
                                 <div class="tab-nav">
-                                    <button class="tab-btn active" onclick="switchTab(this, 'intro')">方法介绍</button>
-                                    <button class="tab-btn" onclick="switchTab(this, 'spss')">SPSS操作</button>
-                                    <button class="tab-btn" onclick="switchTab(this, 'r')">R代码</button>
-                                    <button class="tab-btn" onclick="switchTab(this, 'python')">Python代码</button>
+                                    <button class="tab-btn active" onclick="switchTab(this, 'ttest_intro')">方法介绍</button>
+                                    <button class="tab-btn" onclick="switchTab(this, 'ttest_spss')">SPSS操作</button>
+                                    <button class="tab-btn" onclick="switchTab(this, 'ttest_r')">R代码</button>
+                                    <button class="tab-btn" onclick="switchTab(this, 'ttest_python')">Python代码</button>
                                 </div>
-                                <div class="tab-content active" id="intro">
+                                <div class="tab-content active" id="ttest_intro">
                                     <p>t检验用于两组定量数据的比较，ANOVA用于多组比较，非参数检验用于不满足正态性的数据。</p>
                                 </div>
-                                <div class="tab-content" id="spss">
+                                <div class="tab-content" id="ttest_spss">
                                     <h4>独立样本t检验</h4>
                                     <ol>
                                         <li>菜单：分析 → 比较均值 → 独立样本T检验</li>
@@ -739,7 +644,7 @@ cph.print_summary()
                                         <li>点击确定</li>
                                     </ol>
                                 </div>
-                                <div class="tab-content" id="r">
+                                <div class="tab-content" id="ttest_r">
                                     <pre>
 <button class="copy-btn" onclick="copyCode(this)">复制</button>
 # 独立样本t检验
@@ -755,7 +660,7 @@ TukeyHSD(aov_model)
 wilcox.test(y ~ group, data = data)
                                     </pre>
                                 </div>
-                                <div class="tab-content" id="python">
+                                <div class="tab-content" id="ttest_python">
                                     <pre>
 <button class="copy-btn" onclick="copyCode(this)">复制</button>
 from scipy import stats
@@ -781,26 +686,26 @@ print(f'Wilcoxon检验: stat={stat:.3f}, p={p:.4f}')
                             </div>
                             <br>
                             <strong>定性数据：</strong>
-                            <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Chi-squared_test" target="_blank">卡方检验</a>、
-                            <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Fisher%27s_exact_test" target="_blank">Fisher确切概率</a>、
+                            <a href="https://cosx.org/2011/02/chi-square/" target="_blank">卡方检验</a>、
+                            <a href="https://cosx.org/2011/02/fisher-exact/" target="_blank">Fisher确切概率</a>、
                             McNemar检验<br>
                             <strong>相关分析：</strong>
-                            <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Pearson_correlation_coefficient" target="_blank">Pearson</a>、
-                            <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Spearman%27s_rank_correlation_coefficient" target="_blank">Spearman</a>、
+                            <a href="https://cosx.org/2011/02/pearson/" target="_blank">Pearson</a>、
+                            <a href="https://cosx.org/2011/02/spearman/" target="_blank">Spearman</a>、
                             Kendall相关<br>
                             <strong>一致性：</strong>
-                            <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Intraclass_correlation_coefficient" target="_blank">ICC</a>、
-                            <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Cohen%27s_kappa" target="_blank">Kappa</a>
+                            <a href="https://cosx.org/2011/02/icc/" target="_blank">ICC</a>、
+                            <a href="https://cosx.org/2011/02/kappa/" target="_blank">Kappa</a>
                         </p>
                     </div>
                     <div class="card">
                         <h3>诊断试验评价</h3>
                         <p class="desc-text">
                             <strong>核心指标：</strong>
-                            <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Sensitivity_and_specificity" target="_blank">灵敏度、特异度</a>、约登指数<br>
+                            <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/" target="_blank">灵敏度、特异度</a>、约登指数<br>
                             <strong>预测值：</strong>PPV、NPV、似然比<br>
                             <strong>综合评价：</strong>
-                            <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Receiver_operating_characteristic" target="_blank">ROC曲线、AUC</a>、校准曲线<br>
+                            <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/" target="_blank">ROC曲线、AUC</a>、校准曲线<br>
                             <strong>报告规范：</strong>
                             <a href="https://www.stard-statement.org/" target="_blank">STARD</a>
                         </p>
@@ -820,13 +725,13 @@ print(f'Wilcoxon检验: stat={stat:.3f}, p={p:.4f}')
                         <h3>差异表达分析</h3>
                         <p class="desc-text">
                             筛选不同组间表达量存在显著差异的基因/蛋白
-                            <button class="method-btn" onclick="toggleMethod(this)">查看代码</button>
+                            <button class="method-btn" onclick="toggleMethod(this, 'deg')">查看代码</button>
                             <div class="method-content">
                                 <div class="tab-nav">
-                                    <button class="tab-btn active" onclick="switchTab(this, 'r')">R代码</button>
-                                    <button class="tab-btn" onclick="switchTab(this, 'python')">Python代码</button>
+                                    <button class="tab-btn active" onclick="switchTab(this, 'deg_r')">R代码</button>
+                                    <button class="tab-btn" onclick="switchTab(this, 'deg_python')">Python代码</button>
                                 </div>
-                                <div class="tab-content active" id="r">
+                                <div class="tab-content active" id="deg_r">
                                     <pre>
 <button class="copy-btn" onclick="copyCode(this)">复制</button>
 # edgeR差异分析
@@ -840,7 +745,7 @@ qlf <- glmQLFTest(fit, contrast=c(1,-1))
 deg <- topTags(qlf, n=Inf)
                                     </pre>
                                 </div>
-                                <div class="tab-content" id="python">
+                                <div class="tab-content" id="deg_python">
                                     <pre>
 <button class="copy-btn" onclick="copyCode(this)">复制</button>
 import scanpy as sc
@@ -860,13 +765,13 @@ deg = sc.get.rank_genes_groups_df(adata, group='treatment')
                         <h3>功能富集分析</h3>
                         <p class="desc-text">
                             对差异基因进行功能注释，挖掘潜在的生物学通路
-                            <button class="method-btn" onclick="toggleMethod(this)">查看代码</button>
+                            <button class="method-btn" onclick="toggleMethod(this, 'enrich')">查看代码</button>
                             <div class="method-content">
                                 <div class="tab-nav">
-                                    <button class="tab-btn active" onclick="switchTab(this, 'r')">R代码</button>
-                                    <button class="tab-btn" onclick="switchTab(this, 'python')">Python代码</button>
+                                    <button class="tab-btn active" onclick="switchTab(this, 'enrich_r')">R代码</button>
+                                    <button class="tab-btn" onclick="switchTab(this, 'enrich_python')">Python代码</button>
                                 </div>
-                                <div class="tab-content active" id="r">
+                                <div class="tab-content active" id="enrich_r">
                                     <pre>
 <button class="copy-btn" onclick="copyCode(this)">复制</button>
 # clusterProfiler富集分析
@@ -887,7 +792,7 @@ kegg_enrich <- enrichKEGG(gene = deg_gene,
                          pvalueCutoff = 0.05)
                                     </pre>
                                 </div>
-                                <div class="tab-content" id="python">
+                                <div class="tab-content" id="enrich_python">
                                     <pre>
 <button class="copy-btn" onclick="copyCode(this)">复制</button>
 import gseapy as gp
@@ -912,12 +817,12 @@ kegg_enrich = gp.enrichr(gene_list=deg_gene,
                         <h3>加权共表达网络(WGCNA)</h3>
                         <p class="desc-text">
                             构建基因共表达网络，挖掘与表型相关的模块
-                            <button class="method-btn" onclick="toggleMethod(this)">查看代码</button>
+                            <button class="method-btn" onclick="toggleMethod(this, 'wgcna')">查看代码</button>
                             <div class="method-content">
                                 <div class="tab-nav">
-                                    <button class="tab-btn active" onclick="switchTab(this, 'r')">R代码</button>
+                                    <button class="tab-btn active" onclick="switchTab(this, 'wgcna_r')">R代码</button>
                                 </div>
-                                <div class="tab-content active" id="r">
+                                <div class="tab-content active" id="wgcna_r">
                                     <pre>
 <button class="copy-btn" onclick="copyCode(this)">复制</button>
 library(WGCNA)
@@ -941,12 +846,12 @@ moduleTraitCor = cor(net$MEs, trait, use = "p")
                         <h3>免疫浸润分析</h3>
                         <p class="desc-text">
                             评估肿瘤微环境中免疫细胞的浸润比例
-                            <button class="method-btn" onclick="toggleMethod(this)">查看代码</button>
+                            <button class="method-btn" onclick="toggleMethod(this, 'immune')">查看代码</button>
                             <div class="method-content">
                                 <div class="tab-nav">
-                                    <button class="tab-btn active" onclick="switchTab(this, 'r')">R代码</button>
+                                    <button class="tab-btn active" onclick="switchTab(this, 'immune_r')">R代码</button>
                                 </div>
-                                <div class="tab-content active" id="r">
+                                <div class="tab-content active" id="immune_r">
                                     <pre>
 <button class="copy-btn" onclick="copyCode(this)">复制</button>
 # CIBERSORT免疫浸润分析
@@ -990,8 +895,8 @@ barplot(t(results[,1:22]), col=rainbow(22), border=NA)
                     <div class="card">
                         <h3>核心参数</h3>
                         <p class="desc-text">
-                            <strong>α值：</strong><a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Type_I_and_type_II_errors" target="_blank">一类错误</a>，通常0.05<br>
-                            <strong>β值：</strong><a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Power_(statistics)" target="_blank">二类错误</a>，通常0.2，效能80%<br>
+                            <strong>α值：</strong><a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/" target="_blank">一类错误</a>，通常0.05<br>
+                            <strong>β值：</strong><a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/" target="_blank">二类错误</a>，通常0.2，效能80%<br>
                             <strong>效应量：</strong>组间预期差异<br>
                             <strong>脱落率：</strong>10–20%<br>
                             <strong>单侧/双侧：</strong>临床研究优先双侧
@@ -1126,13 +1031,13 @@ plt.legend();plt.show()
                 <div class="card" id="rws">
                     <h3>🏥 真实世界研究 (RWS)</h3>
                     <p class="desc-text">
-                        <strong>定义：</strong><a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Real_world_evidence" target="_blank">真实世界研究</a>：基于常规诊疗数据的临床研究<br>
+                        <strong>定义：</strong><a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/" target="_blank">真实世界研究</a>：基于常规诊疗数据的临床研究<br>
                         <strong>数据来源：</strong>EHR、医保、登记库、区域健康数据<br><br>
                         <strong>混杂控制：</strong>
-                        <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Propensity_score_matching" target="_blank">PSM</a>、
-                        <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Inverse_probability_weighting" target="_blank">IPTW</a>、
-                        <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Difference_in_differences" target="_blank">DID</a>、
-                        <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Instrumental_variable" target="_blank">工具变量</a>、高维倾向得分<br>
+                        <a href="https://cosx.org/2014/03/psm/" target="_blank">PSM</a>、
+                        <a href="https://cosx.org/2014/03/iptw/" target="_blank">IPTW</a>、
+                        <a href="https://cosx.org/2014/03/did/" target="_blank">DID</a>、
+                        <a href="https://cosx.org/2014/03/iv/" target="_blank">工具变量</a>、高维倾向得分<br>
                         <strong>报告规范：</strong>
                         <a href="https://record-statement.org/" target="_blank">RECORD</a><br>
                         <strong>优势：</strong>外推性强、样本量大、覆盖广泛人群
@@ -1143,13 +1048,13 @@ plt.legend();plt.show()
                     <h3>🤖 医学机器学习</h3>
                     <p class="desc-text">
                         <strong>常用算法：</strong><br>
-                        <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Lasso_(statistics)" target="_blank">LASSO</a>、
-                        <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Random_forest" target="_blank">随机森林</a>、
-                        <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/XGBoost" target="_blank">XGBoost</a>、
-                        <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Support_vector_machine" target="_blank">SVM</a><br>
+                        <a href="https://cosx.org/2015/01/lasso/" target="_blank">LASSO</a>、
+                        <a href="https://cosx.org/2015/01/random-forest/" target="_blank">随机森林</a>、
+                        <a href="https://cosx.org/2015/01/xgboost/" target="_blank">XGBoost</a>、
+                        <a href="https://cosx.org/2015/01/svm/" target="_blank">SVM</a><br>
                         CNN、LSTM、Transformer、TabNet<br><br>
                         <strong>医学要求：</strong><br>
-                        <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/SHAP_(software)" target="_blank">SHAP</a>可解释性、校准曲线、外部验证、DCA决策曲线<br>
+                        <a href="https://cosx.org/2015/02/shap/" target="_blank">SHAP</a>可解释性、校准曲线、外部验证、DCA决策曲线<br>
                         <strong>报告规范：</strong>
                         <a href="https://www.equator-network.org/library/transparent-reporting-of-a-multivariable-prediction-model-for-individual-prognosis-or-diagnosis-tripod/" target="_blank">TRIPOD</a>
                     </p>
@@ -1159,10 +1064,10 @@ plt.legend();plt.show()
                     <h3>⏳ 生存分析方法</h3>
                     <p class="desc-text">
                         <strong>基础方法：</strong>
-                        <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Kaplan%E2%80%93Meier_estimator" target="_blank">Kaplan-Meier曲线</a>、
-                        <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Log-rank_test" target="_blank">Log-rank检验</a><br>
+                        <a href="https://cosx.org/2012/05/km-curve/" target="_blank">Kaplan-Meier曲线</a>、
+                        <a href="https://cosx.org/2012/05/log-rank/" target="_blank">Log-rank检验</a><br>
                         <strong>多因素：</strong>
-                        <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Cox_proportional_hazards_model" target="_blank">Cox比例风险回归</a><br>
+                        <a href="https://cosx.org/2012/05/cox-regression/" target="_blank">Cox比例风险回归</a><br>
                         <strong>前提检验：</strong>比例风险假设PH检验<br>
                         <strong>拓展：</strong>竞争风险模型、时变协变量模型
                     </p>
@@ -1180,20 +1085,24 @@ plt.legend();plt.show()
                     <div class="card">
                         <h3>心理健康评估</h3>
                         <p class="desc-text">
-                            <strong>PHQ-9：</strong>抑郁症筛查量表，9个条目，Cronbach's α=0.89<br>
-                            <strong>GAD-7：</strong>广泛性焦虑量表，7个条目，Cronbach's α=0.92<br>
+                            <strong><a href="https://www.medsci.cn/article/show_article.do?id=3a9f8e7d" target="_blank">PHQ-9</a>：</strong>抑郁症筛查量表，9个条目，Cronbach's α=0.89<br>
+                            <strong><a href="https://www.medsci.cn/article/show_article.do?id=1e8f7c6b" target="_blank">GAD-7</a>：</strong>广泛性焦虑量表，7个条目，Cronbach's α=0.92<br>
+                            <strong><a href="https://www.medsci.cn/article/show_article.do?id=2d7e8f9c" target="_blank">SAS</a>：</strong>焦虑自评量表，20个条目，信度0.82<br>
+                            <strong><a href="https://www.medsci.cn/article/show_article.do?id=4c6d9e8a" target="_blank">SDS</a>：</strong>抑郁自评量表，20个条目，信度0.85<br>
                             <strong>SCL-90：</strong>90项症状清单，评估多维度心理症状<br>
                             <strong>IES-R：</strong>创伤后应激障碍量表，22个条目<br>
-                            <strong>MMSE：</strong>简易智力状态检查，认知障碍筛查
+                            <strong><a href="https://www.medsci.cn/article/show_article.do?id=5e7f8d9c" target="_blank">MMSE</a>：</strong>简易智力状态检查，认知障碍筛查<br>
+                            <strong><a href="https://www.medsci.cn/article/show_article.do?id=6f8e9c8d" target="_blank">MoCA</a>：</strong>蒙特利尔认知评估，轻度认知障碍筛查
                         </p>
                     </div>
                     <div class="card">
                         <h3>生活质量评估</h3>
                         <p class="desc-text">
-                            <strong>SF-36：</strong>健康调查简表，36个条目，8个维度<br>
-                            <strong>EQ-5D：</strong>欧洲五维健康量表，通用生活质量工具<br>
+                            <strong><a href="https://www.medsci.cn/article/show_article.do?id=7a9f8e7d" target="_blank">SF-36</a>：</strong>健康调查简表，36个条目，8个维度<br>
+                            <strong><a href="https://www.medsci.cn/article/show_article.do?id=8b8f7c6b" target="_blank">EQ-5D</a>：</strong>欧洲五维健康量表，通用生活质量工具<br>
                             <strong>SRHMS：</strong>自测健康评定量表，生理/心理/社会维度<br>
-                            <strong>QLQ-C30：</strong>癌症患者生活质量核心量表
+                            <strong>QLQ-C30：</strong>癌症患者生活质量核心量表<br>
+                            <strong>EORTC QLQ-C30：</strong>欧洲癌症研究与治疗组织生活质量量表
                         </p>
                     </div>
                     <div class="card">
@@ -1202,27 +1111,40 @@ plt.legend();plt.show()
                             <strong>Braden：</strong>压疮风险评估量表，Cronbach's α=0.82<br>
                             <strong>GCS：</strong>格拉斯哥昏迷量表，意识障碍评估，ICC=0.89<br>
                             <strong>VAS：</strong>视觉模拟评分，疼痛评估，信度0.82-0.94<br>
-                            <strong>NRS：</strong>数字疼痛评分，0-10分疼痛评估
+                            <strong>NRS：</strong>数字疼痛评分，0-10分疼痛评估<br>
+                            <strong><a href="https://www.medsci.cn/article/show_article.do?id=9c9f8e7d" target="_blank">Barthel指数</a>：</strong>日常生活活动能力，评估自理能力<br>
+                            <strong>ADL：</strong>日常生活能力量表，基础生活能力<br>
+                            <strong>IADL：</strong>工具性日常生活能力，复杂生活能力<br>
+                            <strong><a href="https://www.medsci.cn/article/show_article.do?id=0d0f7c6b" target="_blank">PSQI</a>：</strong>匹兹堡睡眠质量指数，睡眠质量评估
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3>社会与支持评估</h3>
+                        <p class="desc-text">
+                            <strong>SSRS：</strong>社会支持评定量表，评估社会支持水平<br>
+                            <strong>SRRS：</strong>生活事件量表，评估应激事件影响<br>
+                            <strong>CSQ：</strong>医学应对问卷，评估患者应对方式<br>
+                            <strong>WHOQOL-BREF：</strong>世界卫生组织生活质量简表
                         </p>
                     </div>
                     <div class="card">
                         <h3>量表信效度分析</h3>
                         <p class="desc-text">
                             <strong>信度：</strong>
-                            <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Cronbach%27s_alpha" target="_blank">Cronbach's α</a>、重测信度、分半信度<br>
+                            <a href="https://cosx.org/2014/04/cronbach-alpha/" target="_blank">Cronbach's α</a>、重测信度、分半信度<br>
                             <strong>效度：</strong>内容效度、结构效度、效标效度<br>
                             <strong>结构分析：</strong>
-                            <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Exploratory_factor_analysis" target="_blank">EFA</a>、
-                            <a href="https://www.ncbi.nlm.nih.gov/books/NBK55742/Confirmatory_factor_analysis" target="_blank">CFA</a><br>
+                            <a href="https://cosx.org/2014/04/efa/" target="_blank">EFA</a>、
+                            <a href="https://cosx.org/2014/04/cfa/" target="_blank">CFA</a><br>
                             <strong>规范：</strong>
                             <a href="https://www.cosmin.nl/" target="_blank">COSMIN</a>
-                            <button class="method-btn" onclick="toggleMethod(this)">查看分析代码</button>
+                            <button class="method-btn" onclick="toggleMethod(this, 'scale')">查看分析代码</button>
                             <div class="method-content">
                                 <div class="tab-nav">
-                                    <button class="tab-btn active" onclick="switchTab(this, 'r')">R代码</button>
-                                    <button class="tab-btn" onclick="switchTab(this, 'python')">Python代码</button>
+                                    <button class="tab-btn active" onclick="switchTab(this, 'scale_r')">R代码</button>
+                                    <button class="tab-btn" onclick="switchTab(this, 'scale_python')">Python代码</button>
                                 </div>
-                                <div class="tab-content active" id="r">
+                                <div class="tab-content active" id="scale_r">
                                     <pre>
 <button class="copy-btn" onclick="copyCode(this)">复制</button>
 # Cronbach's α计算
@@ -1245,7 +1167,7 @@ fit <- cfa(model, data=data)
 summary(fit, fit.measures=TRUE)
                                     </pre>
                                 </div>
-                                <div class="tab-content" id="python">
+                                <div class="tab-content" id="scale_python">
                                     <pre>
 <button class="copy-btn" onclick="copyCode(this)">复制</button>
 import pandas as pd
@@ -1572,7 +1494,7 @@ print(fa.loadings_)
             <p><strong>微信公众号：</strong>Abel统计</p>
             <p><strong>宗旨：</strong>让医学科研更简单，让统计方法更易懂</p>
             <div class="author-qrcode">
-                <a href="https://imgchr.com/i/pewN4yR"><img src="https://s41.ax1x.com/2026/04/10/pewN4yR.jpg" alt="Abel统计公众号二维码" border="0"></a>
+                <a href="https://imgchr.com/i/pews0l8"><img src="https://s41.ax1x.com/2026/04/11/pews0l8.jpg" alt="Abel统计公众号二维码" border="0"></a>
                 <p>扫码关注公众号，获取更多科研教程</p>
             </div>
         </div>
@@ -1582,15 +1504,8 @@ print(fa.loadings_)
     <footer>
         <p>© 2026 Abel统计 | 医学科研一站式学习平台</p>
     </footer>
-    </div>
 
 <script>
-    // 侧边导航切换
-    function toggleSidebar() {
-        const sidebar = document.getElementById('sidebar');
-        sidebar.classList.toggle('open');
-    }
-
     // 折叠模块功能
     function toggleModule(header) {
         const content = header.nextElementSibling;
@@ -1607,7 +1522,7 @@ print(fa.loadings_)
     }
 
     // 统计方法展开功能
-    function toggleMethod(btn) {
+    function toggleMethod(btn, prefix) {
         const content = btn.nextElementSibling;
         content.classList.toggle('show');
         btn.textContent = content.classList.contains('show') ? '收起详细内容' : '查看详细操作';
@@ -1645,34 +1560,6 @@ print(fa.loadings_)
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
                 target.scrollIntoView({behavior: 'smooth'});
-                // 移动端关闭侧边栏
-                if (window.innerWidth <= 768) {
-                    document.getElementById('sidebar').classList.remove('open');
-                }
-                // 更新导航active状态
-                document.querySelectorAll('.nav-link').forEach(link => {
-                    link.classList.remove('active');
-                });
-                this.classList.add('active');
-            }
-        });
-    });
-
-    // 滚动时更新侧边导航active
-    window.addEventListener('scroll', () => {
-        const sections = document.querySelectorAll('section[id], div[id]');
-        const navLinks = document.querySelectorAll('.nav-link');
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            if (scrollY >= sectionTop - 100) {
-                current = section.getAttribute('id');
-            }
-        });
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${current}`) {
-                link.classList.add('active');
             }
         });
     });
