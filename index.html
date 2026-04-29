@@ -240,7 +240,7 @@ print(f'偏态数据: stat={stat:.3f}, p={p:.4f}')
 stats.probplot(data, dist="norm", plot=plt)
 plt.show()</div></div></div>
 </div>
-<br><strong>方差齐性：</strong>Levene检验、Bartlett检验<br><strong>数据类型：</strong><ul><li>定量：连续、离散</li><li>定性：二分类、多分类、有序</li><li>生存数据：含时间与截尾</li><li>重复测量：多时间点观测</li></ul></p></div>
+<br><strong>方差齐性：</strong>Levene检验、Bartlett检验<br><strong>数据类型：</strong><ul><li>定量：连续、离散</li><li>定性：二分类、多分类、有序</li><li>生存数据：含时间与截尾</li><li>重复测量：多时间点观测</li></ul></p></div></div>
 
 <!-- t检验/ANOVA -->
 <div class="cd" id="cd-ttest"><h3>定量数据比较</h3><div class="ds"><strong>方法：</strong>t检验、ANOVA、非参数检验<button class="mb" onclick="togM(this)">查看详细操作</button>
@@ -297,7 +297,7 @@ model = ols('value ~ group', data=df).fit()
 print(sm.stats.anova_lm(model, typ=2))</div></div></div>
 <div class="tp" id="tcase"><div class="res-box"><div class="res-title">📋 案例：两种降压药的疗效比较</div><div class="res-body"><strong>研究：</strong>比较新药A与标准药B对高血压患者的降压效果<br><strong>数据：</strong>A组(n=30)收缩压: 130±10 mmHg, B组(n=30) 140±12 mmHg<br><strong>结果：</strong>t = -3.42, df=58, <span class="sig">p=0.001</span>, 95%CI [-15.8, -4.2]<br><strong>解读：</strong>新药A的降压效果显著优于标准药B (p&lt;0.01)，平均多降低10 mmHg。</div></div></div>
 </div>
-<br><strong>定性数据：</strong>卡方检验、Fisher确切概率法、McNemar检验<br><strong>相关分析：</strong>Pearson、Spearman、Kendall<br><strong>一致性：</strong>ICC、Kappa</p></div>
+<br><strong>定性数据：</strong>卡方检验、Fisher确切概率法、McNemar检验<br><strong>相关分析：</strong>Pearson、Spearman、Kendall<br><strong>一致性：</strong>ICC、Kappa</p></div></div>
 
 <!-- 卡方检验 -->
 <div class="cd" id="cd-chi"><h3>定性数据检验</h3><div class="ds"><strong>方法：</strong>卡方检验、Fisher确切概率法、McNemar检验<button class="mb" onclick="togM(this)">查看详细操作</button>
@@ -325,7 +325,7 @@ print(f'卡方={chi2:.3f}, p={p:.4f}')
 
 odds_ratio, p_fisher = fisher_exact(table)
 print(f'Fisher OR={odds_ratio:.3f}, p={p_fisher:.4f}')</div></div></div>
-</div></p></div>
+</div></div></div>
 
 <!-- 回归模型 (增强版) -->
 <div class="cd" id="cd-reg"><h3>回归模型</h3><div class="ds"><strong>类型：</strong>线性回归、Logistic回归、Cox回归<button class="mb" onclick="togM(this)">查看详细操作</button>
@@ -373,7 +373,7 @@ y = df['sbp']
 model = sm.OLS(y, X).fit()
 print(model.summary())</div></div></div>
 </div>
-<br><strong>纵向数据：</strong>GEE、线性混合模型<br><strong>因果推断：</strong>PSM、IPTW、工具变量、断点回归、双重差分<br><strong>其他：</strong>中介分析、多重插补、竞争风险模型、结构方程模型</p></div>
+<br><strong>纵向数据：</strong>GEE、线性混合模型<br><strong>因果推断：</strong>PSM、IPTW、工具变量、断点回归、双重差分<br><strong>其他：</strong>中介分析、多重插补、竞争风险模型、结构方程模型</p></div></div>
 
 <!-- 相关 -->
 <div class="cd"><h3>相关与一致性分析</h3><div class="ds"><strong>相关：</strong>Pearson、Spearman、Kendall<button class="mb" onclick="togM(this)">查看详细操作</button>
@@ -406,7 +406,7 @@ kappa2(rater1, rater2)</div></div></div>
 icc = pg.intraclass_corr(data, targets='subject',
                          raters='rater', ratings='score')
 print(icc)</div></div></div>
-</div></p></div>
+</div></div></div>
 
 <!-- 诊断试验 -->
 <div class="cd" id="cd-dx"><h3>诊断试验评价</h3><div class="ds"><strong>核心指标：</strong>灵敏度、特异度、约登指数<br><strong>预测值：</strong>PPV、NPV、似然比<br><strong>综合评价：</strong>ROC曲线、AUC、校准曲线<button class="mb" onclick="togM(this)">查看详解</button>
@@ -909,7 +909,7 @@ plot_decision_curve(dca)</div></div></div>
 <h3 style="margin-bottom:.6rem;font-size:1.1rem">🔧 缺失数据处理</h3>
 <div class="cg">
 <div class="cd"><h3>缺失机制</h3><p class="ds"><strong>MCAR：</strong>完全随机缺失，与数据值无关<br><strong>MAR：</strong>随机缺失，与其他观测变量有关<br><strong>MNAR：</strong>非随机缺失，与缺失值本身有关</p></div>
-<div class="cd"><h3>多重插补MICE</h3><p class="ds">推荐方法<button class="mb" onclick="togM(this)">查看代码</button>
+<div class="cd"><h3>多重插补MICE</h3><div class="ds">推荐方法<button class="mb" onclick="togM(this)">查看代码</button>
 <div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'micer')">R代码</button><button class="tab" onclick="swT(this,'micep')">Python代码</button></div>
 <div class="tp on" id="micer"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(mice)
 set.seed(123)
@@ -926,7 +926,7 @@ summary(pool(fit))</div></div></div>
 import pandas as pd, numpy as np
 imp = IterativeImputer(max_iter=10, random_state=123)
 df_imp = pd.DataFrame(imp.fit_transform(df), columns=df.columns)</div></div></div>
-</div></p></div>
+</div></div></div>
 </div></div>
 
 <!-- ============ 时间序列分析 ============ -->
@@ -949,7 +949,7 @@ ts = np.random.poisson(10,120)+5*np.sin(2*np.pi*np.arange(120)/12)
 model = ARIMA(ts, order=(1,1,1)).fit()
 fc = model.forecast(steps=12)
 print(fc)</div></div></div>
-</div></p></div>
+</div></div></div>
 </div></div>
 
 <!-- ============ 生物信息学 ============ -->
@@ -974,7 +974,7 @@ sc.tl.rank_genes_groups(adata, 'group',
                         method='wilcoxon')
 deg = sc.get.rank_genes_groups_df(adata,
                                   group='treatment')</div></div></div>
-</div><div><strong>工具：</strong>edgeR、DESeq2、limma</div></div>
+</div><div><strong>工具：</strong>edgeR、DESeq2、limma</div></div></div>
 
 <div class="cd"><h3>功能富集分析</h3><div class="ds">GO/KEGG富集<button class="mb" onclick="togM(this)">查看代码</button>
 <div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'er')">R代码</button><button class="tab" onclick="swT(this,'ep')">Python代码</button></div>
@@ -993,7 +993,7 @@ go_res = gp.enrichr(gene_list=deg_genes,
   organism='Human', cutoff=0.05)
 kegg_res = gp.enrichr(gene_list=deg_genes,
   gene_sets='KEGG_2023_Human')</div></div></div>
-</div></div>
+</div></div></div>
 
 <div class="cd"><h3>WGCNA</h3><div class="ds">基因共表达网络<button class="mb" onclick="togM(this)">查看代码</button>
 <div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'wr')">R代码</button></div>
@@ -1005,7 +1005,7 @@ net=blockwiseModules(exprMatrix,
   power=sft$powerEstimate,
   TOMType="unsigned", minModuleSize=30,
   mergeCutHeight=0.25, numericLabels=TRUE)
-moduleTraitCor=cor(net$MEs, trait, use="p")</div></div></div></div></div>
+moduleTraitCor=cor(net$MEs, trait, use="p")</div></div></div></div></div></div>
 
 <div class="cd"><h3>免疫浸润分析</h3><div class="ds">肿瘤微环境免疫细胞浸润<button class="mb" onclick="togM(this)">查看代码</button>
 <div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'ir')">R代码</button></div>
@@ -1016,7 +1016,7 @@ results=CIBERSORT(sig_matrix,
   exprMatrix, perm=1000, QN=TRUE)
 barplot(t(results[,1:22]),
   col=rainbow(22), border=NA)</div></div></div></div>
-<strong>算法：</strong>CIBERSORT、xCell、MCP-counter</div></div>
+<strong>算法：</strong>CIBERSORT、xCell、MCP-counter</div></div></div>
 
 <div class="cd"><h3>单细胞测序分析</h3><div class="ds">细胞分群、轨迹分析、细胞通讯<button class="mb" onclick="togM(this)">查看代码</button>
 <div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'scr')">R代码</button></div>
