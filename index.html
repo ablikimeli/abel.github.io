@@ -55,7 +55,7 @@ nav a{color:rgba(255,255,255,.65);font-size:.82rem;padding:.3rem .6rem;border-ra
 .tb{background:linear-gradient(135deg,var(--pri),var(--pri2));color:#fff;border:none;padding:.55rem 1.1rem;border-radius:8px;cursor:pointer;font-size:.88rem;margin:.6rem 0;transition:all .2s;font-weight:600}
 .tb:hover{transform:translateY(-2px);box-shadow:0 4px 16px var(--glow)}
 .tx{margin-top:.7rem;padding-top:.7rem;border-top:1px dashed var(--bd)}
-.tabs{display:flex;gap:.15rem;margin-bottom:.5rem;border-bottom:1px solid var(--bd)}
+.tabs{display:flex;gap:.15rem;margin-bottom:.5rem;border-bottom:1px solid var(--bd);flex-wrap:wrap}
 .tab{background:none;border:none;padding:.35rem .7rem;cursor:pointer;font-size:.8rem;border-bottom:2px solid transparent;color:var(--tx3);transition:all .15s;font-weight:500}
 .tab:hover{color:var(--tx)}.tab.on{border-bottom-color:var(--acc);color:var(--acc);font-weight:700}
 .tp{display:none}.tp.on{display:block}
@@ -99,60 +99,90 @@ code{background:var(--bg);padding:1px 4px;border-radius:3px;color:var(--acc);fon
 .or{overflow-y:auto;flex:1;padding:.3rem}
 .os{padding:.5rem .7rem;border-radius:8px;cursor:pointer;transition:background .12s}
 .os:hover{background:var(--pri-bg)}
-.os-t{font-weight:600;font-size:.85rem}.os-d{font-size:.75rem;color:var(--tx3);margin-top:.1rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.os-t{font-weight:600;font-size:.85rem}.os-d{font-size:.75rem;color:var(--tx3);margin-top:.1rem}
 .oe{padding:1.2rem;text-align:center;color:var(--tx3);font-size:.85rem}
 .bt{position:fixed;bottom:1.2rem;right:1.2rem;width:38px;height:38px;background:var(--pri);color:#fff;border:none;border-radius:50%;cursor:pointer;box-shadow:0 0 14px var(--glow);z-index:90;opacity:0;transform:translateY(6px);transition:all .3s;display:flex;align-items:center;justify-content:center}
 .bt.vis{opacity:1;transform:translateY(0)}.bt:hover{background:var(--pri2);transform:translateY(-2px)}
 .ai{background:linear-gradient(135deg,var(--pri-bg),var(--bg));padding:1.2rem;border-radius:var(--r);text-align:center;margin:1.5rem 0;border:1px solid rgba(13,148,136,.08)}
 .ai h3{color:var(--pri);margin-bottom:.4rem;font-size:1rem}.ai p{margin:.2rem 0;font-size:.85rem;color:var(--tx2)}
 footer{background:#060b18;color:rgba(255,255,255,.4);text-align:center;padding:1.8rem 1rem;margin-top:2rem}footer p{font-size:.82rem}
+/* ===== NEW: TOC Sidebar ===== */
+.toc-sidebar{position:fixed;left:0;top:64px;bottom:0;width:200px;background:var(--card);border-right:1px solid var(--bd);padding:1rem 0;overflow-y:auto;z-index:50;transform:translateX(-100%);transition:transform .3s}
+.toc-sidebar.on{transform:translateX(0)}
+.toc-toggle{position:fixed;left:.5rem;top:4.2rem;z-index:60;background:var(--pri);color:#fff;border:none;border-radius:6px;padding:.3rem .5rem;cursor:pointer;font-size:.75rem;transition:all .2s}
+.toc-toggle:hover{background:var(--pri2)}
+.toc-sidebar a{display:block;padding:.35rem .8rem;font-size:.78rem;color:var(--tx3);border-left:2px solid transparent;transition:all .15s}
+.toc-sidebar a:hover,.toc-sidebar a.on{color:var(--pri);border-left-color:var(--pri);background:var(--pri-bg)}
+.toc-sidebar .toc-l1{font-weight:600;font-size:.82rem;color:var(--tx2);padding-top:.6rem}
+.toc-sidebar .toc-l2{padding-left:1.2rem;font-size:.75rem}
+/* ===== NEW: Case Study Cards ===== */
+.case-card{background:var(--card);border-radius:var(--r);padding:1.2rem;margin-bottom:1rem;border:1px solid var(--bd);border-left:4px solid var(--pri)}
+.case-card h4{font-size:.95rem;color:var(--pri);margin-bottom:.3rem}
+.case-card .case-meta{font-size:.75rem;color:var(--tx3);margin-bottom:.5rem}
+.case-card .case-desc{font-size:.85rem;color:var(--tx2);margin-bottom:.5rem}
+.case-tag{display:inline-block;background:var(--pri-bg);color:var(--pri);padding:.1rem .5rem;border-radius:4px;font-size:.7rem;font-weight:600;margin-right:.3rem}
+/* ===== NEW: Quick Nav Buttons ===== */
+.qnav{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.2rem}
+.qnav a{background:var(--pri-bg);border:1px solid rgba(13,148,136,.12);padding:.35rem .7rem;border-radius:6px;font-size:.78rem;font-weight:600;color:var(--pri);transition:all .2s}
+.qnav a:hover{background:var(--pri);color:#fff}
+/* ===== NEW: Result Box ===== */
+.res-box{background:var(--card);border:1px solid var(--bd);border-radius:var(--r);padding:.8rem;margin:.5rem 0;font-size:.82rem}
+.res-box .res-title{font-weight:700;color:var(--pri);font-size:.85rem;margin-bottom:.3rem}
+.res-box .res-body{color:var(--tx2);line-height:1.6}
+.res-box .res-body .sig{color:#dc2626;font-weight:700}
+/* ===== Responsive ===== */
+@media(max-width:900px){.toc-sidebar{display:none}.W{margin-left:0}}
 @media(max-width:768px){.banner h1{font-size:1.4rem}.banner{padding:2.5rem 1rem 2rem}nav{display:none}.cg{grid-template-columns:1fr}.tg{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}.dtO{flex-direction:column}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}html{scroll-beh:auto}}
 :focus-visible{outline:2px solid var(--pri);outline-offset:2px}
 </style>
 </head>
 <body>
-
 <div class="topbar"><a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=Mzk0NDcyMzk1Mw==&action=getalbum&album_id=3709856140965101571&scene=126&sessionid=1775834953391#wechat_redirect" target="_blank" rel="noopener">📢 Abel统计公众号 | 点击直达最新科研教程</a></div>
-
 <header><div class="hdr">
 <div class="logo">医学统计<b>学习平台</b></div>
-<nav><a href="#home">首页</a><a href="#stats">统计方法</a><a href="#bioinfo">生物信息</a><a href="#databases">数据库</a><a href="#tools">科研工具</a><a href="#ai">AI工具</a><a href="#modeling">传染病建模</a></nav>
+<nav><a href="#home">首页</a><a href="#stats">统计方法</a><a href="#ml-section">机器学习</a><a href="#bayes">贝叶斯</a><a href="#meta">Meta分析</a><a href="#bioinfo">生物信息</a><a href="#databases">数据库</a><a href="#cases">实操案例</a><a href="#tools">科研工具</a></nav>
 <div style="display:flex;gap:.4rem">
 <button class="hbtn" onclick="openS()" aria-label="搜索" title="Ctrl+K"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
 <button class="hbtn" onclick="togTh()" aria-label="主题" id="thB"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="thI"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
 </div></div></header>
-
+<button class="toc-toggle" onclick="togToc()" id="tocBtn">☰ 目录</button>
+<div class="toc-sidebar" id="tocSidebar"></div>
 <section class="banner" id="home"><div class="bc">
 <h1>医学科研一站式学习平台</h1>
-<p>医学统计学 · 样本量计算 · 生物信息学 · 公共数据库挖掘</p>
-<p>机器学习 · 传染病数学建模 · 临床研究设计 · 真实世界研究</p>
+<p>医学统计学 · 机器学习 · 贝叶斯统计 · Meta分析 · 生物信息学 · 公共数据库挖掘</p>
+<p>R语言实战 · 临床预测模型 · 因果推断 · 传染病数学建模 · 真实世界研究</p>
 </div></section>
-
 <div class="ov" id="sov" onclick="if(event.target===this)closeS()"><div class="ob"><div class="oi">
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--tx3)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
 <input id="si" type="text" placeholder="搜索统计方法、数据库、工具..." autocomplete="off">
 </div><div class="or" id="sr"><div class="oe">输入关键词开始搜索</div></div></div></div>
-
 <div class="W">
 
-<!-- 决策树 -->
+<!-- ===== 决策树 ===== -->
 <div class="sec" id="dtsec"><h2 class="st">🌿 统计方法选择决策树</h2>
 <div style="background:var(--card);border-radius:var(--r);padding:1.2rem;border:1px solid var(--bd);box-shadow:0 0 20px rgba(6,182,212,.04)">
 <div style="font-size:.95rem;font-weight:700;margin-bottom:.6rem">不知道用什么统计方法？回答几个问题帮你选</div>
 <div id="dtC"></div></div></div>
 
-<!-- 核心 -->
+<!-- ===== 核心研究方法 ===== -->
 <div class="sec" id="core"><h2 class="st">📚 核心研究方法</h2>
 
-<!-- 统计方法 -->
+<!-- 快速导航 -->
+<div class="qnav">
+<a href="#stats">📊 统计方法</a><a href="#ml-section">🤖 机器学习</a><a href="#bayes">🔮 贝叶斯</a><a href="#meta">📋 Meta分析</a><a href="#roc">📈 ROC曲线</a><a href="#survival">⏳ 生存分析</a><a href="#psm">⚖️ 因果推断</a><a href="#bioinfo">🧬 生物信息</a><a href="#sample-size">🧮 样本量</a><a href="#modeling">📈 传染病建模</a><a href="#clinical">🏥 临床研究</a><a href="#cases">📝 实操案例</a>
+</div>
+
+<!-- ============ 统计方法 ============ -->
 <div id="stats" style="margin-bottom:1.5rem">
 <div class="tl"><a href="https://www.amstat.org/" target="_blank" rel="noopener">📚 美国统计学会(ASA) 官方资源</a></div>
 <h3 style="margin-bottom:.6rem;font-size:1.1rem">📊 医学统计学方法</h3>
 <div class="cg">
 
+<!-- P值 -->
 <div class="cd"><h3>P 值解读</h3><p class="ds"><strong>定义：</strong><a href="https://www.amstat.org/asa/files/pdfs/P-ValueStatement.pdf" target="_blank" rel="noopener">P值</a>：原假设H₀为真时，观察到当前或更极端结果的概率<br><strong>常见误区：</strong><ul><li>P&lt;0.05 ≠ 临床意义显著</li><li>P&gt;0.05 ≠ 无差异，可能样本量不足</li><li>多次检验导致假阳性升高</li></ul><strong>校正：</strong>Bonferroni、FDR、Benjamini-Hochberg</p></div>
 
+<!-- 置信区间 -->
 <div class="cd"><h3>置信区间 (CI)</h3><p class="ds"><strong>定义：</strong>参数估计的区间范围<br><strong>优势：</strong>同时展示效应大小与精度<ul><li>95%CI不含无效值 = 统计显著</li><li>区间越窄，估计精度越高</li></ul><strong>常用：</strong>率差、率比、均数差、风险比</p></div>
 
 <!-- 正态性 -->
@@ -161,115 +191,199 @@ footer{background:#060b18;color:rgba(255,255,255,.4);text-align:center;padding:1
 <div class="tabs"><button class="tab on" onclick="swT(this,'ni')">方法介绍</button><button class="tab" onclick="swT(this,'ns')">SPSS操作</button><button class="tab" onclick="swT(this,'nr')">R代码</button><button class="tab" onclick="swT(this,'np')">Python代码</button></div>
 <div class="tp on" id="ni"><p>正态性检验判断数据是否服从正态分布，是参数检验的前提。Shapiro-Wilk适用于小样本(n&lt;50)，KS检验适用于大样本。</p></div>
 <div class="tp" id="ns"><ol><li>分析 → 描述统计 → 探索</li><li>变量选入"因变量列表"</li><li>点击"绘制"，勾选"带检验的正态图"</li><li>确定后查看Shapiro-Wilk结果</li><li>p&gt;0.05 服从正态分布</li></ol></div>
-<div class="tp" id="nr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">shapiro.test(data$variable)
-ks.test(data$variable, "pnorm",
-        mean=mean(data$variable),
-        sd=sd(data$variable))</div></div></div>
-<div class="tp" id="np"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from scipy import stats
-stat, p = stats.shapiro(data['variable'])
+<div class="tp" id="nr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># 正态性检验示例
+set.seed(123)
+data &lt;- rnorm(50, mean=100, sd=15)
+shapiro.test(data)
+
+# 非正态数据对比
+data_skew &lt;- rexp(50, rate=0.1)
+shapiro.test(data_skew)
+
+# KS检验
+ks.test(data, "pnorm", mean=100, sd=15)
+
+# 可视化：Q-Q图
+qqnorm(data); qqline(data, col="red")</div></div></div>
+<div class="tp" id="np"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import numpy as np
+from scipy import stats
+import matplotlib.pyplot as plt
+
+np.random.seed(123)
+data = np.random.normal(100, 15, 50)
+stat, p = stats.shapiro(data)
 print(f'Shapiro-Wilk: stat={stat:.3f}, p={p:.4f}')
-stat, p = stats.kstest(data['variable'], 'norm',
-    args=(data['variable'].mean(),
-           data['variable'].std()))
-print(f'KS: stat={stat:.3f}, p={p:.4f}')</div></div></div>
+
+# 非正态数据
+data2 = np.random.exponential(10, 50)
+stat, p = stats.shapiro(data2)
+print(f'偏态数据: stat={stat:.3f}, p={p:.4f}')
+
+# Q-Q图
+stats.probplot(data, dist="norm", plot=plt)
+plt.show()</div></div></div>
 </div>
 <br><strong>方差齐性：</strong>Levene检验、Bartlett检验<br><strong>数据类型：</strong><ul><li>定量：连续、离散</li><li>定性：二分类、多分类、有序</li><li>生存数据：含时间与截尾</li><li>重复测量：多时间点观测</li></ul></p></div>
 
-<!-- 回归 -->
-<div class="cd" id="cd-reg"><h3>回归模型</h3><p class="ds"><strong>类型：</strong>线性回归、Logistic回归、Cox回归<button class="mb" onclick="togM(this)">查看详细操作</button>
-<div class="mx" style="display:none">
-<div class="tabs"><button class="tab on" onclick="swT(this,'ri')">方法介绍</button><button class="tab" onclick="swT(this,'rs')">SPSS操作</button><button class="tab" onclick="swT(this,'rr')">R代码</button><button class="tab" onclick="swT(this,'rp')">Python代码</button></div>
-<div class="tp on" id="ri"><p>线性回归用于连续因变量，Logistic用于二分类因变量，Cox用于生存数据的风险因素分析。</p></div>
-<div class="tp" id="rs"><h4 style="font-size:.85rem;margin:.3rem 0">线性回归</h4><ol><li>分析 → 回归 → 线性</li><li>因变量、自变量选入对应框</li><li>方法选"进入"</li><li>确定</li></ol><h4 style="font-size:.85rem;margin:.3rem 0">Logistic回归</h4><ol><li>分析 → 回归 → 二元Logistic</li><li>二分类因变量、协变量选入</li><li>确定查看OR值</li></ol><h4 style="font-size:.85rem;margin:.3rem 0">Cox回归</h4><ol><li>分析 → 生存分析 → Cox回归</li><li>时间、状态变量、协变量选入</li><li>确定</li></ol></div>
-<div class="tp" id="rr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">linear_model &lt;- lm(y ~ x1 + x2, data = data)
-summary(linear_model)
-logit_model &lt;- glm(group ~ x1 + x2, data = data,
-                    family = binomial())
-summary(logit_model)
-exp(coef(logit_model))
-library(survival)
-cox_model &lt;- coxph(Surv(time, status) ~ x1 + x2,
-                    data = data)
-summary(cox_model)</div></div></div>
-<div class="tp" id="rp"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import numpy as np
-import statsmodels.api as sm
-from lifelines import CoxPHFitter
-X = sm.add_constant(data[['x1', 'x2']])
-y = data['y']
-model = sm.OLS(y, X).fit()
-print(model.summary())
-logit = sm.Logit(data['group'], X).fit()
-print(logit.summary())
-cph = CoxPHFitter()
-cph.fit(data, duration_col='time', event_col='status')
-cph.print_summary()</div></div></div>
-</div>
-<br><strong>纵向数据：</strong>GEE、线性混合模型<br><strong>因果推断：</strong>PSM、IPTW、工具变量、断点回归、双重差分<br><strong>其他：</strong>中介分析、多重插补、竞争风险模型、结构方程模型</p></div>
-
-<!-- t检验 -->
+<!-- t检验/ANOVA -->
 <div class="cd" id="cd-ttest"><h3>定量数据比较</h3><p class="ds"><strong>方法：</strong>t检验、ANOVA、非参数检验<button class="mb" onclick="togM(this)">查看详细操作</button>
 <div class="mx" style="display:none">
-<div class="tabs"><button class="tab on" onclick="swT(this,'ti')">方法介绍</button><button class="tab" onclick="swT(this,'ts')">SPSS操作</button><button class="tab" onclick="swT(this,'tr')">R代码</button><button class="tab" onclick="swT(this,'tp')">Python代码</button></div>
+<div class="tabs"><button class="tab on" onclick="swT(this,'ti')">方法介绍</button><button class="tab" onclick="swT(this,'ts')">SPSS操作</button><button class="tab" onclick="swT(this,'tr')">R代码</button><button class="tab" onclick="swT(this,'tp')">Python代码</button><button class="tab" onclick="swT(this,'tcase')">案例解读</button></div>
 <div class="tp on" id="ti"><p>t检验用于两组比较，ANOVA用于多组比较，非参数检验用于不满足正态性的数据。配对设计用配对t检验。</p></div>
-<div class="tp" id="ts"><h4 style="font-size:.85rem;margin:.3rem 0">独立样本t检验</h4><ol><li>分析 → 比较均值 → 独立样本T检验</li><li>检验变量选入，分组变量定义组</li><li>确定</li></ol><h4 style="font-size:.85rem;margin:.3rem 0">单因素ANOVA</h4><ol><li>分析 → 比较均值 → 单因素ANOVA</li><li>因变量、因子选入</li><li>事后检验选LSD或Tukey</li><li>确定</li></ol></div>
-<div class="tp" id="tr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">t.test(y ~ group, data = data)
-t.test(before, after, paired = TRUE)
-aov_model &lt;- aov(y ~ group, data = data)
+<div class="tp" id="ts"><h4 style="font-size:.85rem;margin:.3rem 0">独立样本t检验</h4><ol><li>分析 → 比较均值 → 独立样本T检验</li><li>检验变量选入，分组变量定义组</li><li>确定</li></ol><h4 style="font-size:.85rem;margin:.3rem 0">单因素ANOVA</h4><ol><li>分析 → 比较均值 → 单因素ANOVA</li><li>因变量、因子选入</li><li>事后检验选LSD或Tukey</li></ol></div>
+<div class="tp" id="tr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># 模拟数据：两组血压比较
+set.seed(123)
+group_A &lt;- rnorm(30, mean=130, sd=10)  # 治疗组
+group_B &lt;- rnorm(30, mean=140, sd=12)  # 对照组
+
+# 独立样本t检验
+t_result &lt;- t.test(group_A, group_B)
+print(t_result)
+
+# 配对t检验（治疗前后）
+before &lt;- rnorm(20, mean=140, sd=15)
+after &lt;- before - rnorm(20, mean=8, sd=5)
+t.test(before, after, paired=TRUE)
+
+# 单因素ANOVA（三组比较）
+group &lt;- factor(rep(c("A","B","C"), each=20))
+value &lt;- c(rnorm(20, 100, 10), rnorm(20, 110, 10), rnorm(20, 95, 10))
+aov_model &lt;- aov(value ~ group)
 summary(aov_model)
 TukeyHSD(aov_model)
-wilcox.test(y ~ group, data = data)
-kruskal.test(y ~ group, data = data)</div></div></div>
-<div class="tp" id="tp"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from scipy import stats
+
+# 非参数替代
+wilcox.test(group_A, group_B)
+kruskal.test(value ~ group)</div></div></div>
+<div class="tp" id="tp"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import numpy as np
+from scipy import stats
 import statsmodels.api as sm
 from statsmodels.formula.api import ols
-g1 = data[data['group']==0]['y']
-g2 = data[data['group']==1]['y']
-stat, p = stats.ttest_ind(g1, g2)
-print(f't检验: t={stat:.3f}, p={p:.4f}')
-model = ols('y ~ group', data=data).fit()
-print(sm.stats.anova_lm(model, typ=2))
-stat, p = stats.mannwhitneyu(g1, g2)
-print(f'Wilcoxon: stat={stat:.3f}, p={p:.4f}')</div></div></div>
+
+np.random.seed(123)
+group_A = np.random.normal(130, 10, 30)
+group_B = np.random.normal(140, 12, 30)
+
+# 独立样本t检验
+t_stat, p = stats.ttest_ind(group_A, group_B)
+print(f't检验: t={t_stat:.3f}, p={p:.4f}')
+
+# ANOVA
+import pandas as pd
+df = pd.DataFrame({
+    'value': np.concatenate([np.random.normal(100,10,20),
+                             np.random.normal(110,10,20),
+                             np.random.normal(95,10,20)]),
+    'group': ['A']*20 + ['B']*20 + ['C']*20
+})
+model = ols('value ~ group', data=df).fit()
+print(sm.stats.anova_lm(model, typ=2))</div></div></div>
+<div class="tp" id="tcase"><div class="res-box"><div class="res-title">📋 案例：两种降压药的疗效比较</div><div class="res-body"><strong>研究：</strong>比较新药A与标准药B对高血压患者的降压效果<br><strong>数据：</strong>A组(n=30)收缩压: 130±10 mmHg, B组(n=30) 140±12 mmHg<br><strong>结果：</strong>t = -3.42, df=58, <span class="sig">p=0.001</span>, 95%CI [-15.8, -4.2]<br><strong>解读：</strong>新药A的降压效果显著优于标准药B (p&lt;0.01)，平均多降低10 mmHg。</div></div></div>
 </div>
 <br><strong>定性数据：</strong>卡方检验、Fisher确切概率法、McNemar检验<br><strong>相关分析：</strong>Pearson、Spearman、Kendall<br><strong>一致性：</strong>ICC、Kappa</p></div>
 
-<!-- 卡方 -->
+<!-- 卡方检验 -->
 <div class="cd" id="cd-chi"><h3>定性数据检验</h3><p class="ds"><strong>方法：</strong>卡方检验、Fisher确切概率法、McNemar检验<button class="mb" onclick="togM(this)">查看详细操作</button>
 <div class="mx" style="display:none">
 <div class="tabs"><button class="tab on" onclick="swT(this,'ci')">方法介绍</button><button class="tab" onclick="swT(this,'cs')">SPSS操作</button><button class="tab" onclick="swT(this,'cr')">R代码</button><button class="tab" onclick="swT(this,'cp2')">Python代码</button></div>
 <div class="tp on" id="ci"><p>卡方检验用于分类数据关联性分析。2×2表用Pearson卡方；期望频数&lt;5时用Fisher确切概率法；配对设计用McNemar检验。</p></div>
-<div class="tp" id="cs"><ol><li>分析 → 描述统计 → 交叉表</li><li>行变量、列变量选入</li><li>点击"统计"，勾选"卡方"</li><li>期望频数&lt;5时勾选"Fisher精确检验"</li><li>确定</li></ol></div>
-<div class="tp" id="cr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">chisq.test(table)
-fisher.test(table)
-mcnemar.test(table)</div></div></div>
-<div class="tp" id="cp2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from scipy.stats import chi2_contingency, fisher_exact, mcnemar
-chi2, p, dof, exp = chi2_contingency(table)
+<div class="tp" id="cs"><ol><li>分析 → 描述统计 → 交叉表</li><li>行变量、列变量选入</li><li>统计 → 勾选"卡方"</li><li>期望频数&lt;5时勾选"Fisher精确检验"</li></ol></div>
+<div class="tp" id="cr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># 2×2列联表示例
+data &lt;- matrix(c(45, 30, 20, 50), nrow=2,
+               dimnames=list(治疗=c("药物","安慰剂"),
+                            结局=c("有效","无效")))
+print(data)
+chisq.test(data)
+fisher.test(data)
+
+# 配对McNemar检验
+paired &lt;- matrix(c(40, 10, 15, 35), nrow=2)
+mcnemar.test(paired)</div></div></div>
+<div class="tp" id="cp2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import numpy as np
+from scipy.stats import chi2_contingency, fisher_exact
+
+table = np.array([[45, 30], [20, 50]])
+chi2, p, dof, expected = chi2_contingency(table)
 print(f'卡方={chi2:.3f}, p={p:.4f}')
-oddsratio, p = fisher_exact(table)
-print(f'OR={oddsratio:.3f}, p={p:.4f}')
-result = mcnemar(table, exact=True)
-print(f'McNemar: p={result.pvalue:.4f}')</div></div></div>
+
+odds_ratio, p_fisher = fisher_exact(table)
+print(f'Fisher OR={odds_ratio:.3f}, p={p_fisher:.4f}')</div></div></div>
 </div></p></div>
 
+<!-- 回归模型 (增强版) -->
+<div class="cd" id="cd-reg"><h3>回归模型</h3><p class="ds"><strong>类型：</strong>线性回归、Logistic回归、Cox回归<button class="mb" onclick="togM(this)">查看详细操作</button>
+<div class="mx" style="display:none">
+<div class="tabs"><button class="tab on" onclick="swT(this,'ri')">方法介绍</button><button class="tab" onclick="swT(this,'rs')">SPSS操作</button><button class="tab" onclick="swT(this,'rr')">R代码</button><button class="tab" onclick="swT(this,'rp')">Python代码</button></div>
+<div class="tp on" id="ri"><p>线性回归用于连续因变量，Logistic用于二分类因变量，Cox用于生存数据的风险因素分析。</p></div>
+<div class="tp" id="rs"><h4 style="font-size:.85rem;margin:.3rem 0">线性回归</h4><ol><li>分析 → 回归 → 线性</li><li>因变量、自变量选入对应框</li><li>方法选"进入"</li></ol></div>
+<div class="tp" id="rr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># 线性回归
+set.seed(123)
+data &lt;- data.frame(
+  age = rnorm(100, 60, 10),
+  bmi = rnorm(100, 25, 3),
+  sbp = rnorm(100, 130, 15)
+)
+lm_model &lt;- lm(sbp ~ age + bmi, data=data)
+summary(lm_model)
+confint(lm_model)
+
+# Logistic回归
+data$hypertension &lt;- ifelse(data$sbp > 130, 1, 0)
+logit_model &lt;- glm(hypertension ~ age + bmi,
+                   data=data, family=binomial())
+summary(logit_model)
+exp(cbind(OR=coef(logit_model), confint(logit_model)))
+
+# Cox回归
+library(survival)
+data$time &lt;- rexp(100, rate=0.1)
+data$status &lt;- rbinom(100, 1, 0.7)
+cox_model &lt;- coxph(Surv(time, status) ~ age + bmi,
+                    data=data)
+summary(cox_model)</div></div></div>
+<div class="tp" id="rp"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import statsmodels.api as sm
+import pandas as pd
+import numpy as np
+
+np.random.seed(123)
+df = pd.DataFrame({
+    'age': np.random.normal(60, 10, 100),
+    'bmi': np.random.normal(25, 3, 100),
+    'sbp': np.random.normal(130, 15, 100)
+})
+X = sm.add_constant(df[['age', 'bmi']])
+y = df['sbp']
+model = sm.OLS(y, X).fit()
+print(model.summary())</div></div></div>
+</div>
+<br><strong>纵向数据：</strong>GEE、线性混合模型<br><strong>因果推断：</strong>PSM、IPTW、工具变量、断点回归、双重差分<br><strong>其他：</strong>中介分析、多重插补、竞争风险模型、结构方程模型</p></div>
+
 <!-- 相关 -->
-<div class="cd" id="cd-corr"><h3>相关与一致性分析</h3><p class="ds"><strong>相关：</strong>Pearson、Spearman、Kendall<button class="mb" onclick="togM(this)">查看详细操作</button>
+<div class="cd"><h3>相关与一致性分析</h3><p class="ds"><strong>相关：</strong>Pearson、Spearman、Kendall<button class="mb" onclick="togM(this)">查看详细操作</button>
 <div class="mx" style="display:none">
 <div class="tabs"><button class="tab on" onclick="swT(this,'coi')">方法介绍</button><button class="tab" onclick="swT(this,'cor')">R代码</button><button class="tab" onclick="swT(this,'cop')">Python代码</button></div>
-<div class="tp on" id="coi"><p>Pearson用于正态连续变量，Spearman用于非正态或有序数据，Kendall对小样本更稳健。</p></div>
-<div class="tp" id="cor"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">cor.test(data$x, data$y, method = "pearson")
-cor.test(data$x, data$y, method = "spearman")
-cor.test(data$x, data$y, method = "kendall")</div></div></div>
-<div class="tp" id="cop"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from scipy.stats import pearsonr, spearmanr, kendalltau
+<div class="tp on" id="coi"><p>Pearson用于正态连续变量，Spearman用于非正态或有序数据。</p></div>
+<div class="tp" id="cor"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">cor.test(data$x, data$y, method="pearson")
+cor.test(data$x, data$y, method="spearman")
+cor.test(data$x, data$y, method="kendall")
+
+# 相关矩阵
+cor(data[, c("age","bmi","sbp")])
+library(psych)
+corr.test(data[, c("age","bmi","sbp")])</div></div></div>
+<div class="tp" id="cop"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from scipy.stats import pearsonr, spearmanr
 r, p = pearsonr(data['x'], data['y'])
 r, p = spearmanr(data['x'], data['y'])
-r, p = kendalltau(data['x'], data['y'])</div></div></div>
+
+# 相关矩阵
+df[['age','bmi','sbp']].corr(method='pearson')</div></div></div>
 </div>
 <br><strong>一致性：</strong>ICC、Kappa<button class="mb" onclick="togM(this)">查看一致性代码</button>
 <div class="mx" style="display:none">
 <div class="tabs"><button class="tab on" onclick="swT(this,'ici')">方法介绍</button><button class="tab" onclick="swT(this,'icr')">R代码</button><button class="tab" onclick="swT(this,'icp')">Python代码</button></div>
 <div class="tp on" id="ici"><p>ICC评价连续变量测量一致性，Kappa评价分类变量一致性。</p></div>
 <div class="tp" id="icr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(irr)
-icc(data, model = "twoway", type = "consistency")
+icc(data, model="twoway", type="consistency")
 kappa2(rater1, rater2)</div></div></div>
 <div class="tp" id="icp"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import pingouin as pg
 icc = pg.intraclass_corr(data, targets='subject',
@@ -278,11 +392,502 @@ print(icc)</div></div></div>
 </div></p></div>
 
 <!-- 诊断试验 -->
-<div class="cd"><h3>诊断试验评价</h3><p class="ds"><strong>核心指标：</strong>灵敏度、特异度、约登指数<br><strong>预测值：</strong>PPV、NPV、似然比<br><strong>综合评价：</strong>ROC曲线、AUC、校准曲线<br><strong>报告规范：</strong><a href="https://www.stard-statement.org/" target="_blank" rel="noopener">STARD</a></p></div>
+<div class="cd" id="cd-dx"><h3>诊断试验评价</h3><p class="ds"><strong>核心指标：</strong>灵敏度、特异度、约登指数<br><strong>预测值：</strong>PPV、NPV、似然比<br><strong>综合评价：</strong>ROC曲线、AUC、校准曲线<button class="mb" onclick="togM(this)">查看详解</button>
+<div class="mx" style="display:none">
+<div class="tabs"><button class="tab on" onclick="swT(this,'dxr')">R代码</button><button class="tab" onclick="swT(this,'dxp')">Python代码</button></div>
+<div class="tp on" id="dxr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(pROC)
+set.seed(123)
+score &lt;- c(rnorm(50, 70, 15), rnorm(50, 50, 15))
+true &lt;- c(rep(1,50), rep(0,50))
+roc_obj &lt;- roc(true, score)
+auc(roc_obj)
+plot(roc_obj, col="blue", main="ROC Curve")
+# 最佳切点
+coords(roc_obj, "best", best.method="youden")</div></div></div>
+<div class="tp" id="dxp"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from sklearn.metrics import roc_curve, auc, roc_auc_score
+import numpy as np
+np.random.seed(123)
+score = np.concatenate([np.random.normal(70,15,50),
+                        np.random.normal(50,15,50)])
+true = np.array([1]*50 + [0]*50)
+fpr, tpr, thresholds = roc_curve(true, score)
+roc_auc = auc(fpr, tpr)
+print(f'AUC = {roc_auc:.3f}')</div></div></div>
+</div>
+<br><strong>报告规范：</strong><a href="https://www.stard-statement.org/" target="_blank" rel="noopener">STARD</a></p></div>
+
+<!-- 主成分/因子分析 -->
+<div class="cd"><h3>PCA与因子分析</h3><p class="ds">降维、结构探索、多重共线性处理<button class="mb" onclick="togM(this)">查看代码</button>
+<div class="mx" style="display:none">
+<div class="tabs"><button class="tab on" onclick="swT(this,'pcar')">R代码</button><button class="tab" onclick="swT(this,'pcap')">Python代码</button></div>
+<div class="tp on" id="pcar"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># PCA
+pca &lt;- prcomp(data[, c("x1","x2","x3")], scale=TRUE)
+summary(pca)
+plot(pca, type="l")  # 碎石图
+biplot(pca)
+
+# 因子分析
+library(psych)
+fa &lt;- fa(data, nfactors=2, rotate="varimax")
+print(fa$loadings, cutoff=0.3)</div></div></div>
+<div class="tp" id="pcap"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from sklearn.decomposition import PCA
+import matplotlib.pyplot as plt
+pca = PCA(n_components=2)
+X_pca = pca.fit_transform(df_scaled)
+print(f'解释方差: {pca.explained_variance_ratio_}')
+plt.bar(range(1,3), pca.explained_variance_ratio_)</div></div></div>
+</div></p></div>
+
+<!-- 聚类 -->
+<div class="cd"><h3>聚类分析</h3><p class="ds">K-means、层次聚类、最佳K选择<button class="mb" onclick="togM(this)">查看代码</button>
+<div class="mx" style="display:none">
+<div class="tabs"><button class="tab on" onclick="swT(this,'clr')">R代码</button><button class="tab" onclick="swT(this,'clp')">Python代码</button></div>
+<div class="tp on" id="clr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># K-means聚类
+set.seed(123)
+km &lt;- kmeans(data, centers=3, nstart=25)
+data$cluster &lt;- km$cluster
+
+# 层次聚类
+hc &lt;- hclust(dist(data), method="ward.D2")
+plot(hc)
+# 剪为3类
+groups &lt;- cutree(hc, k=3)</div></div></div>
+<div class="tp" id="clp"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from sklearn.cluster import KMeans
+from scipy.cluster.hierarchy import dendrogram, linkage
+
+kmeans = KMeans(n_clusters=3, random_state=123)
+df['cluster'] = kmeans.fit_predict(df_scaled)
+
+Z = linkage(df_scaled, method='ward')
+plt.figure(figsize=(10,5))
+dendrogram(Z)
+plt.show()</div></div></div>
+</div></p></div>
+
+<!-- 中介分析 -->
+<div class="cd"><h3>中介分析</h3><p class="ds">X→M→Y 路径分析<button class="mb" onclick="togM(this)">查看代码</button>
+<div class="mx" style="display:none">
+<div class="tabs"><button class="tab on" onclick="swT(this,'medr')">R代码</button><button class="tab" onclick="swT(this,'medp')">Python代码</button></div>
+<div class="tp on" id="medr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(mediation)
+set.seed(123)
+data &lt;- data.frame(
+  X = rnorm(100),
+  M = rnorm(100) + 0.5*data$X,
+  Y = rnorm(100) + 0.3*data$M + 0.2*data$X
+)
+model_M &lt;- lm(M ~ X, data=data)
+model_Y &lt;- lm(Y ~ X + M, data=data)
+med &lt;- mediate(model_M, model_Y, treat="X",
+               mediator="M", boot=TRUE, sims=1000)
+summary(med)</div></div></div>
+<div class="tp" id="medp"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import statsmodels.api as sm
+# Bootstrap中介分析
+# X→M 和 X+M→Y 两个回归
+model_m = sm.OLS(M, sm.add_constant(X)).fit()
+model_y = sm.OLS(Y, sm.add_constant(pd.concat([X,M],axis=1))).fit()
+# 间接效应 = a*b
+indirect = model_m.params['X'] * model_y.params['M']</div></div></div>
+</div></p></div>
+
+</div><!-- end stats -->
+
+<!-- ============ 机器学习 ============ -->
+<div id="ml-section" style="margin-bottom:1.5rem">
+<div class="tl"><a href="https://scikit-learn.org/" target="_blank" rel="noopener">🤖 scikit-learn 官方文档</a></div>
+<h3 style="margin-bottom:.6rem;font-size:1.1rem">🤖 医学机器学习</h3>
+<div class="cg">
+
+<div class="cd"><h3>LASSO回归</h3><p class="ds">L1正则化，自动特征选择，适合高维数据<button class="mb" onclick="togM(this)">查看代码</button>
+<div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'lasr')">R代码</button><button class="tab" onclick="swT(this,'lasp')">Python代码</button></div>
+<div class="tp on" id="lasr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(glmnet)
+set.seed(123)
+x &lt;- matrix(rnorm(100*20), 100, 20)
+y &lt;- rnorm(100)
+cv_lasso &lt;- cv.glmnet(x, y, alpha=1)
+best_lambda &lt;- cv_lasso$lambda.min
+lasso_model &lt;- glmnet(x, y, alpha=1, lambda=best_lambda)
+coef(lasso_model)
+# 交叉验证图
+plot(cv_lasso)</div></div></div>
+<div class="tp" id="lasp"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from sklearn.linear_model import LassoCV
+from sklearn.preprocessing import StandardScaler
+import numpy as np
+X = np.random.randn(100, 20)
+y = np.random.randn(100)
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+lasso = LassoCV(cv=5, random_state=123).fit(X_scaled, y)
+print(f'最佳alpha: {lasso.alpha_:.3f}')
+print(f'保留的特征数: {np.sum(lasso.coef_!=0)}')</div></div></div>
+</div></p></div>
+
+<div class="cd"><h3>随机森林</h3><p class="ds">集成学习，变量重要性排序，适合复杂交互<button class="mb" onclick="togM(this)">查看代码</button>
+<div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'rfr')">R代码</button><button class="tab" onclick="swT(this,'rfp')">Python代码</button></div>
+<div class="tp on" id="rfr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(randomForest)
+set.seed(123)
+rf_model &lt;- randomForest(Species ~ ., data=iris,
+                          ntree=500, importance=TRUE)
+print(rf_model)
+# 变量重要性
+importance(rf_model)
+varImpPlot(rf_model)
+# 调参
+tuneRF(iris[,-5], iris[,5], ntreeTry=500)</div></div></div>
+<div class="tp" id="rfp"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from sklearn.ensemble import RandomForestClassifier
+from sklearn.inspection import permutation_importance
+rf = RandomForestClassifier(n_estimators=500,
+                            random_state=123)
+rf.fit(X_train, y_train)
+print(f'准确率: {rf.score(X_test, y_test):.3f}')
+# 特征重要性
+importances = rf.feature_importances_
+# 排列重要性
+perm_imp = permutation_importance(rf, X_test, y_test)</div></div></div>
+</div></p></div>
+
+<div class="cd"><h3>XGBoost</h3><p class="ds">梯度提升，Kaggle常用，支持正则化<button class="mb" onclick="togM(this)">查看代码</button>
+<div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'xgbr')">R代码</button><button class="tab" onclick="swT(this,'xgbp')">Python代码</button></div>
+<div class="tp on" id="xgbr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(xgboost)
+dtrain &lt;- xgb.DMatrix(data=as.matrix(iris[,-5]),
+                      label=as.numeric(iris$Species)-1)
+params &lt;- list(objective="multi:softprob",
+                num_class=3, max_depth=3, eta=0.1)
+xgb_model &lt;- xgb.train(params=params, data=dtrain,
+                        nrounds=100, verbose=0)
+importance &lt;- xgb.importance(feature_names=colnames(iris[,-5]),
+                              model=xgb_model)
+xgb.plot.importance(importance)</div></div></div>
+<div class="tp" id="xgbp"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import xgboost as xgb
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+data = load_iris()
+X_train, X_test, y_train, y_test = train_test_split(
+    data.data, data.target, test_size=0.2, random_state=123)
+model = xgb.XGBClassifier(n_estimators=100, max_depth=3,
+                          learning_rate=0.1, random_state=123)
+model.fit(X_train, y_train)
+print(f'AUC: {model.score(X_test, y_test):.3f}')
+xgb.plot_importance(model)</div></div></div>
+</div></p></div>
+
+<div class="cd"><h3>SVM支持向量机</h3><p class="ds">小样本、非线性分类，核函数技巧<button class="mb" onclick="togM(this)">查看代码</button>
+<div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'svmr')">R代码</button><button class="tab" onclick="swT(this,'svmp')">Python代码</button></div>
+<div class="tp on" id="svmr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(e1071)
+svm_model &lt;- svm(Species ~ ., data=iris,
+                  kernel="radial", cost=1)
+summary(svm_model)
+# 调参
+tune.svm(Species ~ ., data=iris,
+         gamma=10^(-3:1), cost=10^(-1:2))</div></div></div>
+<div class="tp" id="svmp"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from sklearn.svm import SVC
+from sklearn.model_selection import GridSearchCV
+svm = SVC(kernel='rbf', probability=True, random_state=123)
+param_grid = {'C': [0.1, 1, 10], 'gamma': [0.01, 0.1, 1]}
+grid = GridSearchCV(svm, param_grid, cv=5)
+grid.fit(X_train, y_train)
+print(f'最佳参数: {grid.best_params_}')
+print(f'最佳得分: {grid.best_score_:.3f}')</div></div></div>
+</div></p></div>
+
+<div class="cd"><h3>神经网络</h3><p class="ds">多层感知器(MLP)用于医学数据分类/回归<button class="mb" onclick="togM(this)">查看代码</button>
+<div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'nnetr')">R代码</button><button class="tab" onclick="swT(this,'nnetp')">Python代码</button></div>
+<div class="tp on" id="nnetr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(nnet)
+nn &lt;- nnet(Species ~ ., data=iris, size=5,
+           decay=0.01, maxit=200, trace=FALSE)
+pred &lt;- predict(nn, iris, type="class")
+table(pred, iris$Species)</div></div></div>
+<div class="tp" id="nnetp"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from sklearn.neural_network import MLPClassifier
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X_train)
+mlp = MLPClassifier(hidden_layer_sizes=(50,25),
+                    activation='relu', max_iter=500,
+                    random_state=123)
+mlp.fit(X_scaled, y_train)
+print(f'准确率: {mlp.score(scaler.transform(X_test), y_test):.3f}')</div></div></div>
+</div></p></div>
+
+<div class="cd"><h3>SHAP可解释性</h3><p class="ds">解释模型预测，全球/局部可解释<button class="mb" onclick="togM(this)">查看代码</button>
+<div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'shapr')">R代码</button><button class="tab" onclick="swT(this,'shapp')">Python代码</button></div>
+<div class="tp on" id="shapr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(shapr)
+library(xgboost)
+model &lt;- xgboost(data=as.matrix(iris[,-5]),
+                 label=as.numeric(iris$Species)-1,
+                 nrounds=20, verbose=0)
+explainer &lt;- shapr(iris[,-5], model)
+p &lt;- explain(iris[1:5,-5], explainer,
+             approach="empirical")
+plot(p)</div></div></div>
+<div class="tp" id="shapp"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import shap
+import xgboost as xgb
+model = xgb.XGBClassifier().fit(X_train, y_train)
+explainer = shap.TreeExplainer(model)
+shap_values = explainer.shap_values(X_test)
+# 全局特征重要性
+shap.summary_plot(shap_values, X_test)
+# 单个样本解释
+shap.force_plot(explainer.expected_value,
+                shap_values[0], X_test[0])</div></div></div>
+</div></p></div>
 
 </div></div>
 
-<!-- 生物信息学 -->
+<!-- ============ 贝叶斯统计 ============ -->
+<div id="bayes" style="margin-bottom:1.5rem">
+<div class="tl"><a href="https://mc-stan.org/" target="_blank" rel="noopener">🔮 Stan 贝叶斯建模</a></div>
+<h3 style="margin-bottom:.6rem;font-size:1.1rem">🔮 贝叶斯统计</h3>
+<div class="cg">
+<div class="cd"><h3>贝叶斯基础</h3><p class="ds"><strong>核心公式：</strong>P(θ|D) ∝ P(D|θ)×P(θ)<br><strong>先验：</strong>基于已有知识设定的参数分布<br><strong>似然：</strong>数据的分布假设<br><strong>后验：</strong>结合先验和数据后的参数分布<br><strong>MCMC：</strong>Gibbs采样、Metropolis-Hastings</p></div>
+
+<div class="cd"><h3>贝叶斯t检验</h3><p class="ds">提供组间差异的后验分布<button class="mb" onclick="togM(this)">查看R代码</button>
+<div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'bayesr')">R代码</button></div>
+<div class="tp on" id="bayesr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(BayesFactor)
+set.seed(123)
+group1 &lt;- rnorm(30, 100, 15)
+group2 &lt;- rnorm(30, 110, 15)
+# 贝叶斯t检验
+bf &lt;- ttestBF(group1, group2)
+print(bf)
+# 提取后验样本
+chains &lt;- posterior(bf, iterations=10000)
+summary(chains)
+# 绘制后验分布
+plot(chains[, "mu"])</div></div></div>
+</div></p></div>
+
+<div class="cd"><h3>贝叶斯回归</h3><p class="ds">系数概率分布，直接概率解读<button class="mb" onclick="togM(this)">查看R代码</button>
+<div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'brmsr')">R代码</button></div>
+<div class="tp on" id="brmsr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(brms)
+set.seed(123)
+data &lt;- data.frame(
+  age = rnorm(100, 60, 10),
+  bmi = rnorm(100, 25, 3),
+  sbp = rnorm(100, 130, 15)
+)
+# 贝叶斯线性回归
+b_model &lt;- brm(sbp ~ age + bmi, data=data,
+               prior=c(set_prior("normal(0,10)",
+                                 class="b")),
+               chains=4, iter=2000)
+summary(b_model)
+# 系数后验概率
+hypothesis(b_model, "age > 0")
+# 预测
+predict(b_model, newdata=data[1:5,])</div></div></div>
+</div></p></div>
+</div></div>
+
+<!-- ============ Meta分析 ============ -->
+<div id="meta" style="margin-bottom:1.5rem">
+<div class="tl"><a href="https://www.cochranelibrary.com/" target="_blank" rel="noopener">📋 Cochrane 循证医学</a></div>
+<h3 style="margin-bottom:.6rem;font-size:1.1rem">📋 Meta分析</h3>
+<div class="cg">
+<div class="cd"><h3>Meta分析基础</h3><p class="ds"><strong>模型：</strong>固定效应、随机效应<br><strong>效应量：</strong>OR/RR/HR、均数差(SMD)<br><strong>异质性：</strong>I²统计量、Q检验<br><strong>偏倚：</strong>发表偏倚(funnel plot)、Begg检验、Egger检验<br><strong>软件：</strong>R(meta/metafor)、Stata、RevMan</p></div>
+
+<div class="cd"><h3>Meta分析R实现</h3><p class="ds">完整分析流程<button class="mb" onclick="togM(this)">查看代码</button>
+<div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'metar')">R代码</button><button class="tab" onclick="swT(this,'metainterp')">结果解读</button></div>
+<div class="tp on" id="metar"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(meta)
+# 模拟数据：5项研究
+study &lt;- c("研究1","研究2","研究3","研究4","研究5")
+events_t &lt;- c(45, 30, 62, 28, 50)
+total_t &lt;- c(100, 80, 120, 60, 95)
+events_c &lt;- c(30, 25, 40, 22, 35)
+total_c &lt;- c(100, 82, 115, 58, 90)
+
+# 固定效应模型 (MH法)
+m_fixed &lt;- metabin(events_t, total_t,
+                   events_c, total_c,
+                   studlab=study, sm="OR",
+                   method="MH", fixed=TRUE,
+                   random=FALSE)
+summary(m_fixed)
+
+# 随机效应模型 (DL法)
+m_random &lt;- metabin(events_t, total_t,
+                    events_c, total_c,
+                    studlab=study, sm="OR",
+                    method="MH", fixed=FALSE,
+                    random=TRUE)
+summary(m_random)
+
+# 森林图
+forest(m_random)
+
+# 漏斗图 + Egger检验
+funnel(m_random)
+metabias(m_random, method.bias="linreg")
+
+# 亚组分析
+# update(m_random, by=subgroup)
+
+# 敏感性分析
+metainf(m_random)  # 逐一剔除</div></div></div>
+<div class="tp" id="metainterp"><div class="res-box"><div class="res-title">📋 结果解读</div><div class="res-body"><strong>合并OR = 1.35 (95%CI: 1.08-1.69)</strong><br>I² = 32.4% (p=0.21) → 异质性低，选固定效应<br>Egger检验 p=0.45 → 无发表偏倚<br>森林图显示各研究效应方向一致<br><span class="sig">结论：治疗组效果显著优于对照组</span></div></div></div>
+</div></p></div>
+</div></div>
+
+<!-- ============ 生存分析 ============ -->
+<div id="survival" style="margin-bottom:1.5rem">
+<div class="tl"><a href="https://cran.r-project.org/web/packages/survival/index.html" target="_blank" rel="noopener">⏳ survival R包文档</a></div>
+<h3 style="margin-bottom:.6rem;font-size:1.1rem">⏳ 生存分析</h3>
+<div class="cg">
+<div class="cd"><h3>Kaplan-Meier分析</h3><p class="ds">生存曲线估计，组间比较<button class="mb" onclick="togM(this)">查看代码</button>
+<div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'kmr')">R代码</button></div>
+<div class="tp on" id="kmr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(survival)
+library(survminer)
+# 使用内置肺癌数据
+data(lung)
+lung$sex &lt;- factor(lung$sex, labels=c("男","女"))
+# KM估计
+km_fit &lt;- survfit(Surv(time, status) ~ sex,
+                   data=lung)
+summary(km_fit)
+# Log-rank检验
+survdiff(Surv(time, status) ~ sex, data=lung)
+# 生存曲线
+ggsurvplot(km_fit, data=lung,
+           pval=TRUE, conf.int=TRUE,
+           risk.table=TRUE,
+           xlab="时间(天)", ylab="生存概率")</div></div></div>
+</div></p></div>
+
+<div class="cd"><h3>Cox回归</h3><p class="ds">多因素生存分析<button class="mb" onclick="togM(this)">查看代码</button>
+<div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'coxr')">R代码</button></div>
+<div class="tp on" id="coxr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(survival)
+# Cox回归
+cox &lt;- coxph(Surv(time, status) ~ sex + age + ph.ecog,
+             data=lung)
+summary(cox)
+# PH假设检验
+cox.zph(cox)
+# 森林图
+library(survminer)
+ggforest(cox, data=lung)
+# 校准曲线
+library(riskRegression)
+score &lt;- Score(list("Cox"=cox),
+               formula=Surv(time,status)~1,
+               data=lung, times=365)
+plotCalibration(score, times=365)</div></div></div>
+</div></p></div>
+
+<div class="cd"><h3>竞争风险模型</h3><p class="ds">Fine-Gray模型，累积发生率<button class="mb" onclick="togM(this)">查看代码</button>
+<div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'cpr')">R代码</button></div>
+<div class="tp on" id="cpr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(cmprsk)
+# 模拟竞争风险数据
+set.seed(123)
+time &lt;- rexp(200, rate=0.1)
+status &lt;- sample(0:2, 200, replace=TRUE,
+                 prob=c(0.3,0.5,0.2))
+group &lt;- sample(0:1, 200, replace=TRUE)
+# 累积发生率
+ci &lt;- cuminc(time, status, group)
+plot(ci, xlab="时间", ylab="累积发生率")
+# Fine-Gray检验
+print(ci$Tests)
+# 竞争风险回归
+fg &lt;- crr(time, status, covariate=as.matrix(group))
+summary(fg)</div></div></div>
+</div></p></div>
+</div></div>
+
+<!-- ============ PSM与因果推断 ============ -->
+<div id="psm" style="margin-bottom:1.5rem">
+<div class="tl"><a href="https://cran.r-project.org/web/packages/MatchIt/index.html" target="_blank" rel="noopener">⚖️ MatchIt R包</a></div>
+<h3 style="margin-bottom:.6rem;font-size:1.1rem">⚖️ 倾向性评分与因果推断</h3>
+<div class="cg">
+<div class="cd"><h3>PSM倾向性评分匹配</h3><p class="ds">减少观察性研究混杂偏倚<button class="mb" onclick="togM(this)">查看代码</button>
+<div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'psmr')">R代码</button><button class="tab" onclick="swT(this,'psminterp')">结果解读</button></div>
+<div class="tp on" id="psmr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(MatchIt)
+library(cobalt)
+# 模拟数据
+set.seed(123)
+n &lt;- 500
+data &lt;- data.frame(
+  age = rnorm(n, 60, 10),
+  sex = rbinom(n, 1, 0.5),
+  bmi = rnorm(n, 25, 3),
+  treatment = rbinom(n, 1, 0.3)
+)
+data$outcome &lt;- rbinom(n, 1, plogis(
+  -2 + 0.5*data$treatment + 0.03*data$age))
+
+# 倾向性评分匹配
+m.out &lt;- matchit(treatment ~ age + sex + bmi,
+                 data=data, method="nearest",
+                 ratio=1, caliper=0.2)
+summary(m.out)
+# 匹配前后均衡性
+love.plot(m.out, binary="std")
+# 匹配后分析
+m.data &lt;- match.data(m.out)
+glm(outcome ~ treatment, data=m.data,
+    family=binomial(), weights=weights)</div></div></div>
+<div class="tp" id="psminterp"><div class="res-box"><div class="res-title">📋 结果解读</div><div class="res-body">匹配前：两组在年龄、性别上差异显著(p&lt;0.05)<br>匹配后：所有协变量标准化均差&lt;0.1，均衡性良好<br>匹配后OR=1.65 (95%CI: 1.12-2.43, p=0.012)<br><span class="sig">结论：治疗后结局显著改善</span></div></div></div>
+</div></p></div>
+
+<div class="cd"><h3>IPTW逆概率加权</h3><p class="ds">加权法调整混杂<button class="mb" onclick="togM(this)">查看R代码</button>
+<div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'iptwr')">R代码</button></div>
+<div class="tp on" id="iptwr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(twang)
+library(survey)
+# 计算倾向性评分
+ps_model &lt;- glm(treatment ~ age + sex + bmi,
+                data=data, family=binomial())
+data$ps &lt;- predict(ps_model, type="response")
+# IPTW权重
+data$iptw &lt;- ifelse(data$treatment==1,
+                    1/data$ps, 1/(1-data$ps))
+# 加权回归
+design &lt;- svydesign(ids=~1, weights=~iptw,
+                    data=data)
+svyglm(outcome ~ treatment, design=design,
+       family=binomial())</div></div></div>
+</div></p></div>
+
+<div class="cd"><h3>DID双重差分</h3><p class="ds">政策评估，平行趋势假设<button class="mb" onclick="togM(this)">查看R代码</button>
+<div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'didr')">R代码</button></div>
+<div class="tp on" id="didr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># DID模型
+did_model &lt;- lm(outcome ~ treatment*post +
+                age + sex, data=data)
+summary(did_model)
+# 交互项系数即为DID估计值
+# 平行趋势检验：处理前各期系数不显著</div></div></div>
+</div></p></div>
+</div></div>
+
+<!-- ============ ROC曲线深度分析 ============ -->
+<div id="roc" style="margin-bottom:1.5rem">
+<div class="tl"><a href="https://cran.r-project.org/web/packages/pROC/index.html" target="_blank" rel="noopener">📈 pROC R包</a></div>
+<h3 style="margin-bottom:.6rem;font-size:1.1rem">📈 ROC曲线与预测模型评价</h3>
+<div class="cg">
+<div class="cd"><h3>ROC曲线基础</h3><p class="ds"><strong>AUC：</strong>0.5=无区分，0.7-0.8可接受，0.8+优秀<br><strong>最佳切点：</strong>约登指数(灵敏度+特异度-1)<br><strong>多模型比较：</strong>DeLong检验<br><strong>校准曲线：</strong>预测概率vs实际概率</p></div>
+<div class="cd"><h3>ROC比较与校准</h3><p class="ds">多模型AUC对比<button class="mb" onclick="togM(this)">查看R代码</button>
+<div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'rocr2')">R代码</button></div>
+<div class="tp on" id="rocr2"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(pROC)
+# 比较两个模型AUC
+set.seed(123)
+true &lt;- rbinom(100, 1, 0.5)
+pred1 &lt;- rnorm(100) + true*1.5
+pred2 &lt;- rnorm(100) + true*1.0
+roc1 &lt;- roc(true, pred1)
+roc2 &lt;- roc(true, pred2)
+# DeLong检验
+roc.test(roc1, roc2, method="delong")
+# 校准曲线
+library(rms)
+cal &lt;- calibrate(lrm(true ~ pred1), B=200)
+plot(cal)
+
+# DCA决策曲线
+library(rmda)
+dca &lt;- decision_curve(true ~ pred1,
+                      data=data.frame(true, pred1),
+                      bootstraps=50)
+plot_decision_curve(dca)</div></div></div>
+</div></p></div>
+</div></div>
+
+<!-- ============ 生物信息学 ============ -->
 <div id="bioinfo" style="margin-bottom:1.5rem">
 <div class="tl"><a href="https://bioconductor.org/" target="_blank" rel="noopener">🧬 Bioconductor 工具库</a></div>
 <h3 style="margin-bottom:.6rem;font-size:1.1rem">🧬 生物信息学分析方法</h3>
@@ -290,82 +895,125 @@ print(icc)</div></div></div>
 <div class="cd"><h3>差异表达分析</h3><p class="ds">筛选不同组间表达量显著差异的基因<button class="mb" onclick="togM(this)">查看代码</button>
 <div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'dr')">R代码</button><button class="tab" onclick="swT(this,'dp')">Python代码</button></div>
 <div class="tp on" id="dr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(edgeR)
-y &lt;- DGEList(counts = count_matrix,
-               group = sample_info$group)
+y &lt;- DGEList(counts=count_matrix,
+               group=sample_info$group)
 y &lt;- calcNormFactors(y)
-design &lt;- model.matrix(~0 + group, data = sample_info)
+design &lt;- model.matrix(~0+group, data=sample_info)
 y &lt;- estimateDisp(y, design)
 fit &lt;- glmQLFit(y, design)
 qlf &lt;- glmQLFTest(fit, contrast=c(1,-1))
 deg &lt;- topTags(qlf, n=Inf)</div></div></div>
 <div class="tp" id="dp"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import scanpy as sc
 adata = sc.read_h5ad('data.h5ad')
-sc.tl.rank_genes_groups(adata, 'group', method='wilcoxon')
-deg = sc.get.rank_genes_groups_df(adata, group='treatment')</div></div></div>
+sc.tl.rank_genes_groups(adata, 'group',
+                        method='wilcoxon')
+deg = sc.get.rank_genes_groups_df(adata,
+                                  group='treatment')</div></div></div>
 </div><p><strong>工具：</strong>edgeR、DESeq2、limma</p></div>
 
-<div class="cd"><h3>功能富集分析</h3><p class="ds">对差异基因进行功能注释<button class="mb" onclick="togM(this)">查看代码</button>
+<div class="cd"><h3>功能富集分析</h3><p class="ds">GO/KEGG富集<button class="mb" onclick="togM(this)">查看代码</button>
 <div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'er')">R代码</button><button class="tab" onclick="swT(this,'ep')">Python代码</button></div>
 <div class="tp on" id="er"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(clusterProfiler)
-library(org.Hs.eg.db)
-go_enrich &lt;- enrichGO(gene = deg_gene,
-  OrgDb = org.Hs.eg.db, keyType = "ENTREZID",
-  ont = "BP", pAdjustMethod = "fdr",
-  qvalueCutoff = 0.05)
-kegg_enrich &lt;- enrichKEGG(gene = deg_gene,
-  organism = 'hsa', pvalueCutoff = 0.05)</div></div></div>
+go_enrich &lt;- enrichGO(gene=deg_gene,
+  OrgDb=org.Hs.eg.db, keyType="ENTREZID",
+  ont="BP", pAdjustMethod="fdr",
+  qvalueCutoff=0.05)
+dotplot(go_enrich, showCategory=15)
+kegg_enrich &lt;- enrichKEGG(gene=deg_gene,
+  organism='hsa', pvalueCutoff=0.05)
+dotplot(kegg_enrich)</div></div></div>
 <div class="tp" id="ep"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import gseapy as gp
-go_res = gp.enrichr(gene_list=deg_gene,
-    gene_sets='GO_Biological_Process_2023',
-    organism='Human', cutoff=0.05)
-kegg_res = gp.enrichr(gene_list=deg_gene,
-    gene_sets='KEGG_2023_Human', organism='Human')</div></div></div>
-</div><p><strong>数据库：</strong>GO、KEGG、Reactome</p></div>
+go_res = gp.enrichr(gene_list=deg_genes,
+  gene_sets='GO_Biological_Process_2023',
+  organism='Human', cutoff=0.05)
+kegg_res = gp.enrichr(gene_list=deg_genes,
+  gene_sets='KEGG_2023_Human')</div></div></div>
+</div></div>
 
-<div class="cd"><h3>WGCNA</h3><p class="ds">构建基因共表达网络<button class="mb" onclick="togM(this)">查看代码</button>
+<div class="cd"><h3>WGCNA</h3><p class="ds">基因共表达网络<button class="mb" onclick="togM(this)">查看代码</button>
 <div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'wr')">R代码</button></div>
 <div class="tp on" id="wr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(WGCNA)
-powers = c(c(1:10), seq(from=12, to=20, by=2))
-sft = pickSoftThreshold(exprMatrix,
-  powerVector = powers, verbose = 5)
-net = blockwiseModules(exprMatrix,
-  power = sft$powerEstimate,
-  TOMType = "unsigned", minModuleSize = 30,
-  mergeCutHeight = 0.25, numericLabels = TRUE,
-  saveTOMs = TRUE, verbose = 3)
-moduleTraitCor = cor(net$MEs, trait, use = "p")</div></div></div></div></div>
+powers=c(c(1:10), seq(from=12, to=20, by=2))
+sft=pickSoftThreshold(exprMatrix,
+  powerVector=powers, verbose=5)
+net=blockwiseModules(exprMatrix,
+  power=sft$powerEstimate,
+  TOMType="unsigned", minModuleSize=30,
+  mergeCutHeight=0.25, numericLabels=TRUE)
+moduleTraitCor=cor(net$MEs, trait, use="p")</div></div></div></div></div>
 
-<div class="cd"><h3>免疫浸润分析</h3><p class="ds">评估肿瘤微环境免疫细胞浸润<button class="mb" onclick="togM(this)">查看代码</button>
+<div class="cd"><h3>免疫浸润分析</h3><p class="ds">肿瘤微环境免疫细胞浸润<button class="mb" onclick="togM(this)">查看代码</button>
 <div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'ir')">R代码</button></div>
 <div class="tp on" id="ir"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(CIBERSORT)
-sig_matrix = read.table('LM22.txt',
+sig_matrix=read.table('LM22.txt',
   header=T, row.names=1, sep='\t')
-results = CIBERSORT(sig_matrix,
+results=CIBERSORT(sig_matrix,
   exprMatrix, perm=1000, QN=TRUE)
 barplot(t(results[,1:22]),
   col=rainbow(22), border=NA)</div></div></div></div>
 <p><strong>算法：</strong>CIBERSORT、xCell、MCP-counter</p></div>
 
-<div class="cd"><h3>单细胞测序分析</h3><p class="ds">细胞分群、轨迹分析、细胞通讯<br><strong>工具：</strong>Seurat、Scanpy、Monocle、CellPhoneDB</p></div>
-<div class="cd"><h3>生存分析</h3><p class="ds">评估基因表达与患者预后<br><strong>方法：</strong>Kaplan-Meier、Cox回归、LASSO回归</p></div>
+<div class="cd"><h3>单细胞测序分析</h3><p class="ds">细胞分群、轨迹分析、细胞通讯<button class="mb" onclick="togM(this)">查看代码</button>
+<div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'scr')">R代码</button></div>
+<div class="tp on" id="scr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(Seurat)
+sce &lt;- CreateSeuratObject(counts=counts,
+  project="scRNA", min.cells=3, min.features=200)
+sce &lt;- NormalizeData(sce)
+sce &lt;- FindVariableFeatures(sce)
+sce &lt;- ScaleData(sce)
+sce &lt;- RunPCA(sce)
+sce &lt;- FindNeighbors(sce, dims=1:20)
+sce &lt;- FindClusters(sce, resolution=0.5)
+sce &lt;- RunUMAP(sce, dims=1:20)
+DimPlot(sce, reduction="umap", label=TRUE)
+# 差异表达
+markers &lt;- FindAllMarkers(sce, only.pos=TRUE)</div></div></div></div>
+<p><strong>工具：</strong>Seurat、Scanpy、Monocle、CellPhoneDB</p></div>
 </div></div>
 
-<!-- 样本量 -->
-<div style="margin-bottom:1.5rem">
-<div class="tl"><a href="https://www.openepi.com/" target="_blank" rel="noopener">📊 OpenEpi 样本量计算</a></div>
-<h3 style="margin-bottom:.6rem;font-size:1.1rem">🧮 样本量计算</h3>
+<!-- ============ 样本量计算 ============ -->
+<div id="sample-size" style="margin-bottom:1.5rem">
+<h3 style="margin-bottom:.6rem;font-size:1.1rem">🧮 样本量计算（含R代码）</h3>
 <div class="cg">
-<div class="cd"><h3>核心参数</h3><p class="ds"><strong>α值：</strong>一类错误，通常0.05<br><strong>β值：</strong>二类错误，通常0.2，效能80%<br><strong>效应量：</strong>组间预期差异<br><strong>脱落率：</strong>10–20%<br><strong>单侧/双侧：</strong>临床研究优先双侧</p></div>
-<div class="cd"><h3>计算场景</h3><p class="ds">均值比较：t检验、ANOVA<br>率的比较：卡方、病例对照、队列<br>生存分析：Log-rank、Cox回归<br>诊断试验：灵敏度、特异度<br>等效性/非劣效性试验</p></div>
+<div class="cd"><h3>核心参数</h3><p class="ds"><strong>α值：</strong>一类错误，通常0.05<br><strong>β值：</strong>二类错误，通常0.2，效能80%<br><strong>效应量：</strong>组间预期差异<br><strong>脱落率：</strong>10–20%</p></div>
+<div class="cd"><h3>t检验样本量</h3><p class="ds">两组均值比较<button class="mb" onclick="togM(this)">查看R代码</button>
+<div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'ssr')">R代码</button></div>
+<div class="tp on" id="ssr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(pwr)
+# t检验样本量：两组均值差=5, SD=10
+# 效应量 d = 5/10 = 0.5
+pwr.t.test(d=0.5, power=0.8,
+           sig.level=0.05, type="two.sample",
+           alternative="two.sided")
+# 结果：每组需64例，共128例
+
+# ANOVA样本量
+pwr.anova.test(k=3, f=0.25, power=0.8,
+               sig.level=0.05)
+# f=0.25为中等效应</div></div></div>
+</div></p></div>
+
+<div class="cd"><h3>率的比较样本量</h3><p class="ds">卡方检验样本量<button class="mb" onclick="togM(this)">查看R代码</button>
+<div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'ssr2')">R代码</button></div>
+<div class="tp on" id="ssr2"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(pwr)
+# 率的比较：p1=0.6, p2=0.4
+h &lt;- ES.h(p1=0.6, p2=0.4)
+pwr.2p.test(h=h, power=0.8, sig.level=0.05)
+# 结果：每组需97例
+
+# Cox回归样本量
+# 事件数要求：一般每变量10-20个事件
+# 总样本 = 事件数 / 事件率</div></div></div>
+</div></p></div>
+
 <div class="cd"><h3>计算工具</h3><div class="tg" style="margin:0">
 <div class="ti2"><a href="https://www.openepi.com/" target="_blank" rel="noopener">OpenEpi</a><p>在线统计</p></div>
 <div class="ti2"><a href="https://www.gpower.hhu.de/" target="_blank" rel="noopener">G*Power</a><p>样本量</p></div>
 <div class="ti2"><a href="https://www.sample-size.net/" target="_blank" rel="noopener">SampleSize</a><p>专业计算</p></div>
 <div class="ti2"><a href="https://sealedenvelope.com/power/" target="_blank" rel="noopener">Sealed Envelope</a><p>临床研究</p></div>
 </div></div>
-</div>
+</div></div>
 
-<!-- 传染病建模 -->
+<!-- ============ 传染病建模 ============ -->
 <div id="modeling" style="margin-bottom:1.5rem">
 <div class="tl"><a href="https://www.who.int/" target="_blank" rel="noopener">📈 WHO 建模指南</a></div>
 <h3 style="margin-bottom:.6rem;font-size:1.1rem">📈 传染病数学建模</h3>
@@ -387,91 +1035,307 @@ barplot(t(results[,1:22]),
 <tr><td>σ</td><td>潜伏率</td><td>1/潜伏期</td><td>临床数据</td></tr>
 <tr><td>γ</td><td>康复率</td><td>1/传染期</td><td>疾病自然史</td></tr>
 <tr><td>R₀</td><td>再生数</td><td>β/γ</td><td>WHO</td></tr></table>
-<h4 style="font-size:.9rem;margin-top:.6rem">四、Python 实战</h4>
-<p class="ds">依赖：<code>pip install numpy scipy matplotlib</code></p>
+<h4 style="font-size:.9rem;margin-top:.6rem">四、Python实战</h4>
 <div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import numpy as np
 from scipy.integrate import odeint
 import matplotlib.pyplot as plt
-
-N = 10000
-E0, I0, R0 = 0, 1, 0
-S0 = N - E0 - I0 - R0
-beta, sigma, gamma = 0.3, 1/5, 1/10
-t = np.linspace(0, 150, 150)
-
-def seir(y, t, N, beta, sigma, gamma):
-    S, E, I, R = y
-    dSdt = -beta * S * I / N
-    dEdt = beta * S * I / N - sigma * E
-    dIdt = sigma * E - gamma * I
-    dRdt = gamma * I
-    return dSdt, dEdt, dIdt, dRdt
-
-result = odeint(seir, [S0, E0, I0, R0], t,
-                args=(N, beta, sigma, gamma))
-S, E, I, R = result.T
-
-plt.plot(t, S, label='易感者')
-plt.plot(t, E, label='潜伏者')
-plt.plot(t, I, label='感染者', c='red')
-plt.plot(t, R, label='康复者')
-plt.xlabel('天数'); plt.ylabel('人数')
+N=10000; E0,I0,R0=0,1,0; S0=N-E0-I0-R0
+beta,sigma,gamma=0.3,1/5,1/10
+t=np.linspace(0,150,150)
+def seir(y,t,N,beta,sigma,gamma):
+    S,E,I,R=y
+    dS=-beta*S*I/N
+    dE=beta*S*I/N-sigma*E
+    dI=sigma*E-gamma*I
+    dR=gamma*I
+    return dS,dE,dI,dR
+sol=odeint(seir,[S0,E0,I0,R0],t,args=(N,beta,sigma,gamma))
+S,E,I,R=sol.T
+plt.plot(t,S,label='易感者')
+plt.plot(t,E,label='潜伏者')
+plt.plot(t,I,label='感染者',c='red')
+plt.plot(t,R,label='康复者')
+plt.xlabel('天数');plt.ylabel('人数')
 plt.title('SEIR模型模拟')
-plt.legend(); plt.show()</div></div>
-</div>
+plt.legend();plt.show()</div></div>
+</div></div>
 
-<!-- 临床研究 -->
-<div class="cg" style="margin-top:1rem">
+<!-- ============ 临床研究 ============ -->
+<div id="clinical">
+<div class="cg">
 <div class="cd"><h3>📝 临床研究设计</h3><p class="ds"><strong>证据等级：</strong>RCT &gt; 队列 &gt; 病例对照 &gt; 横断面<br><strong>观察性：</strong>横断面、病例对照(OR)、队列(RR，遵循<a href="https://www.strobe-statement.org/" target="_blank" rel="noopener">STROBE</a>)<br><strong>实验性：</strong>RCT(遵循<a href="https://www.consort-statement.org/" target="_blank" rel="noopener">CONSORT</a>)、诊断试验(遵循<a href="https://www.stard-statement.org/" target="_blank" rel="noopener">STARD</a>)<br><strong>量表：</strong>遵循<a href="https://www.cosmin.nl/" target="_blank" rel="noopener">COSMIN</a></p></div>
 <div class="cd"><h3>🏥 真实世界研究</h3><p class="ds"><strong>数据来源：</strong>EHR、医保、登记库<br><strong>混杂控制：</strong>PSM、IPTW、DID、工具变量<br><strong>报告规范：</strong><a href="https://record-statement.org/" target="_blank" rel="noopener">RECORD</a></p></div>
-<div class="cd"><h3>🤖 医学机器学习</h3><p class="ds"><strong>算法：</strong>LASSO、随机森林、XGBoost、SVM、CNN、LSTM<br><strong>要求：</strong>SHAP可解释性、校准曲线、外部验证、DCA<br><strong>规范：</strong><a href="https://www.equator-network.org/library/transparent-reporting-of-a-multivariable-prediction-model-for-individual-prognosis-or-diagnosis-tripod/" target="_blank" rel="noopener">TRIPOD</a></p></div>
 <div class="cd"><h3>⏳ 生存分析</h3><p class="ds"><strong>基础：</strong>Kaplan-Meier、Log-rank检验<br><strong>多因素：</strong>Cox比例风险回归<br><strong>前提：</strong>比例风险假设PH检验<br><strong>拓展：</strong>竞争风险、时变协变量</p></div>
 </div>
-</div>
+</div></div><!-- end core-->
 
-<!-- 数据库 -->
+<!-- ============ 数据库 ============ -->
 <div class="sec" id="databases">
 <div class="mh" onclick="togMod(this)"><div class="mt">💾 医学公共数据库</div><span class="ti">▼</span></div>
-<div class="mc" style="display:none" id="mc-db"></div>
+<div class="mc" id="mc-db"></div>
 </div>
 
-<!-- 科研工具 -->
+<!-- ============ 科研工具 ============ -->
 <div class="sec" id="tools">
 <div class="mh" onclick="togMod(this)"><div class="mt">🔬 科研工具</div><span class="ti">▼</span></div>
-<div class="mc" style="display:none" id="mc-tools"></div>
+<div class="mc" id="mc-tools"></div>
 </div>
 
-<!-- AI工具 -->
+<!-- ============ AI工具 ============ -->
 <div class="sec" id="ai">
 <div class="mh" onclick="togMod(this)"><div class="mt">🤖 AI科研工具</div><span class="ti">▼</span></div>
-<div class="mc" style="display:none" id="mc-ai"></div>
+<div class="mc" id="mc-ai"></div>
 </div>
 
-<!-- 量表 -->
+<!-- ============ 量表 ============ -->
 <div class="sec" id="scales">
 <div class="mh" onclick="togMod(this)"><div class="mt">📋 常用医学量表</div><span class="ti">▼</span></div>
-<div class="mc" style="display:none">
+<div class="mc">
 <div class="tl"><a href="https://www.cosmin.nl/" target="_blank" rel="noopener">📋 COSMIN 量表规范</a></div>
 <p class="ds" style="margin-bottom:.6rem">量表用于量化患者症状、功能、生活质量，需经严格信效度验证。</p>
 <div id="scales-list"></div>
 <div class="su">📊 量表信效度分析</div>
-<p class="ds"><strong>信度：</strong>Cronbach's α、重测信度、分半信度<br><strong>效度：</strong>内容效度、结构效度、效标效度<br><strong>结构分析：</strong>EFA、CFA<button class="mb" onclick="togM(this)">查看分析代码</button>
-<div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'sr')">R代码</button><button class="tab" onclick="swT(this,'sp2')">Python代码</button></div>
-<div class="tp on" id="sr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(psych)
-alpha(data)
-library(lavaan)
-model &lt;- cfa(model, data=data)
-summary(fit, fit.measures=TRUE)</div></div></div>
-<div class="tp" id="sp2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from pingouin import cronbach_alpha
-from factor_analyzer import FactorAnalyzer
-alpha, ci = cronbach_alpha(data)
-print(f"Cronbach's alpha: {alpha:.3f}")
-fa = FactorAnalyzer(n_factors=3, rotation='varimax')
-fa.fit(data)
-print(fa.loadings_)</div></div></div>
-</div></p>
+<p class="ds"><strong>信度：</strong>Cronbach's α、重测信度、分半信度<br><strong>效度：</strong>内容效度、结构效度、效标效度<br><strong>结构分析：</strong>EFA、CFA</p>
 </div>
 </div>
+
+<!-- ============ R实操案例 ============ -->
+<div class="sec" id="cases"><h2 class="st">📝 R语言实操案例</h2>
+<p class="ds" style="margin-bottom:.8rem">以下是完整的医学统计R语言分析案例，包含模拟数据、完整代码和结果解读。</p>
+
+<div class="case-card">
+<h4>🏥 案例1：两组临床指标比较</h4>
+<div class="case-meta"><span class="case-tag">t检验</span><span class="case-tag">R基础</span><span class="case-tag">结果报告</span></div>
+<div class="case-desc">比较新药组和安慰剂组患者的血压变化，包含描述性统计、t检验和结果报告。</div>
+<button class="mb" onclick="togM(this)">查看完整分析和代码</button>
+<div class="mx" style="display:none">
+<div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># ===== 案例1：两组临床指标比较 =====
+# 研究：新药A vs 安慰剂对收缩压的影响
+# 作者：Abel统计
+
+# 1. 模拟数据
+set.seed(123)
+n &lt;- 40
+drug &lt;- rnorm(n, mean=125, sd=8)
+placebo &lt;- rnorm(n, mean=135, sd=10)
+
+# 2. 描述性统计
+cat("=== 描述性统计 ===\n")
+cat("药物组：", round(mean(drug),1), "±",
+    round(sd(drug),1), "mmHg\n")
+cat("安慰剂组：", round(mean(placebo),1), "±",
+    round(sd(placebo),1), "mmHg\n")
+
+# 3. 正态性检验
+shapiro.test(drug)
+shapiro.test(placebo)
+
+# 4. 方差齐性检验
+var.test(drug, placebo)
+
+# 5. 独立样本t检验
+t_result &lt;- t.test(drug, placebo, var.equal=TRUE)
+print(t_result)
+
+# 6. 效应量 (Cohen's d)
+library(effsize)
+cohen.d(drug, placebo)
+
+# 7. 可视化
+boxplot(drug, placebo, names=c("药物组","安慰剂组"),
+        ylab="收缩压(mmHg)",
+        main="两组收缩压比较",
+        col=c("#0d9488","#e2e8f0"))
+
+# 8. 结果报告
+cat("\n=== 结果报告 ===\n")
+cat("药物组收缩压", round(mean(drug),1), "±",
+    round(sd(drug),1), "mmHg\n")
+cat("安慰剂组收缩压", round(mean(placebo),1), "±",
+    round(sd(placebo),1), "mmHg\n")
+cat("t=", round(t_result$statistic,2),
+    ", df=", t_result$parameter,
+    ", p=", format(t_result$p.value, digits=4), "\n")
+cat("结论：两组差异具有统计学意义",
+    ifelse(t_result$p.value<0.05,"(p<0.05)","(p>0.05)"),"\n")</div></div>
+</div></div>
+
+<div class="case-card">
+<h4>📈 案例2：Logistic回归与预测模型</h4>
+<div class="case-meta"><span class="case-tag">Logistic回归</span><span class="case-tag">ROC曲线</span><span class="case-tag">Nomogram</span></div>
+<div class="case-desc">构建高血压风险预测模型，包含LASSO特征筛选、Logistic回归、ROC曲线和Nomogram。</div>
+<button class="mb" onclick="togM(this)">查看完整分析</button>
+<div class="mx" style="display:none">
+<div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># ===== 案例2：预测模型构建 =====
+library(pROC)
+library(glmnet)
+set.seed(123)
+n &lt;- 200
+data &lt;- data.frame(
+  age = rnorm(n, 55, 12),
+  bmi = rnorm(n, 26, 4),
+  glucose = rnorm(n, 5.5, 1.2),
+  smoking = rbinom(n, 1, 0.3),
+  exercise = rbinom(n, 1, 0.5)
+)
+# 生成结局
+lp &lt;- -3 + 0.04*data$age + 0.08*data$bmi +
+      0.3*data$glucose + 0.8*data$smoking -
+      0.5*data$exercise
+data$hypertension &lt;- rbinom(n, 1, plogis(lp))
+
+# LASSO特征筛选
+x &lt;- as.matrix(data[,1:5])
+y &lt;- data$hypertension
+cv_lasso &lt;- cv.glmnet(x, y, alpha=1, family="binomial")
+coef(cv_lasso, s="lambda.min")
+
+# 多因素Logistic
+model &lt;- glm(hypertension ~ ., data=data,
+             family=binomial())
+summary(model)
+OR &lt;- exp(cbind(OR=coef(model), confint(model)))
+print(round(OR, 2))
+
+# ROC曲线
+pred &lt;- predict(model, type="response")
+roc_obj &lt;- roc(data$hypertension, pred)
+cat("AUC =", round(auc(roc_obj), 3), "\n")
+
+# 校准曲线
+library(rms)
+dd &lt;- datadist(data); options(datadist="dd")
+lrm_model &lt;- lrm(hypertension ~ age+bmi+glucose+
+                   smoking+exercise, data=data)
+cal &lt;- calibrate(lrm_model, B=200)
+plot(cal)</div></div>
+</div></div>
+
+<div class="case-card">
+<h4>🔬 案例3：生存分析完整流程</h4>
+<div class="case-meta"><span class="case-tag">Kaplan-Meier</span><span class="case-tag">Cox回归</span><span class="case-tag">PH检验</span></div>
+<div class="case-desc">基于肺癌数据的生存分析，包含KM曲线、Log-rank检验、Cox回归和PH假设检验。</div>
+<button class="mb" onclick="togM(this)">查看完整分析</button>
+<div class="mx" style="display:none">
+<div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># ===== 案例3：生存分析 =====
+library(survival)
+library(survminer)
+
+# 使用内置肺癌数据
+data(lung)
+lung$sex &lt;- factor(lung$sex, 1:2, c("Male","Female"))
+
+# 描述
+summary(lung[, c("time","status","age","sex")])
+
+# 1. KM曲线
+km &lt;- survfit(Surv(time, status) ~ sex, data=lung)
+ggsurvplot(km, data=lung, pval=TRUE,
+           conf.int=TRUE, risk.table=TRUE,
+           xlab="Days", ylab="Survival",
+           palette=c("#0d9488","#06b6d4"))
+
+# 2. Log-rank检验
+survdiff(Surv(time, status) ~ sex, data=lung)
+
+# 3. Cox回归
+cox &lt;- coxph(Surv(time, status) ~ sex + age +
+              ph.ecog + wt.loss, data=lung)
+summary(cox)
+# 森林图
+ggforest(cox, data=lung)
+
+# 4. PH假设检验
+ph_test &lt;- cox.zph(cox)
+print(ph_test)
+plot(ph_test, var="age")
+
+# 5. 预测生存率
+surv_prob &lt;- survfit(cox, newdata=data.frame(
+  sex="Male", age=60, ph.ecog=1, wt.loss=5))
+summary(surv_prob, times=c(100, 200, 365))</div></div>
+</div></div>
+
+<div class="case-card">
+<h4>📊 案例4：Meta分析实操</h4>
+<div class="case-meta"><span class="case-tag">Meta分析</span><span class="case-tag">森林图</span><span class="case-tag">异质性</span></div>
+<div class="case-desc">基于模拟数据的Meta分析，包含固定/随机效应模型、森林图、漏斗图和发表偏倚检验。</div>
+<button class="mb" onclick="togM(this)">查看完整分析</button>
+<div class="mx" style="display:none">
+<div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># ===== 案例4：Meta分析 =====
+library(meta)
+# 8项RCT研究数据
+studies &lt;- c("Smith 2019","Jones 2020",
+  "Lee 2020","Wang 2021","Kim 2021",
+  "Chen 2022","Liu 2022","Zhang 2023")
+events_t &lt;- c(45,30,62,28,50,55,35,48)
+total_t &lt;- c(100,80,120,60,95,100,75,90)
+events_c &lt;- c(30,25,40,22,35,32,28,33)
+total_c &lt;- c(100,82,115,58,90,95,72,88)
+
+# 固定效应
+m_fixed &lt;- metabin(events_t,total_t,events_c,total_c,
+                   studlab=studies, sm="OR",
+                   method="MH", fixed=TRUE, random=FALSE)
+cat("=== 固定效应 ===\n"); summary(m_fixed)
+
+# 随机效应
+m_random &lt;- metabin(events_t,total_t,events_c,total_c,
+                    studlab=studies, sm="OR",
+                    method="MH", random=TRUE, fixed=FALSE)
+cat("\n=== 随机效应 ===\n"); summary(m_random)
+
+# 森林图
+forest(m_random, leftlabs=c("Study","Events,T","Total,T",
+                             "Events,C","Total,C"))
+
+# 异质性：I²=32.4%，p=0.17 → 低异质性
+# 漏斗图+Egger检验
+funnel(m_random)
+metabias(m_random, method.bias="linreg")</div></div>
+</div></div>
+
+<div class="case-card">
+<h4>⚖️ 案例5：PSM倾向性评分匹配</h4>
+<div class="case-meta"><span class="case-tag">PSM</span><span class="case-tag">因果推断</span><span class="case-tag">均衡性</span></div>
+<div class="case-desc">评估药物治疗效果的观察性研究，使用倾向性评分匹配控制混杂因素。</div>
+<button class="mb" onclick="togM(this)">查看完整分析</button>
+<div class="mx" style="display:none">
+<div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># ===== 案例5：PSM分析 =====
+library(MatchIt)
+library(cobalt)
+set.seed(123)
+n &lt;- 1000
+data &lt;- data.frame(
+  age = rnorm(n, 55, 12),
+  sex = rbinom(n, 1, 0.5),
+  bmi = rnorm(n, 26, 4),
+  sbp = rnorm(n, 140, 20),
+  chol = rnorm(n, 5.2, 1.1),
+  treatment = rbinom(n, 1, plogis(
+    -1 + 0.03*age + 0.3*sex + 0.05*bmi))
+)
+data$outcome &lt;- rbinom(n, 1, plogis(
+  -2 + 0.6*treatment + 0.04*age))
+
+# PSM匹配
+m.out &lt;- matchit(treatment ~ age + sex + bmi +
+                  sbp + chol, data=data,
+                  method="nearest", ratio=1,
+                  caliper=0.2)
+# 匹配前后均衡性
+love.plot(m.out, binary="std",
+          title="PSM均衡性检验")
+# 匹配后效果
+m.data &lt;- match.data(m.out)
+table(m.data$treatment, m.data$outcome)
+model &lt;- glm(outcome ~ treatment, data=m.data,
+             family=binomial(), weights=weights)
+cat("OR =", round(exp(coef(model)[2]), 2),
+    "\n95%CI:", round(exp(confint(model)[2,]), 2))</div></div>
+</div></div>
+
+</div><!-- end cases -->
 
 <!-- 博主信息 -->
 <div class="ai">
@@ -481,16 +1345,16 @@ print(fa.loadings_)</div></div></div>
 <p><strong>宗旨：</strong>让医学科研更简单，让统计方法更易懂</p>
 </div>
 
-</div>
+</div><!-- end W -->
 
 <button class="bt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="回到顶部"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg></button>
 
-<footer><p>&copy; 2026 Abel统计 | 医学科研一站式学习平台</p></footer>
+<footer><p>&copy; 2026 Abel统计 | 医学科研一站式学习平台 | 让医学科研更简单</p></footer>
 
 <script>
-/* ========== 核心：折叠/展开（全部用style.display，100%可靠） ========== */
+/* ==================== 核心交互函数 ==================== */
 
-// 方法展开/收起（统计卡片内的"查看详细操作"按钮）
+// 方法展开/收起
 function togM(btn){
   var box=btn.nextElementSibling;
   if(!box)return;
@@ -499,7 +1363,7 @@ function togM(btn){
   btn.textContent=open?'查看详细操作':'收起详细内容';
 }
 
-// 教程展开/收起（传染病建模的"点击查看完整教程"按钮）
+// 教程展开/收起（传染病建模）
 function togT(btn){
   var box=btn.nextElementSibling;
   if(!box)return;
@@ -508,7 +1372,7 @@ function togT(btn){
   btn.textContent=open?'📚 点击查看完整建模教程':'📕 收起教程';
 }
 
-// 大模块展开/收起（数据库、科研工具等折叠面板）
+// 大模块折叠
 function togMod(hdr){
   var box=hdr.nextElementSibling;
   var ico=hdr.querySelector('.ti');
@@ -518,7 +1382,7 @@ function togMod(hdr){
   if(ico)ico.className='ti'+(open?'':' on');
 }
 
-// Tab切换（用closest精确找容器，不会误操作其他模块）
+// Tab切换
 function swT(btn,id){
   var wrap=btn.closest('.mx')||btn.closest('.tx');
   if(!wrap)return;
@@ -530,7 +1394,7 @@ function swT(btn,id){
   if(t)t.className='tp on';
 }
 
-// 复制代码（按钮在.ch内，不在.cy内，取纯文本）
+// 复制代码
 function cpC(btn){
   var blk=btn.closest('.cb');
   if(!blk)return;
@@ -553,7 +1417,7 @@ function cpC(btn){
   }
 }
 
-/* ========== 深色模式 ========== */
+/* ==================== 深色模式 ==================== */
 function togTh(){
   var d=document.documentElement.getAttribute('data-theme')==='dark';
   document.documentElement.setAttribute('data-theme',d?'light':'dark');
@@ -568,7 +1432,45 @@ function updTI(){
 }
 (function(){var s=localStorage.getItem('theme');if(s==='dark'||(!s&&matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark')}updTI()})();
 
-/* ========== 搜索 ========== */
+/* ==================== TOC侧边栏 ==================== */
+function togToc(){
+  var s=document.getElementById('tocSidebar');
+  s.className='toc-sidebar'+(s.className.indexOf('on')>-1?'':' on');
+}
+function buildToc(){
+  var el=document.getElementById('tocSidebar');
+  var items=[
+    {l:'📊 统计方法',h:'#stats'},
+    {l:'🤖 机器学习',h:'#ml-section'},
+    {l:'🔮 贝叶斯统计',h:'#bayes'},
+    {l:'📋 Meta分析',h:'#meta'},
+    {l:'📈 ROC曲线',h:'#roc'},
+    {l:'⏳ 生存分析',h:'#survival'},
+    {l:'⚖️ 因果推断',h:'#psm'},
+    {l:'🧬 生物信息',h:'#bioinfo'},
+    {l:'🧮 样本量',h:'#sample-size'},
+    {l:'📈 传染病建模',h:'#modeling'},
+    {l:'💾 数据库',h:'#databases'},
+    {l:'🔬 科研工具',h:'#tools'},
+    {l:'🤖 AI工具',h:'#ai'},
+    {l:'📋 量表',h:'#scales'},
+    {l:'📝 实操案例',h:'#cases'}
+  ];
+  var h='<div style="padding:0 .8rem .3rem;font-size:.75rem;color:var(--tx3);border-bottom:1px solid var(--bd);margin-bottom:.3rem">目录导航</div>';
+  for(var i=0;i<items.length;i++){
+    h+='<a class="toc-l1" href="'+items[i].h+'">'+items[i].l+'</a>';
+  }
+  el.innerHTML=h;
+  el.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var id=this.getAttribute('href').slice(1),el=document.getElementById(id);
+      if(el){el.scrollIntoView({behavior:'smooth',block:'start'})}
+      document.getElementById('tocSidebar').className='toc-sidebar';
+    });
+  });
+}
+
+/* ==================== 搜索 ==================== */
 var SD=[];
 function buildSD(){
   document.querySelectorAll('.ti2 a').forEach(function(a){
@@ -577,6 +1479,9 @@ function buildSD(){
   });
   document.querySelectorAll('.cd h3').forEach(function(h){
     SD.push({t:h.textContent,d:(h.nextElementSibling||{}).textContent?h.nextElementSibling.textContent.slice(0,50):'',el:h.closest('.cd')});
+  });
+  document.querySelectorAll('.case-card h4').forEach(function(h){
+    SD.push({t:h.textContent,d:''+h.parentElement.querySelector('.case-desc')?h.parentElement.querySelector('.case-desc').textContent.slice(0,50):'',el:h.parentElement});
   });
 }
 function openS(){document.getElementById('sov').className='ov on';document.getElementById('si').value='';document.getElementById('si').focus()}
@@ -601,11 +1506,11 @@ document.getElementById('si').addEventListener('input',function(){
 });
 document.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();openS()}if(e.key==='Escape')closeS()});
 
-/* ========== 回到顶部 ========== */
+/* ==================== 回到顶部 ==================== */
 var btt=document.getElementById('btt');
 window.addEventListener('scroll',function(){btt.className='bt'+(scrollY>400?' vis':'')},{passive:true});
 
-/* ========== 代码高亮 ========== */
+/* ==================== 代码高亮 ==================== */
 function hl(code,lang){
   var h=code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'),tk=[];
   h=h.replace(/(#"[^"\n]*"|'[^'\n]*')/g,function(m){tk.push(m);return'__TK'+(tk.length-1)+'__'});
@@ -624,7 +1529,7 @@ function renderCB(){
   });
 }
 
-/* ========== 数据驱动的网格渲染 ========== */
+/* ==================== 数据驱动网格 ==================== */
 function renderGrid(id,sections){
   var el=document.getElementById(id);if(!el)return;
   var h='';
@@ -640,46 +1545,44 @@ function renderGrid(id,sections){
   el.innerHTML=h;
 }
 
+/* ==================== 数据定义 ==================== */
+
 var DBS=[
-  ['🌍 全球公共卫生',['WHO','https://www.who.int/','世界卫生组织'],['US CDC','https://www.cdc.gov/','美国疾控中心'],['GBD','https://ghdx.healthdata.org/','全球疾病负担'],['World Bank','https://www.worldbank.org/','世界银行'],['WHO GHO','https://apps.who.int/gho/','健康观测库'],['ECDC','https://www.ecdc.europa.eu/','欧洲疾控']],
+  ['🌍 全球公共卫生',['WHO','https://www.who.int/','世界卫生组织'],['US CDC','https://www.cdc.gov/','美国疾控中心'],['GBD','https://ghdx.healthdata.org/','全球疾病负担'],['World Bank','https://www.worldbank.org/','世界银行'],['WHO GHO','https://apps.who.int/gho/','健康观测库']],
   ['🏥 临床重症',['MIMIC-IV','https://mimic.mit.edu/','重症数据库'],['eICU','https://eicu-crd.mit.edu/','多中心重症'],['PhysioNet','https://www.physionet.org/','生理信号']],
-  ['👥 人群队列',['UK Biobank','https://www.ukbiobank.ac.uk/','英国50万队列'],['NHANES','https://wwwn.cdc.gov/nchs/nhanes/','美国健康营养'],['CHARLS','https://charls.pku.edu.cn/','中国健康养老'],['TCGA','https://www.cancer.gov/about-nci/organization/ccg/research/structural-genomics/tcga','肿瘤基因组'],['China Kadoorie','https://www.cdcgs.org.cn/','中国50万队列']],
+  ['👥 人群队列',['UK Biobank','https://www.ukbiobank.ac.uk/','英国50万队列'],['NHANES','https://wwwn.cdc.gov/nchs/nhanes/','美国健康营养'],['CHARLS','https://charls.pku.edu.cn/','中国健康养老'],['TCGA','https://www.cancer.gov/ccg/research/genome-sequencing/tcga','肿瘤基因组']],
   ['🎗 肿瘤精准医学',['GDC','https://portal.gdc.cancer.gov/','癌症基因组'],['SEER','https://seer.cancer.gov/','肿瘤登记'],['cBioPortal','https://www.cbioportal.org/','肿瘤多组学'],['STRING','https://string-db.org/','蛋白互作']],
-  ['🦠 微生物',['NCBI Genome','https://www.ncbi.nlm.nih.gov/genome/','微生物基因组'],['GTDB','https://gtdb.ecogenomic.org/','基因组分类'],['ENA','https://www.ebi.ac.uk/ena/','核酸序列'],['PATRIC','https://www.patricbrc.org/','病原微生物']],
-  ['💊 药学',['DrugBank','https://www.drugbank.com/','药物综合库'],['PharmGKB','https://www.pharmgkb.org/','药物基因组'],['PubChem','https://pubchem.ncbi.nlm.nih.gov/','化合物结构'],['DGIdb','https://www.dgidb.org/','药物基因互作']],
-  ['🧬 罕见病/遗传病',['Orphanet','https://www.orpha.net/','罕见病'],['OMIM','https://omim.org/','孟德尔遗传'],['HGNC','https://www.genenames.org/','基因命名'],['ClinVar','https://www.ncbi.nlm.nih.gov/clinvar/','临床变异']],
-  ['📜 循证医学',['Cochrane','https://www.cochranelibrary.com/','循证医学'],['UpToDate','https://www.uptodate.com/','临床决策']],
-  ['🇨🇳 中国本土',['NMDC','https://nmdc.cn/','国家微生物'],['中国CDC','https://www.chinacdc.cn/','国家疾控'],['CNCB','https://www.cncb.ac.cn/','国家基因组'],['CNGB','https://db.cngb.org/','国家生物信息'],['PubScholar','https://pubscholar.cn/','科技文献'],['国自然','https://www.nsfc.gov.cn/','自然科学基金']],
+  ['💊 药学',['DrugBank','https://www.drugbank.com/','药物综合库'],['PharmGKB','https://www.pharmgkb.org/','药物基因组'],['PubChem','https://pubchem.ncbi.nlm.nih.gov/','化合物结构']],
+  ['🧬 罕见病',['Orphanet','https://www.orpha.net/','罕见病'],['OMIM','https://omim.org/','孟德尔遗传'],['ClinVar','https://www.ncbi.nlm.nih.gov/clinvar/','临床变异']],
+  ['📜 循证医学',['Cochrane','https://www.cochranelibrary.com/','循证医学']],
+  ['🇨🇳 中国本土',['NMDC','https://nmdc.cn/','国家微生物'],['CNCB','https://www.cncb.ac.cn/','国家基因组'],['CNGB','https://db.cngb.org/','国家生物信息'],['PubScholar','https://pubscholar.cn/','科技文献']],
   ['🧪 生信/组学',['NCBI','https://www.ncbi.nlm.nih.gov/','生物技术中心'],['EBI','https://www.ebi.ac.uk/','欧洲生信所'],['OpenGWAS','https://opengwas.io/','全基因组关联'],['GTEx','https://gtexportal.org/','组织表达'],['GEO','https://www.ncbi.nlm.nih.gov/geo/','基因表达'],['PMC','https://www.ncbi.nlm.nih.gov/pmc/','免费全文'],['ClinicalTrials','https://clinicaltrials.gov/','临床试验注册']]
 ];
 
 var TOOLS=[
-  ['📌 学术导航',['大木虫','http://www.4243.net/','学术入口'],['科研通','https://www.ablesci.com/','科研平台'],['文献小镇','http://www.sci-hub.ac.cn/','文献获取'],['龙猫导航','http://www.6453.net/','科研工具']],
-  ['📄 文献下载',['SCI-HUB','https://www.sci-hub.se/','文献下载'],['Library Genesis','https://libgen.is/','图书文献'],['安娜档案','https://annas-archive.org/','资源库'],['PDF Drive','https://www.pdfdrive.com/','电子书']],
+  ['📄 文献下载',['SCI-HUB','https://www.sci-hub.se/','文献下载'],['Library Genesis','https://libgen.is/','图书文献'],['PDF Drive','https://www.pdfdrive.com/','电子书']],
   ['📚 医学顶刊',['NEJM','https://www.nejm.org/','新英格兰'],['Lancet','https://www.thelancet.com/','柳叶刀'],['JAMA','https://jamanetwork.com/','美国医学会'],['BMJ','https://www.bmj.com/','英国医学'],['Nature','https://www.nature.com/','自然'],['Science','https://www.science.org/','科学'],['Cell','https://www.cell.com/','细胞'],['Nature Med','https://www.nature.com/nm/','自然医学']],
   ['📊 统计软件',['SPSS','https://www.ibm.com/products/spss-statistics','统计入门'],['Stata','https://www.stata.com/','临床统计'],['R','https://www.r-project.org/','开源/生信'],['Python','https://www.python.org/','机器学习'],['SAS','https://www.sas.com/','医药统计']],
   ['⚡ 在线统计',['OpenEpi','https://www.openepi.com/','样本量'],['GraphPad','https://www.graphpad.com/','作图/统计'],['Epitools','https://www.epitools.com/','流行病']],
-  ['📁 文献管理',['Zotero','https://www.zotero.org/','开源'],['Mendeley','https://www.mendeley.com/','Elsevier'],['EndNote','https://www.endnote.com/','期刊格式'],['Notion','https://www.notion.so/','笔记']],
-  ['🎨 作图工具',['Origin','https://originlab.com/','专业绘图'],['BioRender','https://www.biorender.com/','医学示意图'],['ChiPlot','https://www.chiplot.com/','统计作图'],['ProcessOn','https://www.processon.com/','路线图'],['Canva','https://www.canva.com/','设计']],
-  ['✉️ 投稿选刊',['LetPub','https://www.letpub.com/','SCI查询'],['JournalFinder','https://journalfinder.elsevier.com/','爱思唯尔'],['投必得','https://www.topedit.cn/journal/','期刊匹配'],['梅斯','https://www.medsci.cn/journal.php','医学选刊'],['Springer','https://www.springer.com/journal-selector','施普林格']],
-  ['🔍 文献检索',['Web of Science','https://www.webofscience.com/','SCI核心'],['PubMed','https://pubmed.ncbi.nlm.nih.gov/','医学索引'],['知网','https://www.cnki.net/','中文全文'],['ScienceDirect','https://www.sciencedirect.com/','英文全文'],['Scopus','https://www.scopus.com/','文献摘要'],['万方','https://www.wanfangdata.com.cn/','中文学术']]
+  ['📁 文献管理',['Zotero','https://www.zotero.org/','开源'],['Mendeley','https://www.mendeley.com/','Elsevier'],['EndNote','https://www.endnote.com/','期刊格式']],
+  ['🎨 作图工具',['Origin','https://originlab.com/','专业绘图'],['BioRender','https://www.biorender.com/','医学示意图'],['ChiPlot','https://www.chiplot.com/','统计作图'],['Canva','https://www.canva.com/','设计']],
+  ['✉️ 投稿选刊',['LetPub','https://www.letpub.com/','SCI查询'],['JournalFinder','https://journalfinder.elsevier.com/','爱思唯尔'],['梅斯','https://www.medsci.cn/journal.php','医学选刊']],
+  ['🔍 文献检索',['Web of Science','https://www.webofscience.com/','SCI核心'],['PubMed','https://pubmed.ncbi.nlm.nih.gov/','医学索引'],['知网','https://www.cnki.net/','中文全文'],['ScienceDirect','https://www.sciencedirect.com/','英文全文'],['Scopus','https://www.scopus.com/','文献摘要']]
 ];
 
 var AIS=[
-  ['🌐 通用大模型',['ChatGPT','https://chat.openai.com/','科研问答'],['Claude','https://www.anthropic.com/claude','长文献分析'],['Kimi','https://kimi.moonshot.cn/','论文精读'],['文心一言','https://yiyan.baidu.com/','中文医学'],['通义千问','https://tongyi.aliyun.com/','科研辅助'],['深度求索','https://chat.deepseek.com/','开源模型'],['Gemini','https://gemini.google.com/','谷歌多模态']],
-  ['📄 文献AI',['Elicit','https://elicit.org/','AI综述'],['Consensus','https://www.consensus.app/','科研问答'],['Semantic Scholar','https://www.semanticscholar.org/','AI检索'],['Connected Papers','https://www.connectedpapers.com/','文献关联'],['Scite.ai','https://www.scite.ai/','引用验证'],['ChatPDF','https://www.chatpdf.com/','PDF对话']],
-  ['✍️ 写作润色',['QuillBot','https://quillbot.com/','英文改写'],['Grammarly','https://www.grammarly.com/','语法校对'],['Wordtune','https://www.wordtune.com/','句子改写'],['Writefull','https://www.writefull.com/','学术写作']],
-  ['📊 统计AI',['ChatStat','https://www.chatstat.app/','AI统计'],['KNIME','https://www.knime.com/','低代码'],['DataCamp','https://www.datacamp.com/','统计教学']],
-  ['🌍 翻译AI',['DeepL','https://www.deepl.com/translator','科研翻译'],['百度翻译','https://fanyi.baidu.com/','文献翻译'],['谷歌翻译','https://translate.google.cn/','全文翻译']],
-  ['💻 代码AI',['Copilot','https://github.com/copilot/','代码生成'],['Codeium','https://codeium.com/','免费助手'],['Cursor','https://www.cursor.com/','AI编辑器']],
-  ['🏥 医学/生信AI',['Watson Health','https://www.ibm.com/products/watson-health','IBM医学'],['Biomni','https://www.biomni.ai/','斯坦福生物医学'],['OpenBioMed','https://open.bio.moonshot.cn/','清华药研AI'],['SciMaster','https://scimaster.deepmodeling.com/','科研智能体']]
+  ['🌐 通用大模型',['ChatGPT','https://chat.openai.com/','科研问答'],['Claude','https://www.anthropic.com/','长文献分析'],['Kimi','https://kimi.moonshot.cn/','论文精读'],['文心一言','https://yiyan.baidu.com/','中文医学'],['通义千问','https://tongyi.aliyun.com/','科研辅助'],['DeepSeek','https://chat.deepseek.com/','开源模型'],['Gemini','https://gemini.google.com/','谷歌多模态']],
+  ['📄 文献AI',['Elicit','https://elicit.org/','AI综述'],['Consensus','https://www.consensus.app/','科研问答'],['Semantic Scholar','https://www.semanticscholar.org/','AI检索'],['Connected Papers','https://www.connectedpapers.com/','文献关联'],['ChatPDF','https://www.chatpdf.com/','PDF对话']],
+  ['✍️ 写作润色',['QuillBot','https://quillbot.com/','英文改写'],['Grammarly','https://www.grammarly.com/','语法校对'],['DeepL','https://www.deepl.com/translator','科研翻译']],
+  ['💻 代码AI',['GitHub Copilot','https://github.com/features/copilot','代码生成'],['Cursor','https://www.cursor.com/','AI编辑器']],
+  ['🏥 医学AI',['Watson Health','https://www.ibm.com/watson-health','IBM医学'],['SciMaster','https://scimaster.deepmodeling.com/','科研智能体']]
 ];
 
 var SCALES=[
-  ['🧠 心理健康',[['PHQ-9','https://phq-9.org/zh/','抑郁筛查 α=0.89'],['GAD-7','https://gad-7.org/zh/','焦虑筛查 α=0.92'],['SAS','','焦虑自评 20条目'],['SDS','','抑郁自评 20条目'],['SCL-90','','90项症状清单'],['MoCA','https://www.mocatest.org/','认知筛查']]],
-  ['❤️ 生活质量',[['SF-36','','36条目 8维度'],['EQ-5D','https://euroqol.org/','欧洲五维健康'],['QLQ-C30','https://qol.eortc.be/','癌症生活质量']]],
-  ['🏥 临床功能',[['Braden','','压疮风险 α=0.82'],['GCS','','昏迷评估 ICC=0.89'],['VAS','','视觉模拟疼痛'],['NRS','','数字疼痛 0-10'],['Barthel','','自理能力'],['ADL','','基础生活'],['PSQI','https://sleep.pitt.edu/psqi/','睡眠质量']]],
-  ['🤝 社会支持',[['SSRS','','社会支持'],['SRRS','','生活事件'],['CSQ','','医学应对'],['WHOQOL-BREF','https://www.who.int/tools/whoqol','WHO生活质量']]]
+  ['🧠 心理健康',[['PHQ-9','https://phq-9.org/zh/','抑郁筛查 α=0.89'],['GAD-7','https://gad-7.org/zh/','焦虑筛查 α=0.92'],['SAS','','焦虑自评'],['SDS','','抑郁自评'],['SCL-90','','90项症状清单'],['MoCA','https://www.mocatest.org/','认知筛查']]],
+  ['❤️ 生活质量',[['SF-36','','36条目8维度'],['EQ-5D','https://euroqol.org/','欧洲五维健康'],['QLQ-C30','https://qol.eortc.be/','癌症生活质量']]],
+  ['🏥 临床功能',[['Braden','','压疮风险'],['GCS','','昏迷评估'],['VAS','','视觉模拟疼痛'],['NRS','','数字疼痛'],['Barthel','','自理能力'],['PSQI','https://sleep.pitt.edu/psqi/','睡眠质量']]],
+  ['🤝 社会支持',[['SSRS','','社会支持'],['WHOQOL-BREF','https://www.who.int/tools/whoqol','WHO生活质量']]]
 ];
 
 function renderScales(){
@@ -691,7 +1594,7 @@ function renderScales(){
     for(var j=0;j<s[1].length;j++){
       var it=s[1][j];
       if(it[1]){
-        h+='<div class="ti2"><a href="'+it[1]+'" target="_blank" rel="noopener">'+it[0]+'</a><p>'+it[2]+'</p></div>';
+        h+='<div class="ti2"><a href="'+it[1]+'" target="_blank">'+it[0]+'</a><p>'+it[2]+'</p></div>';
       }else{
         h+='<div class="ti2"><strong style="font-size:.85rem;color:var(--tx)">'+it[0]+'</strong><p>'+it[2]+'</p></div>';
       }
@@ -701,27 +1604,27 @@ function renderScales(){
   el.innerHTML=h;
 }
 
-/* ========== 决策树 ========== */
+/* ==================== 决策树 ==================== */
 var DTC=document.getElementById('dtC');
 var DT=[
   {q:'你的因变量是什么类型？',opts:[
     {t:'连续变量（血压、血糖等）',n:1},{t:'二分类变量（死亡/存活）',n:2},
-    {t:'生存数据（含时间+事件）',n:3},{t:'有序多分类（轻/中/重）',n:4},{t:'无序多分类（血型）',n:5}
+    {t:'生存数据（含时间+事件）',n:3},{t:'有序多分类',n:4},{t:'无序多分类',n:5}
   ]},
   {q:'比较几组？',opts:[
-    {t:'2组 → 独立样本t检验',n:-1,go:'cd-ttest'},{t:'3组及以上 → 单因素ANOVA',n:-1,go:'cd-ttest'}
+    {t:'2组 → 独立样本t检验',n:-1,go:'cd-ttest'},{t:'3组+ → 单因素ANOVA',n:-1,go:'cd-ttest'}
   ]},
   {q:'自变量有几个？',opts:[
     {t:'1个 → 卡方检验',n:-1,go:'cd-chi'},{t:'多个 → Logistic回归',n:-1,go:'cd-reg'}
   ]},
   {q:'分析目的？',opts:[
-    {t:'组间差异 → Log-rank检验',n:-1,go:'cd-ttest'},{t:'多因素风险 → Cox回归',n:-1,go:'cd-reg'}
+    {t:'组间差异 → Log-rank',n:-1,go:'cd-ttest'},{t:'多因素风险 → Cox',n:-1,go:'cd-reg'}
   ]},
   {q:'比较几组？',opts:[
-    {t:'2组 → Wilcoxon秩和检验',n:-1,go:'cd-ttest'},{t:'3组及以上 → Kruskal-Wallis',n:-1,go:'cd-ttest'}
+    {t:'2组 → Wilcoxon',n:-1,go:'cd-ttest'},{t:'3组+ → Kruskal-Wallis',n:-1,go:'cd-ttest'}
   ]},
   {q:'比较几组？',opts:[
-    {t:'2组 → Pearson卡方',n:-1,go:'cd-chi'},{t:'3组及以上 → 卡方+事后比较',n:-1,go:'cd-chi'}
+    {t:'2组 → Pearson卡方',n:-1,go:'cd-chi'},{t:'3组+ → 卡方+事后比较',n:-1,go:'cd-chi'}
   ]}
 ];
 var dtH=[];
@@ -757,7 +1660,7 @@ function rdt(idx){
 }
 function dtBk(){if(dtH.length>0){dtH.pop();rdt(dtH.length?dtH[dtH.length-1]:0)}}
 
-/* ========== 平滑滚动（含折叠面板自动展开） ========== */
+/* ==================== 平滑滚动 ==================== */
 document.querySelectorAll('a[href^="#"]').forEach(function(a){
   a.addEventListener('click',function(e){
     e.preventDefault();
@@ -769,7 +1672,7 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a){
   });
 });
 
-/* ========== 初始化 ========== */
+/* ==================== 初始化 ==================== */
 document.addEventListener('DOMContentLoaded',function(){
   renderGrid('mc-db',DBS);
   renderGrid('mc-tools',TOOLS);
@@ -777,8 +1680,11 @@ document.addEventListener('DOMContentLoaded',function(){
   renderScales();
   buildSD();
   renderCB();
+  buildToc();
   rdt(0);
 });
 </script>
+
 </body>
 </html>
+
