@@ -135,47 +135,112 @@ footer{background:#060b18;color:rgba(255,255,255,.4);text-align:center;padding:1
 @media(max-width:768px){.banner h1{font-size:1.4rem}.banner{padding:2.5rem 1rem 2rem}nav{display:none}.cg{grid-template-columns:1fr}.tg{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}.dtO{flex-direction:column}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}html{scroll-beh:auto}}
 :focus-visible{outline:2px solid var(--pri);outline-offset:2px}
+
+/* ===== v3.0: Hamburger Menu ===== */
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:.4rem;border-radius:6px;color:rgba(255,255,255,.6);transition:all .2s}
+.hamburger:hover{color:#fff;background:rgba(6,182,212,.08)}
+@media(max-width:768px){.hamburger{display:flex}}
+/* ===== v3.0: Slide Menu ===== */
+.slide-overlay{position:fixed;inset:0;z-index:199;background:rgba(6,11,24,.5);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .3s}
+.slide-overlay.on{opacity:1;pointer-events:auto}
+.slide-menu{position:fixed;top:0;right:0;bottom:0;width:280px;max-width:80vw;background:var(--card);border-left:1px solid var(--bd);z-index:200;transform:translateX(100%);transition:transform .3s ease;padding:1rem;overflow-y:auto;display:flex;flex-direction:column}
+.slide-menu.on{transform:translateX(0)}
+.slide-menu .slide-hdr{display:flex;justify-content:space-between;align-items:center;padding-bottom:.8rem;border-bottom:1px solid var(--bd);margin-bottom:.6rem}
+.slide-menu .slide-close{background:none;border:none;color:var(--tx3);cursor:pointer;padding:.3rem;border-radius:5px;font-size:1.1rem}
+.slide-menu .slide-close:hover{background:var(--bg);color:var(--tx)}
+.slide-menu a{display:block;padding:.5rem .6rem;color:var(--tx2);font-size:.88rem;border-radius:6px;transition:all .15s}
+.slide-menu a:hover{background:var(--pri-bg);color:var(--pri)}
+.slide-menu .slide-lang{margin-top:auto;padding-top:.8rem;border-top:1px solid var(--bd)}
+/* ===== v3.0: Language Toggle ===== */
+.lang-btn{background:none;border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.6);cursor:pointer;padding:.3rem .5rem;border-radius:6px;font-size:.75rem;font-weight:600;transition:all .2s;min-width:32px;text-align:center}
+.lang-btn:hover{color:#fff;border-color:rgba(6,182,212,.3);background:rgba(6,182,212,.08)}
+/* ===== v3.0: WeChat Articles ===== */
+.wc-phase{margin-bottom:1.5rem}
+.wc-phase-hdr{background:var(--card);padding:.8rem 1rem;border-radius:var(--r);cursor:pointer;display:flex;justify-content:space-between;align-items:center;margin-bottom:.3rem;border:1px solid var(--bd);font-weight:700;font-size:.95rem;transition:all .2s}
+.wc-phase-hdr:hover{border-color:rgba(6,182,212,.2)}
+.wc-article{background:var(--card);border:1px solid var(--bd);border-radius:var(--r);padding:.8rem 1rem;margin-bottom:.4rem;cursor:pointer;transition:all .2s}
+.wc-article:hover{border-color:rgba(6,182,212,.15)}
+.wc-article-title{font-weight:600;font-size:.9rem;display:flex;justify-content:space-between;align-items:center}
+.wc-article-week{font-size:.7rem;color:var(--pri);background:var(--pri-bg);padding:.1rem .4rem;border-radius:4px;font-weight:600;white-space:nowrap}
+.wc-article-desc{font-size:.8rem;color:var(--tx3);margin-top:.2rem}
+.wc-article-body{display:none;padding:.8rem;background:var(--bg);border-radius:8px;margin-top:.5rem;border:1px solid var(--bd);font-size:.9rem;line-height:1.75}
+.wc-article-body.on{display:block}
+.wc-article-body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0;border:1px solid var(--bd)}
+.wc-article-body h3{font-size:1.05rem;margin:.8rem 0 .4rem;color:var(--tx)}
+.wc-article-body h4{font-size:.95rem;margin:.6rem 0 .3rem;color:var(--tx2)}
+.wc-article-body p{margin:.3rem 0}
+.wc-article-body ul,.wc-article-body ol{padding-left:1.2rem;margin:.3rem 0}
+.wc-article-body li{margin-bottom:.1rem}
+.wc-article-body .note{font-size:.85rem}
+.wc-article-body hr{margin:.8rem 0;border:none;border-top:1px solid var(--bd);opacity:.4}
+.wc-article-body .cb{margin:.5rem 0}
+
 </style>
+<script src="articles-data.js" defer></script>
 </head>
 <body>
 <div class="topbar"><a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=Mzk0NDcyMzk1Mw==&action=getalbum&album_id=3709856140965101571&scene=126&sessionid=1775834953391#wechat_redirect" target="_blank" rel="noopener">📢 Abel医研统计公众号 | 点击直达最新科研教程</a></div>
 <header><div class="hdr">
 <div class="logo">Abel医研<b>统计</b></div>
-<nav><a href="#home">首页</a><a href="#stats">统计方法</a><a href="#ml-section">机器学习</a><a href="#bayes">贝叶斯</a><a href="#meta">Meta分析</a><a href="#bioinfo">生物信息</a><a href="#databases">数据库</a><a href="#cases">实操案例</a><a href="#tools">科研工具</a></nav>
+<nav><a href="#home" data-i18n="nav-home">首页</a><a href="#stats" data-i18n="nav-stats">统计方法</a><a href="#ml-section" data-i18n="nav-ml">机器学习</a><a href="#bayes" data-i18n="nav-bayes">贝叶斯</a><a href="#meta" data-i18n="nav-meta">Meta分析</a><a href="#wechat" data-i18n="nav-wechat">公众号</a><a href="#bioinfo" data-i18n="nav-bioinfo">生物信息</a><a href="#databases" data-i18n="nav-db">数据库</a><a href="#cases" data-i18n="nav-cases">实操案例</a><a href="#tools" data-i18n="nav-tools">科研工具</a></nav>
+<button class="hamburger" onclick="togSlide()" aria-label="Menu">☰</button>
 <div style="display:flex;gap:.4rem">
+<button class="lang-btn" id="langBtn" onclick="swLang()" data-i18n="lang-btn" title="Switch language">中</button>
 <button class="hbtn" onclick="openS()" aria-label="搜索" title="Ctrl+K"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
 <button class="hbtn" onclick="togTh()" aria-label="主题" id="thB"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="thI"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
 </div></div></header>
+<!-- v3.0: Slide Menu -->
+<div class="slide-overlay" id="slideOverlay" onclick="togSlide()"></div>
+<div class="slide-menu" id="slideMenu">
+<div class="slide-hdr"><span style="font-weight:700;font-size:.9rem" data-i18n="nav-title">导航菜单</span><button class="slide-close" onclick="togSlide()">✕</button></div>
+<a href="#home" onclick="togSlide()" data-i18n="nav-home">首页</a>
+<a href="#stats" onclick="togSlide()" data-i18n="nav-stats">统计方法</a>
+<a href="#ml-section" onclick="togSlide()" data-i18n="nav-ml">机器学习</a>
+<a href="#bayes" onclick="togSlide()" data-i18n="nav-bayes">贝叶斯统计</a>
+<a href="#meta" onclick="togSlide()" data-i18n="nav-meta">Meta分析</a>
+<a href="#wechat" onclick="togSlide()" data-i18n="nav-wechat">公众号教程</a>
+<a href="#survival" onclick="togSlide()" data-i18n="nav-survival">生存分析</a>
+<a href="#psm" onclick="togSlide()" data-i18n="nav-psm">因果推断</a>
+<a href="#bioinfo" onclick="togSlide()" data-i18n="nav-bioinfo">生物信息学</a>
+<a href="#databases" onclick="togSlide()" data-i18n="nav-db">公共数据库</a>
+<a href="#tools" onclick="togSlide()" data-i18n="nav-tools">科研工具</a>
+<a href="#ai" onclick="togSlide()" data-i18n="nav-ai">AI工具</a>
+<a href="#scales" onclick="togSlide()" data-i18n="nav-scales">医学量表</a>
+<a href="#cases" onclick="togSlide()" data-i18n="nav-cases">实操案例</a>
+<a href="#reporting" onclick="togSlide()" data-i18n="nav-reporting">报告规范</a>
+<div class="slide-lang"><button class="lang-btn" onclick="swLang()" style="width:100%" data-i18n="slide-lang-btn">English</button></div>
+</div>
+
 <button class="toc-toggle" onclick="togToc()" id="tocBtn">☰ 目录</button>
 <div class="toc-sidebar" id="tocSidebar"></div>
 <section class="banner" id="home"><div class="bc">
-<h1>医学科研一站式学习平台</h1>
-<p>医学统计学 · 机器学习 · 贝叶斯统计 · Meta分析 · 生物信息学 · 公共数据库挖掘</p>
-<p>R语言实战 · 临床预测模型 · 因果推断 · 传染病数学建模 · 真实世界研究</p>
+<h1 data-i18n="banner-title">医学科研一站式学习平台</h1>
+<p data-i18n="banner-sub1">医学统计学 · 机器学习 · 贝叶斯统计 · Meta分析 · 生物信息学 · 公共数据库挖掘</p>
+<p data-i18n="banner-sub2">R语言实战 · 临床预测模型 · 因果推断 · 传染病数学建模 · 真实世界研究</p>
 </div></section>
 <div class="ov" id="sov" onclick="if(event.target===this)closeS()"><div class="ob"><div class="oi">
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--tx3)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-<input id="si" type="text" placeholder="搜索统计方法、数据库、工具..." autocomplete="off">
-</div><div class="or" id="sr"><div class="oe">输入关键词开始搜索</div></div></div></div>
+<input id="si" type="text" placeholder="搜索统计方法、数据库、工具..." data-i18n="search-placeholder" autocomplete="off">
+</div><div class="or" id="sr"><div class="oe" data-i18n="search-empty">输入关键词开始搜索</div></div></div></div>
 <div class="W">
 
 <!-- ===== 决策树 ===== -->
-<div class="sec" id="dtsec"><h2 class="st">🌿 统计方法选择决策树</h2>
+<div class="sec" id="dtsec"><h2 class="st" data-i18n="dt-title">🌿 统计方法选择决策树</h2>
 <div style="background:var(--card);border-radius:var(--r);padding:1.2rem;border:1px solid var(--bd);box-shadow:0 0 20px rgba(6,182,212,.04)">
 <div style="font-size:.95rem;font-weight:700;margin-bottom:.6rem">不知道用什么统计方法？回答几个问题帮你选</div>
 <div id="dtC"></div></div></div>
 
 <!-- ===== 核心研究方法 ===== -->
-<div class="sec" id="core"><h2 class="st">📚 核心研究方法</h2>
+<div class="sec" id="core"><h2 class="st" data-i18n="core-title">📚 核心研究方法</h2>
 
 <!-- 快速导航 -->
 <div class="qnav">
-<a href="#stats">📊 统计方法</a><a href="#ml-section">🤖 机器学习</a><a href="#bayes">🔮 贝叶斯</a><a href="#meta">📋 Meta分析</a><a href="#roc">📈 ROC曲线</a><a href="#survival">⏳ 生存分析</a><a href="#psm">⚖️ 因果推断</a><a href="#bioinfo">🧬 生物信息</a><a href="#sample-size">🧮 样本量</a><a href="#modeling">📈 传染病建模</a><a href="#clinical">🏥 临床研究</a><a href="#reporting">📋 报告规范</a><a href="#cases">📝 实操案例</a>
+<a href="#stats">📊 统计方法</a><a href="#ml-section">🤖 机器学习</a><a href="#bayes">🔮 贝叶斯</a><a href="#meta">📋 Meta分析</a><a href="#roc">📈 ROC曲线</a><a href="#survival">⏳ 生存分析</a><a href="#psm">⚖️ 因果推断</a><a href="#bioinfo">🧬 生物信息</a><a href="#sample-size">🧮 样本量</a><a href="#modeling">📈 传染病建模</a><a href="#clinical">🏥 临床研究</a><a href="#reporting" data-i18n="nav-reporting">📋 报告规范</a><a href="#wechat" data-i18n="nav-wechat">📱 公众号</a><a href="#cases">📝 实操案例</a>
 </div>
 
 <!-- 公式速查 -->
 <div style="margin-bottom:1rem">
-<div class="mh" onclick="togMod(this)"><div class="mt">📐 统计公式速查</div><span class="ti">▼</span></div>
+<div class="mh" onclick="togMod(this)"><div class="mt" data-i18n="formula-title">📐 统计公式速查</div><span class="ti">▼</span></div>
 <div class="mc" style="display:none">
 <table class="dtb"><tr><th>方法</th><th>统计量</th><th>公式</th><th>条件</th></tr>
 <tr><td>单样本t</td><td>t</td><td>t=(x̄-μ)/(s/√n)</td><td>正态分布</td></tr>
@@ -1447,19 +1512,27 @@ cat("OR =", round(exp(coef(model)[2]), 2),
 
 </div><!-- end cases -->
 
+
+<!-- ============ 公众号教程 ============ -->
+<div class="sec" id="wechat">
+<h2 class="st" data-i18n="wechat-title">📱 公众号半年教程合集</h2>
+<p style="margin-bottom:.8rem;color:var(--tx2);font-size:.9rem" data-i18n="wechat-desc">Abel医研统计公众号26周系统性教程，覆盖从基础到前沿的60篇医学统计方法。点击文章标题展开全文。</p>
+<div id="wcContainer"></div>
+</div>
+
 <!-- 博主信息 -->
 <div class="ai">
-<h3>👨‍⚕️ 博主信息</h3>
-<p><strong>研究方向：</strong>医学统计学、临床流行病学、生物信息学、真实世界研究、临床预测模型、传染病数学建模</p>
-<p><strong>微信公众号：</strong>Abel医研统计</p>
-<p><strong>宗旨：</strong>让医学科研更简单，让统计方法更易懂</p>
+<h3 data-i18n="about-title">👨‍⚕️ 博主信息</h3>
+<p data-i18n="about-research"><strong>研究方向：</strong>医学统计学、临床流行病学、生物信息学、真实世界研究、临床预测模型、传染病数学建模</p>
+<p data-i18n="about-wechat"><strong>微信公众号：</strong>Abel医研统计</p>
+<p data-i18n="about-mission"><strong>宗旨：</strong>让医学科研更简单，让统计方法更易懂</p>
 </div>
 
 </div><!-- end W -->
 
-<button class="bt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="回到顶部"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg></button>
+<button class="bt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="回到顶部" data-i18n="back-top"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg></button>
 
-<footer><p>&copy; 2026 Abel医研统计 | 医学科研一站式学习平台 | 让医学科研更简单</p></footer>
+<footer><p data-i18n="footer">&copy; 2026 Abel医研统计 | 医学科研一站式学习平台 | 让医学科研更简单</p></footer>
 
 <script>
 /* ==================== 核心交互函数 ==================== */
@@ -1470,7 +1543,9 @@ function togM(btn){
   if(!box)return;
   var open=box.style.display==='block';
   box.style.display=open?'none':'block';
-  btn.textContent=open?'查看详细操作':'收起详细内容';
+  btn.textContent=open
+    ?(TRANS[LANG]['hide-details']||'收起详细内容')
+    :(TRANS[LANG]['view-details']||'查看详细操作');
 }
 
 // 教程展开/收起（传染病建模）
@@ -1513,8 +1588,8 @@ function cpC(btn){
   var txt=body.textContent.trim();
   if(navigator.clipboard&&navigator.clipboard.writeText){
     navigator.clipboard.writeText(txt).then(function(){
-      btn.textContent='已复制';btn.className='cp ok';
-      setTimeout(function(){btn.textContent='复制';btn.className='cp'},1500);
+      btn.textContent=TRANS[LANG]['copy-done']||'已复制';btn.className='cp ok';
+      setTimeout(function(){btn.textContent=TRANS[LANG]['copy-btn']||'复制';btn.className='cp'},1500);
     });
   }else{
     var ta=document.createElement('textarea');
@@ -1522,8 +1597,8 @@ function cpC(btn){
     document.body.appendChild(ta);ta.select();
     try{document.execCommand('copy')}catch(e){}
     document.body.removeChild(ta);
-    btn.textContent='已复制';btn.className='cp ok';
-    setTimeout(function(){btn.textContent='复制';btn.className='cp'},1500);
+    btn.textContent=TRANS[LANG]['copy-done']||'已复制';btn.className='cp ok';
+    setTimeout(function(){btn.textContent=TRANS[LANG]['copy-btn']||'复制';btn.className='cp'},1500);
   }
 }
 
@@ -1542,6 +1617,139 @@ function updTI(){
 }
 (function(){var s=localStorage.getItem('theme');if(s==='dark'||(!s&&matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark')}updTI()})();
 
+
+/* ==================== v3.0: i18n ==================== */
+var LANG=localStorage.getItem('lang')||'zh';
+var TRANS={
+  zh:{
+    'lang-btn':'中','slide-lang-btn':'English','nav-title':'导航菜单',
+    'nav-home':'首页','nav-stats':'统计方法','nav-ml':'机器学习','nav-bayes':'贝叶斯统计',
+    'nav-meta':'Meta分析','nav-wechat':'公众号教程','nav-survival':'生存分析','nav-psm':'因果推断',
+    'nav-bioinfo':'生物信息学','nav-db':'公共数据库','nav-tools':'科研工具','nav-ai':'AI工具',
+    'nav-scales':'医学量表','nav-cases':'实操案例','nav-reporting':'报告规范',
+    'banner-title':'医学科研一站式学习平台',
+    'banner-sub1':'医学统计学 · 机器学习 · 贝叶斯统计 · Meta分析 · 生物信息学 · 公共数据库挖掘',
+    'banner-sub2':'R语言实战 · 临床预测模型 · 因果推断 · 传染病数学建模 · 真实世界研究',
+    'dt-title':'🌿 统计方法选择决策树',
+    'search-placeholder':'搜索统计方法、数据库、工具...',
+    'search-empty':'输入关键词开始搜索',
+    'search-noresult':'未找到匹配结果',
+    'copy-btn':'复制','copy-done':'已复制',
+    'view-details':'查看详细操作','hide-details':'收起详细内容',
+    'back-top':'回到顶部',
+    'footer':'© 2026 Abel医研统计 | 医学科研一站式学习平台 | 让医学科研更简单',
+    'about-title':'👨‍⚕️ 博主信息','about-wechat':'微信公众号：Abel医研统计',
+    'about-mission':'让医学科研更简单，让统计方法更易懂',
+    'wechat-title':'📱 公众号半年教程合集',
+    'wechat-desc':'Abel医研统计公众号26周系统性教程，覆盖从基础到前沿的60篇医学统计方法。点击文章标题展开全文。',
+    'wc-phase1':'第一阶段：权威重建期（第1-4周）',
+    'wc-phase2':'第二阶段：深度强化期（第5-12周）',
+    'wc-phase3':'第三阶段：前沿拓展期（第13-20周）',
+    'wc-phase4':'第四阶段：品牌沉淀期（第21-26周）',
+  },
+  en:{
+    'lang-btn':'EN','slide-lang-btn':'中文','nav-title':'Navigation',
+    'nav-home':'Home','nav-stats':'Statistics','nav-ml':'ML','nav-bayes':'Bayesian',
+    'nav-meta':'Meta Analysis','nav-wechat':'Tutorials','nav-survival':'Survival','nav-psm':'Causal Inference',
+    'nav-bioinfo':'Bioinformatics','nav-db':'Databases','nav-tools':'Tools','nav-ai':'AI Tools',
+    'nav-scales':'Scales','nav-cases':'Case Studies','nav-reporting':'Guidelines',
+    'banner-title':'Medical Research & Statistics Hub',
+    'banner-sub1':'Statistics · Machine Learning · Bayesian · Meta Analysis · Bioinformatics · Public Databases',
+    'banner-sub2':'R/Python · Prediction Models · Causal Inference · Infectious Disease Modeling · Real-World Study',
+    'dt-title':'🌿 Statistical Method Decision Tree',
+    'search-placeholder':'Search methods, databases, tools...',
+    'search-empty':'Type keywords to search',
+    'search-noresult':'No results found',
+    'copy-btn':'Copy','copy-done':'Copied!',
+    'view-details':'View Details','hide-details':'Collapse',
+    'back-top':'Back to top',
+    'footer':'© 2026 Abel Medical Statistics | Learn Research Statistics with R/Python',
+    'about-title':'👨‍⚕️ About','about-wechat':'WeChat: Abel医研统计',
+    'about-mission':'Making medical research statistics accessible to all.',
+    'wechat-title':'📱 WeChat Tutorial Collection',
+    'wechat-desc':'A 26-week systematic tutorial series with 60 articles covering medical statistics from basics to advanced topics. Click to expand.',
+    'wc-phase1':'Phase 1: Foundation (Weeks 1-4)',
+    'wc-phase2':'Phase 2: Deep Dive (Weeks 5-12)',
+    'wc-phase3':'Phase 3: Advanced (Weeks 13-20)',
+    'wc-phase4':'Phase 4: Consolidation (Weeks 21-26)',
+  }
+};
+
+function swLang(){
+  LANG=LANG==='zh'?'en':'zh';
+  localStorage.setItem('lang',LANG);
+  document.getElementById('langBtn').textContent=TRANS[LANG]['lang-btn'];
+  applyLang();
+  // Re-render data grids with language-appropriate data
+  renderGrid('mc-db',LANG==='zh'?DBS:DBS_EN);
+  renderGrid('mc-tools',LANG==='zh'?TOOLS:TOOLS_EN);
+  renderGrid('mc-ai',LANG==='zh'?AIS:AIS_EN);
+  renderScales(LANG==='zh'?SCALES:SCALES_EN);
+  buildToc();
+}
+
+function applyLang(){
+  var t=TRANS[LANG];
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var key=el.getAttribute('data-i18n');
+    if(t[key]){
+      if(el.tagName==='INPUT'||el.tagName==='TEXTAREA'){el.setAttribute('placeholder',t[key])}
+      else{el.textContent=t[key]}
+    }
+  });
+}
+
+/* ==================== v3.0: Slide Menu ==================== */
+function togSlide(){
+  var menu=document.getElementById('slideMenu');
+  var overlay=document.getElementById('slideOverlay');
+  if(!menu||!overlay)return;
+  var open=menu.classList.contains('on');
+  menu.classList.toggle('on');
+  overlay.classList.toggle('on');
+  document.body.style.overflow=open?'':'hidden';
+}
+
+/* ==================== v3.0: WeChat Articles ==================== */
+function renderArticles(){
+  var c=document.getElementById('wcContainer');
+  if(!c||typeof ARTICLES_DATA==='undefined')return;
+  var html='',ph=TRANS[LANG];
+  for(var p=0;p<ARTICLES_DATA.length;p++){
+    var phase=ARTICLES_DATA[p];
+    var label=LANG==='zh'?phase.phaseLabel:phase.phaseLabelEn;
+    html+='<div class="wc-phase"><div class="wc-phase-hdr" onclick="togPhase(this)">';
+    html+='<span>'+label+'</span><span class="ti">▼</span></div>';
+    html+='<div class="mc" style="display:none">';
+    for(var a=0;a<phase.articles.length;a++){
+      var art=phase.articles[a];
+      html+='<div class="wc-article" onclick="togArticle(this)">';
+      html+='<div class="wc-article-title"><span>'+art.title+'</span>';
+      if(art.week)html+='<span class="wc-article-week">'+art.week+'</span>';
+      html+='</div><div class="wc-article-desc">'+art.description+'</div>';
+      html+='<div class="wc-article-body">'+art.html+'</div></div>';
+    }
+    html+='</div></div>';
+  }
+  c.innerHTML=html;
+  renderCB();
+}
+
+function togPhase(hdr){
+  var box=hdr.nextElementSibling;
+  var ico=hdr.querySelector('.ti');
+  if(!box)return;
+  var open=box.style.display==='block';
+  box.style.display=open?'none':'block';
+  if(ico)ico.className='ti'+(open?'':' on');
+}
+
+function togArticle(el){
+  var body=el.querySelector('.wc-article-body');
+  if(!body)return;
+  body.classList.toggle('on');
+}
+
 /* ==================== TOC侧边栏 ==================== */
 function togToc(){
   var s=document.getElementById('tocSidebar');
@@ -1549,25 +1757,13 @@ function togToc(){
 }
 function buildToc(){
   var el=document.getElementById('tocSidebar');
+  var tl=LANG==='zh'
+    ? {toc:'目录导航',stats:'📊 统计方法',ml:'🤖 机器学习',bayes:'🔮 贝叶斯统计',meta:'📋 Meta分析',roc:'📈 ROC曲线',survival:'⏳ 生存分析',psm:'⚖️ 因果推断',bioinfo:'🧬 生物信息',sample:'🧮 样本量',modeling:'📈 传染病建模',db:'💾 数据库',tools:'🔬 科研工具',ai:'🤖 AI工具',scales:'📋 量表',cases:'📝 实操案例',wechat:'📱 公众号教程',reporting:'📋 报告规范'}
+    : {toc:'Contents',stats:'📊 Statistics',ml:'🤖 ML',bayes:'🔮 Bayesian',meta:'📋 Meta Analysis',roc:'📈 ROC Curve',survival:'⏳ Survival',psm:'⚖️ Causality',bioinfo:'🧬 Bioinformatics',sample:'🧮 Sample Size',modeling:'📈 Modeling',db:'💾 Databases',tools:'🔬 Tools',ai:'🤖 AI',scales:'📋 Scales',cases:'📝 Cases',wechat:'📱 Tutorials',reporting:'📋 Guidelines'};
   var items=[
-    {l:'📊 统计方法',h:'#stats'},
-    {l:'🤖 机器学习',h:'#ml-section'},
-    {l:'🔮 贝叶斯统计',h:'#bayes'},
-    {l:'📋 Meta分析',h:'#meta'},
-    {l:'📈 ROC曲线',h:'#roc'},
-    {l:'⏳ 生存分析',h:'#survival'},
-    {l:'⚖️ 因果推断',h:'#psm'},
-    {l:'🧬 生物信息',h:'#bioinfo'},
-    {l:'🧮 样本量',h:'#sample-size'},
-    {l:'📈 传染病建模',h:'#modeling'},
-    {l:'💾 数据库',h:'#databases'},
-    {l:'🔬 科研工具',h:'#tools'},
-    {l:'🤖 AI工具',h:'#ai'},
-    {l:'📋 量表',h:'#scales'},
-    {l:'📝 实操案例',h:'#cases'},
-    {l:'📋 报告规范',h:'#reporting'}
+    {l:tl.stats,h:'#stats'},{l:tl.ml,h:'#ml-section'},{l:tl.bayes,h:'#bayes'},{l:tl.meta,h:'#meta'},{l:tl.roc,h:'#roc'},{l:tl.survival,h:'#survival'},{l:tl.psm,h:'#psm'},{l:tl.bioinfo,h:'#bioinfo'},{l:tl.sample,h:'#sample-size'},{l:tl.modeling,h:'#modeling'},{l:tl.db,h:'#databases'},{l:tl.tools,h:'#tools'},{l:tl.ai,h:'#ai'},{l:tl.scales,h:'#scales'},{l:tl.cases,h:'#cases'},{l:tl.wechat,h:'#wechat'},{l:tl.reporting,h:'#reporting'}
   ];
-  var h='<div style="padding:0 .8rem .3rem;font-size:.75rem;color:var(--tx3);border-bottom:1px solid var(--bd);margin-bottom:.3rem">目录导航</div>';
+  var h='<div style="padding:0 .8rem .3rem;font-size:.75rem;color:var(--tx3);border-bottom:1px solid var(--bd);margin-bottom:.3rem">'+tl.toc+'</div>';
   for(var i=0;i<items.length;i++){
     h+='<a class="toc-l1" href="'+items[i].h+'">'+items[i].l+'</a>';
   }
@@ -1594,12 +1790,21 @@ function buildSD(){
   document.querySelectorAll('.case-card h4').forEach(function(h){
     SD.push({t:h.textContent,d:''+h.parentElement.querySelector('.case-desc')?h.parentElement.querySelector('.case-desc').textContent.slice(0,50):'',el:h.parentElement});
   });
+  // Add articles to search
+  if(typeof ARTICLES_DATA!=='undefined'){
+    for(var p=0;p<ARTICLES_DATA.length;p++){
+      for(var a=0;a<ARTICLES_DATA[p].articles.length;a++){
+        var art=ARTICLES_DATA[p].articles[a];
+        SD.push({t:art.title,d:art.description,el:null,sc:'#wechat'});
+      }
+    }
+  }
 }
 function openS(){document.getElementById('sov').className='ov on';document.getElementById('si').value='';document.getElementById('si').focus()}
 function closeS(){document.getElementById('sov').className='ov'}
 document.getElementById('si').addEventListener('input',function(){
   var q=this.value.trim().toLowerCase(),box=document.getElementById('sr');
-  if(!q){box.innerHTML='<div class="oe">输入关键词开始搜索</div>';return}
+  if(!q){box.innerHTML='<div class="oe" data-i18n="search-empty">输入关键词开始搜索</div>';return}
   var hits=SD.filter(function(d){return d.t.toLowerCase().indexOf(q)!==-1||d.d.toLowerCase().indexOf(q)!==-1}).slice(0,8);
   if(!hits.length){box.innerHTML='<div class="oe">未找到匹配结果</div>';return}
   var h='';
@@ -1608,7 +1813,9 @@ document.getElementById('si').addEventListener('input',function(){
   box.querySelectorAll('.os').forEach(function(s){
     s.addEventListener('click',function(){
       var idx=parseInt(this.getAttribute('data-i'));closeS();
-      var el=hits[idx].el;if(!el)return;
+      var hit=hits[idx];
+      if(hit.sc){var target=document.getElementById(hit.sc.slice(1));if(target)target.scrollIntoView({behavior:'smooth',block:'start'});return}
+      var el=hit.el;if(!el)return;
       var mc=el.closest('.mc');
       if(mc&&mc.style.display!=='block'){var mh=mc.previousElementSibling;if(mh)mh.click()}
       el.scrollIntoView({behavior:'smooth',block:'center'});
@@ -1641,6 +1848,40 @@ function renderCB(){
 }
 
 /* ==================== 数据驱动网格 ==================== */
+
+
+/* ==================== v3.0: English Data Arrays ==================== */
+var DBS_EN=[
+  ['Global Public Health',['WHO','https://www.who.int/','World Health Organization'],['CDC','https://www.cdc.gov/','US CDC'],['GHDx','https://ghdx.healthdata.org/','Global Health Data Exchange'],['Our World in Data','https://ourworldindata.org/','Global health trends']],
+  ['Critical Care',['MIMIC-IV','https://mimic.mit.edu/','Critical care database'],['eICU','https://eicu-crd.mit.edu/','Collaborative Research Database']],
+  ['Cohort Studies',['UK Biobank','https://www.ukbiobank.ac.uk/','Large-scale biomedical database'],['NHANES','https://www.cdc.gov/nchs/nhanes/','US health survey'],['CHARLS','https://charls.pku.edu.cn/','China aging study'],['CLHLS','https://www.icpsr.umich.edu/','Longevity study']],
+  ['Cancer Genomics',['TCGA','https://www.cancer.gov/ccg/research/genome-sequencing/tcga','Cancer genome atlas'],['GDC','https://portal.gdc.cancer.gov/','Genomic Data Commons'],['SEER','https://seer.cancer.gov/','Surveillance & epidemiology'],['cBioPortal','https://www.cbioportal.org/','Cancer genomics portal']],
+  ['Chinese Databases',['CNCB','https://www.cncb.ac.cn/','China National Center for Bioinfo'],['CNGB','https://www.cngb.org/','China National GeneBank'],['NMDC','https://nmdc.cn/','Microbiome database']],
+  ['Evidence Based Medicine',['Cochrane','https://www.cochrane.org/','Systematic reviews'],['ClinicalTrials','https://clinicaltrials.gov/','Trial registry'],['PubMed Central','https://www.ncbi.nlm.nih.gov/pmc/','Free full text']],
+];
+var TOOLS_EN=[
+  ['Academic Search',['SCI-HUB','https://sci-hub.se/','Free access to papers'],['ResearchGate','https://www.researchgate.net/','Academic network'],['Google Scholar','https://scholar.google.com/','Academic search'],['Semantic Scholar','https://www.semanticscholar.org/','AI-powered search']],
+  ['Top Medical Journals',['NEJM','https://www.nejm.org/','New England Journal of Medicine'],['JAMA','https://jamanetwork.com/','Journal of the AMA'],['The Lancet','https://www.thelancet.com/','Leading clinical journal'],['BMJ','https://www.bmj.com/','British Medical Journal'],['Nature Medicine','https://www.nature.com/nm/','Biomedical research']],
+  ['Statistics Software',['SPSS','https://www.ibm.com/products/spss-statistics','Statistical analysis'],['R','https://www.r-project.org/','Statistical computing'],['RStudio','https://posit.co/','R development environment'],['Python','https://www.python.org/','Programming language'],['SAS','https://www.sas.com/','Advanced analytics'],['Stata','https://www.stata.com/','Data analysis']],
+  ['Online Calculators',['Sealed Envelope','https://sealedenvelope.com/power/','Power/sample size'],['ClinCalc','https://clincalc.com/','Clinical calculators'],['DAGitty','https://www.dagitty.net/','DAG builder'],['VassarStats','https://vassarstats.net/','Statistical calculators'],['Easy CGI','https://www.easy-cgi.com/','Calculator generator'],['Sample Size','https://riskcalc.org/samplesize/','Sample size']],
+  ['Reference Management',['Zotero','https://www.zotero.org/','Free reference manager'],['EndNote','https://endnote.com/','Reference management'],['NoteExpress','https://www.inoteexpress.com/','Chinese reference tool'],['Mendley','https://www.mendley.com/','Reference manager']],
+  ['Scientific Graphing',['GraphPad Prism','https://www.graphpad.com/','Scientific graphing'],['Origin','https://www.originlab.com/','Data analysis & graphing'],['BioRender','https://www.biorender.com/','Scientific illustrations'],['Figdraw','https://www.figdraw.com/','Medical illustration'],['ChiPlot','https://www.chiplot.online/','Online plotting tool'],['Hiplot','https://hiplot.com.cn/','Chinese plotting tool']],
+  ['Manuscript Submission',['LetPub','https://www.letpub.com/','Journal finder'],['JANE','https://jane.biosemantics.org/','Journal suggester'],['Springer Guide','https://www.springer.com/gp/authors-editors/journal-author/journal-author-helpdesk','Author resources']],
+  ['Literature Databases',['PubMed','https://pubmed.ncbi.nlm.nih.gov/','Biomedical literature'],['Web of Science','https://www.webofscience.com/','Citation index'],['Scopus','https://www.scopus.com/','Abstract & citation'],['CNKI','https://www.cnki.net/','Chinese literature'],['Wanfang','https://www.wanfangdata.com.cn/','Chinese literature'],['VIP','https://www.cqvip.com/','Chinese periodicals']],
+];
+var AIS_EN=[
+  ['General Purpose LLMs',['ChatGPT','https://chat.openai.com/','OpenAI assistant'],['Claude','https://claude.ai/','Anthropic assistant'],['Kimi','https://kimi.moonshot.cn/','Long context AI'],['DeepSeek','https://chat.deepseek.com/','Chinese LLM'],['Gemini','https://gemini.google.com/','Google AI'],['Doubao','https://www.doubao.com/','ByteDance AI']],
+  ['AI for Literature',['Elicit','https://elicit.com/','AI research assistant'],['Consensus','https://consensus.com/','Evidence-based search'],['Semantic Scholar','https://www.semanticscholar.org/','AI literature search'],['Connected Papers','https://www.connectedpapers.com/','Citation graph'],['Scite','https://scite.ai/','Citation analysis']],
+  ['Writing & Polish',['QuillBot','https://quillbot.com/','Paraphrasing tool'],['Grammarly','https://www.grammarly.com/','Grammar checker'],['DeepL','https://www.deepl.com/','Translation'],['Writefull','https://www.writefull.com/','Academic writing'],['PaperPal','https://paperpal.com/','Academic language']],
+  ['AI for Medicine',['OpenEvidence','https://www.openevidence.com/','Medical AI'],['Glass AI','https://glass.health/','Clinical AI'],['DDIer','https://ddier.com/','Drug interaction']],
+  ['Code Assistants',['GitHub Copilot','https://github.com/features/copilot','AI coding'],['Cursor','https://cursor.sh/','AI IDE']],
+];
+var SCALES_EN=[
+  ['Mental Health',[['PHQ-9','Depression screening: 9 items'],['GAD-7','Anxiety screening: 7 items'],['SDS','Zung Self-Rating Depression Scale: 20 items'],['SAS','Zung Self-Rating Anxiety Scale: 20 items'],['SCL-90','Symptom Checklist-90: 90 items'],['MMSE','Cognitive function: 30 items']]],
+  ['Quality of Life',[['SF-36','Health Survey: 36 items, 8 dimensions'],['EQ-5D','EuroQol: 5 dimensions, utility value'],['WHOQOL-BREF','WHO Quality of Life: 26 items'],['QLQ-C30','EORTC Cancer QoL: 30 items']]],
+  ['Clinical Function',[['Barthel Index','ADL: 10 items'],['BI (Braden)','Pressure ulcer risk: 6 items'],['NRS','Numeric Pain Rating Scale: 0-10'],['VAS','Visual Analog Scale: 0-100mm'],['KPS','Karnofsky Performance Status: 0-100']]],
+  ['Social & Others',[['SSRS','Social Support: 10 items'],['PSQI','Pittsburgh Sleep Quality: 19 items'],['ISI','Insomnia Severity: 7 items'],['MoCA','Montreal Cognitive Assessment: 30 items'],['FRAIL','Frailty screening: 5 items']]],
+];
 function renderGrid(id,sections){
   var el=document.getElementById(id);if(!el)return;
   var h='';
@@ -1696,11 +1937,11 @@ var SCALES=[
   ['🤝 社会支持',[['SSRS','','社会支持'],['WHOQOL-BREF','https://www.who.int/tools/whoqol','WHO生活质量']]]
 ];
 
-function renderScales(){
+function renderScales(data){
   var el=document.getElementById('scales-list');if(!el)return;
   var h='';
-  for(var i=0;i<SCALES.length;i++){
-    var s=SCALES[i];
+  for(var i=0;i<data.length;i++){
+    var s=data[i];
     h+='<div class="su">'+s[0]+'</div><div class="tg">';
     for(var j=0;j<s[1].length;j++){
       var it=s[1][j];
@@ -1785,10 +2026,13 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a){
 
 /* ==================== 初始化 ==================== */
 document.addEventListener('DOMContentLoaded',function(){
-  renderGrid('mc-db',DBS);
-  renderGrid('mc-tools',TOOLS);
-  renderGrid('mc-ai',AIS);
-  renderScales();
+  document.getElementById('langBtn').textContent=TRANS[LANG]['lang-btn'];
+  applyLang();
+  renderArticles();
+  renderGrid('mc-db',LANG==='zh'?DBS:DBS_EN);
+  renderGrid('mc-tools',LANG==='zh'?TOOLS:TOOLS_EN);
+  renderGrid('mc-ai',LANG==='zh'?AIS:AIS_EN);
+  renderScales(LANG==='zh'?SCALES:SCALES_EN);
   buildSD();
   renderCB();
   buildToc();
