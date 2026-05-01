@@ -28,7 +28,7 @@ nav a{color:rgba(255,255,255,.65);font-size:.82rem;padding:.3rem .6rem;border-ra
 .bc{position:relative;z-index:2;max-width:750px;margin:0 auto}
 .banner h1{font-size:2rem;font-weight:800;margin-bottom:.8rem;text-shadow:0 0 40px rgba(6,182,212,.2)}
 .banner p{font-size:.92rem;opacity:.85;margin:.2rem 0}
-.W{max-width:1200px;margin:0 auto;padding:0 1rem;position:relative;z-index:1}@media(min-width:901px){.W{margin-left:210px}}
+.W{max-width:1200px;margin:0 auto;padding:0 1rem;position:relative;z-index:1}@media(min-width:901px){body:not(.toc-closed) .W{margin-left:210px}}
 .sec{padding:2rem 0}
 .st{font-size:1.35rem;font-weight:700;margin-bottom:1.2rem;border-left:4px solid var(--pri);padding-left:10px}
 .cat-hdr{font-size:1.1rem;font-weight:700;margin:0 0 .8rem;padding:.55rem 1rem;background:var(--pri-bg);border-left:4px solid var(--pri);border-radius:0 8px 8px 0;color:var(--pri);letter-spacing:.3px}
@@ -119,7 +119,11 @@ code{background:var(--bg);padding:1px 4px;border-radius:3px;color:var(--acc);fon
 .ai h3{color:var(--pri);margin-bottom:.4rem;font-size:1rem}.ai p{margin:.2rem 0;font-size:.85rem;color:var(--tx2)}
 footer{background:#060b18;color:rgba(255,255,255,.4);text-align:center;padding:1.8rem 1rem;margin-top:2rem}footer p{font-size:.82rem}
 /* ===== NEW: TOC Sidebar ===== */
-.toc-sidebar{position:fixed;left:0;top:150px;bottom:0;width:200px;background:var(--card);border-right:1px solid var(--bd);padding:1rem 0;overflow-y:auto;z-index:50}
+.toc-sidebar{position:fixed;left:0;top:150px;bottom:0;width:200px;background:var(--card);border-right:1px solid var(--bd);padding:1rem 0;overflow-y:auto;z-index:50;transform:translateX(-100%);transition:transform .3s ease}
+body:not(.toc-closed) .toc-sidebar{transform:translateX(0)}
+.toc-toggle{position:fixed;left:0;top:212px;z-index:55;width:16px;height:40px;background:var(--card);border:1px solid var(--bd);border-left:none;border-radius:0 5px 5px 0;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--tx2);font-size:.5rem;padding:0;transition:left .3s ease;line-height:1}
+body:not(.toc-closed) .toc-toggle{left:200px}
+.toc-toggle:hover{color:var(--pri);background:var(--pri-bg)}
 .toc-sidebar a{display:block;padding:.35rem .8rem;font-size:.78rem;color:var(--tx3);border-left:2px solid transparent;transition:all .15s}
 .toc-sidebar a:hover,.toc-sidebar a.on{color:var(--pri);border-left-color:var(--pri);background:var(--pri-bg)}
 .toc-sidebar .toc-l1{font-weight:600;font-size:.82rem;color:var(--tx2);padding-top:.6rem}
@@ -163,7 +167,7 @@ nav a:hover::after{width:50%}
 .cg .cd:nth-child(8){animation-delay:.28s}
 .cg .cd:nth-child(n+9){animation-delay:.32s}
 /* ===== Responsive ===== */
-@media(max-width:900px){.toc-sidebar{display:none}.W{margin-left:0}}
+@media(max-width:900px){.toc-sidebar,.toc-toggle{display:none}.W{margin-left:0}}
 @media(max-width:768px){.banner h1{font-size:1.4rem}.banner{padding:2.5rem 1rem 2rem}nav{display:none}.cg{grid-template-columns:1fr}.tg{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}.dtO{flex-direction:column}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}html{scroll-beh:auto}}
 :focus-visible{outline:2px solid var(--pri);outline-offset:2px}
@@ -255,6 +259,7 @@ nav a:hover::after{width:50%}
 </div>
 
 <div class="toc-sidebar" id="tocSidebar"></div>
+<button class="toc-toggle" onclick="togToc()" id="tocBtn" aria-label="Toggle TOC">◀</button>
 <section class="banner" id="home"><div class="bc">
 <h1 data-i18n="banner-title">医学科研一站式学习平台</h1>
 <p data-i18n="banner-sub1">医学统计学 · 机器学习 · 贝叶斯统计 · Meta分析 · 生物信息学 · 公共数据库挖掘</p>
@@ -2644,6 +2649,11 @@ function togArticle(el){
 }
 
 /* ==================== TOC侧边栏 ==================== */
+function togToc(){
+  var b=document.body;
+  b.classList.toggle('toc-closed');
+  document.getElementById('tocBtn').textContent=b.classList.contains('toc-closed')?'▶':'◀';
+}
 function buildToc(){
   var el=document.getElementById('tocSidebar');
   var tl=LANG==='zh'
