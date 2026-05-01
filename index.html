@@ -257,7 +257,7 @@ nav a:hover::after{width:50%}
 <div class="slide-lang"><button class="lang-btn" onclick="swLang()" style="width:100%" data-i18n="slide-lang-btn">English</button></div>
 </div>
 
-<button class="toc-toggle" onclick="togToc()" id="tocBtn">☰ 目录</button>
+<button class="toc-toggle" onclick="togToc()" id="tocBtn" data-i18n="toc">☰ 目录</button>
 <div class="toc-sidebar" id="tocSidebar"></div>
 <section class="banner" id="home"><div class="bc">
 <h1 data-i18n="banner-title">医学科研一站式学习平台</h1>
@@ -2511,6 +2511,7 @@ var TRANS={
     'search-empty':'输入关键词开始搜索',
     'search-noresult':'未找到匹配结果',
     'search-float':'🔍 搜索',
+    'toc':'☰ 目录',
     'copy-btn':'复制','copy-done':'已复制',
     'view-details':'查看详细操作','hide-details':'收起详细内容',
     'back-top':'回到顶部',
@@ -2540,6 +2541,7 @@ var TRANS={
     'search-empty':'Type keywords to search',
     'search-noresult':'No results found',
     'search-float':'🔍 Search',
+    'toc':'☰ Contents',
     'copy-btn':'Copy','copy-done':'Copied!',
     'view-details':'View Details','hide-details':'Collapse',
     'back-top':'Back to top',
@@ -2738,10 +2740,15 @@ document.getElementById('si').addEventListener('input',function(){
 });
 document.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();openS()}if(e.key==='Escape')closeS()});
 
-/* ==================== 回到顶部 & 搜索浮窗 ==================== */
+/* ==================== 回到顶部 & 搜索浮窗 & TOC按钮 ==================== */
 var btt=document.getElementById('btt');
 var sfb=document.getElementById('sfb');
-window.addEventListener('scroll',function(){btt.className='bt'+(scrollY>400?' vis':'');if(sfb)sfb.className='sf'+(scrollY>200?' vis':'')},{passive:true});
+var tcb=document.getElementById('tocBtn');
+window.addEventListener('scroll',function(){
+  btt.className='bt'+(scrollY>400?' vis':'');
+  if(sfb)sfb.className='sf'+(scrollY>200?' vis':'');
+  if(tcb)tcb.style.opacity=scrollY>120?'0':'1';
+},{passive:true});
 
 /* ==================== 代码高亮 ==================== */
 function hl(code,lang){
