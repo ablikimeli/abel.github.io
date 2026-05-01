@@ -260,317 +260,399 @@ footer{background:#060b18;color:rgba(255,255,255,.4);text-align:center;padding:1
 <div class="tl"><a href="https://www.amstat.org/" target="_blank" rel="noopener">📚 美国统计学会(ASA) 官方资源</a></div>
 <h3 style="margin-bottom:.6rem;font-size:1.1rem">📊 医学统计学方法</h3>
 <div class="cg">
-
-<!-- P值 -->
-<div class="cd"><h3>P 值解读</h3><p class="ds"><strong>定义：</strong><a href="https://www.amstat.org/asa/files/pdfs/P-ValueStatement.pdf" target="_blank" rel="noopener">P值</a>：原假设H₀为真时，观察到当前或更极端结果的概率<br><strong>常见误区：</strong><ul><li>P&lt;0.05 ≠ 临床意义显著</li><li>P&gt;0.05 ≠ 无差异，可能样本量不足</li><li>多次检验导致假阳性升高</li></ul><strong>校正：</strong>Bonferroni、FDR、Benjamini-Hochberg</p></div>
-
-<!-- 置信区间 -->
-<div class="cd"><h3>置信区间 (CI)</h3><p class="ds"><strong>定义：</strong>参数估计的区间范围<br><strong>优势：</strong>同时展示效应大小与精度<ul><li>95%CI不含无效值 = 统计显著</li><li>区间越窄，估计精度越高</li></ul><strong>常用：</strong>率差、率比、均数差、风险比</p></div>
-
-<!-- 正态性 -->
-<div class="cd" id="cd-norm"><h3>数据前提检验</h3><div class="ds"><strong>正态性：</strong>Shapiro-Wilk、KS检验<button class="mb" onclick="togM(this)">查看详细操作</button>
-<div class="mx" style="display:none">
-<div class="tabs"><button class="tab on" onclick="swT(this,'ni')">方法介绍</button><button class="tab" onclick="swT(this,'ns')">SPSS操作</button><button class="tab" onclick="swT(this,'nr')">R代码</button><button class="tab" onclick="swT(this,'np')">Python代码</button></div>
-<div class="tp on" id="ni"><p>正态性检验判断数据是否服从正态分布，是参数检验的前提。Shapiro-Wilk适用于小样本(n&lt;50)，KS检验适用于大样本。</p></div>
-<div class="tp" id="ns"><ol><li>分析 → 描述统计 → 探索</li><li>变量选入"因变量列表"</li><li>点击"绘制"，勾选"带检验的正态图"</li><li>确定后查看Shapiro-Wilk结果</li><li>p&gt;0.05 服从正态分布</li></ol></div>
-<div class="tp" id="nr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># 正态性检验示例
+<div class="cd" id="cd-pvalue"><h3>P 值解读</h3><div class="ds"><strong>定义：</strong>P值：原假设H₀为真时，观察到当前或更极端结果的概率。需结合效应量和置信区间解读。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'pvalue-t0')">方法介绍</button><button class="tab" onclick="swT(this,'pvalue-t1')">SPSS操作</button><button class="tab" onclick="swT(this,'pvalue-t2')">R代码</button><button class="tab" onclick="swT(this,'pvalue-t3')">Python代码</button><button class="tab" onclick="swT(this,'pvalue-t4')">案例解读</button></div><div class="tp on" id="pvalue-t0"><p>P值是统计学中最常用的概念。它衡量在原假设为真的条件下，观察到当前结果或更极端结果的概率。P<0.05常被视为统计学显落，但这只是约定俗成的阈值。ASA发布的官方声明强调，P值不能代表效应大小或结果重要性。</p></div><div class="tp" id="pvalue-t1"><ol><li>分析 -> 描述统计 -> 交叉表（分类变量）或 分析 -> 比较均值 -> T检验（连续变量）</li><li>在输出结果中查看Sig.列即为P值</li><li>注意: SPSS默认输出双侧P值</li></ol></div><div class="tp" id="pvalue-t2"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># P值计算示例
 set.seed(123)
-data &lt;- rnorm(50, mean=100, sd=15)
+g1 <- rnorm(30, mean=100, sd=15)
+g2 <- rnorm(30, mean=110, sd=15)
+result <- t.test(g1, g2)
+print(result)
+cat("P:", result$p.value, "\n")
+# P值取决于: 效应量 + 样本量 + 变异度</div></div></div><div class="tp" id="pvalue-t3"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from scipy import stats
+g1 = np.random.normal(100,15,30)
+g2 = np.random.normal(110,15,30)
+t, p = stats.ttest_ind(g1, g2)
+print(f't={t:.3f}, p={p:.4f}')
+# 多重比较校正
+from scipy.stats import multipletests
+_, corr, _, _ = multipletests([0.012,0.043,0.210,0.003], method='bonferroni')
+print(f'Corr: {corr}')</div></div></div><div class="tp" id="pvalue-t4"><div class="res-box"><div class="res-title">📋 P值案例</div><div class="res-body"><strong>情景：</strong>比较两种降压药的疗效<br><strong>结果：</strong>t=2.45, df=58, <span class=sig>P=0.017</span><br><strong>解读：</strong>P<0.05显示组间差异显著。但需关注效应量(Cohen d=0.63)和95%CI[1.2,11.8]</div></div></div></div></div></div>
+<div class="cd" id="cd-ci"><h3>置信区间 (CI)</h3><div class="ds"><strong>定义：</strong>参数估计的区间范围，同时展示效应大小与精度。95%CI不含无效值=统计显著。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'ci-t0')">方法介绍</button><button class="tab" onclick="swT(this,'ci-t1')">SPSS操作</button><button class="tab" onclick="swT(this,'ci-t2')">R代码</button><button class="tab" onclick="swT(this,'ci-t3')">Python代码</button><button class="tab" onclick="swT(this,'ci-t4')">案例解读</button></div><div class="tp on" id="ci-t0"><p>CI是参数估计的区间范围。95%CI含义: 重复抽样100次，约95次区间会包含总体真实值。CI展示效应大小和精度，比P值提供更多临床相关信息。</p></div><div class="tp" id="ci-t1"><ol><li>分析 -> 比较均值 -> 独立样本T检验</li><li>在选项中设置置信区间百分比(默认95%)</li><li>查看差值的95%置信区间</li></ol></div><div class="tp" id="ci-t2"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># CI
+set.seed(123)
+data <- rnorm(50, 100, 15)
+t.test(data, conf.level=0.95)
+n <- length(data); se <- sd(data)/sqrt(n)
+ci <- mean(data)+c(-1,1)*qt(0.975,n-1)*se
+cat("95%CI:", round(ci,2))
+g1 <- rnorm(30,130,10); g2 <- rnorm(30,140,12)
+t.test(g1,g2,conf.level=0.95)</div></div></div><div class="tp" id="ci-t3"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from scipy import stats
+data = np.random.normal(100,15,50)
+ci = stats.t.interval(0.95, len(data)-1,
+    loc=np.mean(data), scale=stats.sem(data))
+print(f'95%CI: {ci}')</div></div></div><div class="tp" id="ci-t4"><div class="res-box"><div class="res-title">📋 CI案例</div><div class="res-body"><strong>结果：</strong>均值差=-8.5, <span class=sig>95%CI[-12.3,-4.7]</span><br><strong>解读：</strong>不包含0→显著。最保守估计(-4.7)也有临床意义。</div></div></div></div></div></div>
+<div class="cd" id="cd-normality"><h3>正态性检验</h3><div class="ds"><strong>方法：</strong>Shapiro-Wilk(n<50)、K-S(n≥50)。参数检验的前提。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'normality-t0')">方法介绍</button><button class="tab" onclick="swT(this,'normality-t1')">SPSS操作</button><button class="tab" onclick="swT(this,'normality-t2')">R代码</button><button class="tab" onclick="swT(this,'normality-t3')">Python代码</button><button class="tab" onclick="swT(this,'normality-t4')">案例解读</button></div><div class="tp on" id="normality-t0"><p>正态性检验判断数据是否服从正态分布，是t检验、ANOVA、线性回归的前提。Shapiro-Wilk适用于小样本(n<50)，K-S适用于大样本。大样本时微小偏离也会显著，建议结合Q-Q图和偏度/峰度综合判断。</p></div><div class="tp" id="normality-t1"><ol><li>分析 -> 描述统计 -> 探索</li><li>因变量列表选入待检验变量</li><li>点击绘制，勾选带检验的正态图</li><li>p>0.05服从正态分布；结合Q-Q图辅助判断</li></ol></div><div class="tp" id="normality-t2"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># 正态性检验
+set.seed(123)
+data <- rnorm(50, 100, 15)
 shapiro.test(data)
 
-# 非正态数据对比
-data_skew &lt;- rexp(50, rate=0.1)
-shapiro.test(data_skew)
-
-# KS检验
-ks.test(data, "pnorm", mean=100, sd=15)
-
-# 可视化：Q-Q图
-qqnorm(data); qqline(data, col="red")</div></div></div>
-<div class="tp" id="np"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import numpy as np
-from scipy import stats
-import matplotlib.pyplot as plt
-
-np.random.seed(123)
-data = np.random.normal(100, 15, 50)
-stat, p = stats.shapiro(data)
-print(f'Shapiro-Wilk: stat={stat:.3f}, p={p:.4f}')
-
-# 非正态数据
-data2 = np.random.exponential(10, 50)
-stat, p = stats.shapiro(data2)
-print(f'偏态数据: stat={stat:.3f}, p={p:.4f}')
+# 偏态数据对比
+rexp(50, 0.1) |> shapiro.test()
 
 # Q-Q图
-stats.probplot(data, dist="norm", plot=plt)
-plt.show()</div></div></div>
-</div>
-<br><strong>方差齐性：</strong>Levene检验、Bartlett检验<br><strong>数据类型：</strong><ul><li>定量：连续、离散</li><li>定性：二分类、多分类、有序</li><li>生存数据：含时间与截尾</li><li>重复测量：多时间点观测</li></ul></p></div></div>
-
-<!-- t检验/ANOVA -->
-<div class="cd" id="cd-ttest"><h3>定量数据比较</h3><div class="ds"><strong>方法：</strong>t检验、ANOVA、非参数检验<button class="mb" onclick="togM(this)">查看详细操作</button>
-<div class="mx" style="display:none">
-<div class="tabs"><button class="tab on" onclick="swT(this,'ti')">方法介绍</button><button class="tab" onclick="swT(this,'ts')">SPSS操作</button><button class="tab" onclick="swT(this,'tr')">R代码</button><button class="tab" onclick="swT(this,'tp')">Python代码</button><button class="tab" onclick="swT(this,'tcase')">案例解读</button></div>
-<div class="tp on" id="ti"><p>t检验用于两组比较，ANOVA用于多组比较，非参数检验用于不满足正态性的数据。配对设计用配对t检验。</p></div>
-<div class="tp" id="ts"><h4 style="font-size:.85rem;margin:.3rem 0">独立样本t检验</h4><ol><li>分析 → 比较均值 → 独立样本T检验</li><li>检验变量选入，分组变量定义组</li><li>确定</li></ol><h4 style="font-size:.85rem;margin:.3rem 0">单因素ANOVA</h4><ol><li>分析 → 比较均值 → 单因素ANOVA</li><li>因变量、因子选入</li><li>事后检验选LSD或Tukey</li></ol></div>
-<div class="tp" id="tr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># 模拟数据：两组血压比较
+qqnorm(data); qqline(data, col="red")</div></div></div><div class="tp" id="normality-t3"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from scipy import stats
+data = np.random.normal(100, 15, 50)
+stat, p = stats.shapiro(data)
+print(f'W={stat:.3f}, p={p:.4f}')
+import matplotlib.pyplot as plt
+stats.probplot(data, dist="norm", plot=plt); plt.show()</div></div></div><div class="tp" id="normality-t4"><div class="res-box"><div class="res-title">📋 正态性案例</div><div class="res-body"><strong>数据：</strong>50名患者收缩压<br><strong>结果：</strong>W=0.982, <span class=sig>P=0.234</span><br><strong>解读：</strong>P>0.05，不拒绝正态性。如不满足，可用非参数检验</div></div></div></div></div></div>
+<div class="cd" id="cd-homogeneity"><h3>方差齐性检验</h3><div class="ds"><strong>方法：</strong>Levene检验、Bartlett检验。t检验和ANOVA的前提。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'homogeneity-t0')">方法介绍</button><button class="tab" onclick="swT(this,'homogeneity-t1')">SPSS操作</button><button class="tab" onclick="swT(this,'homogeneity-t2')">R代码</button><button class="tab" onclick="swT(this,'homogeneity-t3')">Python代码</button><button class="tab" onclick="swT(this,'homogeneity-t4')">案例解读</button></div><div class="tp on" id="homogeneity-t0"><p>方差齐性指各组总体方差相等。Levene检验对非正态数据较稳健；Bartlett对正态敏感。ANOVA方差不齐时可用Welch校正或非参数替代。</p></div><div class="tp" id="homogeneity-t1"><ol><li>分析 -> 比较均值 -> 独立样本T检验</li><li>在结果中查看Levene方差齐性检验</li><li>P>0.05示方差齐，看第一行t结果</li><li>ANOVA中: 在选项勾选方差齐性检验</li></ol></div><div class="tp" id="homogeneity-t2"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># 方差齐性
 set.seed(123)
-group_A &lt;- rnorm(30, mean=130, sd=10)  # 治疗组
-group_B &lt;- rnorm(30, mean=140, sd=12)  # 对照组
-
-# 独立样本t检验
-t_result &lt;- t.test(group_A, group_B)
+g1 <- rnorm(30,100,10); g2 <- rnorm(30,110,15); g3 <- rnorm(30,105,12)
+var.test(g1,g2)
+library(car)
+leveneTest(c(g1,g2,g3), factor(rep(1:3,each=30)))
+t.test(g1,g2,var.equal=FALSE)  # Welch</div></div></div><div class="tp" id="homogeneity-t3"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from scipy import stats
+g1 = np.random.normal(100,10,30)
+g2 = np.random.normal(110,15,30)
+g3 = np.random.normal(105,12,30)
+stat, p = stats.levene(g1, g2, g3)
+print(f'Levene: stat={stat:.3f}, p={p:.4f}')</div></div></div><div class="tp" id="homogeneity-t4"><div class="res-box"><div class="res-title">📋 方差齐性案例</div><div class="res-body"><strong>结果：</strong>Levene F=2.34, <span class=sig>P=0.102</span><br><strong>解读：</strong>P>0.05，方差齐，满足ANOVA前提。</div></div></div></div></div></div>
+<div class="cd" id="cd-ind-ttest"><h3>独立样本t检验</h3><div class="ds"><strong>用途：</strong>比较两组独立样本的均值差异。前提：正态性+方差齐。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'ind-ttest-t0')">方法介绍</button><button class="tab" onclick="swT(this,'ind-ttest-t1')">SPSS操作</button><button class="tab" onclick="swT(this,'ind-ttest-t2')">R代码</button><button class="tab" onclick="swT(this,'ind-ttest-t3')">Python代码</button><button class="tab" onclick="swT(this,'ind-ttest-t4')">案例解读</button></div><div class="tp on" id="ind-ttest-t0"><p>独立样本t检验比较两组独立(不配对)样本的均值差异。要求数据近似正态且方差齐。不满足可用Welch校正或Mann-Whitney U检验。</p></div><div class="tp" id="ind-ttest-t1"><ol><li>分析 -> 比较均值 -> 独立样本T检验</li><li>检验变量和分组变量选入</li><li>定义组别名称(如 1=试验组, 2=对照组)</li><li>查看Levene检验判断方差齐性，阅读对应行t检验结果</li></ol></div><div class="tp" id="ind-ttest-t2"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># 独立样本t检验
+set.seed(123)
+treatment <- rnorm(35, 125, 10)
+control <- rnorm(35, 135, 12)
+t_result <- t.test(treatment, control, var.equal=TRUE)
 print(t_result)
-
-# 配对t检验（治疗前后）
-before &lt;- rnorm(20, mean=140, sd=15)
-after &lt;- before - rnorm(20, mean=8, sd=5)
+library(effsize); cohen.d(treatment, control)</div></div></div><div class="tp" id="ind-ttest-t3"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from scipy import stats
+treatment = np.random.normal(125,10,35)
+control = np.random.normal(135,12,35)
+t, p = stats.ttest_ind(treatment, control)
+print(f't={t:.3f}, p={p:.4f}')
+d = (np.mean(treatment)-np.mean(control)) / np.sqrt(
+    (np.var(treatment,ddof=1)+np.var(control,ddof=1))/2)
+print(f"Cohen's d={d:.3f}")</div></div></div><div class="tp" id="ind-ttest-t4"><div class="res-box"><div class="res-title">📋 独立t检验案例</div><div class="res-body"><strong>结果：</strong>试验组125.3±10.2 vs 对照组135.8±12.1<br><span class=sig>t=-3.87, df=68, P<0.001, 95%CI[-15.8,-5.2]</span><br><strong>解读：</strong>新药显著降低SBP，Cohen d=0.93(大效应)。</div></div></div></div></div></div>
+<div class="cd" id="cd-paired-ttest"><h3>配对t检验</h3><div class="ds"><strong>用途：</strong>比较配对样本的均值差异(如治疗前后、配对病例对照)。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'paired-ttest-t0')">方法介绍</button><button class="tab" onclick="swT(this,'paired-ttest-t1')">SPSS操作</button><button class="tab" onclick="swT(this,'paired-ttest-t2')">R代码</button><button class="tab" onclick="swT(this,'paired-ttest-t3')">Python代码</button><button class="tab" onclick="swT(this,'paired-ttest-t4')">案例解读</button></div><div class="tp on" id="paired-ttest-t0"><p>配对t检验用于同一组受试者在两个时间点或匹配条件下的均值比较。本质是对差值进行单样本t检验。优点: 消除个体间变异，统计效能更高。</p></div><div class="tp" id="paired-ttest-t1"><ol><li>分析 -> 比较均值 -> 成对样本T检验</li><li>将治疗前和治疗后变量选入成对变量</li><li>查看均值差、t值、df、P值、95%CI</li></ol></div><div class="tp" id="paired-ttest-t2"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># 配对t检验
+set.seed(123)
+before <- rnorm(25, 140, 15)
+after <- before - rnorm(25, 10, 5)
 t.test(before, after, paired=TRUE)
-
-# 单因素ANOVA（三组比较）
-group &lt;- factor(rep(c("A","B","C"), each=20))
-value &lt;- c(rnorm(20, 100, 10), rnorm(20, 110, 10), rnorm(20, 95, 10))
-aov_model &lt;- aov(value ~ group)
+# 效应量
+diff <- before - after
+cat("Cohen's d:", mean(diff)/sd(diff), "\n")</div></div></div><div class="tp" id="paired-ttest-t3"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from scipy import stats
+before = np.random.normal(140,15,25)
+after = before - np.random.normal(10,5,25)
+t, p = stats.ttest_rel(before, after)
+print(f'Paired t: t={t:.3f}, p={p:.4f}')
+d = np.mean(before-after)/np.std(before-after, ddof=1)
+print(f"d={d:.3f}")</div></div></div><div class="tp" id="paired-ttest-t4"><div class="res-box"><div class="res-title">📋 配对t案例</div><div class="res-body"><strong>结果：</strong>治疗前142.3→131.8<br><span class=sig>均值差=10.5, t=6.82, df=24, P<0.001</span></div></div></div></div></div></div>
+<div class="cd" id="cd-oneway-anova"><h3>单因素ANOVA</h3><div class="ds"><strong>用途：</strong>比较三组及以上独立样本的均值差异。事后检验：Tukey、LSD、Bonferroni。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'oneway-anova-t0')">方法介绍</button><button class="tab" onclick="swT(this,'oneway-anova-t1')">SPSS操作</button><button class="tab" onclick="swT(this,'oneway-anova-t2')">R代码</button><button class="tab" onclick="swT(this,'oneway-anova-t3')">Python代码</button><button class="tab" onclick="swT(this,'oneway-anova-t4')">案例解读</button></div><div class="tp on" id="oneway-anova-t0"><p>ANOVA用于比较三个或以上组的均值差异。F统计量=组间方差/组内方差。ANOVA显著只表明至少有一组不同，需要事后检验进行两两比较。</p></div><div class="tp" id="oneway-anova-t1"><ol><li>分析 -> 比较均值 -> 单因素ANOVA</li><li>因变量和因子选入</li><li>事后多重比较：方差齐选Tukey，不齐选Games-Howell</li><li>选项 -> 描述性 + 方差齐性检验</li><li>读取F值和P值，再看事后比较</li></ol></div><div class="tp" id="oneway-anova-t2"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># ANOVA
+set.seed(123)
+value <- c(rnorm(25,100,10), rnorm(25,110,10), rnorm(25,95,10))
+group <- factor(rep(c("A","B","C"), each=25))
+aov_model <- aov(value ~ group)
 summary(aov_model)
 TukeyHSD(aov_model)
-
-# 非参数替代
-wilcox.test(group_A, group_B)
-kruskal.test(value ~ group)</div></div></div>
-<div class="tp" id="tp"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import numpy as np
-from scipy import stats
+library(lsr); etaSquared(aov_model)</div></div></div><div class="tp" id="oneway-anova-t3"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import pandas as pd
 import statsmodels.api as sm
 from statsmodels.formula.api import ols
-
-np.random.seed(123)
-group_A = np.random.normal(130, 10, 30)
-group_B = np.random.normal(140, 12, 30)
-
-# 独立样本t检验
-t_stat, p = stats.ttest_ind(group_A, group_B)
-print(f't检验: t={t_stat:.3f}, p={p:.4f}')
-
-# ANOVA
-import pandas as pd
 df = pd.DataFrame({
-    'value': np.concatenate([np.random.normal(100,10,20),
-                             np.random.normal(110,10,20),
-                             np.random.normal(95,10,20)]),
-    'group': ['A']*20 + ['B']*20 + ['C']*20
+    'value': np.concatenate([np.random.normal(100,10,25),
+        np.random.normal(110,10,25),
+        np.random.normal(95,10,25)]),
+    'group': ['A']*25+['B']*25+['C']*25
 })
-model = ols('value ~ group', data=df).fit()
-print(sm.stats.anova_lm(model, typ=2))</div></div></div>
-<div class="tp" id="tcase"><div class="res-box"><div class="res-title">📋 案例：两种降压药的疗效比较</div><div class="res-body"><strong>研究：</strong>比较新药A与标准药B对高血压患者的降压效果<br><strong>数据：</strong>A组(n=30)收缩压: 130±10 mmHg, B组(n=30) 140±12 mmHg<br><strong>结果：</strong>t = -3.42, df=58, <span class="sig">p=0.001</span>, 95%CI [-15.8, -4.2]<br><strong>解读：</strong>新药A的降压效果显著优于标准药B (p&lt;0.01)，平均多降低10 mmHg。</div></div></div>
-</div>
-<br><strong>定性数据：</strong>卡方检验、Fisher确切概率法、McNemar检验<br><strong>相关分析：</strong>Pearson、Spearman、Kendall<br><strong>一致性：</strong>ICC、Kappa</p></div></div>
-
-<!-- 卡方检验 -->
-<div class="cd" id="cd-chi"><h3>定性数据检验</h3><div class="ds"><strong>方法：</strong>卡方检验、Fisher确切概率法、McNemar检验<button class="mb" onclick="togM(this)">查看详细操作</button>
-<div class="mx" style="display:none">
-<div class="tabs"><button class="tab on" onclick="swT(this,'ci')">方法介绍</button><button class="tab" onclick="swT(this,'cs')">SPSS操作</button><button class="tab" onclick="swT(this,'cr')">R代码</button><button class="tab" onclick="swT(this,'cp2')">Python代码</button></div>
-<div class="tp on" id="ci"><p>卡方检验用于分类数据关联性分析。2×2表用Pearson卡方；期望频数&lt;5时用Fisher确切概率法；配对设计用McNemar检验。</p></div>
-<div class="tp" id="cs"><ol><li>分析 → 描述统计 → 交叉表</li><li>行变量、列变量选入</li><li>统计 → 勾选"卡方"</li><li>期望频数&lt;5时勾选"Fisher精确检验"</li></ol></div>
-<div class="tp" id="cr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># 2×2列联表示例
-data &lt;- matrix(c(45, 30, 20, 50), nrow=2,
-               dimnames=list(治疗=c("药物","安慰剂"),
-                            结局=c("有效","无效")))
-print(data)
-chisq.test(data)
-fisher.test(data)
-
-# 配对McNemar检验
-paired &lt;- matrix(c(40, 10, 15, 35), nrow=2)
-mcnemar.test(paired)</div></div></div>
-<div class="tp" id="cp2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import numpy as np
-from scipy.stats import chi2_contingency, fisher_exact
-
-table = np.array([[45, 30], [20, 50]])
-chi2, p, dof, expected = chi2_contingency(table)
-print(f'卡方={chi2:.3f}, p={p:.4f}')
-
-odds_ratio, p_fisher = fisher_exact(table)
-print(f'Fisher OR={odds_ratio:.3f}, p={p_fisher:.4f}')</div></div></div>
-</div></div></div>
-
-<!-- 回归模型 (增强版) -->
-<div class="cd" id="cd-reg"><h3>回归模型</h3><div class="ds"><strong>类型：</strong>线性回归、Logistic回归、Cox回归<button class="mb" onclick="togM(this)">查看详细操作</button>
-<div class="mx" style="display:none">
-<div class="tabs"><button class="tab on" onclick="swT(this,'ri')">方法介绍</button><button class="tab" onclick="swT(this,'rs')">SPSS操作</button><button class="tab" onclick="swT(this,'rr')">R代码</button><button class="tab" onclick="swT(this,'rp')">Python代码</button></div>
-<div class="tp on" id="ri"><p>线性回归用于连续因变量，Logistic用于二分类因变量，Cox用于生存数据的风险因素分析。</p></div>
-<div class="tp" id="rs"><h4 style="font-size:.85rem;margin:.3rem 0">线性回归</h4><ol><li>分析 → 回归 → 线性</li><li>因变量、自变量选入对应框</li><li>方法选"进入"</li></ol></div>
-<div class="tp" id="rr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># 线性回归
+print(sm.stats.anova_lm(ols('value~group',data=df).fit(), typ=2))
+from statsmodels.stats.multicomp import pairwise_tukeyhsd
+print(pairwise_tukeyhsd(df['value'], df['group']))</div></div></div><div class="tp" id="oneway-anova-t4"><div class="res-box"><div class="res-title">📋 ANOVA案例</div><div class="res-body"><strong>结果：</strong><span class=sig>F=4.82, df=2,72, P=0.011</span><br><strong>事后：</strong>A vs C差异显著(P=0.008)。</div></div></div></div></div></div>
+<div class="cd" id="cd-rm-anova"><h3>重复测量ANOVA</h3><div class="ds"><strong>用途：</strong>同一组受试者多个时间点的测量比较。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'rm-anova-t0')">方法介绍</button><button class="tab" onclick="swT(this,'rm-anova-t1')">R代码</button><button class="tab" onclick="swT(this,'rm-anova-t2')">Python代码</button><button class="tab" onclick="swT(this,'rm-anova-t3')">案例解读</button></div><div class="tp on" id="rm-anova-t0"><p>重复测量ANOVA用于同一组受试者在三个或以上时间点的测量数据。需满足球形假设(Mauchly检验)。不满足时用Greenhouse-Geisser校正。</p></div><div class="tp" id="rm-anova-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># 重复测量ANOVA
+library(ez)
 set.seed(123)
-data &lt;- data.frame(
-  age = rnorm(100, 60, 10),
-  bmi = rnorm(100, 25, 3),
-  sbp = rnorm(100, 130, 15)
-)
-lm_model &lt;- lm(sbp ~ age + bmi, data=data)
+id <- factor(rep(1:20, each=3))
+time <- factor(rep(c("T0","T1","T2"), 20))
+value <- c(rnorm(20,140,10), rnorm(20,130,10), rnorm(20,125,10))
+rm_data <- data.frame(id, time, value)
+ezANOVA(data=rm_data, dv=value, wid=id, within=time, detailed=TRUE)</div></div></div><div class="tp" id="rm-anova-t2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import pandas as pd
+from statsmodels.stats.anova import AnovaRM
+df = pd.DataFrame({
+    'id': np.repeat(range(20), 3),
+    'time': np.tile(['T0','T1','T2'], 20),
+    'value': np.concatenate([np.random.normal(140,10,20),
+        np.random.normal(130,10,20),
+        np.random.normal(125,10,20)])
+})
+print(AnovaRM(df, 'value', 'id', within=['time']).fit())</div></div></div><div class="tp" id="rm-anova-t3"><div class="res-box"><div class="res-title">📋 重复测量案例</div><div class="res-body"><strong>结果：</strong><span class=sig>F=12.45, P<0.001</span><br><strong>解读：</strong>血压随时间显著下降(140→130→125mmHg)。</div></div></div></div></div></div>
+<div class="cd" id="cd-mannwhitney"><h3>Mann-Whitney U检验</h3><div class="ds"><strong>用途：</strong>两组独立样本的非参数检验。t检验的非参数替代，不要求正态性。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'mannwhitney-t0')">方法介绍</button><button class="tab" onclick="swT(this,'mannwhitney-t1')">SPSS操作</button><button class="tab" onclick="swT(this,'mannwhitney-t2')">R代码</button><button class="tab" onclick="swT(this,'mannwhitney-t3')">Python代码</button><button class="tab" onclick="swT(this,'mannwhitney-t4')">案例解读</button></div><div class="tp on" id="mannwhitney-t0"><p>Mann-Whitney U检验是独立t检验的非参数替代。基于秩次而非原始值，不要求正态分布。适用于有序分类变量或偏态连续变量。</p></div><div class="tp" id="mannwhitney-t1"><ol><li>分析 -> 非参数检验 -> 旧对话框 -> 2个独立样本</li><li>检验变量和分组变量选入</li><li>检验类型勾选Mann-Whitney U</li><li>查看U统计量和精确P值</li></ol></div><div class="tp" id="mannwhitney-t2"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># Mann-Whitney U检验
+set.seed(123)
+g1 <- rexp(25, 0.1); g2 <- rexp(25, 0.05)
+wilcox.test(g1, g2)
+cat("Median G1:", median(g1), "\nMedian G2:", median(g2), "\n")</div></div></div><div class="tp" id="mannwhitney-t3"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from scipy import stats
+g1 = np.random.exponential(10, 25)
+g2 = np.random.exponential(20, 25)
+stat, p = stats.mannwhitneyu(g1, g2)
+print(f'U={stat:.0f}, p={p:.4f}')</div></div></div><div class="tp" id="mannwhitney-t4"><div class="res-box"><div class="res-title">📋 Mann-Whitney案例</div><div class="res-body"><strong>结果：</strong>A组中位8天(IQR:5-12)，B组12天(IQR:7-18)<br><span class=sig>U=185.5, P=0.003</span></div></div></div></div></div></div>
+<div class="cd" id="cd-wilcoxon-sr"><h3>Wilcoxon符号秩检验</h3><div class="ds"><strong>用途：</strong>配对数据的非参数检验。配对t检验的非参数替代。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'wilcoxon-sr-t0')">方法介绍</button><button class="tab" onclick="swT(this,'wilcoxon-sr-t1')">R代码</button><button class="tab" onclick="swT(this,'wilcoxon-sr-t2')">Python代码</button><button class="tab" onclick="swT(this,'wilcoxon-sr-t3')">案例解读</button></div><div class="tp on" id="wilcoxon-sr-t0"><p>Wilcoxon符号秩检验是配对t检验的非参数替代。计算差值的绝对值排序后比较正负秩和。不要求差值正态。</p></div><div class="tp" id="wilcoxon-sr-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># Wilcoxon符号秩检验
+set.seed(123)
+before <- runif(20, 50, 100)
+after <- before - runif(20, 5, 20)
+wilcox.test(before, after, paired=TRUE)
+cat("Median diff:", median(before-after), "\n")</div></div></div><div class="tp" id="wilcoxon-sr-t2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from scipy import stats
+before = np.random.uniform(50,100,20)
+after = before - np.random.uniform(5,20,20)
+stat, p = stats.wilcoxon(before, after)
+print(f'W={stat:.0f}, p={p:.4f}')</div></div></div><div class="tp" id="wilcoxon-sr-t3"><div class="res-box"><div class="res-title">📋 Wilcoxon案例</div><div class="res-body"><strong>结果：</strong>治疗前VAS 7(IQR:5-8) → 3(IQR:2-5)<br><span class=sig>V=66.5, P=0.002</span></div></div></div></div></div></div>
+<div class="cd" id="cd-kruskal-wallis"><h3>Kruskal-Wallis检验</h3><div class="ds"><strong>用途：</strong>三组及以上独立样本的非参数ANOVA。事后：Dunn检验。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'kruskal-wallis-t0')">方法介绍</button><button class="tab" onclick="swT(this,'kruskal-wallis-t1')">R代码</button><button class="tab" onclick="swT(this,'kruskal-wallis-t2')">Python代码</button><button class="tab" onclick="swT(this,'kruskal-wallis-t3')">案例解读</button></div><div class="tp on" id="kruskal-wallis-t0"><p>Kruskal-Wallis检验是ANOVA的非参数替代。基于秩次比较分布差异。显著后需Dunn检验进行事后两两比较。</p></div><div class="tp" id="kruskal-wallis-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># Kruskal-Wallis
+set.seed(123)
+value <- c(rexp(20,0.1), rexp(20,0.08), rexp(20,0.05))
+group <- factor(rep(c("A","B","C"), each=20))
+kruskal.test(value ~ group)
+library(FSA); dunnTest(value ~ group, method="bonferroni")</div></div></div><div class="tp" id="kruskal-wallis-t2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from scipy import stats
+g1, g2, g3 = [np.random.exponential(r,20) for r in [10,12.5,20]]
+stat, p = stats.kruskal(g1, g2, g3)
+print(f'H={stat:.3f}, p={p:.4f}')</div></div></div><div class="tp" id="kruskal-wallis-t3"><div class="res-box"><div class="res-title">📋 Kruskal-Wallis案例</div><div class="res-body"><strong>结果：</strong><span class=sig>H=8.92, df=2, P=0.012</span><br>三种化疗方案的恶心评分存在显著差异。</div></div></div></div></div></div>
+<div class="cd" id="cd-chisq-test"><h3>卡方检验</h3><div class="ds"><strong>用途：</strong>检验分类变量间关联性。条件：期望频数≥5。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'chisq-test-t0')">方法介绍</button><button class="tab" onclick="swT(this,'chisq-test-t1')">SPSS操作</button><button class="tab" onclick="swT(this,'chisq-test-t2')">R代码</button><button class="tab" onclick="swT(this,'chisq-test-t3')">Python代码</button><button class="tab" onclick="swT(this,'chisq-test-t4')">案例解读</button></div><div class="tp on" id="chisq-test-t0"><p>卡方检验检验两个分类变量间的关联性。基本思想是比较观测频数与期望频数的差异。公式χ²=Σ(O-E)²/E。条件: 总样本≥40且所有期望频数≥5。</p></div><div class="tp" id="chisq-test-t1"><ol><li>分析 -> 描述统计 -> 交叉表</li><li>行变量和列变量选入</li><li>统计 -> 卡方</li><li>单元格 -> 期望频数和百分比</li><li>查看Pearson卡方值和P值</li></ol></div><div class="tp" id="chisq-test-t2"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># 卡方检验
+data <- matrix(c(45,30,20,50), nrow=2,
+  dimnames=list(Treatment=c("Drug","Placebo"), Outcome=c("有效","无效")))
+chi <- chisq.test(data)
+print(chi)
+cat("chi2 =", round(chi$statistic,3), ", P =", round(chi$p.value,4))
+library(rstatix); cramer_v(data)</div></div></div><div class="tp" id="chisq-test-t3"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from scipy.stats import chi2_contingency
+table = np.array([[45,30],[20,50]])
+chi2, p, dof, exp = chi2_contingency(table)
+print(f'chi2={chi2:.3f}, p={p:.4f}')
+n = table.sum()
+v = np.sqrt(chi2/(n*(min(table.shape)-1)))
+print(f"V={v:.3f}")</div></div></div><div class="tp" id="chisq-test-t4"><div class="res-box"><div class="res-title">📋 卡方案例</div><div class="res-body"><strong>结果：</strong><span class=sig>χ²=12.45, df=1, P<0.001</span>, V=0.35<br>吸烟组肺癌比例显著高于非吸烟组。</div></div></div></div></div></div>
+<div class="cd" id="cd-fisher-exact"><h3>Fisher精确检验</h3><div class="ds"><strong>用途：</strong>小样本或期望频数<5时分类变量的关联性检验。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'fisher-exact-t0')">方法介绍</button><button class="tab" onclick="swT(this,'fisher-exact-t1')">R代码</button><button class="tab" onclick="swT(this,'fisher-exact-t2')">Python代码</button><button class="tab" onclick="swT(this,'fisher-exact-t3')">案例解读</button></div><div class="tp on" id="fisher-exact-t0"><p>Fisher精确检验适用于2×2表期望频数<5时。基于超几何分布精确计算P值。提供OR值和精确置信区间。</p></div><div class="tp" id="fisher-exact-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># Fisher
+data <- matrix(c(4,10,12,25), nrow=2)
+f <- fisher.test(data)
+print(f)
+cat("OR =", round(f$estimate,3), ", P =", round(f$p.value,4))</div></div></div><div class="tp" id="fisher-exact-t2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from scipy.stats import fisher_exact
+table = np.array([[4,10],[12,25]])
+or_, p = fisher_exact(table)
+print(f'OR={or_:.3f}, p={p:.4f}')</div></div></div><div class="tp" id="fisher-exact-t3"><div class="res-box"><div class="res-title">📋 Fisher案例</div><div class="res-body"><strong>结果：</strong><span class=sig>P=0.039, OR=8.33</span><br>治疗组有效比例显著高于对照组，但样本量小。</div></div></div></div></div></div>
+<div class="cd" id="cd-linear-reg"><h3>线性回归</h3><div class="ds"><strong>用途：</strong>多个自变量对连续因变量的影响。前提：线性、独立、正态、方差齐。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'linear-reg-t0')">方法介绍</button><button class="tab" onclick="swT(this,'linear-reg-t1')">SPSS操作</button><button class="tab" onclick="swT(this,'linear-reg-t2')">R代码</button><button class="tab" onclick="swT(this,'linear-reg-t3')">Python代码</button><button class="tab" onclick="swT(this,'linear-reg-t4')">案例解读</button></div><div class="tp on" id="linear-reg-t0"><p>线性回归建模连续因变量与自变量的线性关系。Y=β₀+β₁X₁+...+ε。核心前提: 线性关系、残差独立、残差正态、方差齐。R²解释模型拟合度。</p></div><div class="tp" id="linear-reg-t1"><ol><li>分析 -> 回归 -> 线性</li><li>因变量和自变量选入</li><li>统计 -> 估计、模型拟合、Durbin-Watson</li><li>绘制 -> 残差图检查方差齐性</li></ol></div><div class="tp" id="linear-reg-t2"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># 线性回归
+set.seed(123)
+data <- data.frame(age=rnorm(100,60,10), bmi=rnorm(100,25,3))
+data$sbp <- 80 + 0.5*data$age + 1.2*data$bmi + rnorm(100,0,8)
+lm_model <- lm(sbp ~ age + bmi, data=data)
 summary(lm_model)
 confint(lm_model)
+par(mfrow=c(2,2)); plot(lm_model)</div></div></div><div class="tp" id="linear-reg-t3"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import statsmodels.api as sm
+X = sm.add_constant(df[['age','bmi']])
+model = sm.OLS(df['sbp'], X).fit()
+print(model.summary())
+print(f'R2 = {model.rsquared:.3f}')</div></div></div><div class="tp" id="linear-reg-t4"><div class="res-box"><div class="res-title">📋 线性回归案例</div><div class="res-body"><strong>结果：</strong>年龄β=0.48(P<0.001), BMI β=1.15(P=0.002)<br><span class=sig>R²=0.42, 调整R²=0.41</span><br>年龄和BMI解释SBP变异的42%。</div></div></div></div></div></div>
+<div class="cd" id="cd-logistic-reg"><h3>Logistic回归</h3><div class="ds"><strong>用途：</strong>二分类因变量建模(发病/未发病)。输出OR值。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'logistic-reg-t0')">方法介绍</button><button class="tab" onclick="swT(this,'logistic-reg-t1')">SPSS操作</button><button class="tab" onclick="swT(this,'logistic-reg-t2')">R代码</button><button class="tab" onclick="swT(this,'logistic-reg-t3')">Python代码</button><button class="tab" onclick="swT(this,'logistic-reg-t4')">案例解读</button></div><div class="tp on" id="logistic-reg-t0"><p>Logistic回归用于二分类因变量建模。自变量对log-odds线性影响，指数化转为OR。最大似然估计参数。似然比检验用于模型比较。</p></div><div class="tp" id="logistic-reg-t1"><ol><li>分析 -> 回归 -> 二元Logistic</li><li>因变量和协变量选入</li><li>分类变量点击分类指定</li><li>选项 -> HL检验、CI for exp(B)</li><li>读取B、OR、95%CI、P值</li></ol></div><div class="tp" id="logistic-reg-t2"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># Logistic
+set.seed(123)
+age <- rnorm(200,60,10); bmi <- rnorm(200,25,3)
+smoking <- rbinom(200,1,0.3)
+logit <- -3+0.05*age+0.08*bmi+0.8*smoking
+disease <- rbinom(200,1,plogis(logit))
+model <- glm(disease~age+bmi+smoking, family=binomial())
+summary(model)
+OR <- exp(cbind(OR=coef(model), confint(model)))
+print(round(OR,3))</div></div></div><div class="tp" id="logistic-reg-t3"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">X = sm.add_constant(df[['age','bmi','smoking']])
+model = sm.Logit(df['disease'], X).fit()
+print('OR:', np.exp(model.params))
+print('95%CI:', np.exp(model.conf_int()))</div></div></div><div class="tp" id="logistic-reg-t4"><div class="res-box"><div class="res-title">📋 Logistic案例</div><div class="res-body"><strong>结果：</strong>吸烟 OR=2.24(95%CI:1.42-3.56, P<0.001)<br><strong>解读：</strong>调整年龄和BMI后，吸烟者冠心病风险是非吸烟者的2.24倍。</div></div></div></div></div></div>
+<div class="cd" id="cd-poisson-reg"><h3>Poisson回归</h3><div class="ds"><strong>用途：</strong>计数数据建模(发病率、死亡率)。偏移量处理人年数据。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'poisson-reg-t0')">方法介绍</button><button class="tab" onclick="swT(this,'poisson-reg-t1')">R代码</button><button class="tab" onclick="swT(this,'poisson-reg-t2')">Python代码</button><button class="tab" onclick="swT(this,'poisson-reg-t3')">案例解读</button></div><div class="tp on" id="poisson-reg-t0"><p>Poisson回归用于计数数据建模。连接函数为log，系数指数化为发生率比(IRR)。要求均值=方差(等离散)。过离散时用负二项回归。</p></div><div class="tp" id="poisson-reg-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># Poisson
+set.seed(123)
+age <- rnorm(100,50,12); smoking <- rbinom(100,1,0.3)
+pyears <- rep(1000,100)
+lam <- exp(-3+0.03*age+0.5*smoking)
+events <- rpois(100, lam*pyears/1000)
+model <- glm(events~age+smoking+offset(log(pyears)), family=poisson())
+summary(model)
+IRR <- exp(cbind(IRR=coef(model), confint(model)))
+print(round(IRR,3))</div></div></div><div class="tp" id="poisson-reg-t2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">model = sm.GLM(df['events'], X, family=sm.families.Poisson()).fit()
+print('IRR:', np.exp(model.params))</div></div></div><div class="tp" id="poisson-reg-t3"><div class="res-box"><div class="res-title">📋 Poisson案例</div><div class="res-body"><strong>结果：</strong>吸烟 IRR=1.85(95%CI:1.42-2.41, P<0.001)<br><strong>解读：</strong>调整年龄后，吸烟者肺癌发病率是非吸烟者的1.85倍。</div></div></div></div></div></div>
+<div class="cd" id="cd-pearson-corr"><h3>Pearson相关</h3><div class="ds"><strong>用途：</strong>两个连续变量的线性相关。前提：双变量正态。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'pearson-corr-t0')">方法介绍</button><button class="tab" onclick="swT(this,'pearson-corr-t1')">SPSS操作</button><button class="tab" onclick="swT(this,'pearson-corr-t2')">R代码</button><button class="tab" onclick="swT(this,'pearson-corr-t3')">Python代码</button><button class="tab" onclick="swT(this,'pearson-corr-t4')">案例解读</button></div><div class="tp on" id="pearson-corr-t0"><p>Pearson相关系数r衡量线性相关强度。|r|<0.3弱，0.3-0.7中等，>0.7强相关。前提: 两变量近似正态且关系呈线性。</p></div><div class="tp" id="pearson-corr-t1"><ol><li>分析 -> 相关 -> 双变量</li><li>变量选入，勾选Pearson</li><li>查看r值和P值</li></ol></div><div class="tp" id="pearson-corr-t2"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># Pearson
+set.seed(123)
+x <- rnorm(50,100,15); y <- 0.6*x + rnorm(50,0,10)
+cor.test(x, y, method="pearson")
+plot(x,y,col="#0d9488"); abline(lm(y~x),col="red")</div></div></div><div class="tp" id="pearson-corr-t3"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from scipy import stats
+r, p = stats.pearsonr(x, y)
+print(f'r={r:.3f}, p={p:.4f}')
+z = np.arctanh(r); se = 1/np.sqrt(len(x)-3)
+ci = np.tanh(z + np.array([-1,1])*1.96*se)
+print(f'95%CI: [{ci[0]:.3f}, {ci[1]:.3f}]')</div></div></div><div class="tp" id="pearson-corr-t4"><div class="res-box"><div class="res-title">📋 Pearson案例</div><div class="res-body"><strong>结果：</strong><span class=sig>r=0.52, P<0.001</span>, 95%CI[0.35,0.68]<br>BMI与SBP呈中等正相关。</div></div></div></div></div></div>
+<div class="cd" id="cd-spearman-corr"><h3>Spearman相关</h3><div class="ds"><strong>用途：</strong>非参数相关。适用于偏态或有序数据。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'spearman-corr-t0')">方法介绍</button><button class="tab" onclick="swT(this,'spearman-corr-t1')">R代码</button><button class="tab" onclick="swT(this,'spearman-corr-t2')">Python代码</button><button class="tab" onclick="swT(this,'spearman-corr-t3')">案例解读</button></div><div class="tp on" id="spearman-corr-t0"><p>Spearman秩相关是Pearson的非参数替代。基于秩次，衡量单调相关。对异常值不敏感，适用于有序变量或偏态分布。</p></div><div class="tp" id="spearman-corr-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># Spearman
+set.seed(123)
+x <- rexp(30,0.1); y <- x^2 + runif(30,0,50)
+cor.test(x, y, method="spearman")</div></div></div><div class="tp" id="spearman-corr-t2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from scipy import stats
+rho, p = stats.spearmanr(x, y)
+print(f'rho={rho:.3f}, p={p:.4f}')</div></div></div><div class="tp" id="spearman-corr-t3"><div class="res-box"><div class="res-title">📋 Spearman案例</div><div class="res-body"><strong>结果：</strong><span class=sig>ρ=-0.38, P=0.008</span><br>住院天数与满意度呈弱负相关。</div></div></div></div></div></div>
+<div class="cd" id="cd-icc"><h3>ICC组内相关系数</h3><div class="ds"><strong>用途：</strong>评价连续变量测量的一致性/信度。>0.75良好，>0.9优秀。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'icc-t0')">方法介绍</button><button class="tab" onclick="swT(this,'icc-t1')">R代码</button><button class="tab" onclick="swT(this,'icc-t2')">Python代码</button><button class="tab" onclick="swT(this,'icc-t3')">案例解读</button></div><div class="tp on" id="icc-t0"><p>ICC用于评价连续变量测量一致性。不同类型对应不同设计: ICC(1,1)随机选评价者; ICC(2,1)固定评价者; ICC(3,1)一致性测量。</p></div><div class="tp" id="icc-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># ICC
+library(irr)
+r1 <- rnorm(20,50,10); r2 <- r1 + rnorm(20,0,3)
+icc(data.frame(r1,r2), model="twoway", type="consistency")
 
-# Logistic回归
-data$hypertension &lt;- ifelse(data$sbp > 130, 1, 0)
-logit_model &lt;- glm(hypertension ~ age + bmi,
-                   data=data, family=binomial())
-summary(logit_model)
-exp(cbind(OR=coef(logit_model), confint(logit_model)))
-
-# Cox回归
-library(survival)
-data$time &lt;- rexp(100, rate=0.1)
-data$status &lt;- rbinom(100, 1, 0.7)
-cox_model &lt;- coxph(Surv(time, status) ~ age + bmi,
-                    data=data)
-summary(cox_model)</div></div></div>
-<div class="tp" id="rp"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import statsmodels.api as sm
-import pandas as pd
-import numpy as np
-
-np.random.seed(123)
+library(psych)
+multi <- data.frame(r1=rnorm(20,50,10), r2=rnorm(20,50,10)+rnorm(20,0,3), r3=rnorm(20,50,10)+rnorm(20,0,4))
+ICC(multi)</div></div></div><div class="tp" id="icc-t2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import pingouin as pg
 df = pd.DataFrame({
-    'age': np.random.normal(60, 10, 100),
-    'bmi': np.random.normal(25, 3, 100),
-    'sbp': np.random.normal(130, 15, 100)
+    'target': np.repeat(range(20),2),
+    'rater': np.tile(['A','B'],20),
+    'score': np.concatenate([r1, r2])
 })
-X = sm.add_constant(df[['age', 'bmi']])
-y = df['sbp']
-model = sm.OLS(y, X).fit()
-print(model.summary())</div></div></div>
-</div>
-<br><strong>纵向数据：</strong>GEE、线性混合模型<br><strong>因果推断：</strong>PSM、IPTW、工具变量、断点回归、双重差分<br><strong>其他：</strong>中介分析、多重插补、竞争风险模型、结构方程模型</p></div></div>
-
-<!-- 相关 -->
-<div class="cd"><h3>相关与一致性分析</h3><div class="ds"><strong>相关：</strong>Pearson、Spearman、Kendall<button class="mb" onclick="togM(this)">查看详细操作</button>
-<div class="mx" style="display:none">
-<div class="tabs"><button class="tab on" onclick="swT(this,'coi')">方法介绍</button><button class="tab" onclick="swT(this,'cor')">R代码</button><button class="tab" onclick="swT(this,'cop')">Python代码</button></div>
-<div class="tp on" id="coi"><p>Pearson用于正态连续变量，Spearman用于非正态或有序数据。</p></div>
-<div class="tp" id="cor"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">cor.test(data$x, data$y, method="pearson")
-cor.test(data$x, data$y, method="spearman")
-cor.test(data$x, data$y, method="kendall")
-
-# 相关矩阵
-cor(data[, c("age","bmi","sbp")])
-library(psych)
-corr.test(data[, c("age","bmi","sbp")])</div></div></div>
-<div class="tp" id="cop"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from scipy.stats import pearsonr, spearmanr
-r, p = pearsonr(data['x'], data['y'])
-r, p = spearmanr(data['x'], data['y'])
-
-# 相关矩阵
-df[['age','bmi','sbp']].corr(method='pearson')</div></div></div>
-</div>
-<br><strong>一致性：</strong>ICC、Kappa<button class="mb" onclick="togM(this)">查看一致性代码</button>
-<div class="mx" style="display:none">
-<div class="tabs"><button class="tab on" onclick="swT(this,'ici')">方法介绍</button><button class="tab" onclick="swT(this,'icr')">R代码</button><button class="tab" onclick="swT(this,'icp')">Python代码</button></div>
-<div class="tp on" id="ici"><p>ICC评价连续变量测量一致性，Kappa评价分类变量一致性。</p></div>
-<div class="tp" id="icr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(irr)
-icc(data, model="twoway", type="consistency")
-kappa2(rater1, rater2)</div></div></div>
-<div class="tp" id="icp"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import pingouin as pg
-icc = pg.intraclass_corr(data, targets='subject',
-                         raters='rater', ratings='score')
-print(icc)</div></div></div>
-</div></div></div>
-
-<!-- 诊断试验 -->
-<div class="cd" id="cd-dx"><h3>诊断试验评价</h3><div class="ds"><strong>核心指标：</strong>灵敏度、特异度、约登指数<br><strong>预测值：</strong>PPV、NPV、似然比<br><strong>综合评价：</strong>ROC曲线、AUC、校准曲线<button class="mb" onclick="togM(this)">查看详解</button>
-<div class="mx" style="display:none">
-<div class="tabs"><button class="tab on" onclick="swT(this,'dxr')">R代码</button><button class="tab" onclick="swT(this,'dxp')">Python代码</button></div>
-<div class="tp on" id="dxr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(pROC)
+print(pg.intraclass_corr(df, 'target', 'rater', 'score'))</div></div></div><div class="tp" id="icc-t3"><div class="res-box"><div class="res-title">📋 ICC案例</div><div class="res-body"><strong>结果：</strong><span class=sig>ICC(2,1)=0.87, 95%CI[0.78-0.93]</span><br>评分者间一致性良好。</div></div></div></div></div></div>
+<div class="cd" id="cd-kappa"><h3>Kappa一致性</h3><div class="ds"><strong>用途：</strong>分类变量的一致性评价。加权Kappa用于有序分类。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'kappa-t0')">方法介绍</button><button class="tab" onclick="swT(this,'kappa-t1')">R代码</button><button class="tab" onclick="swT(this,'kappa-t2')">Python代码</button><button class="tab" onclick="swT(this,'kappa-t3')">案例解读</button></div><div class="tp on" id="kappa-t0"><p>Kappa系数评价两个评价者对分类变量的一致性，校正了随机一致。Kappa≥0.75一致性好，0.4-0.75中等，<0.4差。加权Kappa用于有序分类。</p></div><div class="tp" id="kappa-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># Kappa
+library(irr)
+r1 <- c(1,1,1,0,1,0,0,0,1,1)
+r2 <- c(1,1,1,1,1,0,0,0,0,0)
+kappa2(cbind(r1, r2))
+# 加权Kappa
+ord1 <- c(1,2,3,2,1,2,3,3,2,1)
+ord2 <- c(1,2,3,2,2,2,3,2,2,1)
+kappa2(cbind(ord1, ord2), weight="squared")</div></div></div><div class="tp" id="kappa-t2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from sklearn.metrics import cohen_kappa_score
+r1 = [1,1,1,0,1,0,0,0,1,1]
+r2 = [1,1,1,1,1,0,0,0,0,0]
+kappa = cohen_kappa_score(r1, r2)
+print(f'Kappa = {kappa:.3f}')
+wkappa = cohen_kappa_score(r1, r2, weights='linear')
+print(f'Weighted Kappa = {wkappa:.3f}')</div></div></div><div class="tp" id="kappa-t3"><div class="res-box"><div class="res-title">📋 Kappa案例</div><div class="res-body"><strong>结果：</strong><span class=sig>Kappa=0.78, P<0.001</span><br>两名诊断医生的判断一致性良好。</div></div></div></div></div></div>
+<div class="cd" id="cd-dx-indices"><h3>诊断试验指标</h3><div class="ds"><strong>核心：</strong>灵敏度(Se)、特异度(Sp)、PPV、NPV、似然比(LR)、约登指数。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'dx-indices-t0')">方法介绍</button><button class="tab" onclick="swT(this,'dx-indices-t1')">R代码</button><button class="tab" onclick="swT(this,'dx-indices-t2')">Python代码</button><button class="tab" onclick="swT(this,'dx-indices-t3')">案例解读</button></div><div class="tp on" id="dx-indices-t0"><p>诊断试验指标评价诊断方法的准确性。Se=TP/(TP+FN)，Sp=TN/(TN+FP)。PPV为阳性预测值，NPV为阴性预测值。LR+=Se/(1-Sp)，LR-=(1-Se)/Sp。约登指数=Se+Sp-1。</p></div><div class="tp" id="dx-indices-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># 诊断指标
 set.seed(123)
-score &lt;- c(rnorm(50, 70, 15), rnorm(50, 50, 15))
-true &lt;- c(rep(1,50), rep(0,50))
-roc_obj &lt;- roc(true, score)
-auc(roc_obj)
-plot(roc_obj, col="blue", main="ROC Curve")
-# 最佳切点
-coords(roc_obj, "best", best.method="youden")</div></div></div>
-<div class="tp" id="dxp"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from sklearn.metrics import roc_curve, auc, roc_auc_score
-import numpy as np
-np.random.seed(123)
-score = np.concatenate([np.random.normal(70,15,50),
-                        np.random.normal(50,15,50)])
-true = np.array([1]*50 + [0]*50)
-fpr, tpr, thresholds = roc_curve(true, score)
+gold <- rbinom(200,1,0.3)
+test <- ifelse(gold==1, rbinom(200,1,0.85), rbinom(200,1,0.15))
+TP=sum(test==1&gold==1); FP=sum(test==1&gold==0)
+FN=sum(test==0&gold==1); TN=sum(test==0&gold==0)
+cat("Se:", round(TP/(TP+FN),3), "\nSp:", round(TN/(TN+FP),3))
+cat("PPV:", round(TP/(TP+FP),3), "\nNPV:", round(TN/(TN+FN),3))
+cat("LR+:", round((TP/(TP+FN))/(1-TN/(TN+FP)),2))
+cat("\nLR-:", round((1-TP/(TP+FN))/(TN/(TN+FP)),2))
+library(epiR); epi.tests(data.frame(TP,FP,FN,TN))</div></div></div><div class="tp" id="dx-indices-t2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from sklearn.metrics import confusion_matrix
+gold = np.random.binomial(1,0.3,200)
+test = np.where(gold==1, np.random.binomial(1,0.85,200), np.random.binomial(1,0.15,200))
+cm = confusion_matrix(gold, test)
+TP, FP, FN, TN = cm[1,1], cm[0,1], cm[1,0], cm[0,0]
+se=TP/(TP+FN); sp=TN/(TN+FP)
+ppv=TP/(TP+FP); npv=TN/(TN+FN)
+print(f'Se={se:.3f}, Sp={sp:.3f}, PPV={ppv:.3f}, NPV={npv:.3f}')
+print(f'LR+={se/(1-sp):.2f}, LR-={(1-se)/sp:.2f}')</div></div></div><div class="tp" id="dx-indices-t3"><div class="res-box"><div class="res-title">📋 诊断指标案例</div><div class="res-body"><strong>结果：</strong>Se=0.85, Sp=0.85, LR+=5.67<br><span class=sig>PPV=0.71, NPV=0.93</span><br>阴性预测值高，阴性结果可较好排除疾病。</div></div></div></div></div></div>
+<div class="cd" id="cd-roc-curve"><h3>ROC曲线</h3><div class="ds"><strong>用途：</strong>评价诊断试验/预测模型的判别能力。AUC、最佳切点、Se、Sp。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'roc-curve-t0')">方法介绍</button><button class="tab" onclick="swT(this,'roc-curve-t1')">SPSS操作</button><button class="tab" onclick="swT(this,'roc-curve-t2')">R代码</button><button class="tab" onclick="swT(this,'roc-curve-t3')">Python代码</button><button class="tab" onclick="swT(this,'roc-curve-t4')">案例解读</button></div><div class="tp on" id="roc-curve-t0"><p>ROC曲线以1-特异度为横轴、灵敏度为纵轴绘制。AUC综合评价: 0.5无判别，0.7-0.8可接受，0.8-0.9优秀。最佳切点用约登指数确定。DeLong检验比较两个AUC。</p></div><div class="tp" id="roc-curve-t1"><ol><li>分析 -> ROC曲线</li><li>检验变量选入预测概率，状态变量选入金标准</li><li>状态变量值设为1(阳性)</li><li>选项 -> AUC置信区间和坐标点</li></ol></div><div class="tp" id="roc-curve-t2"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># ROC
+library(pROC)
+set.seed(123)
+score <- c(rnorm(50,70,15), rnorm(50,50,15))
+true <- c(rep(1,50), rep(0,50))
+roc_obj <- roc(true, score)
+cat("AUC:", round(auc(roc_obj),3), "\n95%CI:", round(ci.auc(roc_obj),3))
+best <- coords(roc_obj, "best", best.method="youden")
+print(best)
+plot(roc_obj, col="#0d9488", lwd=2)</div></div></div><div class="tp" id="roc-curve-t3"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from sklearn.metrics import roc_curve, auc
+fpr, tpr, thr = roc_curve(true, score)
 roc_auc = auc(fpr, tpr)
-print(f'AUC = {roc_auc:.3f}')</div></div></div>
-</div>
-<br><strong>报告规范：</strong><a href="https://www.stard-statement.org/" target="_blank" rel="noopener">STARD</a></div></div>
-
-<!-- 主成分/因子分析 -->
-<div class="cd"><h3>PCA与因子分析</h3><div class="ds">降维、结构探索、多重共线性处理<button class="mb" onclick="togM(this)">查看代码</button>
-<div class="mx" style="display:none">
-<div class="tabs"><button class="tab on" onclick="swT(this,'pcar')">R代码</button><button class="tab" onclick="swT(this,'pcap')">Python代码</button></div>
-<div class="tp on" id="pcar"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># PCA
-pca &lt;- prcomp(data[, c("x1","x2","x3")], scale=TRUE)
-summary(pca)
-plot(pca, type="l")  # 碎石图
-biplot(pca)
-
-# 因子分析
-library(psych)
-fa &lt;- fa(data, nfactors=2, rotate="varimax")
-print(fa$loadings, cutoff=0.3)</div></div></div>
-<div class="tp" id="pcap"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from sklearn.decomposition import PCA
+print(f'AUC={roc_auc:.3f}')
+youden = tpr - fpr
+best = thr[np.argmax(youden)]
+print(f'Best threshold={best:.2f}')</div></div></div><div class="tp" id="roc-curve-t4"><div class="res-box"><div class="res-title">📋 ROC案例</div><div class="res-body"><strong>结果：</strong><span class=sig>AUC=0.87, 95%CI[0.82-0.92]</span><br>最佳切点NT-proBNP>450pg/mL: Se=0.82, Sp=0.79</div></div></div></div></div></div>
+<div class="cd" id="cd-calibration"><h3>校准曲线</h3><div class="ds"><strong>用途：</strong>评价预测模型的校准度—预测概率与实际概率的一致性。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'calibration-t0')">方法介绍</button><button class="tab" onclick="swT(this,'calibration-t1')">R代码</button><button class="tab" onclick="swT(this,'calibration-t2')">Python代码</button><button class="tab" onclick="swT(this,'calibration-t3')">案例解读</button></div><div class="tp on" id="calibration-t0"><p>校准曲线展示预测概率与实际观测概率的一致性。完美校准沿45°对角线。HL检验不显著=校准良好。Brier Score综合评估判别和校准。</p></div><div class="tp" id="calibration-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># 校准曲线
+library(rms)
+set.seed(123)
+n <- 300
+data <- data.frame(age=rnorm(n,60,10), bmi=rnorm(n,25,3), smoking=rbinom(n,1,0.3))
+logit <- -3+0.05*data$age+0.08*data$bmi+0.8*data$smoking
+data$disease <- rbinom(n, 1, plogis(logit))
+dd <- datadist(data); options(datadist="dd")
+model <- lrm(disease~age+bmi+smoking, data=data, x=TRUE, y=TRUE)
+cal <- calibrate(model, B=200)
+plot(cal, xlab="Predicted", ylab="Actual")</div></div></div><div class="tp" id="calibration-t2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from sklearn.calibration import calibration_curve
 import matplotlib.pyplot as plt
+prob_pred, prob_true = calibration_curve(y_true, y_pred, n_bins=10)
+plt.plot(prob_pred, prob_true, marker='o')
+plt.plot([0,1],[0,1], 'k--'); plt.show()
+from sklearn.metrics import brier_score_loss
+print(f'Brier Score = {brier_score_loss(y_true, y_pred):.4f}')</div></div></div><div class="tp" id="calibration-t3"><div class="res-box"><div class="res-title">📋 校准案例</div><div class="res-body"><strong>结果：</strong>校准曲线接近45°对角线<br>HL检验P=0.342(>0.05，校准良好)<br>Brier Score=0.12<0.25(有临床价值)</div></div></div></div></div></div>
+<div class="cd" id="cd-pca"><h3>PCA主成分分析</h3><div class="ds"><strong>用途：</strong>降维、多重共线性处理、高维数据可视化。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'pca-t0')">方法介绍</button><button class="tab" onclick="swT(this,'pca-t1')">R代码</button><button class="tab" onclick="swT(this,'pca-t2')">Python代码</button><button class="tab" onclick="swT(this,'pca-t3')">案例解读</button></div><div class="tp on" id="pca-t0"><p>PCA将多个相关变量转为不相关主成分(原始变量的线性组合)。第一主成分方差最大。需对变量标准化。用于降维、去共线性、探索数据结构。</p></div><div class="tp" id="pca-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># PCA
+set.seed(123)
+data <- data.frame(x1=rnorm(100,50,10), x2=0.7*x1+rnorm(100,0,5),
+                   x3=0.5*x1+0.3*x2+rnorm(100,0,4), x4=rnorm(100,30,8))
+pca <- prcomp(data, scale=TRUE)
+summary(pca)
+print(pca$rotation[,1:2])
+screeplot(pca, type="lines"); abline(h=1,lty=2,col="red")
+biplot(pca)</div></div></div><div class="tp" id="pca-t2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
 pca = PCA(n_components=2)
-X_pca = pca.fit_transform(df_scaled)
-print(f'解释方差: {pca.explained_variance_ratio_}')
-plt.bar(range(1,3), pca.explained_variance_ratio_)</div></div></div>
-</div></div></div>
-
-<!-- 聚类 -->
-<div class="cd"><h3>聚类分析</h3><div class="ds">K-means、层次聚类、最佳K选择<button class="mb" onclick="togM(this)">查看代码</button>
-<div class="mx" style="display:none">
-<div class="tabs"><button class="tab on" onclick="swT(this,'clr')">R代码</button><button class="tab" onclick="swT(this,'clp')">Python代码</button></div>
-<div class="tp on" id="clr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># K-means聚类
+X_pca = pca.fit_transform(StandardScaler().fit_transform(df))
+print(f'Explained variance: {pca.explained_variance_ratio_}')
+print(f'Cumulative: {np.cumsum(pca.explained_variance_ratio_)}')</div></div></div><div class="tp" id="pca-t3"><div class="res-box"><div class="res-title">📋 PCA案例</div><div class="res-body"><strong>结果：</strong>前2个主成分解释68%方差<br>PC1=代谢负荷(BMI+血糖+血脂), PC2=炎症因子</div></div></div></div></div></div>
+<div class="cd" id="cd-efa"><h3>EFA探索性因子分析</h3><div class="ds"><strong>用途：</strong>探索变量背后的潜在结构/因子。旋转：Varimax(正交)、Promax(斜交)。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'efa-t0')">方法介绍</button><button class="tab" onclick="swT(this,'efa-t1')">R代码</button><button class="tab" onclick="swT(this,'efa-t2')">Python代码</button><button class="tab" onclick="swT(this,'efa-t3')">案例解读</button></div><div class="tp on" id="efa-t0"><p>EFA假设观测变量由潜在因子决定，用于问卷结构效度评价。与PCA不同，因子分析有测量误差模型。旋转使因子载荷更清晰。KMO>0.6且Bartlett P<0.05表示适合做EFA。</p></div><div class="tp" id="efa-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># EFA
+library(psych)
 set.seed(123)
-km &lt;- kmeans(data, centers=3, nstart=25)
-data$cluster &lt;- km$cluster
-
-# 层次聚类
-hc &lt;- hclust(dist(data), method="ward.D2")
-plot(hc)
-# 剪为3类
-groups &lt;- cutree(hc, k=3)</div></div></div>
-<div class="tp" id="clp"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from sklearn.cluster import KMeans
-from scipy.cluster.hierarchy import dendrogram, linkage
-
-kmeans = KMeans(n_clusters=3, random_state=123)
-df['cluster'] = kmeans.fit_predict(df_scaled)
-
+data <- data.frame(q1=rnorm(200,3,1), q2=0.6*q1+rnorm(200,0,0.8),
+                   q3=0.7*q1+rnorm(200,0,0.7), q4=rnorm(200,3,1),
+                   q5=0.5*q4+rnorm(200,0,0.9), q6=0.6*q4+rnorm(200,0,0.8))
+KMO(cor(data))
+cortest.bartlett(cor(data), n=200)
+fa <- fa(data, nfactors=2, rotate="varimax")
+print(fa$loadings, cutoff=0.3)</div></div></div><div class="tp" id="efa-t2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from factor_analyzer import FactorAnalyzer, calculate_kmo
+from factor_analyzer.factor_analyzer import calculate_bartlett_sphericity
+kmo_all, kmo = calculate_kmo(df)
+print(f'KMO = {kmo:.3f}')
+chi2, p = calculate_bartlett_sphericity(df)
+print(f'Bartlett: p={p:.4f}')
+fa = FactorAnalyzer(n_factors=2, rotation='varimax')
+fa.fit(df)
+print('Loadings:', fa.loadings_)</div></div></div><div class="tp" id="efa-t3"><div class="res-box"><div class="res-title">📋 EFA案例</div><div class="res-body"><strong>结果：</strong>KMO=0.82, Bartlett P<0.001<br>2个因子解释58%方差: 因子1=躯体症状, 因子2=心理症状<br>问卷结构效度良好。</div></div></div></div></div></div>
+<div class="cd" id="cd-kmeans"><h3>K-means聚类</h3><div class="ds"><strong>用途：</strong>将样本划分为K个簇。基于距离的硬聚类。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'kmeans-t0')">方法介绍</button><button class="tab" onclick="swT(this,'kmeans-t1')">R代码</button><button class="tab" onclick="swT(this,'kmeans-t2')">Python代码</button><button class="tab" onclick="swT(this,'kmeans-t3')">案例解读</button></div><div class="tp on" id="kmeans-t0"><p>K-means将数据划分为K个簇，每个样本属于最近的质心。需指定K值。最佳K可通过肘部法则(降低曲线)或轮廓系数选择。</p></div><div class="tp" id="kmeans-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># K-means
+set.seed(123)
+data <- data.frame(x1=rnorm(150,c(0,5,10),1.5), x2=rnorm(150,c(0,5,10),1.5))
+wss <- sapply(1:8, function(k) kmeans(data,k,nstart=25)$tot.withinss)
+plot(1:8,wss,type="b",xlab="K",ylab="WSS")
+km <- kmeans(data, centers=3, nstart=25)
+plot(data$x1, data$x2, col=km$cluster, pch=19)
+points(km$centers, col=1:3, pch=8, cex=2)</div></div></div><div class="tp" id="kmeans-t2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from sklearn.cluster import KMeans
+from sklearn.metrics import silhouette_score
+kmeans = KMeans(n_clusters=3, random_state=123, n_init=25)
+df['cluster'] = kmeans.fit_predict(X)
+sil = silhouette_score(X, df['cluster'])
+print(f'Silhouette = {sil:.3f}')</div></div></div><div class="tp" id="kmeans-t3"><div class="res-box"><div class="res-title">📋 K-means案例</div><div class="res-body"><strong>结果：</strong>K=3最优(轮廓系数0.62)<br>簇1: 年轻+轻度代谢异常 | 簇2: 中年+中重度 | 簇3: 老年+多并发症</div></div></div></div></div></div>
+<div class="cd" id="cd-hclust"><h3>层次聚类</h3><div class="ds"><strong>用途：</strong>无需预设K的聚类。输出树状图。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'hclust-t0')">方法介绍</button><button class="tab" onclick="swT(this,'hclust-t1')">R代码</button><button class="tab" onclick="swT(this,'hclust-t2')">Python代码</button><button class="tab" onclick="swT(this,'hclust-t3')">案例解读</button></div><div class="tp on" id="hclust-t0"><p>层次聚类按层次聚合(自底向上)或分裂(自顶向下)。不需预指定K，树状图直观展示聚类层次。常见连接法: ward.D2、complete、average。</p></div><div class="tp" id="hclust-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># 层次聚类
+set.seed(123)
+data <- data.frame(x1=rnorm(50,c(0,5,10),1.5), x2=rnorm(50,c(0,5,10),1.5))
+dist_m <- dist(data, method="euclidean")
+hc <- hclust(dist_m, method="ward.D2")
+plot(hc, main="Dendrogram", xlab="", sub="")
+rect.hclust(hc, k=3, border=1:3)
+groups <- cutree(hc, k=3)
+print(table(groups))</div></div></div><div class="tp" id="hclust-t2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">from scipy.cluster.hierarchy import dendrogram, linkage, fcluster
 Z = linkage(df_scaled, method='ward')
-plt.figure(figsize=(10,5))
-dendrogram(Z)
-plt.show()</div></div></div>
-</div></div></div>
-
-<!-- 中介分析 -->
-<div class="cd"><h3>中介分析</h3><div class="ds">X→M→Y 路径分析<button class="mb" onclick="togM(this)">查看代码</button>
-<div class="mx" style="display:none">
-<div class="tabs"><button class="tab on" onclick="swT(this,'medr')">R代码</button><button class="tab" onclick="swT(this,'medp')">Python代码</button></div>
-<div class="tp on" id="medr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(mediation)
+dendrogram(Z); plt.show()
+clusters = fcluster(Z, t=3, criterion='maxclust')
+print(pd.Series(clusters).value_counts())</div></div></div><div class="tp" id="hclust-t3"><div class="res-box"><div class="res-title">📋 层次聚类案例</div><div class="res-body"><strong>结果：</strong>树状图显示3个主要腐瘤亚型，与临床预后相关<br>发现新的疾病亚型。</div></div></div></div></div></div>
+<div class="cd" id="cd-mediation"><h3>中介分析</h3><div class="ds"><strong>用途：</strong>检验X通过M影响Y的间接路径(中介效应)。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'mediation-t0')">方法介绍</button><button class="tab" onclick="swT(this,'mediation-t1')">R代码</button><button class="tab" onclick="swT(this,'mediation-t2')">Python代码</button><button class="tab" onclick="swT(this,'mediation-t3')">案例解读</button></div><div class="tp on" id="mediation-t0"><p>中介分析检验X是否通过M影响Y。总效应=直接效应(c')+间接效应(a×b)。Bootstrap法检验间接效应(不要求正态)。</p></div><div class="tp" id="mediation-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># 中介分析
+library(mediation)
 set.seed(123)
-data &lt;- data.frame(
-  X = rnorm(100),
-  M = rnorm(100) + 0.5*data$X,
-  Y = rnorm(100) + 0.3*data$M + 0.2*data$X
-)
-model_M &lt;- lm(M ~ X, data=data)
-model_Y &lt;- lm(Y ~ X + M, data=data)
-med &lt;- mediate(model_M, model_Y, treat="X",
-               mediator="M", boot=TRUE, sims=1000)
-summary(med)</div></div></div>
-<div class="tp" id="medp"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import statsmodels.api as sm
-# Bootstrap中介分析
-# X→M 和 X+M→Y 两个回归
-model_m = sm.OLS(M, sm.add_constant(X)).fit()
-model_y = sm.OLS(Y, sm.add_constant(pd.concat([X,M],axis=1))).fit()
-# 间接效应 = a*b
-indirect = model_m.params['X'] * model_y.params['M']</div></div></div>
-</div></div></div>
-
+n <- 200
+data <- data.frame(X=rnorm(n), M=0.5*X+rnorm(n), Y=0.3*M+0.2*X+rnorm(n))
+model_M <- lm(M ~ X, data=data)
+model_Y <- lm(Y ~ X + M, data=data)
+med <- mediate(model_M, model_Y, treat="X", mediator="M", boot=TRUE, sims=1000)
+summary(med)
+cat("ACME:", med$d0, "\nDirect:", med$z0, "\nProp:", med$n.avg)</div></div></div><div class="tp" id="mediation-t2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">a_m = sm.OLS(df['M'], sm.add_constant(df['X'])).fit()
+b_m = sm.OLS(df['Y'], sm.add_constant(df[['X','M']])).fit()
+indirect = a_m.params['X'] * b_m.params['M']
+direct = b_m.params['X']
+total = indirect + direct
+print(f'Indirect={indirect:.3f}, Direct={direct:.3f}')
+print(f'Mediation ratio={indirect/total:.1%}')</div></div></div><div class="tp" id="mediation-t3"><div class="res-box"><div class="res-title">📋 中介案例</div><div class="res-body"><strong>结果：</strong>间接效应=0.12(P=0.002), 直接效应=0.08(P=0.124)<br><strong>解读：</strong>健康素养完全中介SES对健康的影响(中介比例~60%)。</div></div></div></div></div></div>
+<div class="cd" id="cd-moderation"><h3>调节效应</h3><div class="ds"><strong>用途：</strong>检验调节变量W是否改变X对Y的影响方向/强度(交互作用)。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'moderation-t0')">方法介绍</button><button class="tab" onclick="swT(this,'moderation-t1')">R代码</button><button class="tab" onclick="swT(this,'moderation-t2')">Python代码</button><button class="tab" onclick="swT(this,'moderation-t3')">案例解读</button></div><div class="tp on" id="moderation-t0"><p>调节效应检验X对Y的效应是否依赖于调节变量W。核心是交互项X×W的回归系数。交互项显著即存在调节效应。连续变量需中心化。</p></div><div class="tp" id="moderation-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># 调节效应
+set.seed(123)
+n <- 200; X <- rnorm(n); W <- rnorm(n)
+Y <- 0.3*X + 0.2*W + 0.4*X*W + rnorm(n)
+data <- data.frame(X, W, Y)
+data$X_c <- scale(data$X, scale=FALSE)
+data$W_c <- scale(data$W, scale=FALSE)
+data$XW <- data$X_c * data$W_c
+mod <- lm(Y ~ X_c + W_c + XW, data=data)
+summary(mod)
+library(interactions); sim_slopes(mod, pred=X_c, modx=W_c)</div></div></div><div class="tp" id="moderation-t2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">df['X_c'] = df['X']-df['X'].mean()
+df['W_c'] = df['W']-df['W'].mean()
+df['XW'] = df['X_c']*df['W_c']
+X = sm.add_constant(df[['X_c','W_c','XW']])
+model = sm.OLS(df['Y'], X).fit()
+print(model.summary())
+# 交互项显著→存在调节效应</div></div></div><div class="tp" id="moderation-t3"><div class="res-box"><div class="res-title">📋 调节效应案例</div><div class="res-body"><strong>结果：</strong>运动×年龄交互项β=0.03, <span class=sig>P=0.008</span><br><strong>解读：</strong>年龄调节了运动对血压的效果—年轻人运动降压效果更明显。</div></div></div></div></div></div>
 </div><!-- end stats -->
 
 <!-- ============ 机器学习 ============ -->
@@ -1971,19 +2053,19 @@ var DT=[
     {t:'生存数据（含时间+事件）',n:3},{t:'有序多分类',n:4},{t:'无序多分类',n:5}
   ]},
   {q:'比较几组？',opts:[
-    {t:'2组 → 独立样本t检验',n:-1,go:'cd-ttest'},{t:'3组+ → 单因素ANOVA',n:-1,go:'cd-ttest'}
+    {t:'2组 → 独立样本t检验',n:-1,go:'cd-ind-ttest'},{t:'3组+ → 单因素ANOVA',n:-1,go:'cd-oneway-anova'}
   ]},
   {q:'自变量有几个？',opts:[
-    {t:'1个 → 卡方检验',n:-1,go:'cd-chi'},{t:'多个 → Logistic回归',n:-1,go:'cd-reg'}
+    {t:'1个 → 卡方检验',n:-1,go:'cd-chisq-test'},{t:'多个 → Logistic回归',n:-1,go:'cd-logistic-reg'}
   ]},
   {q:'分析目的？',opts:[
-    {t:'组间差异 → Log-rank',n:-1,go:'cd-ttest'},{t:'多因素风险 → Cox',n:-1,go:'cd-reg'}
+    {t:'组间差异 → Log-rank',n:-1,go:'cd-kruskal-wallis'},{t:'多因素风险 → Cox回归',n:-1,go:'cd-logistic-reg'}
   ]},
   {q:'比较几组？',opts:[
-    {t:'2组 → Wilcoxon',n:-1,go:'cd-ttest'},{t:'3组+ → Kruskal-Wallis',n:-1,go:'cd-ttest'}
+    {t:'2组 → Mann-Whitney U',n:-1,go:'cd-mannwhitney'},{t:'3组+ → Kruskal-Wallis',n:-1,go:'cd-kruskal-wallis'}
   ]},
   {q:'比较几组？',opts:[
-    {t:'2组 → Pearson卡方',n:-1,go:'cd-chi'},{t:'3组+ → 卡方+事后比较',n:-1,go:'cd-chi'}
+    {t:'2组 → Pearson卡方',n:-1,go:'cd-chisq-test'},{t:'3组+ → 卡方+事后比较',n:-1,go:'cd-chisq-test'}
   ]}
 ];
 var dtH=[];
