@@ -1338,8 +1338,8 @@ model.fit(df)
 future = model.make_future_dataframe(periods=12, freq="M")
 fc = model.predict(future)
 model.plot(fc).show()
-model.plot_components(fc).show()</div></div></div><div class="tp" id="prophet-t3"><div class="res-box"><div class="res-title">📋 Prophet案例</div><div class="res-body">数据：2020-2024年某医院月度门诊量<br>结果：模型拟合良好，周期性波动被成功捕捗<br>解读：2025年门诊量预计保持上升趋势，季节性高峰出现在冬季呼吸道疾病高发期。</div></div></div></div></div></div>
-<div class="cd" id="cd-lstm-ts"><h3>LSTM时间序列预测</h3><div class="ds">用途：深度学习方法，适合复杂模式和长期依赖的时间序列。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'lstm-ts-t0')">方法介绍</button><button class="tab" onclick="swT(this,'lstm-ts-t1')">R代码</button><button class="tab" onclick="swT(this,'lstm-ts-t2')">Python代码</button><button class="tab" onclick="swT(this,'lstm-ts-t3')">案例解读</button></div><div class="tp on" id="lstm-ts-t0"><p>LSTM（Long Short-Term Memory）是循环神经网络的变种，通过徘徊门机制解决了传统RNN的梯度消失问题。LSTM能捕捗时间序列中的长期依赖关系，适合复杂模式的时间序列预测。需要注意：需要先处理数据创建观测窗口，通常比统计方法需要更多数据。</p></div><div class="tp" id="lstm-ts-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(keras)
+model.plot_components(fc).show()</div></div></div><div class="tp" id="prophet-t3"><div class="res-box"><div class="res-title">📋 Prophet案例</div><div class="res-body">数据：2020-2024年某医院月度门诊量<br>结果：模型拟合良好，周期性波动被成功捕捉<br>解读：2025年门诊量预计保持上升趋势，季节性高峰出现在冬季呼吸道疾病高发期。</div></div></div></div></div></div>
+<div class="cd" id="cd-lstm-ts"><h3>LSTM时间序列预测</h3><div class="ds">用途：深度学习方法，适合复杂模式和长期依赖的时间序列。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'lstm-ts-t0')">方法介绍</button><button class="tab" onclick="swT(this,'lstm-ts-t1')">R代码</button><button class="tab" onclick="swT(this,'lstm-ts-t2')">Python代码</button><button class="tab" onclick="swT(this,'lstm-ts-t3')">案例解读</button></div><div class="tp on" id="lstm-ts-t0"><p>LSTM（Long Short-Term Memory）是循环神经网络的变种，通过徘徊门机制解决了传统RNN的梯度消失问题。LSTM能捕捉时间序列中的长期依赖关系，适合复杂模式的时间序列预测。需要注意：需要先处理数据创建观测窗口，通常比统计方法需要更多数据。</p></div><div class="tp" id="lstm-ts-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(keras)
 # 生成模拟数据
 set.seed(123)
 n <- 300
@@ -1386,7 +1386,7 @@ model.compile(optimizer="adam", loss="mse")
 model.fit(X[:200], Y[:200], epochs=50, batch_size=16,
           validation_split=0.2, verbose=0)
 pred = model.predict(X[200:290], verbose=0)
-print("Prediction shape:", pred.shape)</div></div></div><div class="tp" id="lstm-ts-t3"><div class="res-box"><div class="res-title">📋 LSTM案例</div><div class="res-body">数据：模拟的周期性生物标志物测定时间序列<br>结果：LSTM成功学习了波形模式，MSE=0.015<br>解读：深度学习方法在捕捗复杂循环模式方面优于传统统计方法，但需要较多数据和调参。</div></div></div></div></div></div>
+print("Prediction shape:", pred.shape)</div></div></div><div class="tp" id="lstm-ts-t3"><div class="res-box"><div class="res-title">📋 LSTM案例</div><div class="res-body">数据：模拟的周期性生物标志物测定时间序列<br>结果：LSTM成功学习了波形模式，MSE=0.015<br>解读：深度学习方法在捕捉复杂循环模式方面优于传统统计方法，但需要较多数据和调参。</div></div></div></div></div></div>
 <div class="cd" id="cd-var"><h3>VAR向量自回归</h3><div class="ds">用途：多变量时间序列分析，同时预测多个相互关联的变量。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'var-t0')">方法介绍</button><button class="tab" onclick="swT(this,'var-t1')">R代码</button><button class="tab" onclick="swT(this,'var-t2')">Python代码</button><button class="tab" onclick="swT(this,'var-t3')">案例解读</button></div><div class="tp on" id="var-t0"><p>VAR（Vector Autoregression）是多变量时间序列的经典模型，同时建模多个时间序列的动态关系。VAR(p)表示包含P阶滞后项。核心优势：无需区分内生和外生变量，所有变量均等待处。通常用于宏观经济和卫生政策评估。</p></div><div class="tp" id="var-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(vars)
 set.seed(123)
 n <- 200
@@ -1697,7 +1697,7 @@ plt.xlabel("天数"); plt.ylabel("人数")
 plt.title(f"SEIR模型 (R0={beta/gamma:.1f}, 潜伏期={1/sigma:.0f}天)")
 plt.legend(); plt.grid(alpha=0.3); plt.show()
 print(f"R0 = {beta/gamma:.1f}")
-print(f"潜伏期 = {1/sigma:.0f}天")</div></div></div><div class="tp" id="seir-model-t3"><div class="res-box"><div class="res-title">📋 SEIR案例</div><div class="res-body">场景：cOVID-19传播模拟，潜伏期5天，R₀=3.0<br>结果：感染高峰在约70天，比SIR模型延迟约一倍<br>解读：潜伏期的存在显著延缓了疫情高峰，但总体爆发规模仍然巨大，提醒早期干预至关重要。</div></div></div></div></div></div>
+print(f"潜伏期 = {1/sigma:.0f}天")</div></div></div><div class="tp" id="seir-model-t3"><div class="res-box"><div class="res-title">📋 SEIR案例</div><div class="res-body">场景：COVID-19传播模拟，潜伏期5天，R₀=3.0<br>结果：感染高峰在约70天，比SIR模型延迟约一倍<br>解读：潜伏期的存在显著延缓了疫情高峰，但总体爆发规模仍然巨大，提醒早期干预至关重要。</div></div></div></div></div></div>
 <div class="cd" id="cd-stochastic-seir"><h3>随机SEIR模型</h3><div class="ds">用途：考虑随机性的传染病模型，适合小规模人群爆发模拟。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'stochastic-seir-t0')">方法介绍</button><button class="tab" onclick="swT(this,'stochastic-seir-t1')">R代码</button><button class="tab" onclick="swT(this,'stochastic-seir-t2')">Python代码</button><button class="tab" onclick="swT(this,'stochastic-seir-t3')">案例解读</button></div><div class="tp on" id="stochastic-seir-t0"><p>随机SEIR模型使用二项分布/泊松分布替代微分方程，反映传染过程的随机性。在小人群中，随机性可能导致疫情自行熔灭或爆发。每步计算新感染者~Binom(S, βI/N)，新潜伏转感染者~Binom(E, σ)，新康复者~Binom(I, γ)。</p></div><div class="tp" id="stochastic-seir-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># 随机SEIR模型 (离散时间)
 set.seed(42)
 N <- 500; S <- N-1; E <- 0; I <- 1; R <- 0
@@ -1766,7 +1766,7 @@ final_sizes = [run_one_sim()[-1,3] for _ in range(sims)]
 plt.subplot(122)
 plt.hist(final_sizes, bins=15)
 plt.title(f"100次模拟最终感染分布"); plt.xlabel("康复人数")
-plt.tight_layout(); plt.show()</div></div></div><div class="tp" id="stochastic-seir-t3"><div class="res-box"><div class="res-title">📋 随机SEIR案例</div><div class="res-body">场景：小城镇500人的传染病爆发模拟<br>结果：约15%ME模拟中疫情自行熔灭，85%爆发<br>解读：随机模型揭示了小人群中的重要现象——即便R₀>1，随机性也可使疫情未必爆发。</div></div></div></div></div></div>
+plt.tight_layout(); plt.show()</div></div></div><div class="tp" id="stochastic-seir-t3"><div class="res-box"><div class="res-title">📋 随机SEIR案例</div><div class="res-body">场景：小城镇500人的传染病爆发模拟<br>结果：约15%的模拟中疫情自行熔灭，85%爆发<br>解读：随机模型揭示了小人群中的重要现象——即便R₀>1，随机性也可使疫情未必爆发。</div></div></div></div></div></div>
 <div class="cd" id="cd-branching"><h3>Branching传播链模型</h3><div class="ds">用途：基于再生数的传播链模型，评估爆发概率和传播链长度。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'branching-t0')">方法介绍</button><button class="tab" onclick="swT(this,'branching-t1')">R代码</button><button class="tab" onclick="swT(this,'branching-t2')">Python代码</button><button class="tab" onclick="swT(this,'branching-t3')">案例解读</button></div><div class="tp on" id="branching-t0"><p>Branching过程将传染病传播视为一个传播链，每个感染者产生的二代病例数服从某分布(如泊松分布、负二项分布)。核心概念：时空再生数R（复制数），R<1时传播链必然熔灭，R>1时有正概率爆发。</p></div><div class="tp" id="branching-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># Branching过程模拟
 set.seed(123)
 # 负二项分布(过度离散)
@@ -2189,8 +2189,8 @@ function togM(btn){
   var open=box.style.display==='block';
   box.style.display=open?'none':'block';
   btn.textContent=open
-    ?(TRANS[LANG]['hide-details']||'收起详细内容')
-    :(TRANS[LANG]['view-details']||'查看详细操作');
+    ?(TRANS[LANG]['view-details']||'查看详细操作')
+    :(TRANS[LANG]['hide-details']||'收起详细内容');
 }
 
 // 教程展开/收起（传染病建模）
@@ -2269,7 +2269,7 @@ var TRANS={
   zh:{
     'lang-btn':'EN','slide-lang-btn':'English','nav-title':'导航菜单',
     'nav-home':'首页','nav-stats':'统计方法','nav-ml':'机器学习','nav-bayes':'贝叶斯统计',
-    'nav-meta':'Meta分析','nav-wechat':'公众号教程','nav-survival':'生存分析',''nav-time-series':'时间序列','nav-modeling':'传染病建模',,'nav-psm':'因果推断',
+    'nav-meta':'Meta分析','nav-wechat':'公众号教程','nav-survival':'生存分析','nav-time-series':'时间序列','nav-modeling':'传染病建模','nav-psm':'因果推断',
     'nav-bioinfo':'生物信息学','nav-db':'公共数据库','nav-tools':'科研工具','nav-ai':'AI工具',
     'nav-scales':'医学量表','nav-cases':'实操案例','nav-reporting':'报告规范',
     'banner-title':'医学科研一站式学习平台',
@@ -2295,7 +2295,7 @@ var TRANS={
   en:{
     'lang-btn':'中','slide-lang-btn':'中文','nav-title':'Navigation',
     'nav-home':'Home','nav-stats':'Statistics','nav-ml':'ML','nav-bayes':'Bayesian',
-    'nav-meta':'Meta Analysis','nav-wechat':'Tutorials','nav-survival':'Survival',''nav-time-series':'Time Series','nav-modeling':'Modeling',,'nav-psm':'Causal Inference',
+    'nav-meta':'Meta Analysis','nav-wechat':'Tutorials','nav-survival':'Survival','nav-time-series':'Time Series','nav-modeling':'Modeling','nav-psm':'Causal Inference',
     'nav-bioinfo':'Bioinformatics','nav-db':'Databases','nav-tools':'Tools','nav-ai':'AI Tools',
     'nav-scales':'Scales','nav-cases':'Case Studies','nav-reporting':'Guidelines',
     'banner-title':'Medical Research & Statistics Hub',
@@ -2338,8 +2338,16 @@ function applyLang(){
   document.querySelectorAll('[data-i18n]').forEach(function(el){
     var key=el.getAttribute('data-i18n');
     if(t[key]){
-      if(el.tagName==='INPUT'||el.tagName==='TEXTAREA'){el.setAttribute('placeholder',t[key])}
-      else{el.textContent=t[key]}
+      if(el.tagName==='INPUT'||el.tagName==='TEXTAREA'){el.setAttribute('placeholder',t[key]);return}
+      // 展开/收起按钮：根据卡片实际状态选用正确文本
+      if(key==='view-details'||key==='hide-details'){
+        var box=el.nextElementSibling;
+        el.textContent=box&&box.style.display==='block'
+          ?(t['hide-details']||'收起详细内容')
+          :(t['view-details']||'查看详细操作');
+        return;
+      }
+      el.textContent=t[key];
     }
   });
 }
