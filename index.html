@@ -2656,35 +2656,30 @@ function buildToc(){
     ? {toc:'目录导航',stats:'📊 统计方法',ml:'🤖 机器学习',bayes:'🔮 贝叶斯',meta:'📋 Meta分析',roc:'📈 ROC曲线',survival:'⏳ 生存分析',psm:'⚖️ 因果推断',bioinfo:'🧬 生物信息',sample:'🧮 样本量','time-series':'📈 时间序列',modeling:'📈 传染病建模',db:'💾 数据库',tools:'🔬 工具',ai:'🤖 AI',scales:'📋 量表',cases:'📝 案例',wechat:'📱 教程',reporting:'📋 规范','missing-data':'🔧 缺失数据','clinical':'🏥 临床研究'}
     : {toc:'Contents',stats:'Statistics',ml:'Machine Learning',bayes:'Bayesian',meta:'Meta Analysis',roc:'ROC Curve',survival:'Survival',psm:'Causal Inference',bioinfo:'Bioinformatics',sample:'Sample Size','time-series':'Time Series',modeling:'Modeling',db:'Databases',tools:'Tools',ai:'AI Tools',scales:'Scales',cases:'Cases',wechat:'Tutorials',reporting:'Guidelines','missing-data':'Missing Data','clinical':'Clinical'};
   var items=[
-    {l:'─ '+tl.stats+' ─',h:'#cat-a',cls:'toc-cat'},
-    {l:tl.stats,h:'#stats',cls:'toc-l2'},
-    {l:tl.survival,h:'#survival',cls:'toc-l2'},
-    {l:tl.roc,h:'#roc',cls:'toc-l2'},
-    {l:tl['missing-data'],h:'#missing-data',cls:'toc-l2'},
-    {l:tl['time-series'],h:'#time-series',cls:'toc-l2'},
-    {l:tl.sample,h:'#sample-size',cls:'toc-l2'},
-    {l:'─ '+tl.psm+' ─',h:'#cat-b',cls:'toc-cat'},
-    {l:'─ '+tl.ml+' ─',h:'#cat-c',cls:'toc-cat'},
-    {l:tl.ml,h:'#ml-section',cls:'toc-l2'},
-    {l:tl.bayes,h:'#bayes',cls:'toc-l2'},
-    {l:tl.meta,h:'#meta',cls:'toc-l2'},
-    {l:tl.modeling,h:'#modeling',cls:'toc-l2'},
-    {l:'─ '+tl.reporting+' ─',h:'#reporting',cls:'toc-cat'},
-    {l:'─ '+tl.clinical+' ─',h:'#cat-d',cls:'toc-cat'},
-    {l:tl.clinical,h:'#clinical',cls:'toc-l2'},
-    {l:'─ '+tl.bioinfo+' ─',h:'#cat-e',cls:'toc-cat'},
-    {l:tl.bioinfo,h:'#bioinfo',cls:'toc-l2'},
-    {l:tl.db,h:'#databases',cls:'toc-l2'},
-    {l:tl.tools,h:'#tools',cls:'toc-l2'},
-    {l:tl.ai,h:'#ai',cls:'toc-l2'},
-    {l:tl.scales,h:'#scales',cls:'toc-l2'},
-    {l:tl.cases,h:'#cases',cls:'toc-l2'},
-    {l:tl.wechat,h:'#wechat',cls:'toc-l2'}
+    {l:tl.stats,h:'#stats'},
+    {l:tl.survival,h:'#survival'},
+    {l:tl.roc,h:'#roc'},
+    {l:tl['missing-data'],h:'#missing-data'},
+    {l:tl['time-series'],h:'#time-series'},
+    {l:tl.sample,h:'#sample-size'},
+    {l:tl.psm,h:'#psm'},
+    {l:tl.ml,h:'#ml-section'},
+    {l:tl.bayes,h:'#bayes'},
+    {l:tl.meta,h:'#meta'},
+    {l:tl.modeling,h:'#modeling'},
+    {l:tl.reporting,h:'#reporting'},
+    {l:tl.clinical,h:'#clinical'},
+    {l:tl.bioinfo,h:'#bioinfo'},
+    {l:tl.db,h:'#databases'},
+    {l:tl.tools,h:'#tools'},
+    {l:tl.ai,h:'#ai'},
+    {l:tl.scales,h:'#scales'},
+    {l:tl.cases,h:'#cases'},
+    {l:tl.wechat,h:'#wechat'}
   ];
   var h='<div style="padding:0 .8rem .3rem;font-size:.75rem;color:var(--tx3);border-bottom:1px solid var(--bd);margin-bottom:.3rem">'+tl.toc+'</div>';
   for(var i=0;i<items.length;i++){
-    var cls=items[i].cls||'toc-l1';
-    h+='<a class="'+cls+'" href="'+items[i].h+'">'+items[i].l+'</a>';
+    h+='<a class="toc-l1" href="'+items[i].h+'">'+items[i].l+'</a>';
   }
   el.innerHTML=h;
   el.querySelectorAll('a').forEach(function(a){
