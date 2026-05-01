@@ -1748,6 +1748,7 @@ function togArticle(el){
   var body=el.querySelector('.wc-article-body');
   if(!body)return;
   body.classList.toggle('on');
+  if(body.classList.contains('on'))renderCB();
 }
 
 /* ==================== TOC侧边栏 ==================== */
@@ -1839,11 +1840,14 @@ function hl(code,lang){
   return h;
 }
 function renderCB(){
-  document.querySelectorAll('.cy[data-lang]').forEach(function(el){
-    var lang=el.getAttribute('data-lang'),raw=el.textContent.trim(),hled=hl(raw,lang);
+  document.querySelectorAll('.cy[data-lang]:not(.cy[data-processed])').forEach(function(el){
+    var lang=el.getAttribute('data-lang'),raw=el.textContent.trim();
+    if(!raw)return;
+    var hled=hl(raw,lang);
     var lines=hled.split('\n'),html='';
-    for(var j=0;j<lines.length;j++)html+='<span class="ln">'+(lines[j]||' ')+'</span>';
+    for(var j=0;j<lines.length;j++)html+='<span class="ln">'+lines[j]+'</span>\n';
     el.innerHTML=html;
+    el.setAttribute('data-processed','1');
   });
 }
 
@@ -1852,35 +1856,38 @@ function renderCB(){
 
 /* ==================== v3.0: English Data Arrays ==================== */
 var DBS_EN=[
-  ['Global Public Health',['WHO','https://www.who.int/','World Health Organization'],['CDC','https://www.cdc.gov/','US CDC'],['GHDx','https://ghdx.healthdata.org/','Global Health Data Exchange'],['Our World in Data','https://ourworldindata.org/','Global health trends']],
-  ['Critical Care',['MIMIC-IV','https://mimic.mit.edu/','Critical care database'],['eICU','https://eicu-crd.mit.edu/','Collaborative Research Database']],
-  ['Cohort Studies',['UK Biobank','https://www.ukbiobank.ac.uk/','Large-scale biomedical database'],['NHANES','https://www.cdc.gov/nchs/nhanes/','US health survey'],['CHARLS','https://charls.pku.edu.cn/','China aging study'],['CLHLS','https://www.icpsr.umich.edu/','Longevity study']],
-  ['Cancer Genomics',['TCGA','https://www.cancer.gov/ccg/research/genome-sequencing/tcga','Cancer genome atlas'],['GDC','https://portal.gdc.cancer.gov/','Genomic Data Commons'],['SEER','https://seer.cancer.gov/','Surveillance & epidemiology'],['cBioPortal','https://www.cbioportal.org/','Cancer genomics portal']],
-  ['Chinese Databases',['CNCB','https://www.cncb.ac.cn/','China National Center for Bioinfo'],['CNGB','https://www.cngb.org/','China National GeneBank'],['NMDC','https://nmdc.cn/','Microbiome database']],
+  ['Global Public Health',['WHO','https://www.who.int/','World Health Organization'],['CDC','https://www.cdc.gov/','US CDC'],['GBD','https://ghdx.healthdata.org/','Global Burden of Disease'],['World Bank','https://www.worldbank.org/','World Bank Open Data'],['WHO GHO','https://apps.who.int/gho/','Global Health Observatory']],
+  ['Critical Care',['MIMIC-IV','https://mimic.mit.edu/','Critical care database'],['eICU','https://eicu-crd.mit.edu/','Collaborative Research Database'],['PhysioNet','https://www.physionet.org/','Physiological signals']],
+  ['Cohort Studies',['UK Biobank','https://www.ukbiobank.ac.uk/','Large-scale biomedical database'],['NHANES','https://www.cdc.gov/nchs/nhanes/','US health survey'],['CHARLS','https://charls.pku.edu.cn/','China aging study']],
+  ['Cancer Genomics',['TCGA','https://www.cancer.gov/ccg/research/genome-sequencing/tcga','Cancer genome atlas'],['GDC','https://portal.gdc.cancer.gov/','Genomic Data Commons'],['SEER','https://seer.cancer.gov/','Surveillance & epidemiology'],['cBioPortal','https://www.cbioportal.org/','Cancer genomics portal'],['STRING','https://string-db.org/','Protein-protein interaction']],
+  ['Pharmacology',['DrugBank','https://www.drugbank.com/','Drug database'],['PharmGKB','https://www.pharmgkb.org/','Pharmacogenomics'],['PubChem','https://pubchem.ncbi.nlm.nih.gov/','Compound structure']],
+  ['Rare Diseases',['Orphanet','https://www.orpha.net/','Rare diseases'],['OMIM','https://omim.org/','Mendelian inheritance'],['ClinVar','https://www.ncbi.nlm.nih.gov/clinvar/','Clinical variants']],
   ['Evidence Based Medicine',['Cochrane','https://www.cochrane.org/','Systematic reviews'],['ClinicalTrials','https://clinicaltrials.gov/','Trial registry'],['PubMed Central','https://www.ncbi.nlm.nih.gov/pmc/','Free full text']],
+  ['Chinese Databases',['CNCB','https://www.cncb.ac.cn/','China National Center for Bioinfo'],['CNGB','https://db.cngb.org/','China National GeneBank'],['NMDC','https://nmdc.cn/','Microbiome database'],['PubScholar','https://pubscholar.cn/','Scientific literature']],
+  ['Bioinformatics/Omics',['NCBI','https://www.ncbi.nlm.nih.gov/','Biotechnology info'],['EBI','https://www.ebi.ac.uk/','European Bioinformatics'],['OpenGWAS','https://opengwas.io/','GWAS summary data'],['GTEx','https://gtexportal.org/','Tissue expression'],['GEO','https://www.ncbi.nlm.nih.gov/geo/','Gene expression'],['PMC','https://www.ncbi.nlm.nih.gov/pmc/','Free full text']]
 ];
 var TOOLS_EN=[
   ['Academic Search',['SCI-HUB','https://sci-hub.se/','Free access to papers'],['ResearchGate','https://www.researchgate.net/','Academic network'],['Google Scholar','https://scholar.google.com/','Academic search'],['Semantic Scholar','https://www.semanticscholar.org/','AI-powered search']],
   ['Top Medical Journals',['NEJM','https://www.nejm.org/','New England Journal of Medicine'],['JAMA','https://jamanetwork.com/','Journal of the AMA'],['The Lancet','https://www.thelancet.com/','Leading clinical journal'],['BMJ','https://www.bmj.com/','British Medical Journal'],['Nature Medicine','https://www.nature.com/nm/','Biomedical research']],
   ['Statistics Software',['SPSS','https://www.ibm.com/products/spss-statistics','Statistical analysis'],['R','https://www.r-project.org/','Statistical computing'],['RStudio','https://posit.co/','R development environment'],['Python','https://www.python.org/','Programming language'],['SAS','https://www.sas.com/','Advanced analytics'],['Stata','https://www.stata.com/','Data analysis']],
   ['Online Calculators',['Sealed Envelope','https://sealedenvelope.com/power/','Power/sample size'],['ClinCalc','https://clincalc.com/','Clinical calculators'],['DAGitty','https://www.dagitty.net/','DAG builder'],['VassarStats','https://vassarstats.net/','Statistical calculators'],['Easy CGI','https://www.easy-cgi.com/','Calculator generator'],['Sample Size','https://riskcalc.org/samplesize/','Sample size']],
-  ['Reference Management',['Zotero','https://www.zotero.org/','Free reference manager'],['EndNote','https://endnote.com/','Reference management'],['NoteExpress','https://www.inoteexpress.com/','Chinese reference tool'],['Mendley','https://www.mendley.com/','Reference manager']],
+  ['Reference Management',['Zotero','https://www.zotero.org/','Free reference manager'],['EndNote','https://endnote.com/','Reference management'],['NoteExpress','https://www.inoteexpress.com/','Chinese reference tool'],['Mendeley','https://www.mendeley.com/','Reference manager']],
   ['Scientific Graphing',['GraphPad Prism','https://www.graphpad.com/','Scientific graphing'],['Origin','https://www.originlab.com/','Data analysis & graphing'],['BioRender','https://www.biorender.com/','Scientific illustrations'],['Figdraw','https://www.figdraw.com/','Medical illustration'],['ChiPlot','https://www.chiplot.online/','Online plotting tool'],['Hiplot','https://hiplot.com.cn/','Chinese plotting tool']],
   ['Manuscript Submission',['LetPub','https://www.letpub.com/','Journal finder'],['JANE','https://jane.biosemantics.org/','Journal suggester'],['Springer Guide','https://www.springer.com/gp/authors-editors/journal-author/journal-author-helpdesk','Author resources']],
   ['Literature Databases',['PubMed','https://pubmed.ncbi.nlm.nih.gov/','Biomedical literature'],['Web of Science','https://www.webofscience.com/','Citation index'],['Scopus','https://www.scopus.com/','Abstract & citation'],['CNKI','https://www.cnki.net/','Chinese literature'],['Wanfang','https://www.wanfangdata.com.cn/','Chinese literature'],['VIP','https://www.cqvip.com/','Chinese periodicals']],
 ];
 var AIS_EN=[
   ['General Purpose LLMs',['ChatGPT','https://chat.openai.com/','OpenAI assistant'],['Claude','https://claude.ai/','Anthropic assistant'],['Kimi','https://kimi.moonshot.cn/','Long context AI'],['DeepSeek','https://chat.deepseek.com/','Chinese LLM'],['Gemini','https://gemini.google.com/','Google AI'],['Doubao','https://www.doubao.com/','ByteDance AI']],
-  ['AI for Literature',['Elicit','https://elicit.com/','AI research assistant'],['Consensus','https://consensus.com/','Evidence-based search'],['Semantic Scholar','https://www.semanticscholar.org/','AI literature search'],['Connected Papers','https://www.connectedpapers.com/','Citation graph'],['Scite','https://scite.ai/','Citation analysis']],
+  ['AI for Literature',['Elicit','https://elicit.org/','AI research assistant'],['Consensus','https://consensus.app/','Evidence-based search'],['Semantic Scholar','https://www.semanticscholar.org/','AI literature search'],['Connected Papers','https://www.connectedpapers.com/','Citation graph'],['Scite','https://scite.ai/','Citation analysis']],
   ['Writing & Polish',['QuillBot','https://quillbot.com/','Paraphrasing tool'],['Grammarly','https://www.grammarly.com/','Grammar checker'],['DeepL','https://www.deepl.com/','Translation'],['Writefull','https://www.writefull.com/','Academic writing'],['PaperPal','https://paperpal.com/','Academic language']],
-  ['AI for Medicine',['OpenEvidence','https://www.openevidence.com/','Medical AI'],['Glass AI','https://glass.health/','Clinical AI'],['DDIer','https://ddier.com/','Drug interaction']],
-  ['Code Assistants',['GitHub Copilot','https://github.com/features/copilot','AI coding'],['Cursor','https://cursor.sh/','AI IDE']],
+  ['AI for Medicine',['OpenEvidence','https://www.openevidence.com/','Medical AI'],['Glass AI','https://glass.health/','Clinical AI']],
+  ['Code Assistants',['GitHub Copilot','https://github.com/features/copilot','AI coding'],['Cursor','https://www.cursor.com/','AI IDE']],
 ];
 var SCALES_EN=[
-  ['Mental Health',[['PHQ-9','Depression screening: 9 items'],['GAD-7','Anxiety screening: 7 items'],['SDS','Zung Self-Rating Depression Scale: 20 items'],['SAS','Zung Self-Rating Anxiety Scale: 20 items'],['SCL-90','Symptom Checklist-90: 90 items'],['MMSE','Cognitive function: 30 items']]],
-  ['Quality of Life',[['SF-36','Health Survey: 36 items, 8 dimensions'],['EQ-5D','EuroQol: 5 dimensions, utility value'],['WHOQOL-BREF','WHO Quality of Life: 26 items'],['QLQ-C30','EORTC Cancer QoL: 30 items']]],
-  ['Clinical Function',[['Barthel Index','ADL: 10 items'],['BI (Braden)','Pressure ulcer risk: 6 items'],['NRS','Numeric Pain Rating Scale: 0-10'],['VAS','Visual Analog Scale: 0-100mm'],['KPS','Karnofsky Performance Status: 0-100']]],
-  ['Social & Others',[['SSRS','Social Support: 10 items'],['PSQI','Pittsburgh Sleep Quality: 19 items'],['ISI','Insomnia Severity: 7 items'],['MoCA','Montreal Cognitive Assessment: 30 items'],['FRAIL','Frailty screening: 5 items']]],
+  ['Mental Health',[['PHQ-9','https://phq-9.org/','Depression screening: 9 items'],['GAD-7','https://gad-7.org/','Anxiety screening: 7 items'],['SDS','','Zung Self-Rating Depression Scale: 20 items'],['SAS','','Zung Self-Rating Anxiety Scale: 20 items'],['SCL-90','','Symptom Checklist-90: 90 items'],['MMSE','','Cognitive function: 30 items']]],
+  ['Quality of Life',[['SF-36','','Health Survey: 36 items, 8 dimensions'],['EQ-5D','https://euroqol.org/','EuroQol: 5 dimensions, utility value'],['WHOQOL-BREF','https://www.who.int/tools/whoqol','WHO Quality of Life: 26 items'],['QLQ-C30','https://qol.eortc.be/','EORTC Cancer QoL: 30 items']]],
+  ['Clinical Function',[['Barthel Index','','ADL: 10 items'],['Braden','','Pressure ulcer risk: 6 items'],['NRS','','Numeric Pain Rating Scale: 0-10'],['VAS','','Visual Analog Scale: 0-100mm'],['KPS','','Karnofsky Performance Status: 0-100']]],
+  ['Social & Others',[['SSRS','','Social Support: 10 items'],['PSQI','https://www.sleep.pitt.edu/','Pittsburgh Sleep Quality: 19 items'],['ISI','','Insomnia Severity: 7 items'],['MoCA','https://www.mocatest.org/','Montreal Cognitive Assessment: 30 items'],['FRAIL','','Frailty screening: 5 items']]],
 ];
 function renderGrid(id,sections){
   var el=document.getElementById(id);if(!el)return;
