@@ -121,7 +121,7 @@ footer{background:#060b18;color:rgba(255,255,255,.4);text-align:center;padding:1
 /* ===== NEW: TOC Sidebar ===== */
 .toc-sidebar{position:fixed;left:0;top:150px;bottom:0;width:200px;background:var(--card);border-right:1px solid var(--bd);padding:1rem 0;overflow-y:auto;z-index:50;transform:translateX(-100%);transition:transform .3s ease}
 body:not(.toc-closed) .toc-sidebar{transform:translateX(0)}
-.toc-toggle{position:fixed;left:0;top:212px;z-index:55;width:16px;height:40px;background:var(--card);border:1px solid var(--bd);border-left:none;border-radius:0 5px 5px 0;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--tx2);font-size:.5rem;padding:0;transition:left .3s ease;line-height:1}
+.toc-toggle{position:fixed;left:0;top:130px;z-index:55;background:var(--card);border:1px solid var(--bd);border-left:none;border-radius:0 6px 6px 0;cursor:pointer;padding:.35rem .5rem;color:var(--tx2);font-size:.78rem;font-weight:600;transition:left .3s ease;white-space:nowrap}
 body:not(.toc-closed) .toc-toggle{left:200px}
 .toc-toggle:hover{color:var(--pri);background:var(--pri-bg)}
 .toc-sidebar a{display:block;padding:.35rem .8rem;font-size:.78rem;color:var(--tx3);border-left:2px solid transparent;transition:all .15s}
@@ -259,7 +259,7 @@ nav a:hover::after{width:50%}
 </div>
 
 <div class="toc-sidebar" id="tocSidebar"></div>
-<button class="toc-toggle" onclick="togToc()" id="tocBtn" aria-label="Toggle TOC">◀</button>
+<button class="toc-toggle" onclick="togToc()" id="tocBtn">✕</button>
 <section class="banner" id="home"><div class="bc">
 <h1 data-i18n="banner-title">医学科研一站式学习平台</h1>
 <p data-i18n="banner-sub1">医学统计学 · 机器学习 · 贝叶斯统计 · Meta分析 · 生物信息学 · 公共数据库挖掘</p>
@@ -2569,6 +2569,10 @@ function swLang(){
   renderGrid('mc-ai',LANG==='zh'?AIS:AIS_EN);
   renderScales(LANG==='zh'?SCALES:SCALES_EN);
   buildToc();
+  // Update TOC toggle text if sidebar is collapsed
+  var tbtn=document.getElementById('tocBtn');
+  if(document.body.classList.contains('toc-closed'))
+    tbtn.textContent=LANG==='zh'?'☰ 目录':'☰ Contents';
 }
 
 function applyLang(){
@@ -2652,7 +2656,10 @@ function togArticle(el){
 function togToc(){
   var b=document.body;
   b.classList.toggle('toc-closed');
-  document.getElementById('tocBtn').textContent=b.classList.contains('toc-closed')?'▶':'◀';
+  var btn=document.getElementById('tocBtn');
+  btn.textContent=b.classList.contains('toc-closed')
+    ?(LANG==='zh'?'☰ 目录':'☰ Contents')
+    :'✕';
 }
 function buildToc(){
   var el=document.getElementById('tocSidebar');
