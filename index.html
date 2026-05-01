@@ -119,9 +119,9 @@ code{background:var(--bg);padding:1px 4px;border-radius:3px;color:var(--acc);fon
 .ai h3{color:var(--pri);margin-bottom:.4rem;font-size:1rem}.ai p{margin:.2rem 0;font-size:.85rem;color:var(--tx2)}
 footer{background:#060b18;color:rgba(255,255,255,.4);text-align:center;padding:1.8rem 1rem;margin-top:2rem}footer p{font-size:.82rem}
 /* ===== NEW: TOC Sidebar ===== */
-.toc-sidebar{position:fixed;left:0;top:64px;bottom:0;width:200px;background:var(--card);border-right:1px solid var(--bd);padding:1rem 0;overflow-y:auto;z-index:50;transform:translateX(-100%);transition:transform .3s}
+.toc-sidebar{position:fixed;left:0;top:100px;bottom:0;width:200px;background:var(--card);border-right:1px solid var(--bd);padding:1rem 0;overflow-y:auto;z-index:50;transform:translateX(-100%);transition:transform .3s}
 .toc-sidebar.on{transform:translateX(0)}
-.toc-toggle{position:fixed;left:.5rem;top:4.2rem;z-index:60;background:var(--pri);color:#fff;border:none;border-radius:6px;padding:.3rem .5rem;cursor:pointer;font-size:.75rem;transition:all .2s}
+.toc-toggle{position:fixed;left:.5rem;top:5.5rem;z-index:60;background:var(--pri);color:#fff;border:none;border-radius:6px;padding:.3rem .5rem;cursor:pointer;font-size:.75rem;transition:all .2s}
 .toc-toggle:hover{background:var(--pri2)}
 .toc-sidebar a{display:block;padding:.35rem .8rem;font-size:.78rem;color:var(--tx3);border-left:2px solid transparent;transition:all .15s}
 .toc-sidebar a:hover,.toc-sidebar a.on{color:var(--pri);border-left-color:var(--pri);background:var(--pri-bg)}
@@ -2657,30 +2657,11 @@ function buildToc(){
     : {toc:'Contents',stats:'Statistics',ml:'Machine Learning',bayes:'Bayesian',meta:'Meta Analysis',roc:'ROC Curve',survival:'Survival',psm:'Causal Inference',bioinfo:'Bioinformatics',sample:'Sample Size','time-series':'Time Series',modeling:'Modeling',db:'Databases',tools:'Tools',ai:'AI Tools',scales:'Scales',cases:'Cases',wechat:'Tutorials',reporting:'Guidelines','missing-data':'Missing Data','clinical':'Clinical'};
   var items=[
     {l:'─ '+tl.stats+' ─',h:'#cat-a',cls:'toc-cat'},
-    {l:tl.stats,h:'#stats',cls:'toc-l2'},
-    {l:tl.survival,h:'#survival',cls:'toc-l2'},
-    {l:tl.roc,h:'#roc',cls:'toc-l2'},
-    {l:tl['missing-data'],h:'#missing-data',cls:'toc-l2'},
-    {l:tl['time-series'],h:'#time-series',cls:'toc-l2'},
-    {l:tl.sample,h:'#sample-size',cls:'toc-l2'},
     {l:'─ '+tl.psm+' ─',h:'#cat-b',cls:'toc-cat'},
-    {l:tl.psm,h:'#psm',cls:'toc-l2'},
     {l:'─ '+tl.ml+' ─',h:'#cat-c',cls:'toc-cat'},
-    {l:tl.ml,h:'#ml-section',cls:'toc-l2'},
-    {l:tl.bayes,h:'#bayes',cls:'toc-l2'},
-    {l:tl.meta,h:'#meta',cls:'toc-l2'},
-    {l:tl.modeling,h:'#modeling',cls:'toc-l2'},
-    {l:tl.reporting,h:'#reporting',cls:'toc-l2'},
+    {l:'─ '+tl.reporting+' ─',h:'#reporting',cls:'toc-cat'},
     {l:'─ '+tl.clinical+' ─',h:'#cat-d',cls:'toc-cat'},
-    {l:tl.clinical,h:'#clinical',cls:'toc-l2'},
-    {l:'─ '+tl.bioinfo+' ─',h:'#cat-e',cls:'toc-cat'},
-    {l:tl.bioinfo,h:'#bioinfo',cls:'toc-l2'},
-    {l:tl.db,h:'#databases',cls:'toc-l2'},
-    {l:tl.tools,h:'#tools',cls:'toc-l2'},
-    {l:tl.ai,h:'#ai',cls:'toc-l2'},
-    {l:tl.scales,h:'#scales',cls:'toc-l2'},
-    {l:tl.cases,h:'#cases',cls:'toc-l2'},
-    {l:tl.wechat,h:'#wechat',cls:'toc-l2'}
+    {l:'─ '+tl.bioinfo+' ─',h:'#cat-e',cls:'toc-cat'}
   ];
   var h='<div style="padding:0 .8rem .3rem;font-size:.75rem;color:var(--tx3);border-bottom:1px solid var(--bd);margin-bottom:.3rem">'+tl.toc+'</div>';
   for(var i=0;i<items.length;i++){
