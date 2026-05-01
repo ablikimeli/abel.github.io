@@ -217,7 +217,7 @@ nav a:hover::after{width:50%}
 <div class="topbar"><a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=Mzk0NDcyMzk1Mw==&action=getalbum&album_id=3709856140965101571&scene=126&sessionid=1775834953391#wechat_redirect" target="_blank" rel="noopener">📢 Abel医研统计公众号 | 点击直达最新科研教程</a></div>
 <header><div class="hdr">
 <div class="logo">Abel医研<b>统计</b></div>
-<nav><a href="#home" data-i18n="nav-home">首页</a><a href="#stats" data-i18n="nav-stats">统计方法</a><a href="#ml-section" data-i18n="nav-ml">高级模型</a><a href="#psm" data-i18n="nav-psm">因果推断</a><a href="#reporting" data-i18n="nav-reporting">报告规范</a><a href="#bioinfo" data-i18n="nav-bioinfo">科研资源</a><a href="#wechat" data-i18n="nav-wechat">公众号</a></nav>
+<nav><a href="#home" data-i18n="nav-home">首页</a><a href="#stats" data-i18n="nav-stats">统计方法</a><a href="#survival" data-i18n="nav-survival">生存分析</a><a href="#roc" data-i18n="nav-roc">ROC曲线</a><a href="#sample-size" data-i18n="nav-sample">样本量</a><a href="#psm" data-i18n="nav-psm">因果推断</a><a href="#ml-section" data-i18n="nav-ml">高级模型</a><a href="#reporting" data-i18n="nav-reporting">报告规范</a><a href="#clinical" data-i18n="nav-clinical">临床研究</a><a href="#bioinfo" data-i18n="nav-bioinfo">科研资源</a><a href="#wechat" data-i18n="nav-wechat">公众号</a></nav>
 <button class="hamburger" onclick="togSlide()" aria-label="Menu">☰</button>
 <div style="display:flex;gap:.4rem">
 <button class="lang-btn" id="langBtn" onclick="swLang()" data-i18n="lang-btn" title="Switch language">中</button>
@@ -1951,17 +1951,17 @@ print(f"暴发(>100例)概率: {np.mean(np.array(res)>100)*100:.1f}%")</div></di
 <!-- ============ 研究报告规范 ============ -->
 <div class="sec" id="reporting"><h2 class="st">📋 研究报告规范与检查清单</h2>
 <p class="ds" style="margin-bottom:.8rem">医学研究报告规范是高质量科研的基石。以下是各类型研究应遵循的报告规范，投稿前请逐项核对。</p>
-<div class="tg">
-<div class="ti2"><a href="https://www.strobe-statement.org/" target="_blank" rel="noopener">STROBE</a><p>观察性研究<br>横断面/队列/病例对照</p></div>
-<div class="ti2"><a href="https://www.consort-statement.org/" target="_blank" rel="noopener">CONSORT</a><p>随机对照试验<br>含流程图模板</p></div>
-<div class="ti2"><a href="http://www.prisma-statement.org/" target="_blank" rel="noopener">PRISMA</a><p>系统评价/Meta分析<br>27项核查清单</p></div>
-<div class="ti2"><a href="https://www.stard-statement.org/" target="_blank" rel="noopener">STARD</a><p>诊断准确性试验<br>25项核查清单</p></div>
-<div class="ti2"><a href="https://www.equator-network.org/" target="_blank" rel="noopener">EQUATOR</a><p>报告规范总库<br>500+指南汇总</p></div>
-<div class="ti2"><a href="http://record-statement.org/" target="_blank" rel="noopener">RECORD</a><p>真实世界数据研究<br>常规收集数据</p></div>
-<div class="ti2"><a href="https://www.cosmin.nl/" target="_blank" rel="noopener">COSMIN</a><p>量表/测量工具<br>信效度评价</p></div>
-<div class="ti2"><a href="https://www.arriveguidelines.org/" target="_blank" rel="noopener">ARRIVE</a><p>动物实验报告<br>10项核心清单</p></div>
-<div class="ti2"><a href="https://www.tripod-statement.org/" target="_blank" rel="noopener">TRIPOD</a><p>预测模型研究<br>个体化预测</p></div>
-<div class="ti2"><a href="https://www.spirit-statement.org/" target="_blank" rel="noopener">SPIRIT</a><p>临床试验方案<br>含SPIRIT图</p></div>
+<div class="cg">
+<div class="cd"><h3>STROBE</h3><p class="ds">观察性研究报告规范<br>横断面/队列/病例对照<br><a href="https://www.strobe-statement.org/" target="_blank" rel="noopener">查看详情 →</a></p></div>
+<div class="cd"><h3>CONSORT</h3><p class="ds">随机对照试验报告规范<br>含流程图模板<br><a href="https://www.consort-statement.org/" target="_blank" rel="noopener">查看详情 →</a></p></div>
+<div class="cd"><h3>PRISMA</h3><p class="ds">系统评价/Meta分析报告规范<br>27项核查清单<br><a href="http://www.prisma-statement.org/" target="_blank" rel="noopener">查看详情 →</a></p></div>
+<div class="cd"><h3>STARD</h3><p class="ds">诊断准确性试验报告规范<br>25项核查清单<br><a href="https://www.stard-statement.org/" target="_blank" rel="noopener">查看详情 →</a></p></div>
+<div class="cd"><h3>EQUATOR</h3><p class="ds">报告规范总库<br>500+指南汇总<br><a href="https://www.equator-network.org/" target="_blank" rel="noopener">查看详情 →</a></p></div>
+<div class="cd"><h3>RECORD</h3><p class="ds">真实世界数据研究报告规范<br>常规收集数据<br><a href="http://record-statement.org/" target="_blank" rel="noopener">查看详情 →</a></p></div>
+<div class="cd"><h3>COSMIN</h3><p class="ds">量表/测量工具报告规范<br>信效度评价<br><a href="https://www.cosmin.nl/" target="_blank" rel="noopener">查看详情 →</a></p></div>
+<div class="cd"><h3>ARRIVE</h3><p class="ds">动物实验报告规范<br>10项核心清单<br><a href="https://www.arriveguidelines.org/" target="_blank" rel="noopener">查看详情 →</a></p></div>
+<div class="cd"><h3>TRIPOD</h3><p class="ds">预测模型研究报告规范<br>个体化预测<br><a href="https://www.tripod-statement.org/" target="_blank" rel="noopener">查看详情 →</a></p></div>
+<div class="cd"><h3>SPIRIT</h3><p class="ds">临床试验方案报告规范<br>含SPIRIT图<br><a href="https://www.spirit-statement.org/" target="_blank" rel="noopener">查看详情 →</a></p></div>
 </div>
 </div>
 
@@ -2654,7 +2654,7 @@ function buildToc(){
   var el=document.getElementById('tocSidebar');
   var tl=LANG==='zh'
     ? {toc:'目录导航',stats:'📊 统计方法',ml:'🤖 机器学习',bayes:'🔮 贝叶斯',meta:'📋 Meta分析',roc:'📈 ROC曲线',survival:'⏳ 生存分析',psm:'⚖️ 因果推断',bioinfo:'🧬 生物信息',sample:'🧮 样本量','time-series':'📈 时间序列',modeling:'📈 传染病建模',db:'💾 数据库',tools:'🔬 工具',ai:'🤖 AI',scales:'📋 量表',cases:'📝 案例',wechat:'📱 教程',reporting:'📋 规范','missing-data':'🔧 缺失数据','clinical':'🏥 临床研究'}
-    : {toc:'Contents',stats:'📊 Statistics',ml:'🤖 ML',bayes:'🔮 Bayesian',meta:'📋 Meta Analysis',roc:'📈 ROC Curve',survival:'⏳ Survival',psm:'⚖️ Causality',bioinfo:'🧬 Bioinformatics',sample:'🧮 Sample Size','time-series':'📈 Time Series',modeling:'📈 Modeling',db:'💾 Databases',tools:'🔬 Tools',ai:'🤖 AI',scales:'📋 Scales',cases:'📝 Cases',wechat:'📱 Tutorials',reporting:'📋 Guidelines','missing-data':'🔧 Missing Data','clinical':'🏥 Clinical'};
+    : {toc:'Contents',stats:'Statistics',ml:'Machine Learning',bayes:'Bayesian',meta:'Meta Analysis',roc:'ROC Curve',survival:'Survival',psm:'Causal Inference',bioinfo:'Bioinformatics',sample:'Sample Size','time-series':'Time Series',modeling:'Modeling',db:'Databases',tools:'Tools',ai:'AI Tools',scales:'Scales',cases:'Cases',wechat:'Tutorials',reporting:'Guidelines','missing-data':'Missing Data','clinical':'Clinical'};
   var items=[
     {l:'─ '+tl.stats+' ─',h:'#cat-a',cls:'toc-cat'},
     {l:tl.stats,h:'#stats',cls:'toc-l2'},
