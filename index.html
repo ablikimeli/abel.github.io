@@ -98,6 +98,7 @@ code{background:var(--bg);padding:1px 4px;border-radius:3px;color:var(--acc);fon
 .dtBk{background:none;border:1px solid var(--bd);padding:.3rem .6rem;border-radius:6px;cursor:pointer;font-size:.78rem;color:var(--tx3);transition:all .2s;margin-right:.3rem}
 .dtBk:hover{border-color:var(--tx3);color:var(--tx)}
 @keyframes fi{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+@keyframes sfi{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
 .ov{position:fixed;inset:0;z-index:200;background:rgba(6,11,24,.8);backdrop-filter:blur(8px);display:none;align-items:flex-start;justify-content:center;padding-top:10vh}
 .ov.on{display:flex}
 .ob{background:var(--card);border-radius:var(--r);width:90%;max-width:580px;box-shadow:0 8px 40px rgba(0,0,0,.4);overflow:hidden;max-height:60vh;display:flex;flex-direction:column;border:1px solid rgba(6,182,212,.08)}
@@ -111,6 +112,9 @@ code{background:var(--bg);padding:1px 4px;border-radius:3px;color:var(--acc);fon
 .oe{padding:1.2rem;text-align:center;color:var(--tx3);font-size:.85rem}
 .bt{position:fixed;bottom:1.2rem;right:1.2rem;width:38px;height:38px;background:var(--pri);color:#fff;border:none;border-radius:50%;cursor:pointer;box-shadow:0 0 14px var(--glow);z-index:90;opacity:0;transform:translateY(6px);transition:all .3s;display:flex;align-items:center;justify-content:center}
 .bt.vis{opacity:1;transform:translateY(0)}.bt:hover{background:var(--pri2);transform:translateY(-2px)}
+.sf{position:fixed;bottom:1.2rem;left:1.2rem;width:38px;height:38px;background:var(--card);color:var(--pri);border:1px solid var(--bd);border-radius:50%;cursor:pointer;box-shadow:0 2px 12px rgba(0,0,0,.08);z-index:90;opacity:0;transform:translateY(6px);transition:all .3s;display:flex;align-items:center;justify-content:center}
+.sf.vis{opacity:1;transform:translateY(0)}.sf:hover{background:var(--pri);color:#fff;border-color:var(--pri);box-shadow:0 0 14px var(--glow);transform:translateY(-2px)}
+.ov.on .ob{animation:sfi .3s ease both}
 .ai{background:linear-gradient(135deg,var(--pri-bg),var(--bg));padding:1.2rem;border-radius:var(--r);text-align:center;margin:1.5rem 0;border:1px solid rgba(13,148,136,.08)}
 .ai h3{color:var(--pri);margin-bottom:.4rem;font-size:1rem}.ai p{margin:.2rem 0;font-size:.85rem;color:var(--tx2)}
 footer{background:#060b18;color:rgba(255,255,255,.4);text-align:center;padding:1.8rem 1rem;margin-top:2rem}footer p{font-size:.82rem}
@@ -217,7 +221,7 @@ nav a:hover::after{width:50%}
 <button class="hamburger" onclick="togSlide()" aria-label="Menu">☰</button>
 <div style="display:flex;gap:.4rem">
 <button class="lang-btn" id="langBtn" onclick="swLang()" data-i18n="lang-btn" title="Switch language">中</button>
-<button class="hbtn" onclick="openS()" aria-label="搜索" title="Ctrl+K"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+<button class="hbtn" onclick="openS()" aria-label="搜索" title="Ctrl+K"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
 <button class="hbtn" onclick="togTh()" aria-label="主题" id="thB"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="thI"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
 </div></div></header>
 <!-- v3.0: Slide Menu -->
@@ -240,8 +244,8 @@ nav a:hover::after{width:50%}
 <a href="#meta" onclick="togSlide()" data-i18n="nav-meta">Meta分析</a>
 <a href="#modeling" onclick="togSlide()" data-i18n="nav-modeling">传染病建模</a>
 <div class="slide-cat" data-i18n="cat-d">🏥 临床实践与规范</div>
-<a href="#clinical" onclick="togSlide()" data-i18n="nav-clinical">临床研究</a>
 <a href="#reporting" onclick="togSlide()" data-i18n="nav-reporting">报告规范</a>
+<a href="#clinical" onclick="togSlide()" data-i18n="nav-clinical">临床研究</a>
 <div class="slide-cat" data-i18n="cat-e">📚 科研资源与工具</div>
 <a href="#bioinfo" onclick="togSlide()" data-i18n="nav-bioinfo">生物信息学</a>
 <a href="#databases" onclick="togSlide()" data-i18n="nav-db">公共数据库</a>
@@ -1944,18 +1948,6 @@ print(f"暴发(>100例)概率: {np.mean(np.array(res)>100)*100:.1f}%")</div></di
 
 </div>
 
-<div class="sec" id="cat-d">
-
-<div class="cat-hdr" data-i18n="cat-d">🏥 临床实践与规范</div>
-<!-- ============ 临床研究 ============ -->
-<div id="clinical">
-<div class="cg">
-<div class="cd"><h3>📝 临床研究设计</h3><p class="ds"><strong>证据等级：</strong>RCT &gt; 队列 &gt; 病例对照 &gt; 横断面<br><strong>观察性：</strong>横断面、病例对照(OR)、队列(RR，遵循<a href="https://www.strobe-statement.org/" target="_blank" rel="noopener">STROBE</a>)<br><strong>实验性：</strong>RCT(遵循<a href="https://www.consort-statement.org/" target="_blank" rel="noopener">CONSORT</a>)、诊断试验(遵循<a href="https://www.stard-statement.org/" target="_blank" rel="noopener">STARD</a>)<br><strong>量表：</strong>遵循<a href="https://www.cosmin.nl/" target="_blank" rel="noopener">COSMIN</a></p></div>
-<div class="cd"><h3>🏥 真实世界研究</h3><p class="ds"><strong>数据来源：</strong>EHR、医保、登记库<br><strong>混杂控制：</strong>PSM、IPTW、DID、工具变量<br><strong>报告规范：</strong><a href="http://record-statement.org/" target="_blank" rel="noopener">RECORD</a></p></div>
-<div class="cd"><h3>⏳ 生存分析</h3><p class="ds"><strong>基础：</strong>Kaplan-Meier、Log-rank检验<br><strong>多因素：</strong>Cox比例风险回归<br><strong>前提：</strong>比例风险假设PH检验<br><strong>拓展：</strong>竞争风险、时变协变量</p></div>
-</div>
-</div></div><!-- end core-->
-
 <!-- ============ 研究报告规范 ============ -->
 <div class="sec" id="reporting"><h2 class="st">📋 研究报告规范与检查清单</h2>
 <p class="ds" style="margin-bottom:.8rem">医学研究报告规范是高质量科研的基石。以下是各类型研究应遵循的报告规范，投稿前请逐项核对。</p>
@@ -1972,6 +1964,18 @@ print(f"暴发(>100例)概率: {np.mean(np.array(res)>100)*100:.1f}%")</div></di
 <div class="ti2"><a href="https://www.spirit-statement.org/" target="_blank" rel="noopener">SPIRIT</a><p>临床试验方案<br>含SPIRIT图</p></div>
 </div>
 </div>
+
+<div class="sec" id="cat-d">
+
+<div class="cat-hdr" data-i18n="cat-d">🏥 临床实践与规范</div>
+<!-- ============ 临床研究 ============ -->
+<div id="clinical">
+<div class="cg">
+<div class="cd"><h3>📝 临床研究设计</h3><p class="ds"><strong>证据等级：</strong>RCT &gt; 队列 &gt; 病例对照 &gt; 横断面<br><strong>观察性：</strong>横断面、病例对照(OR)、队列(RR，遵循<a href="https://www.strobe-statement.org/" target="_blank" rel="noopener">STROBE</a>)<br><strong>实验性：</strong>RCT(遵循<a href="https://www.consort-statement.org/" target="_blank" rel="noopener">CONSORT</a>)、诊断试验(遵循<a href="https://www.stard-statement.org/" target="_blank" rel="noopener">STARD</a>)<br><strong>量表：</strong>遵循<a href="https://www.cosmin.nl/" target="_blank" rel="noopener">COSMIN</a></p></div>
+<div class="cd"><h3>🏥 真实世界研究</h3><p class="ds"><strong>数据来源：</strong>EHR、医保、登记库<br><strong>混杂控制：</strong>PSM、IPTW、DID、工具变量<br><strong>报告规范：</strong><a href="http://record-statement.org/" target="_blank" rel="noopener">RECORD</a></p></div>
+<div class="cd"><h3>⏳ 生存分析</h3><p class="ds"><strong>基础：</strong>Kaplan-Meier、Log-rank检验<br><strong>多因素：</strong>Cox比例风险回归<br><strong>前提：</strong>比例风险假设PH检验<br><strong>拓展：</strong>竞争风险、时变协变量</p></div>
+</div>
+</div></div><!-- end core-->
 
 <!-- ============ 期刊统计要求 ============ -->
 <div class="sec"><h2 class="st">📰 主要医学期刊统计要求</h2>
@@ -2378,6 +2382,7 @@ cat("OR =", round(exp(coef(model)[2]), 2),
 </div><!-- end W -->
 
 <button class="bt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="回到顶部" data-i18n="back-top"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg></button>
+<button class="sf" id="sfb" onclick="openS()" aria-label="搜索"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
 
 
 <footer><p data-i18n="footer">&copy; 2026 Abel医研统计 | 医学科研一站式学习平台 | 让医学科研更简单</p></footer>
@@ -2663,9 +2668,9 @@ function buildToc(){
     {l:tl.bayes,h:'#bayes',cls:'toc-l2'},
     {l:tl.meta,h:'#meta',cls:'toc-l2'},
     {l:tl.modeling,h:'#modeling',cls:'toc-l2'},
+    {l:tl.reporting,h:'#reporting',cls:'toc-l2'},
     {l:'─ '+tl.clinical+' ─',h:'#cat-d',cls:'toc-cat'},
     {l:tl.clinical,h:'#clinical',cls:'toc-l2'},
-    {l:tl.reporting,h:'#reporting',cls:'toc-l2'},
     {l:'─ '+tl.bioinfo+' ─',h:'#cat-e',cls:'toc-cat'},
     {l:tl.bioinfo,h:'#bioinfo',cls:'toc-l2'},
     {l:tl.db,h:'#databases',cls:'toc-l2'},
@@ -2737,9 +2742,10 @@ document.getElementById('si').addEventListener('input',function(){
 });
 document.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();openS()}if(e.key==='Escape')closeS()});
 
-/* ==================== 回到顶部 ==================== */
+/* ==================== 回到顶部 & 搜索浮窗 ==================== */
 var btt=document.getElementById('btt');
-window.addEventListener('scroll',function(){btt.className='bt'+(scrollY>400?' vis':'')},{passive:true});
+var sfb=document.getElementById('sfb');
+window.addEventListener('scroll',function(){btt.className='bt'+(scrollY>400?' vis':'');if(sfb)sfb.className='sf'+(scrollY>300?' vis':'')},{passive:true});
 
 /* ==================== 代码高亮 ==================== */
 function hl(code,lang){
