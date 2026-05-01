@@ -28,7 +28,7 @@ nav a{color:rgba(255,255,255,.65);font-size:.82rem;padding:.3rem .6rem;border-ra
 .bc{position:relative;z-index:2;max-width:750px;margin:0 auto}
 .banner h1{font-size:2rem;font-weight:800;margin-bottom:.8rem;text-shadow:0 0 40px rgba(6,182,212,.2)}
 .banner p{font-size:.92rem;opacity:.85;margin:.2rem 0}
-.W{max-width:1200px;margin:0 auto;padding:0 1rem;position:relative;z-index:1}
+.W{max-width:1200px;margin:0 auto;padding:0 1rem;position:relative;z-index:1}@media(min-width:901px){.W{margin-left:210px}}
 .sec{padding:2rem 0}
 .st{font-size:1.35rem;font-weight:700;margin-bottom:1.2rem;border-left:4px solid var(--pri);padding-left:10px}
 .cat-hdr{font-size:1.1rem;font-weight:700;margin:0 0 .8rem;padding:.55rem 1rem;background:var(--pri-bg);border-left:4px solid var(--pri);border-radius:0 8px 8px 0;color:var(--pri);letter-spacing:.3px}
@@ -119,10 +119,7 @@ code{background:var(--bg);padding:1px 4px;border-radius:3px;color:var(--acc);fon
 .ai h3{color:var(--pri);margin-bottom:.4rem;font-size:1rem}.ai p{margin:.2rem 0;font-size:.85rem;color:var(--tx2)}
 footer{background:#060b18;color:rgba(255,255,255,.4);text-align:center;padding:1.8rem 1rem;margin-top:2rem}footer p{font-size:.82rem}
 /* ===== NEW: TOC Sidebar ===== */
-.toc-sidebar{position:fixed;left:0;top:130px;bottom:0;width:200px;background:var(--card);border-right:1px solid var(--bd);padding:1rem 0;overflow-y:auto;z-index:50;transform:translateX(-100%);transition:transform .3s}
-.toc-sidebar.on{transform:translateX(0)}
-.toc-toggle{position:fixed;left:.5rem;top:5.5rem;z-index:60;background:var(--pri);color:#fff;border:none;border-radius:6px;padding:.3rem .5rem;cursor:pointer;font-size:.75rem;transition:all .2s}
-.toc-toggle:hover{background:var(--pri2)}
+.toc-sidebar{position:fixed;left:0;top:150px;bottom:0;width:200px;background:var(--card);border-right:1px solid var(--bd);padding:1rem 0;overflow-y:auto;z-index:50}
 .toc-sidebar a{display:block;padding:.35rem .8rem;font-size:.78rem;color:var(--tx3);border-left:2px solid transparent;transition:all .15s}
 .toc-sidebar a:hover,.toc-sidebar a.on{color:var(--pri);border-left-color:var(--pri);background:var(--pri-bg)}
 .toc-sidebar .toc-l1{font-weight:600;font-size:.82rem;color:var(--tx2);padding-top:.6rem}
@@ -257,7 +254,6 @@ nav a:hover::after{width:50%}
 <div class="slide-lang"><button class="lang-btn" onclick="swLang()" style="width:100%" data-i18n="slide-lang-btn">English</button></div>
 </div>
 
-<button class="toc-toggle" onclick="togToc()" id="tocBtn" data-i18n="toc">☰ 目录</button>
 <div class="toc-sidebar" id="tocSidebar"></div>
 <section class="banner" id="home"><div class="bc">
 <h1 data-i18n="banner-title">医学科研一站式学习平台</h1>
@@ -2648,10 +2644,6 @@ function togArticle(el){
 }
 
 /* ==================== TOC侧边栏 ==================== */
-function togToc(){
-  var s=document.getElementById('tocSidebar');
-  s.className='toc-sidebar'+(s.className.indexOf('on')>-1?'':' on');
-}
 function buildToc(){
   var el=document.getElementById('tocSidebar');
   var tl=LANG==='zh'
@@ -2688,7 +2680,6 @@ function buildToc(){
     a.addEventListener('click',function(e){
       var id=this.getAttribute('href').slice(1),el=document.getElementById(id);
       if(el){el.scrollIntoView({behavior:'smooth',block:'start'})}
-      document.getElementById('tocSidebar').className='toc-sidebar';
     });
   });
 }
@@ -2743,11 +2734,9 @@ document.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.key
 /* ==================== 回到顶部 & 搜索浮窗 & TOC按钮 ==================== */
 var btt=document.getElementById('btt');
 var sfb=document.getElementById('sfb');
-var tcb=document.getElementById('tocBtn');
 window.addEventListener('scroll',function(){
   btt.className='bt'+(scrollY>400?' vis':'');
   if(sfb)sfb.className='sf'+(scrollY>200?' vis':'');
-  if(tcb)tcb.style.opacity=scrollY>120?'0':'1';
 },{passive:true});
 
 /* ==================== 代码高亮 ==================== */
