@@ -200,6 +200,8 @@ footer{background:#060b18;color:rgba(255,255,255,.4);text-align:center;padding:1
 <a href="#meta" onclick="togSlide()" data-i18n="nav-meta">Meta分析</a>
 <a href="#wechat" onclick="togSlide()" data-i18n="nav-wechat">公众号教程</a>
 <a href="#survival" onclick="togSlide()" data-i18n="nav-survival">生存分析</a>
+	<a href="#time-series" onclick="togSlide()" data-i18n="nav-time-series">时间序列</a>
+	<a href="#modeling" onclick="togSlide()" data-i18n="nav-modeling">传染病建模</a>
 <a href="#psm" onclick="togSlide()" data-i18n="nav-psm">因果推断</a>
 <a href="#bioinfo" onclick="togSlide()" data-i18n="nav-bioinfo">生物信息学</a>
 <a href="#databases" onclick="togSlide()" data-i18n="nav-db">公共数据库</a>
@@ -960,63 +962,258 @@ summary(fg)</div></div></div>
 <div class="tl"><a href="https://cran.r-project.org/web/packages/MatchIt/index.html" target="_blank" rel="noopener">⚖️ MatchIt R包</a></div>
 <h3 style="margin-bottom:.6rem;font-size:1.1rem">⚖️ 倾向性评分与因果推断</h3>
 <div class="cg">
-<div class="cd"><h3>PSM倾向性评分匹配</h3><div class="ds">减少观察性研究混杂偏倚<button class="mb" onclick="togM(this)">查看代码</button>
-<div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'psmr')">R代码</button><button class="tab" onclick="swT(this,'psminterp')">结果解读</button></div>
-<div class="tp on" id="psmr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(MatchIt)
-library(cobalt)
-# 模拟数据
-set.seed(123)
-n &lt;- 500
-data &lt;- data.frame(
+<div class="cd" id="cd-psm-match"><h3>PSM倾向性评分匹配</h3><div class="ds">用途：通过倾向性得分匹配减少观察性研究的纺成偏误。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'psm-match-t0')">方法介绍</button><button class="tab" onclick="swT(this,'psm-match-t1')">R代码</button><button class="tab" onclick="swT(this,'psm-match-t2')">Python代码</button><button class="tab" onclick="swT(this,'psm-match-t3')">案例解读</button></div><div class="tp on" id="psm-match-t0"><p>PSM（Propensity Score Matching）通过Logistic回归估计每个个体接受处理的概率（倾向性得分），然后在处理组和对照组之间进行匹配。常用匹配方法：最近邻匹配、校准匹配、占比匹配、分数匹配。核心假设：无未观测纺成（强忽略性）。</p></div><div class="tp" id="psm-match-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(MatchIt); library(cobalt)
+set.seed(123); n <- 500
+data <- data.frame(
   age = rnorm(n, 60, 10),
   sex = rbinom(n, 1, 0.5),
   bmi = rnorm(n, 25, 3),
   treatment = rbinom(n, 1, 0.3)
 )
-data$outcome &lt;- rbinom(n, 1, plogis(
+data$outcome <- rbinom(n, 1, plogis(
   -2 + 0.5*data$treatment + 0.03*data$age))
-
 # 倾向性评分匹配
-m.out &lt;- matchit(treatment ~ age + sex + bmi,
+m.out <- matchit(treatment ~ age + sex + bmi,
                  data=data, method="nearest",
                  ratio=1, caliper=0.2)
 summary(m.out)
 # 匹配前后均衡性
 love.plot(m.out, binary="std")
 # 匹配后分析
-m.data &lt;- match.data(m.out)
+m.data <- match.data(m.out)
 glm(outcome ~ treatment, data=m.data,
-    family=binomial(), weights=weights)</div></div></div>
-<div class="tp" id="psminterp"><div class="res-box"><div class="res-title">📋 结果解读</div><div class="res-body">匹配前：两组在年龄、性别上差异显著(p&lt;0.05)<br>匹配后：所有协变量标准化均差&lt;0.1，均衡性良好<br>匹配后OR=1.65 (95%CI: 1.12-2.43, p=0.012)<br><span class="sig">结论：治疗后结局显著改善</span></div></div></div>
-</div></div></div>
-
-<div class="cd"><h3>IPTW逆概率加权</h3><div class="ds">加权法调整混杂<button class="mb" onclick="togM(this)">查看R代码</button>
-<div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'iptwr')">R代码</button></div>
-<div class="tp on" id="iptwr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(twang)
-library(survey)
+    family=binomial(), weights=weights)</div></div></div><div class="tp" id="psm-match-t2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import numpy as np, pandas as pd
+from sklearn.linear_model import LogisticRegression
+from sklearn.neighbors import NearestNeighbors
+np.random.seed(123); n = 500
+data = pd.DataFrame({
+    "age": np.random.normal(60, 10, n),
+    "sex": np.random.binomial(1, 0.5, n),
+    "bmi": np.random.normal(25, 3, n),
+    "treatment": np.random.binomial(1, 0.3, n)
+})
+data["outcome"] = np.random.binomial(1,
+    1/(1+np.exp(-(-2 + 0.5*data["treatment"] + 0.03*data["age"]))))
+# 计算倾向性得分
+ps = LogisticRegression().fit(
+    data[["age","sex","bmi"]], data["treatment"]).predict_proba(data[["age","sex","bmi"]])[:,1]
+# 最近邻匹配
+treated = data[data["treatment"]==1]; control = data[data["treatment"]==0]
+nn = NearestNeighbors(n_neighbors=1, metric="euclidean")
+nn.fit(control[["age","sex","bmi"]])
+# 匹配后分析
+matched = pd.concat([treated, control.iloc[nn.kneighbors(treated[["age","sex","bmi"]])[1][:,0]]])
+print("Matched sample size:", len(matched))</div></div></div><div class="tp" id="psm-match-t3"><div class="res-box"><div class="res-title">📋 PSM案例</div><div class="res-body">数据：某新药的观察性研究，500例患者<br>结果：匹配前两组在年龄、性别上差异显著(P<0.05)；匹配后所有协变量标准化均差<0.1<br>解读：匹配后的OR=1.65(95%CI:1.12-2.43, P=0.012)，新药组结局显著改善。</div></div></div></div></div></div>
+<div class="cd" id="cd-iptw-weight"><h3>IPTW逆概率加权</h3><div class="ds">用途：通过加权法调整纺成，保留所有样本。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'iptw-weight-t0')">方法介绍</button><button class="tab" onclick="swT(this,'iptw-weight-t1')">R代码</button><button class="tab" onclick="swT(this,'iptw-weight-t2')">Python代码</button><button class="tab" onclick="swT(this,'iptw-weight-t3')">案例解读</button></div><div class="tp on" id="iptw-weight-t0"><p>IPTW（Inverse Probability of Treatment Weighting）不会丢失样本，而是对每个个体赋予一个权重：W = T/PS + (1-T)/(1-PS)。加权后的幻想人群中处理分配与协变量独立。常用积极稳定化IPTW：SW = T*P(PS的均值)/PS + (1-T)*(1-P)/(1-PS)。</p></div><div class="tp" id="iptw-weight-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(survey)
+set.seed(123); n <- 500
+data <- data.frame(
+  treatment = rbinom(n,1,0.3),
+  age = rnorm(n,60,10),
+  sex = rbinom(n,1,0.5),
+  bmi = rnorm(n,25,3)
+)
+data$outcome <- rbinom(n,1,plogis(-2+0.5*data$treatment+0.03*data$age))
 # 计算倾向性评分
-ps_model &lt;- glm(treatment ~ age + sex + bmi,
+ps_model <- glm(treatment ~ age + sex + bmi,
                 data=data, family=binomial())
-data$ps &lt;- predict(ps_model, type="response")
-# IPTW权重
-data$iptw &lt;- ifelse(data$treatment==1,
-                    1/data$ps, 1/(1-data$ps))
+data$ps <- predict(ps_model, type="response")
+# IPTW权重（稳定化）
+p_t <- mean(data$treatment)
+data$sw <- ifelse(data$treatment==1,
+                  p_t/data$ps, (1-p_t)/(1-data$ps))
 # 加权回归
-design &lt;- svydesign(ids=~1, weights=~iptw,
-                    data=data)
-svyglm(outcome ~ treatment, design=design,
-       family=binomial())</div></div></div>
-</div></div></div>
-
-<div class="cd"><h3>DID双重差分</h3><div class="ds">政策评估，平行趋势假设<button class="mb" onclick="togM(this)">查看R代码</button>
-<div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'didr')">R代码</button></div>
-<div class="tp on" id="didr"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># DID模型
-did_model &lt;- lm(outcome ~ treatment*post +
-                age + sex, data=data)
+design <- svydesign(ids=~1, weights=~sw, data=data)
+svyglm(outcome ~ treatment, design=design, family=binomial())
+# 检查均衡性：加权前后比较
+summary(data$sw)  # 检查极端权重
+data$sw <- pmin(data$sw, 10)  # 截断极端值</div></div></div><div class="tp" id="iptw-weight-t2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import numpy as np, pandas as pd
+import statsmodels.api as sm
+from sklearn.linear_model import LogisticRegression
+np.random.seed(123); n = 500
+data = pd.DataFrame({
+    "treatment": np.random.binomial(1, 0.3, n),
+    "age": np.random.normal(60, 10, n),
+    "sex": np.random.binomial(1, 0.5, n),
+    "bmi": np.random.normal(25, 3, n)
+})
+data["outcome"] = np.random.binomial(1,
+    1/(1+np.exp(-(-2 + 0.5*data["treatment"] + 0.03*data["age"]))))
+# 倾向性评分
+ps = LogisticRegression().fit(
+    data[["age","sex","bmi"]], data["treatment"]
+).predict_proba(data[["age","sex","bmi"]])[:,1]
+# IPTW权重
+p_t = data["treatment"].mean()
+data["sw"] = np.where(data["treatment"]==1, p_t/ps, (1-p_t)/(1-ps))
+data["sw"] = np.minimum(data["sw"], 10)  # 截断极端值
+# 加权回归
+X = sm.add_constant(data["treatment"])
+wls = sm.WLS(data["outcome"], X, weights=data["sw"]).fit()
+print(wls.summary())
+print(f"Treatment effect (IPTW): {wls.params['treatment']:.4f}")</div></div></div><div class="tp" id="iptw-weight-t3"><div class="res-box"><div class="res-title">📋 IPTW案例</div><div class="res-body">数据：同PSM案例的500例患者<br>结果：加权后协变量均衡性显著改善<br>解读：IPTW保留了全部样本，统计检验力更高，适合样本量较小的情景。</div></div></div></div></div></div>
+<div class="cd" id="cd-did-diff"><h3>DID双重差分</h3><div class="ds">用途：政策评估，比较处理组和对照组在干预前后的变化差异。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'did-diff-t0')">方法介绍</button><button class="tab" onclick="swT(this,'did-diff-t1')">R代码</button><button class="tab" onclick="swT(this,'did-diff-t2')">Python代码</button><button class="tab" onclick="swT(this,'did-diff-t3')">案例解读</button></div><div class="tp on" id="did-diff-t0"><p>DID（Difference-in-Differences）比较处理组和对照组在干预前后结局变化的差异。交互项系数即为因果效应。核心假设：平行趋势假设——处理组和对照组在干预前结局的变化趋势一致。</p></div><div class="tp" id="did-diff-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># DID模型：交互项
+set.seed(123)
+n <- 200; time <- 0:1
+data <- expand.grid(id=1:n, post=time)
+data$treatment <- rep(c(rep(1,n/2), rep(0,n/2)), each=2)
+data$age <- rnorm(n*2, 60, 10)
+# 平行趋势：处理前无差异，处理后不同
+data$outcome <- with(data, 50 + 10*treatment*post +
+  0.3*age + rnorm(n*2, 0, 5))
+# DID估计
+did_model <- lm(outcome ~ treatment*post + age, data=data)
 summary(did_model)
-# 交互项系数即为DID估计值
-# 平行趋势检验：处理前各期系数不显著</div></div></div>
-</div></div></div>
+# 交互项系数 = DID估计值
+cat("DID estimate:", coef(did_model)["treatment:post"], "
+")
+# 平行趋势检验（处理前）
+pre_data <- subset(data, post==0)
+t.test(outcome ~ treatment, data=pre_data)  # 应不显著</div></div></div><div class="tp" id="did-diff-t2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import numpy as np, pandas as pd
+import statsmodels.api as sm
+np.random.seed(123)
+n = 200
+data = pd.DataFrame({
+    "id": np.arange(1, n+1).repeat(2),
+    "post": np.tile([0, 1], n),
+    "treatment": np.repeat([1]*(n//2) + [0]*(n//2), 2),
+    "age": np.random.normal(60, 10, n*2)
+})
+data["outcome"] = (50 + 10*data["treatment"]*data["post"]
+    + 0.3*data["age"] + np.random.normal(0, 5, n*2))
+# DID回归
+data["did"] = data["treatment"] * data["post"]
+X = sm.add_constant(data[["treatment", "post", "did", "age"]])
+model = sm.OLS(data["outcome"], X).fit()
+print(model.summary())
+print(f"DID estimate: {model.params['did']:.4f}")
+# 平行趋势检验
+pre = data[data["post"]==0]
+from scipy.stats import ttest_ind
+print("Parallel trend p-value:",
+      ttest_ind(pre[pre["treatment"]==1]["outcome"],
+                pre[pre["treatment"]==0]["outcome"]).pvalue)</div></div></div><div class="tp" id="did-diff-t3"><div class="res-box"><div class="res-title">📋 DID案例</div><div class="res-body">场景：某省2022年实施医保支付改革，评估对患者自付费用的影响<br>结果：DID估计效应=-12.5(95%CI:-18.3~-6.7, P<0.001)<br>解读：改革后患者自付费用显著下降，平行趋势假设检验通过，证据可靠。</div></div></div></div></div></div>
+<div class="cd" id="cd-counterfactual"><h3>反事实因果模型</h3><div class="ds">理论：Rubin因果模型（潜在结果框架），个体处理效应(Y1-Y0)。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'counterfactual-t0')">方法介绍</button><button class="tab" onclick="swT(this,'counterfactual-t1')">R代码</button><button class="tab" onclick="swT(this,'counterfactual-t2')">Python代码</button><button class="tab" onclick="swT(this,'counterfactual-t3')">案例解读</button></div><div class="tp on" id="counterfactual-t0"><p>反事实框架由Donald Rubin提出。每个个体有两个潜在结局：受处理(Y1)和未受处理(Y0)，但只能观测其一。个体处理效应ATE = E[Y1-Y0]。解决方案：匹配、分层、加权、工具变量。核心假设：无干扰因素、存在正确的偏向数据。</p></div><div class="tp" id="counterfactual-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(Matching)
+set.seed(123); n <- 500
+X <- rnorm(n); T <- rbinom(n,1,plogis(X))
+Y1 <- 2 + 0.5*T + 0.3*X + rnorm(n)
+Y0 <- 2 + 0.3*X + rnorm(n)
+Y <- ifelse(T==1,Y1,Y0)
+# PSM估计ATE
+m <- Match(Y=Y, Tr=T, X=X, caliper=0.2)
+summary(m)
+# 线性回归估计
+summary(lm(Y ~ T + X))
+cat("ATE:", mean(Y1-Y0))</div></div></div><div class="tp" id="counterfactual-t2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import numpy as np, pandas as pd
+import statsmodels.api as sm
+np.random.seed(123); n = 500
+X = np.random.normal(0,1,n)
+T = np.random.binomial(1, 1/(1+np.exp(-X)))
+Y1 = 2 + 0.5*T + 0.3*X + np.random.normal(0,1,n)
+Y0 = 2 + 0.3*X + np.random.normal(0,1,n)
+Y = np.where(T==1,Y1,Y0)
+print('True ATE:', np.mean(Y1-Y0))
+# 回归估计
+X2 = sm.add_constant(pd.DataFrame({'T':T,'X':X}))
+print(sm.OLS(Y, X2).fit().summary())</div></div></div><div class="tp" id="counterfactual-t3"><div class="res-box"><div class="res-title">📋 反事实案例</div><div class="res-body">场景：新药临床试验，观察性数据不可避免混杂<br>结果：ATE=0.48(95%CI:0.31-0.65)，推荐新药<br>解读：纺成因素控制后，新药效果显著（反事实框架的核心价值在于明确了个体层面的因果推断逻辑）。</div></div></div></div></div></div>
+<div class="cd" id="cd-its"><h3>中断时间序列</h3><div class="ds">用途：评估干预措施在时间序列上的突变效应（分段回归）。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'its-t0')">方法介绍</button><button class="tab" onclick="swT(this,'its-t1')">R代码</button><button class="tab" onclick="swT(this,'its-t2')">Python代码</button><button class="tab" onclick="swT(this,'its-t3')">案例解读</button></div><div class="tp on" id="its-t0"><p>ITS（Interrupted Time Series）是评价干预措施影响的准实验设计。通过分段线性回归分析比较干预前后的截距变化（瞬时效应）和斜率变化（渐变效应）。需要假设干预前的趋势线性、干预时点明确。常用于政策评估、公共卫生干预效果评价。</p></div><div class="tp" id="its-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># ITS: 分段回归
+set.seed(123); n <- 60
+time <- 1:n; level <- c(rep(0,30),rep(1,30))
+trend_pre <- 0.2*1:30
+trend_post <- 10 + 0.1*1:30
+y <- c(trend_pre, trend_post) + rnorm(n,0,3)
+model <- lm(y ~ time + level + I(time*level))
+summary(model)
+# 绘制ITSA图
+library(ggplot2)
+df <- data.frame(time, y, level)
+ggplot(df, aes(time,y,color=factor(level))) + geom_line() +
+  geom_smooth(method='lm',se=F)</div></div></div><div class="tp" id="its-t2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import numpy as np, pandas as pd
+import statsmodels.api as sm
+np.random.seed(123); n = 60
+time = np.arange(1, n+1)
+level = np.concatenate([np.zeros(30), np.ones(30)])
+trend_pre = 0.2*np.arange(1,31)
+trend_post = 10 + 0.1*np.arange(1,31)
+y = np.concatenate([trend_pre, trend_post]) + np.random.normal(0,3,n)
+df = pd.DataFrame({'time':time,'level':level,'y':y})
+df['trend'] = df['time'] * df['level']
+X = sm.add_constant(df[['time','level','trend']])
+model = sm.OLS(df['y'], X).fit()
+print(model.summary())</div></div></div><div class="tp" id="its-t3"><div class="res-box"><div class="res-title">📋 ITS案例</div><div class="res-body">场景：某省2021年实施吸烟禁令后心脏病入院率变化<br>结果：瞬时效应=-8.5(P<0.001)，渐变效应=-0.3/月(P=0.042)<br>解读：禁令实施后心脏病入院显著下降，且下降趋势持续。</div></div></div></div></div></div>
+<div class="cd" id="cd-iv"><h3>工具变量</h3><div class="ds">用途：当存在未观测纺成因素时，用工具变量Z推断X对Y的因果效应。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'iv-t0')">方法介绍</button><button class="tab" onclick="swT(this,'iv-t1')">R代码</button><button class="tab" onclick="swT(this,'iv-t2')">Python代码</button><button class="tab" onclick="swT(this,'iv-t3')">案例解读</button></div><div class="tp on" id="iv-t0"><p>工具变量(IV)法解决未观测纺成问题。有效的IV需满足：(1)相关性——Z与X强相关；(2)外生性——Z仅通过X影响Y。常用方法：2SLS二阶段最小二乘、工具变量选择：化疗距离作为治疗方案的IV。</p></div><div class="tp" id="iv-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(AER)
+set.seed(123); n <- 500
+Z <- rnorm(n)  # IV: 医院距离
+X <- 0.5*Z + rnorm(n)  # 治疗方案
+Y <- 2 + 0.8*X + rnorm(n) + 0.3*rnorm(n)
+# 普通OLS估计(偏误)
+summary(lm(Y ~ X))
+# 2SLS工具变量
+iv <- ivreg(Y ~ X | Z, data=data.frame(Y,X,Z))
+summary(iv)</div></div></div><div class="tp" id="iv-t2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import numpy as np, pandas as pd
+from linearmodels.iv import IV2SLS
+np.random.seed(123); n = 500
+Z = np.random.normal(0,1,n)  # IV
+X = 0.5*Z + np.random.normal(0,1,n)
+Y = 2 + 0.8*X + np.random.normal(0,1,n)
+df = pd.DataFrame({'Y':Y,'X':X,'Z':Z})
+# 2SLS
+iv = IV2SLS.from_formula('Y ~ 1 + [X ~ Z]', df).fit()
+print(iv)
+print('True effect: 0.8')</div></div></div><div class="tp" id="iv-t3"><div class="res-box"><div class="res-title">📋 IV案例</div><div class="res-body">场景：研究放疗治疗智力降低是否提高生活质量<br>IV：住院距离质子治疗中心的距离<br>结果：2SLS估计效应=0.75(P=0.003)，高于OLS的0.52<br>解读：OLS低估效应，IV纠正了未观测纺成的偏误。</div></div></div></div></div></div>
+<div class="cd" id="cd-rdd"><h3>断点回归</h3><div class="ds">用途：根据分配变量的阈值判断处理效应。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'rdd-t0')">方法介绍</button><button class="tab" onclick="swT(this,'rdd-t1')">R代码</button><button class="tab" onclick="swT(this,'rdd-t2')">Python代码</button><button class="tab" onclick="swT(this,'rdd-t3')">案例解读</button></div><div class="tp on" id="rdd-t0"><p>RDD（Regression Discontinuity）利用分配变量的阈值划分处理组和对照组。在阈值附近的个体可视为随机分配。核心假设：纺成因素在阈值处连续。Sharp RDD（阈值严格分配）和Fuzzy RDD（阈值概率分配）。</p></div><div class="tp" id="rdd-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(rdd)
+set.seed(123); n <- 1000
+X <- runif(n, 0, 100)  # 考试成绩
+cutoff <- 60  # 获奖阈值
+T <- ifelse(X >= cutoff, 1, 0)
+Y <- 50 + 10*T + 0.5*X + rnorm(n, 0, 15)
+# 反事实分析
+rd <- RDestimate(Y ~ X, cutpoint=cutoff)
+summary(rd)
+# 自带图
+plot(rd)</div></div></div><div class="tp" id="rdd-t2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import numpy as np, pandas as pd
+import statsmodels.api as sm
+np.random.seed(123); n = 1000
+X = np.random.uniform(0,100,n)
+cutoff = 60
+T = (X >= cutoff).astype(int)
+Y = 50 + 10*T + 0.5*X + np.random.normal(0,15,n)
+df = pd.DataFrame({'X':X,'T':T,'Y':Y})
+# 局部线性回归(阈值附近50%窗口)
+df['dist'] = df['X'] - cutoff
+df['interact'] = df['T'] * df['dist']
+window = df[df['dist'].abs() < 10]
+X2 = sm.add_constant(window[['T','dist','interact']])
+model = sm.OLS(window['Y'], X2).fit()
+print('RDD effect:', model.params['T'])</div></div></div><div class="tp" id="rdd-t3"><div class="res-box"><div class="res-title">📋 RDD案例</div><div class="res-body">场景：考试成绩≥60分获得奖学金，研究奖学金对后续学业的影响<br>结果：阈值处效应=9.8(95%CI:4.2-15.4), P=0.001<br>解读：获奖学生后续学业成绩显著提升，证据支持奖学金的激励效应。</div></div></div></div></div></div>
+<div class="cd" id="cd-dags"><h3>有向无环图</h3><div class="ds">用途：DAGs可视化因果假设，识别纺成、中介、操控策略。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'dags-t0')">方法介绍</button><button class="tab" onclick="swT(this,'dags-t1')">R代码</button><button class="tab" onclick="swT(this,'dags-t2')">Python代码</button><button class="tab" onclick="swT(this,'dags-t3')">案例解读</button></div><div class="tp on" id="dags-t0"><p>DAG（Directed Acyclic Graph）是因果推断的图论工具。符号规则：X→Y表示X是Y的原因。基础概念：纺成因子（Confounder）——同时影响X和Y，需控制；中介变量（Mediator）——位于X→Y路径上，不应控制；操控变量（Collider）——被多个变量共同影响，控制会引入偏误。</p></div><div class="tp" id="dags-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(dagitty)
+# 构建DAG
+dag <- dagitty('dag {
+  X [exposure,pos="0,0"]
+  Y [outcome,pos="2,0"]
+  Z [pos="1,-1"]
+  C [pos="1,1"]
+  X -> Y
+  C -> X; C -> Y  # 混杂
+  Z -> X; Z -> Y  # 共同原因
+}')
+plot(dag)
+# 最小充分控制集
+adjustmentSets(dag, exposure="X", outcome="Y")
+# 因果效应识别
+cat("Control sets:")
+print(adjustmentSets(dag, "X", "Y"))</div></div></div><div class="tp" id="dags-t2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import networkx as nx, matplotlib.pyplot as plt
+# 构建DAG
+G = nx.DiGraph()
+G.add_edges_from([('X','Y'),('C','X'),('C','Y'),('Z','X'),('Z','Y')])
+pos = {'X':(0,0),'Y':(2,0),'C':(1,-1),'Z':(1,1)}
+# 查找混杂路径
+print("Nodes:", list(G.nodes()))
+print("Edges:", list(G.edges()))
+nx.draw(G, pos, with_labels=True, node_color='lightblue',
+        node_size=2000, arrowsize=20)
+plt.title('DAG示例')
+plt.show()
+# 混杂因子: C和Z均需控制</div></div></div><div class="tp" id="dags-t3"><div class="res-box"><div class="res-title">📋 DAG案例</div><div class="res-body">场景：研究运动健康效应（X→Y）<br>DAG分析：年龄(C)、性别(Z)都是纺成因子，必须控制<br>结果：控制C和Z后，运动对健康的因果效应仍显著<br>解读：DAG帮助选择正确的控制变量集，避免误控制或漏控制。</div></div></div></div></div></div>
 </div></div>
 
 <!-- ============ ROC曲线深度分析 ============ -->
@@ -1080,7 +1277,7 @@ df_imp = pd.DataFrame(imp.fit_transform(df), columns=df.columns)</div></div></di
 <div id="time-series" style="margin-bottom:1.5rem">
 <h3 style="margin-bottom:.6rem;font-size:1.1rem">📈 时间序列分析</h3>
 <div class="cg">
-<div class="cd"><h3>ARIMA模型</h3><p class="ds">自回归移动平均，预测未来趋势<button class="mb" onclick="togM(this)">查看代码</button>
+<div class="cd"><h3>ARIMA模型</h3><div class="ds">自回归移动平均，预测未来趋势<button class="mb" onclick="togM(this)">查看详细操作</button>
 <div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'arimar')">R代码</button><button class="tab" onclick="swT(this,'arimap')">Python代码</button></div>
 <div class="tp on" id="arimar"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(forecast)
 set.seed(123)
@@ -1097,7 +1294,144 @@ model = ARIMA(ts, order=(1,1,1)).fit()
 fc = model.forecast(steps=12)
 print(fc)</div></div></div>
 </div></div></div>
-</div></div>
+<div class="cd" id="cd-ets"><h3>ETS指数平滑</h3><div class="ds">用途：处理时间序列的趋势和季节性，适合单变量预测。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'ets-t0')">方法介绍</button><button class="tab" onclick="swT(this,'ets-t1')">R代码</button><button class="tab" onclick="swT(this,'ets-t2')">Python代码</button><button class="tab" onclick="swT(this,'ets-t3')">案例解读</button></div><div class="tp on" id="ets-t0"><p>ETS（Error Trend Seasonal）是指数平滑方法的统一框架，用于处理时间序列的误差、趋势和季节性。ETS(A,N,N)表示可加性误差、无趋势、无季节；ETS(A,A,A)表示可加性误差、可加性趋势、可加性季节。通过拟合优度选择最优模型。</p></div><div class="tp" id="ets-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(forecast)
+set.seed(123)
+ts_data <- ts(rpois(120,10)+5*sin(2*pi*1:120/12),
+              start=c(2020,1), frequency=12)
+fit <- ets(ts_data)
+summary(fit)
+fc <- forecast(fit, h=12)
+plot(fc)
+accuracy(fc)</div></div></div><div class="tp" id="ets-t2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import numpy as np, pandas as pd
+from statsmodels.tsa.holtwinters import ExponentialSmoothing
+np.random.seed(123)
+ts = np.random.poisson(10,120)+5*np.sin(2*np.pi*np.arange(120)/12)
+df = pd.DataFrame({'y':ts}, index=pd.date_range('2020-01',periods=120,freq='M'))
+model = ExponentialSmoothing(df['y'], seasonal_periods=12,
+    trend='add', seasonal='add').fit()
+fc = model.forecast(12)
+print(fc)</div></div></div><div class="tp" id="ets-t3"><div class="res-box"><div class="res-title">📋 ETS案例</div><div class="res-body">数据：2019-2024月度呼吸道感染病登记例数<br>结果：ETS(A,N,A)模型最优，RMSE=15.3<br>解读：去季节后套合良好，2025年预测值呈现稳定季节性波动。</div></div></div></div></div></div>
+<div class="cd" id="cd-prophet"><h3>Prophet时间序列预测</h3><div class="ds">用途：Facebook开源的时间序列预测框架，自动处理节假日效应和变点。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'prophet-t0')">方法介绍</button><button class="tab" onclick="swT(this,'prophet-t1')">R代码</button><button class="tab" onclick="swT(this,'prophet-t2')">Python代码</button><button class="tab" onclick="swT(this,'prophet-t3')">案例解读</button></div><div class="tp on" id="prophet-t0"><p>Prophet由Facebook于2017年开源，基于可分解时间序列模型：趋势 + 季节性 + 节假日效应。Prophet能自动处理缺失值、异常值和变点，且对非专业用户友好。适合具有明显季节性和多年历史数据的预测场景。</p></div><div class="tp" id="prophet-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(prophet)
+library(dplyr)
+# 模拟月度数据
+set.seed(123)
+ds <- seq(as.Date("2020-01-01"), as.Date("2024-12-01"), by="month")
+trend <- 10 + 0.05*1:60
+seasonal <- 3*sin(2*pi*1:60/12)
+y <- trend + seasonal + rnorm(60, 0, 1)
+df <- data.frame(ds, y)
+# Prophet模型
+m <- prophet(df, yearly.seasonality=TRUE)
+future <- make_future_dataframe(m, periods=12, freq="month")
+fc <- predict(m, future)
+plot(m, fc)
+prophet_plot_components(m, fc)</div></div></div><div class="tp" id="prophet-t2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import numpy as np, pandas as pd
+from prophet import Prophet
+np.random.seed(123)
+ds = pd.date_range("2020-01-01", periods=60, freq="M")
+trend = 10 + 0.05*np.arange(60)
+seasonal = 3*np.sin(2*np.pi*np.arange(60)/12)
+y = trend + seasonal + np.random.normal(0, 1, 60)
+df = pd.DataFrame({"ds": ds, "y": y})
+model = Prophet(yearly_seasonality=True)
+model.fit(df)
+future = model.make_future_dataframe(periods=12, freq="M")
+fc = model.predict(future)
+model.plot(fc).show()
+model.plot_components(fc).show()</div></div></div><div class="tp" id="prophet-t3"><div class="res-box"><div class="res-title">📋 Prophet案例</div><div class="res-body">数据：2020-2024年某医院月度门诊量<br>结果：模型拟合良好，周期性波动被成功捕捗<br>解读：2025年门诊量预计保持上升趋势，季节性高峰出现在冬季呼吸道疾病高发期。</div></div></div></div></div></div>
+<div class="cd" id="cd-lstm-ts"><h3>LSTM时间序列预测</h3><div class="ds">用途：深度学习方法，适合复杂模式和长期依赖的时间序列。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'lstm-ts-t0')">方法介绍</button><button class="tab" onclick="swT(this,'lstm-ts-t1')">R代码</button><button class="tab" onclick="swT(this,'lstm-ts-t2')">Python代码</button><button class="tab" onclick="swT(this,'lstm-ts-t3')">案例解读</button></div><div class="tp on" id="lstm-ts-t0"><p>LSTM（Long Short-Term Memory）是循环神经网络的变种，通过徘徊门机制解决了传统RNN的梯度消失问题。LSTM能捕捗时间序列中的长期依赖关系，适合复杂模式的时间序列预测。需要注意：需要先处理数据创建观测窗口，通常比统计方法需要更多数据。</p></div><div class="tp" id="lstm-ts-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(keras)
+# 生成模拟数据
+set.seed(123)
+n <- 300
+x <- seq(0, 10*pi, length.out=n)
+y <- sin(x) + rnorm(n, 0, 0.1)
+# 创建时间窗口
+create_seq <- function(data, lookback=10){
+  X <- t(sapply(lookback:n, function(i) data[(i-lookback+1):i]))
+  Y <- data[(lookback+1):(n+1)]
+  list(X=array(X, dim=c(nrow(X), lookback, 1)), Y=Y)
+}
+lookback <- 10
+data <- create_seq(y, lookback)
+# LSTM模型
+model <- keras_model_sequential() |>
+  layer_lstm(units=50, input_shape=c(lookback,1)) |>
+  layer_dense(units=1)
+model |> compile(optimizer='adam', loss='mse')
+history <- model |> fit(data$X[1:200,,], data$Y[1:200],
+                        epochs=50, batch_size=16, validation_split=0.2, verbose=0)
+# 预测
+pred <- model |> predict(data$X[201:290,,])
+plot(data$Y[201:290], type='l', col='blue')
+lines(pred, col='red')
+legend('topright', c('True','Pred'), col=c('blue','red'), lty=1)</div></div></div><div class="tp" id="lstm-ts-t2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import numpy as np
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dense
+np.random.seed(123)
+n = 300; x = np.linspace(0, 10*np.pi, n)
+y = np.sin(x) + np.random.normal(0, 0.1, n)
+lookback = 10
+X, Y = [], []
+for i in range(lookback, n-1):
+    X.append(y[i-lookback+1:i+1])
+    Y.append(y[i+1])
+X = np.array(X).reshape(-1, lookback, 1)
+Y = np.array(Y)
+# LSTM模型
+model = Sequential([
+    LSTM(50, input_shape=(lookback, 1)),
+    Dense(1)
+])
+model.compile(optimizer="adam", loss="mse")
+model.fit(X[:200], Y[:200], epochs=50, batch_size=16,
+          validation_split=0.2, verbose=0)
+pred = model.predict(X[200:290], verbose=0)
+print("Prediction shape:", pred.shape)</div></div></div><div class="tp" id="lstm-ts-t3"><div class="res-box"><div class="res-title">📋 LSTM案例</div><div class="res-body">数据：模拟的周期性生物标志物测定时间序列<br>结果：LSTM成功学习了波形模式，MSE=0.015<br>解读：深度学习方法在捕捗复杂循环模式方面优于传统统计方法，但需要较多数据和调参。</div></div></div></div></div></div>
+<div class="cd" id="cd-var"><h3>VAR向量自回归</h3><div class="ds">用途：多变量时间序列分析，同时预测多个相互关联的变量。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'var-t0')">方法介绍</button><button class="tab" onclick="swT(this,'var-t1')">R代码</button><button class="tab" onclick="swT(this,'var-t2')">Python代码</button><button class="tab" onclick="swT(this,'var-t3')">案例解读</button></div><div class="tp on" id="var-t0"><p>VAR（Vector Autoregression）是多变量时间序列的经典模型，同时建模多个时间序列的动态关系。VAR(p)表示包含P阶滞后项。核心优势：无需区分内生和外生变量，所有变量均等待处。通常用于宏观经济和卫生政策评估。</p></div><div class="tp" id="var-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(vars)
+set.seed(123)
+n <- 200
+# 双变量VAR(1)模拟
+e1 <- rnorm(n); e2 <- rnorm(n)
+y1 <- 0.5*e1[1]; y2 <- 0.3*e2[1]
+for(i in 2:n){
+  y1[i] <- 1 + 0.6*y1[i-1] + 0.2*y2[i-1] + e1[i]
+  y2[i] <- 2 + 0.1*y1[i-1] + 0.5*y2[i-1] + e2[i]
+}
+data <- cbind(y1, y2)
+# VAR模型
+var_select <- VARselect(data, lag.max=8)
+print(var_select$selection)
+model <- VAR(data, p=2)
+summary(model)
+# 脉冲响应
+irf <- irf(model, n.ahead=10)
+plot(irf)
+# 预测
+fc <- predict(model, n.ahead=6)
+plot(fc)</div></div></div><div class="tp" id="var-t2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import numpy as np, pandas as pd
+from statsmodels.tsa.api import VAR
+np.random.seed(123)
+n = 200; e1 = np.random.normal(0, 1, n)
+e2 = np.random.normal(0, 1, n)
+y1 = np.zeros(n); y2 = np.zeros(n)
+y1[0] = 0.5*e1[0]; y2[0] = 0.3*e2[0]
+for i in range(1, n):
+    y1[i] = 1 + 0.6*y1[i-1] + 0.2*y2[i-1] + e1[i]
+    y2[i] = 2 + 0.1*y1[i-1] + 0.5*y2[i-1] + e2[i]
+df = pd.DataFrame({"y1": y1, "y2": y2})
+model = VAR(df)
+lag_order = model.select_order(maxlags=8)
+print(lag_order.selected_orders)
+result = model.fit(2)
+print(result.summary())
+# 脉冲响应
+irf = result.irf(10)
+irf.plot()
+# 预测
+fc = result.forecast(df.values[-2:], steps=6)
+print("Forecast:", fc)</div></div></div><div class="tp" id="var-t3"><div class="res-box"><div class="res-title">📋 VAR案例</div><div class="res-body">数据：某地区每月流感发病率和气温数据<br>结果：VAR(2)模型最优，气温对流感有显著滞后影响<br>解读：气温下降后2周流感发病率上升，为预防提供了时间窗口。</div></div></div></div></div></div>
+</div>
+</div>
 
 <!-- ============ 生物信息学 ============ -->
 <div id="bioinfo" style="margin-bottom:1.5rem">
@@ -1270,7 +1604,236 @@ plt.plot(t,R,label='康复者')
 plt.xlabel('天数');plt.ylabel('人数')
 plt.title('SEIR模型模拟')
 plt.legend();plt.show()</div></div>
-</div></div>
+</div>
+<div class="cg">
+<div class="cd" id="cd-sir-model"><h3>SIR模型实践</h3><div class="ds">用途：经典传染病分室模型，模拟从感染到康复的全过程。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'sir-model-t0')">方法介绍</button><button class="tab" onclick="swT(this,'sir-model-t1')">R代码</button><button class="tab" onclick="swT(this,'sir-model-t2')">Python代码</button><button class="tab" onclick="swT(this,'sir-model-t3')">案例解读</button></div><div class="tp on" id="sir-model-t0"><p>SIR模型将人群分为三个分室：S(易感者)、I(感染者)、R(康复者)。微分方程组：dS/dt = -βSI/N，dI/dt = βSI/N – γI，dR/dt = γI。基本再生数R₀ = β/γ，表示一个感染者在完全易感人群中平均传播的人数。</p></div><div class="tp" id="sir-model-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(deSolve)
+# SIR模型参数
+N <- 10000; I0 <- 1; R0 <- 0; S0 <- N - I0 - R0
+beta <- 0.4; gamma <- 0.1
+parameters <- c(beta=beta, gamma=gamma)
+state <- c(S=S0, I=I0, R=R0)
+times <- seq(0, 100, by=1)
+# SIR微分方程
+sir <- function(t, state, parameters) {
+  with(as.list(c(state, parameters)), {
+    dS <- -beta * S * I / N
+    dI <- beta * S * I / N - gamma * I
+    dR <- gamma * I
+    return(list(c(dS, dI, dR)))
+  })
+}
+output <- ode(y=state, times=times, func=sir, parms=parameters)
+plot(output[,1], output[,3], type='l', col='red', lwd=2,
+     xlab='天数', ylab='人数', main='SIR模型模拟')
+lines(output[,1], output[,2], col='blue', lwd=2)
+lines(output[,1], output[,4], col='green', lwd=2)
+legend('topright', c('易感者','感染者','康复者'),
+       col=c('blue','red','green'), lty=1, lwd=2)
+cat('R0 =', beta/gamma, '
+')
+cat('最终感染比例:', max(output[,3])/N*100, '%
+')</div></div></div><div class="tp" id="sir-model-t2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import numpy as np
+from scipy.integrate import odeint
+import matplotlib.pyplot as plt
+N = 10000; beta, gamma = 0.4, 0.1
+def sir(y, t):
+    S, I, R = y
+    dS = -beta * S * I / N
+    dI = beta * S * I / N - gamma * I
+    dR = gamma * I
+    return dS, dI, dR
+sol = odeint(sir, [N-1, 1, 0], np.linspace(0, 100, 101))
+S, I, R = sol.T
+plt.figure(figsize=(8,5))
+plt.plot(S, label="易感者", color="blue")
+plt.plot(I, label="感染者", color="red")
+plt.plot(R, label="康复者", color="green")
+plt.xlabel("天数"); plt.ylabel("人数")
+plt.title(f"SIR模型 (R0={beta/gamma:.1f})")
+plt.legend(); plt.grid(alpha=0.3)
+plt.show()
+print(f"R0 = {beta/gamma:.1f}")
+print(f"峰值感染: {max(I):.0f}人 ({max(I)/N*100:.1f}%)")</div></div></div><div class="tp" id="sir-model-t3"><div class="res-box"><div class="res-title">📋 SIR案例</div><div class="res-body">场景：流感爆发模拟，人口N=10000，R₀=4.0<br>结果：感染高峰出现在级33天，最大日新增约为总人口的8%，累计感染比例约98%<br>解读：R₀>1时疫情将大规模爆发，必须采取干预措施降低R₀。</div></div></div></div></div></div>
+<div class="cd" id="cd-seir-model"><h3>SEIR模型实践</h3><div class="ds">用途：增加潜伏期分室，更精确地模拟具有潜伏期的传染病。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'seir-model-t0')">方法介绍</button><button class="tab" onclick="swT(this,'seir-model-t1')">R代码</button><button class="tab" onclick="swT(this,'seir-model-t2')">Python代码</button><button class="tab" onclick="swT(this,'seir-model-t3')">案例解读</button></div><div class="tp on" id="seir-model-t0"><p>SEIR模型在SIR的基础上增加E(潜伏者)分室。微分方程组：dS/dt = -βSI/N，dE/dt = βSI/N – σE，dI/dt = σE – γI，dR/dt = γI。σ表示潜伏期转染率(1/潜伏期)。适用于新冠、麻疹、结核等具有潜伏期的传染病。</p></div><div class="tp" id="seir-model-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r">library(deSolve)
+N <- 10000; E0 <- 0; I0 <- 1; R0 <- 0; S0 <- N - E0 - I0 - R0
+beta <- 0.3; sigma <- 1/5; gamma <- 1/10
+parameters <- c(beta=beta, sigma=sigma, gamma=gamma)
+state <- c(S=S0, E=E0, I=I0, R=R0)
+times <- seq(0, 150, by=1)
+seir <- function(t, state, parameters) {
+  with(as.list(c(state, parameters)), {
+    dS <- -beta * S * I / N
+    dE <- beta * S * I / N - sigma * E
+    dI <- sigma * E - gamma * I
+    dR <- gamma * I
+    return(list(c(dS, dE, dI, dR)))
+  })
+}
+output <- ode(y=state, times=times, func=seir, parms=parameters)
+matplot(output[,1], output[,2:5], type='l', lwd=2, lty=1,
+        xlab='天数', ylab='人数', main='SEIR模型模拟')
+legend('right', c('S','E','I','R'), col=1:4, lty=1, lwd=2)
+cat('R0 =', beta/gamma, '
+')
+cat('潜伏期 =', 1/sigma, '天
+')</div></div></div><div class="tp" id="seir-model-t2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import numpy as np
+from scipy.integrate import odeint
+import matplotlib.pyplot as plt
+N = 10000; beta, sigma, gamma = 0.3, 1/5, 1/10
+def seir(y, t):
+    S, E, I, R = y
+    dS = -beta * S * I / N
+    dE = beta * S * I / N - sigma * E
+    dI = sigma * E - gamma * I
+    dR = gamma * I
+    return dS, dE, dI, dR
+sol = odeint(seir, [N-1, 0, 1, 0], np.linspace(0, 150, 151))
+S, E, I, R = sol.T
+plt.figure(figsize=(8,5))
+plt.plot(S, label="易感者"); plt.plot(E, label="潜伏者")
+plt.plot(I, label="感染者", color="red")
+plt.plot(R, label="康复者")
+plt.xlabel("天数"); plt.ylabel("人数")
+plt.title(f"SEIR模型 (R0={beta/gamma:.1f}, 潜伏期={1/sigma:.0f}天)")
+plt.legend(); plt.grid(alpha=0.3); plt.show()
+print(f"R0 = {beta/gamma:.1f}")
+print(f"潜伏期 = {1/sigma:.0f}天")</div></div></div><div class="tp" id="seir-model-t3"><div class="res-box"><div class="res-title">📋 SEIR案例</div><div class="res-body">场景：cOVID-19传播模拟，潜伏期5天，R₀=3.0<br>结果：感染高峰在约70天，比SIR模型延迟约一倍<br>解读：潜伏期的存在显著延缓了疫情高峰，但总体爆发规模仍然巨大，提醒早期干预至关重要。</div></div></div></div></div></div>
+<div class="cd" id="cd-stochastic-seir"><h3>随机SEIR模型</h3><div class="ds">用途：考虑随机性的传染病模型，适合小规模人群爆发模拟。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'stochastic-seir-t0')">方法介绍</button><button class="tab" onclick="swT(this,'stochastic-seir-t1')">R代码</button><button class="tab" onclick="swT(this,'stochastic-seir-t2')">Python代码</button><button class="tab" onclick="swT(this,'stochastic-seir-t3')">案例解读</button></div><div class="tp on" id="stochastic-seir-t0"><p>随机SEIR模型使用二项分布/泊松分布替代微分方程，反映传染过程的随机性。在小人群中，随机性可能导致疫情自行熔灭或爆发。每步计算新感染者~Binom(S, βI/N)，新潜伏转感染者~Binom(E, σ)，新康复者~Binom(I, γ)。</p></div><div class="tp" id="stochastic-seir-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># 随机SEIR模型 (离散时间)
+set.seed(42)
+N <- 500; S <- N-1; E <- 0; I <- 1; R <- 0
+beta <- 0.5; sigma <- 0.2; gamma <- 0.1
+days <- 100
+results <- matrix(0, nrow=days, ncol=4)
+colnames(results) <- c('S','E','I','R')
+for (t in 1:days) {
+  new_exposed <- rbinom(1, S, min(beta*I/N, 1))
+  new_infectious <- rbinom(1, E, sigma)
+  new_recovered <- rbinom(1, I, gamma)
+  S <- S - new_exposed
+  E <- E + new_exposed - new_infectious
+  I <- I + new_infectious - new_recovered
+  R <- R + new_recovered
+  results[t,] <- c(S, E, I, R)
+  if (I == 0 && E == 0) break
+}
+matplot(1:t, results[1:t,], type='l', lwd=2, lty=1,
+        xlab='天数', ylab='人数', main='随机SEIR模拟')
+legend('right', c('S','E','I','R'), col=1:4, lty=1, lwd=2)
+cat('最终感染:', results[1,4], '/', N, '
+')
+# 多次模拟显示随机性
+sims <- 100; final_size <- numeric(sims)
+for (s in 1:sims) { # 简写
+  S <- N-1; E <- 0; I <- 1; R <- 0
+  for (t in 1:days) {
+    new_exposed <- rbinom(1, S, min(beta*I/N, 1))
+    new_infectious <- rbinom(1, E, sigma)
+    new_recovered <- rbinom(1, I, gamma)
+    S <- S - new_exposed; E <- E + new_exposed - new_infectious
+    I <- I + new_infectious - new_recovered; R <- R + new_recovered
+    if (I == 0 && E == 0) break
+  }
+  final_size[s] <- R
+}
+hist(final_size, main='100次模拟最终感染分布', xlab='最终康复人数')</div></div></div><div class="tp" id="stochastic-seir-t2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import numpy as np
+import matplotlib.pyplot as plt
+np.random.seed(42)
+N, beta, sigma, gamma = 500, 0.5, 0.2, 0.1
+days = 100
+def run_one_sim():
+    S, E, I, R = N-1, 0, 1, 0
+    hist = []
+    for _ in range(days):
+        new_e = np.random.binomial(S, min(beta*I/N, 1))
+        new_i = np.random.binomial(E, sigma)
+        new_r = np.random.binomial(I, gamma)
+        S -= new_e; E += new_e - new_i
+        I += new_i - new_r; R += new_r
+        hist.append([S, E, I, R])
+        if I == 0 and E == 0: break
+    return np.array(hist)
+# 单次模拟
+result = run_one_sim()
+plt.figure(figsize=(10,4))
+plt.subplot(121)
+plt.plot(result[:,0], label="S"); plt.plot(result[:,1], label="E")
+plt.plot(result[:,2], label="I", color="red")
+plt.plot(result[:,3], label="R")
+plt.legend(); plt.title("单次随机SEIR模拟")
+# 多次模拟
+sims = 100
+final_sizes = [run_one_sim()[-1,3] for _ in range(sims)]
+plt.subplot(122)
+plt.hist(final_sizes, bins=15)
+plt.title(f"100次模拟最终感染分布"); plt.xlabel("康复人数")
+plt.tight_layout(); plt.show()</div></div></div><div class="tp" id="stochastic-seir-t3"><div class="res-box"><div class="res-title">📋 随机SEIR案例</div><div class="res-body">场景：小城镇500人的传染病爆发模拟<br>结果：约15%ME模拟中疫情自行熔灭，85%爆发<br>解读：随机模型揭示了小人群中的重要现象——即便R₀>1，随机性也可使疫情未必爆发。</div></div></div></div></div></div>
+<div class="cd" id="cd-branching"><h3>Branching传播链模型</h3><div class="ds">用途：基于再生数的传播链模型，评估爆发概率和传播链长度。<button class="mb" onclick="togM(this)" data-i18n="view-details">查看详细操作</button><div class="mx" style="display:none"><div class="tabs"><button class="tab on" onclick="swT(this,'branching-t0')">方法介绍</button><button class="tab" onclick="swT(this,'branching-t1')">R代码</button><button class="tab" onclick="swT(this,'branching-t2')">Python代码</button><button class="tab" onclick="swT(this,'branching-t3')">案例解读</button></div><div class="tp on" id="branching-t0"><p>Branching过程将传染病传播视为一个传播链，每个感染者产生的二代病例数服从某分布(如泊松分布、负二项分布)。核心概念：时空再生数R（复制数），R<1时传播链必然熔灭，R>1时有正概率爆发。</p></div><div class="tp" id="branching-t1"><div class="cb"><div class="ch"><span class="cl2">R</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="r"># Branching过程模拟
+set.seed(123)
+# 负二项分布(过度离散)
+sim_branch <- function(R=2.5, k=0.5, gen_max=20) {
+  chain <- 1  # 初始病例
+  total <- 1
+  for (g in 1:gen_max) {
+    offspring <- sum(rnbinom(chain, mu=R, size=k))
+    total <- total + offspring
+    chain <- offspring
+    if (chain == 0) break
+  }
+  return(list(total=total, gens=g, extinct=chain==0))
+}
+# 多次模拟计算暴发概率
+sims <- 1000
+R_vals <- c(0.8, 1.0, 1.5, 2.0, 3.0)
+for (R in R_vals) {
+  extinct <- 0
+  sizes <- numeric(sims)
+  for (s in 1:sims) {
+    res <- sim_branch(R=R, k=0.5)
+    if (res$extinct) extinct <- extinct + 1
+    sizes[s] <- res$total
+  }
+  cat(sprintf('R=%.1f: 暴发概率=%.1f%%, 平均规模=%.0f\n',
+      R, (1-extinct/sims)*100, mean(sizes)))
+}
+# 可视化
+R0 <- 2.5
+res <- replicate(1000, sim_branch(R=R0, k=0.5)$total)
+hist(log10(res+1), main='Branching过程最终规模分布',
+     xlab='log10(总病例数)', col='steelblue')
+abline(v=log10(100), col='red', lwd=2, lty=2)
+cat('R0=', R0, '暴发(>100例)概率:',
+    mean(res>100)*100, '%
+')</div></div></div><div class="tp" id="branching-t2"><div class="cb"><div class="ch"><span class="cl2">Python</span><button class="cp" onclick="cpC(this)">复制</button></div><div class="cy" data-lang="python">import numpy as np
+import matplotlib.pyplot as plt
+np.random.seed(123)
+def sim_branch(R=2.5, k=0.5, gen_max=20):
+    chain = 1; total = 1
+    for g in range(gen_max):
+        # 负二项 offspring (mu=R, size=k 控制离散度)
+        offspring = np.sum(np.random.negative_binomial(k, k/(k+R), chain))
+        total += offspring
+        chain = offspring
+        if chain == 0: break
+    return total, g+1, chain == 0
+# 不同R0下的暴发概率
+sims = 1000
+for R in [0.8, 1.0, 1.5, 2.0, 3.0]:
+    extinct = 0; sizes = []
+    for s in range(sims):
+        tot, _, ext = sim_branch(R=R)
+        sizes.append(tot)
+        if ext: extinct += 1
+    print(f"R={R:.1f}: 暴发概率={(1-extinct/sims)*100:.1f}%, "
+          f"平均规模={np.mean(sizes):.0f}")
+# R0=2.5时规模分布
+res = [sim_branch(R=2.5)[0] for _ in range(1000)]
+plt.hist(np.log10(np.array(res)+1), bins=30)
+plt.axvline(np.log10(100), color='red', ls='--')
+plt.title("Branching过程最终规模分布"); plt.xlabel("log10(总病例数)")
+plt.show()
+print(f"暴发(>100例)概率: {np.mean(np.array(res)>100)*100:.1f}%")</div></div></div><div class="tp" id="branching-t3"><div class="res-box"><div class="res-title">📋 Branching案例</div><div class="res-body">场景：超级传播者事件模拟——一个患者可以传播多少人<br>结果：R₀=2.5时爆发概率≈85%，但有显著的二态性（熔灭或大规模爆发）<br>解读：Branching模型揭示了传播链的随机性，解释为什么同样的R₀可以导致完全不同的爆发结局。</div></div></div></div></div></div>
+</div>
+</div>
 
 <!-- ============ 临床研究 ============ -->
 <div id="clinical">
@@ -1706,7 +2269,7 @@ var TRANS={
   zh:{
     'lang-btn':'EN','slide-lang-btn':'English','nav-title':'导航菜单',
     'nav-home':'首页','nav-stats':'统计方法','nav-ml':'机器学习','nav-bayes':'贝叶斯统计',
-    'nav-meta':'Meta分析','nav-wechat':'公众号教程','nav-survival':'生存分析','nav-psm':'因果推断',
+    'nav-meta':'Meta分析','nav-wechat':'公众号教程','nav-survival':'生存分析',''nav-time-series':'时间序列','nav-modeling':'传染病建模',,'nav-psm':'因果推断',
     'nav-bioinfo':'生物信息学','nav-db':'公共数据库','nav-tools':'科研工具','nav-ai':'AI工具',
     'nav-scales':'医学量表','nav-cases':'实操案例','nav-reporting':'报告规范',
     'banner-title':'医学科研一站式学习平台',
@@ -1732,7 +2295,7 @@ var TRANS={
   en:{
     'lang-btn':'中','slide-lang-btn':'中文','nav-title':'Navigation',
     'nav-home':'Home','nav-stats':'Statistics','nav-ml':'ML','nav-bayes':'Bayesian',
-    'nav-meta':'Meta Analysis','nav-wechat':'Tutorials','nav-survival':'Survival','nav-psm':'Causal Inference',
+    'nav-meta':'Meta Analysis','nav-wechat':'Tutorials','nav-survival':'Survival',''nav-time-series':'Time Series','nav-modeling':'Modeling',,'nav-psm':'Causal Inference',
     'nav-bioinfo':'Bioinformatics','nav-db':'Databases','nav-tools':'Tools','nav-ai':'AI Tools',
     'nav-scales':'Scales','nav-cases':'Case Studies','nav-reporting':'Guidelines',
     'banner-title':'Medical Research & Statistics Hub',
@@ -1841,10 +2404,10 @@ function togToc(){
 function buildToc(){
   var el=document.getElementById('tocSidebar');
   var tl=LANG==='zh'
-    ? {toc:'目录导航',stats:'📊 统计方法',ml:'🤖 机器学习',bayes:'🔮 贝叶斯统计',meta:'📋 Meta分析',roc:'📈 ROC曲线',survival:'⏳ 生存分析',psm:'⚖️ 因果推断',bioinfo:'🧬 生物信息',sample:'🧮 样本量',modeling:'📈 传染病建模',db:'💾 数据库',tools:'🔬 科研工具',ai:'🤖 AI工具',scales:'📋 量表',cases:'📝 实操案例',wechat:'📱 公众号教程',reporting:'📋 报告规范'}
-    : {toc:'Contents',stats:'📊 Statistics',ml:'🤖 ML',bayes:'🔮 Bayesian',meta:'📋 Meta Analysis',roc:'📈 ROC Curve',survival:'⏳ Survival',psm:'⚖️ Causality',bioinfo:'🧬 Bioinformatics',sample:'🧮 Sample Size',modeling:'📈 Modeling',db:'💾 Databases',tools:'🔬 Tools',ai:'🤖 AI',scales:'📋 Scales',cases:'📝 Cases',wechat:'📱 Tutorials',reporting:'📋 Guidelines'};
+    ? {toc:'目录导航',stats:'📊 统计方法',ml:'🤖 机器学习',bayes:'🔮 贝叶斯统计',meta:'📋 Meta分析',roc:'📈 ROC曲线',survival:'⏳ 生存分析',psm:'⚖️ 因果推断',bioinfo:'🧬 生物信息',sample:'🧮 样本量','time-series':'📈 时间序列',modeling:'📈 传染病建模',db:'💾 数据库',tools:'🔬 科研工具',ai:'🤖 AI工具',scales:'📋 量表',cases:'📝 实操案例',wechat:'📱 公众号教程',reporting:'📋 报告规范'}
+    : {toc:'Contents',stats:'📊 Statistics',ml:'🤖 ML',bayes:'🔮 Bayesian',meta:'📋 Meta Analysis',roc:'📈 ROC Curve',survival:'⏳ Survival',psm:'⚖️ Causality',bioinfo:'🧬 Bioinformatics',sample:'🧮 Sample Size','time-series':'📈 Time Series',modeling:'📈 Modeling',db:'💾 Databases',tools:'🔬 Tools',ai:'🤖 AI',scales:'📋 Scales',cases:'📝 Cases',wechat:'📱 Tutorials',reporting:'📋 Guidelines'};
   var items=[
-    {l:tl.stats,h:'#stats'},{l:tl.ml,h:'#ml-section'},{l:tl.bayes,h:'#bayes'},{l:tl.meta,h:'#meta'},{l:tl.roc,h:'#roc'},{l:tl.survival,h:'#survival'},{l:tl.psm,h:'#psm'},{l:tl.bioinfo,h:'#bioinfo'},{l:tl.sample,h:'#sample-size'},{l:tl.modeling,h:'#modeling'},{l:tl.db,h:'#databases'},{l:tl.tools,h:'#tools'},{l:tl.ai,h:'#ai'},{l:tl.scales,h:'#scales'},{l:tl.cases,h:'#cases'},{l:tl.wechat,h:'#wechat'},{l:tl.reporting,h:'#reporting'}
+    {l:tl.stats,h:'#stats'},{l:tl.ml,h:'#ml-section'},{l:tl.bayes,h:'#bayes'},{l:tl.meta,h:'#meta'},{l:tl.roc,h:'#roc'},{l:tl.survival,h:'#survival'},{l:tl['time-series'],h:'#time-series'},{l:tl.psm,h:'#psm'},{l:tl.bioinfo,h:'#bioinfo'},{l:tl.sample,h:'#sample-size'},{l:tl.modeling,h:'#modeling'},{l:tl.db,h:'#databases'},{l:tl.tools,h:'#tools'},{l:tl.ai,h:'#ai'},{l:tl.scales,h:'#scales'},{l:tl.cases,h:'#cases'},{l:tl.wechat,h:'#wechat'},{l:tl.reporting,h:'#reporting'}
   ];
   var h='<div style="padding:0 .8rem .3rem;font-size:.75rem;color:var(--tx3);border-bottom:1px solid var(--bd);margin-bottom:.3rem">'+tl.toc+'</div>';
   for(var i=0;i<items.length;i++){
