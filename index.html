@@ -55,12 +55,12 @@ nav a{color:rgba(255,255,255,.65);font-size:.82rem;padding:.3rem .6rem;border-ra
 .ds ul{padding-left:1.1rem;margin-top:.3rem;font-size:.83rem}.ds li{margin-bottom:.1rem}
 .mb{background:var(--pri);color:#fff;border:none;padding:.4rem .8rem;border-radius:6px;cursor:pointer;font-size:.8rem;margin-top:.4rem;transition:all .2s;font-weight:500}
 .mb:hover{background:var(--pri2);box-shadow:0 0 10px var(--glow)}
-.mx{margin-top:.7rem;background:var(--bg);border-radius:8px;border:1px solid var(--bd);max-height:0;opacity:0;overflow:hidden;transition:max-height .4s ease,padding .3s ease,opacity .3s ease;padding:0 .8rem}
+.mx{margin-top:.7rem;background:var(--bg);border-radius:8px;border:1px solid var(--bd);max-height:0;opacity:0;overflow:hidden;transition:max-height .3s ease,opacity .25s ease,padding .25s ease;padding:0 .8rem}
 .mx-on{max-height:3000px;opacity:1;padding:.8rem}
 .mx-col{max-height:0;opacity:0;padding:0 .8rem}
 .tb{background:linear-gradient(135deg,var(--pri),var(--pri2));color:#fff;border:none;padding:.55rem 1.1rem;border-radius:8px;cursor:pointer;font-size:.88rem;margin:.6rem 0;transition:all .2s;font-weight:600}
 .tb:hover{transform:translateY(-2px);box-shadow:0 4px 16px var(--glow)}
-.tx{margin-top:.7rem;border-top:1px dashed var(--bd);max-height:0;opacity:0;overflow:hidden;transition:max-height .4s ease,opacity .3s ease;padding:0}
+.tx{margin-top:.7rem;border-top:1px dashed var(--bd);max-height:0;opacity:0;overflow:hidden;transition:max-height .3s ease,opacity .25s ease;padding:0}
 .tx-on{max-height:6000px;opacity:1;padding:.7rem .1rem .1rem}
 .tx-col{max-height:0;opacity:0;padding:0}
 .tabs{display:flex;gap:.15rem;margin-bottom:.5rem;border-bottom:1px solid var(--bd);flex-wrap:wrap}
@@ -2402,12 +2402,10 @@ function togM(btn){
     btn.textContent=TRANS[LANG]['hide-details']||'收起详细内容';
   }else{
     box.style.maxHeight=box.scrollHeight+'px';
-    requestAnimationFrame(function(){
-      box.classList.remove('mx-on');
-      box.classList.add('mx-col');
-      void box.offsetHeight;
-      box.style.maxHeight='';
-    });
+    box.classList.remove('mx-on');
+    box.classList.add('mx-col');
+    box.offsetHeight;
+    box.style.maxHeight='';
     btn.textContent=TRANS[LANG]['view-details']||'查看详细操作';
   }
 }
