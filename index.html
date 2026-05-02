@@ -2405,6 +2405,8 @@ function togM(btn){
     requestAnimationFrame(function(){
       box.classList.remove('mx-on');
       box.classList.add('mx-col');
+      void box.offsetHeight;
+      box.style.maxHeight='';
     });
     btn.textContent=TRANS[LANG]['view-details']||'查看详细操作';
   }
